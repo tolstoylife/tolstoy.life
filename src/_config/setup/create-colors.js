@@ -1,26 +1,20 @@
 import fs from 'node:fs';
 import Color from 'colorjs.io';
+import slugify from 'slugify';
 
 const colorsBase = JSON.parse(fs.readFileSync('./src/_data/designTokens/colorsBase.json', 'utf-8'));
+
+const nameSlug = text => slugify(text, {lower: true});
 
 const generatePalette = (baseColorHex, steps) => {
   const baseColor = new Color(baseColorHex).to('oklch');
 
   return steps.map(step => {
-    const color = new Color('oklch', [step.lightness, baseColor.c * step.chromaFactor, baseColor.h]).to(
-      'srgb'
-    );
-
+    const color = new Color('oklch', [step.lightness, baseColor.c * step.chromaFactor, baseColor.h]).to('srgb');
     const [r, g, b] = color.coords.map(value => Math.round(Math.min(Math.max(value * 255, 0), 255)));
+    const hexValue = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 
-    const hexValue = `#${r.toString(16).padStart(2, '0')}${g
-      .toString(16)
-      .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-
-    return {
-      name: `${step.label}`,
-      value: hexValue
-    };
+    return {label: step.label, value: hexValue};
   });
 };
 
@@ -48,37 +42,30 @@ const neutralSteps = [
   {label: '900', lightness: 0.2, chromaFactor: 0.25}
 ];
 
-const colorTokens = {
-  title: colorsBase.title,
-  description: colorsBase.description,
-  items: []
-};
+const colorTokens = {'$type': 'color'};
 
+// Shade palettes (neutral) — nested group e.g. { gray: { "100": { $value: "#..." } } }
 colorsBase.shades_neutral.forEach(color => {
-  const palette = generatePalette(color.value, neutralSteps);
-  palette.forEach(shade => {
-    colorTokens.items.push({
-      name: `${color.name} ${shade.name}`,
-      value: shade.value
-    });
+  const groupKey = nameSlug(color.name);
+  colorTokens[groupKey] = {};
+  generatePalette(color.value, neutralSteps).forEach(shade => {
+    colorTokens[groupKey][shade.label] = {'$value': shade.value};
   });
 });
 
+// Shade palettes (vibrant)
 colorsBase.shades_vibrant.forEach(color => {
-  const palette = generatePalette(color.value, vibrantSteps);
-  palette.forEach(shade => {
-    colorTokens.items.push({
-      name: `${color.name} ${shade.name}`,
-      value: shade.value
-    });
+  const groupKey = nameSlug(color.name);
+  colorTokens[groupKey] = {};
+  generatePalette(color.value, vibrantSteps).forEach(shade => {
+    colorTokens[groupKey][shade.label] = {'$value': shade.value};
   });
 });
 
+// Light/dark colors — each gets a $value plus a "subdued" child (80% chroma)
 colorsBase.light_dark.forEach(color => {
-  colorTokens.items.push({
-    name: color.name,
-    value: color.value
-  });
+  const key = nameSlug(color.name);
+  colorTokens[key] = {'$value': color.value};
 
   const lightDark = new Color(color.value).to('oklch');
   const subduedColor = new Color('oklch', [
@@ -88,22 +75,25 @@ colorsBase.light_dark.forEach(color => {
   ]).to('srgb');
 
   const [r, g, b] = subduedColor.coords.map(value => Math.round(Math.min(Math.max(value * 255, 0), 255)));
+  const subduedHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 
-  const subduedHex = `#${r.toString(16).padStart(2, '0')}${g
-    .toString(16)
-    .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-
-  colorTokens.items.push({
-    name: `${color.name} Subdued`,
-    value: subduedHex
-  });
+  colorTokens[key]['subdued'] = {'$value': subduedHex};
 });
 
-colorsBase.standalone.forEach(color => {
-  colorTokens.items.push({
-    name: color.name,
-    value: color.value
-  });
+// Palette colors (theme colors) — flat keys derived via slugify
+// e.g. "themeColor-Darkest" → "themecolor-darkest"
+colorsBase.palette.forEach(color => {
+  const key = nameSlug(color.name);
+  colorTokens[key] = {'$value': color.value};
 });
+
+// Standalone individual shades — manually-specified entries merged into existing groups
+if (colorsBase.standalone) {
+  colorsBase.standalone.forEach(({group, label, value}) => {
+    const groupKey = nameSlug(group);
+    if (!colorTokens[groupKey]) colorTokens[groupKey] = {};
+    colorTokens[groupKey][label] = {'$value': value};
+  });
+}
 
 fs.writeFileSync('./src/_data/designTokens/colors.json', JSON.stringify(colorTokens, null, 2));

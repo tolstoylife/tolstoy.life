@@ -1,9 +1,15 @@
 {% set headingLevel = headingLevel | default("h2") %}
 {% set definedDate = definedDate | default(item.date) %}
 {% set showTags = showTags | default(true) %}
+{% set category = item.data.tags[1] %}
 
-<custom-card clickable>
-  <{{ headingLevel }} slot="headline" class="text-step-2">
+
+<custom-card clickable img-square>
+{% if item.data.image.length > 1 %}
+  <div slot="image" webc:nokeep>{% image item.data.image, site.name, null, "lazy", null, null, widths, sizes %}
+  </div>
+{% endif %}
+  <{{ headingLevel }} slot="headline" class="text-step-1">
     <a href="{{ item.url | url }}">{{ item.data.title }}</a>
   </{{ headingLevel }}>
   <span slot="date">{%- if item.data.draft -%}<span class="button" data-small-button data-button-variant='tertiary'>draft</span>{%- endif %} {% include "partials/date.njk" %}</span>
@@ -17,6 +23,9 @@
     </div>
   {% endif %}
   <div slot="content" webc:nokeep>{{ item.data.description | markdownFormat | safe }}</div>
+  <footer slot="footer" class="repel">
+    {{ item.data.category }}
+  </footer>
 </custom-card>
 
 {% css "local" %}

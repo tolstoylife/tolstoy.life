@@ -67,15 +67,15 @@ const processImage = async options => {
     alt,
     loading,
     'decoding': loading === 'eager' ? 'sync' : 'async',
-    ...(imageClass && {class: imageClass}),
+    ...(imageClass && { class: imageClass }),
     'eleventy:ignore': ''
   });
 
   const pictureElement = `<picture> ${imageSources}<img ${imageAttributes}></picture>`;
 
-  return caption
-    ? `<figure slot="image"${containerClass ? ` class="${containerClass}"` : ''}>${pictureElement}<figcaption>${caption}</figcaption></figure>`
-    : `<picture slot="image"${containerClass ? ` class="${containerClass}"` : ''}>${imageSources}<img ${imageAttributes}></picture>`;
+  return caption ?
+    `<figure slot="image"${containerClass ? ` class="${containerClass}"` : ''}>${pictureElement}<figcaption>${caption}</figcaption></figure>` :
+    `<picture slot="image"${containerClass ? ` class="${containerClass}"` : ''}>${imageSources}<img ${imageAttributes}></picture>`;
 };
 
 // Positional parameters (legacy)

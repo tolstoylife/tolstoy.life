@@ -12,8 +12,9 @@
 <meta name="theme-color" content="{{ meta.themeDark }}" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="{{ meta.themeLight }}" media="(prefers-color-scheme: light)" />
 <!-- Search Engines -->
-<meta name="robots" content="index,follow" />
-<meta name="googlebot" content="index,follow" />
+<!-- temp hide site-->
+<meta name="robots" content="noindex,nofollow" />
+<meta name="googlebot" content="noindex,nofollow" />
 <!-- Made with Eleventy! -->
 <meta name="generator" content="{{ eleventy.generator }}" />
 <!-- Disable automatic detection and formatting of possible phone numbers -->
@@ -50,7 +51,7 @@
 />
 <meta
   property="og:image"
-  content="{%- if layout == 'post' -%}
+  content="{%- if (layout == 'post') or (layout == 'note') -%}
     {{- meta.url -}}/assets/og-images/{{ title | slugify }}-preview.jpeg
   {%- else -%}
     {{- meta.url -}}{{- meta.opengraph_default -}}
@@ -58,7 +59,7 @@
 />
 <meta
   property="og:image:alt"
-  content="{%- if layout == 'post' -%}
+  content="{%- if (layout == 'post') or (layout == 'note') -%}
     {{- title -}}
   {%- else -%}
     {{- meta.opengraph_default_alt -}}
@@ -83,7 +84,7 @@
   />
 {% endfor %}
 
-<!-- Favicon: https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs -->
+<!-- Favicon: https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs -- now called How to Favicon in 2025: Three files that fit most needs -->
 <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="any" />
 <link rel="icon" href="{{ '/favicon.svg' | url }}" type="image/svg+xml" />
 <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | url }}" />

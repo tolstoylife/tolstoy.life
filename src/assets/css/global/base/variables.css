@@ -8,10 +8,9 @@
   --wrapper-width: 85rem;
   --tracking: -0.04ch;
   --tracking-s: -0.075ch;
-  --tracking-wide: 0.04ch;
+  --tracking-wide: 0.09ch;
   --stroke: 1px solid var(--color-bg-accent);
 
-  --gradient-rainbow: linear-gradient(90deg, #cf4662 10%, #fbbe25 30%, #62c95c 50%, #08bccb 75%, #a977d5 90%);
   --gradient-conic: conic-gradient(
     var(--color-primary) 0 28%,
     var(--color-secondary) 0 67%,
@@ -28,47 +27,78 @@
   --color-light: var(--color-gray-100);
   --color-dark: var(--color-gray-900);
   --color-mid: var(--color-gray-400);
+
+  --color-logo-icon: var(--color-orange-500);
+  --color-border-height: 1rem;
 }
 
 /* Light theme */
 :root,
 :root[data-theme='light'] {
-  --color-text: var(--color-gray-800);
-  --color-bg: var(--color-gray-100);
+  --color-text: var(--color-themecolor-darkest);
+  --color-headline: var(--color-themecolor-darkest);
+  --color-bg: var(--color-themecolor-lightest);
 
-  --color-primary: var(--color-pink);
+  --color-primary: var(--color-orange-500);
   --color-secondary: var(--color-blue);
-  --color-tertiary: var(--color-gold);
+  --color-tertiary: var(--color-green);
 
   --color-text-accent: var(--color-gray-700);
-  --color-bg-accent: var(--color-gray-200);
+  --color-bg-accent: white;
   --color-bg-accent-2: var(--color-gray-300);
+  /* border top for body */
+  --color-border-top: var(--color-themecolor-light);
+  --color-logo-icon: var(--color-themecolor-dark);
+
+  --color-code-bg: color-mix(in oklab, var(--color-bg) 97%, rgb(0, 0, 0));
+  --code-border-color: color-mix(in oklab, var(--color-bg) 96%, rgb(0, 0, 0));
+
+  --color-link-underline: var(--color-orange-600);
+  --color-link-underline-hover: var(--color-red-subdued);
 }
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-text: var(--color-gray-100);
-    --color-bg: var(--color-gray-800);
+    --color-text: var(--color-gray-250);
+    --color-headline: var(--color-gray-200);
+    --color-bg: var(--color-gray-900);
 
-    --color-primary: var(--color-pink-subdued);
+    --color-primary: var(--color-orange-500);
     --color-secondary: var(--color-blue-subdued);
-    --color-tertiary: var(--color-gold-subdued);
+    --color-tertiary: var(--color-green-subdued);
 
-    --color-text-accent: var(--color-gray-300);
+    --color-text-accent: var(--color-gray-200);
     --color-bg-accent: var(--color-gray-700);
     --color-bg-accent-2: var(--color-gray-600);
+    /* border top for body */
+    --color-border-top: var(--color-orange-900);
+    --color-logo-icon: var(--color-orange-700);
+
+    --color-code-bg: color-mix(in oklab, var(--color-bg) 80%, rgb(0, 0, 0));
+    --code-border-color: color-mix(in oklab, var(--color-bg) 95%, rgb(255, 255, 255));
+
+    --color-link-text: var(--color-orange-500);
+    --color-link-underline-hover: var(--color-red-subdued);
   }
 }
+
 :root[data-theme='dark'] {
-  --color-text: var(--color-gray-100);
-  --color-bg: var(--color-gray-800);
+  --color-text: var(--color-gray-250);
+  --color-headline: var(--color-gray-200);
+  --color-bg: var(--color-gray-900);
 
-  --color-primary: var(--color-pink-subdued);
+  --color-primary: var(--color-red-subdued);
   --color-secondary: var(--color-blue-subdued);
-  --color-tertiary: var(--color-gold-subdued);
+  --color-tertiary: var(--color-green-subdued);
 
-  --color-text-accent: var(--color-gray-300);
+  --color-text-accent: var(--color-gray-200);
   --color-bg-accent: var(--color-gray-700);
   --color-bg-accent-2: var(--color-gray-600);
+  /* border top for body */
+  --color-border-top: var(--color-orange-900);
+  --color-logo-icon: var(--color-orange-700);
+
+  --color-link-text: var(--color-orange-500);
+  --color-link-underline-hover: var(--color-red-subdued);
 }

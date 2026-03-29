@@ -1,5 +1,7 @@
 .mainnav {
-  --nav-list-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  /* --nav-list-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55); */
+  /* easeOutQuad https://www.cssportal.com/css-cubic-bezier-generator/ */
+  --nav-list-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: var(--nav-position, absolute);
   inset-inline-end: 0;
 }
@@ -16,7 +18,7 @@
   --cluster-wrap: wrap;
   --cluster-direction: column;
   --nav-list-background: var(--color-bg);
-  --nav-list-shadow: -5px 0 11px 0 hsl(0 0% 0% / 0.2);
+  --nav-list-shadow: -10px 0 25px 0 hsl(0 0% 0% / 0.08);
   --nav-list-height: 100dvh;
   --nav-list-padding-block: var(--space-2xl);
   --nav-list-padding-inline: var(--space-s);
@@ -37,9 +39,7 @@
   inset-inline-end: 0;
   inline-size: var(--nav-list-width);
   opacity: var(--nav-list-opacity);
-  transition:
-    opacity 0.3 var(--nav-list-timing-function),
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.2 var(--nav-list-timing-function), visibility 0.2s ease-in-out;
   visibility: var(--nav-list-visibility);
 }
 
@@ -52,13 +52,11 @@
     --nav-list-transform: translateX(100%);
     --nav-list-opacity: 1;
     transform: var(--nav-list-transform);
-    transition:
-      transform 0.5s var(--nav-list-timing-function),
-      visibility 0.3s linear;
+    transition: transform 0.3s var(--nav-list-timing-function), visibility 0.2s linear;
   }
 
   .mainnav svg {
-    transition: transform 0.4s var(--nav-list-timing-function);
+    transition: transform 0.3s var(--nav-list-timing-function);
   }
 }
 
@@ -87,44 +85,50 @@ body:has([data-drawer-toggle][aria-expanded='true']) {
 
 .mainnav span {
   font-weight: var(--font-bold);
+  font-size: var(--size-step-min-2);
   text-transform: uppercase;
-  font-family: var(--font-display);
-  font-size: var(--size-step-min-1);
+  letter-spacing: var(--tracking-wide);
 }
 
 .mainnav svg {
   block-size: 0.9em;
-  color: var(--color-text);
+  /* color: var(--color-text); */
+  color: var(--color-logo-icon);
   stroke-width: 3;
 }
 
 .mainnav [aria-expanded='true'] svg {
   transform: rotate(45deg);
+  color: currentcolor;
 }
 
 .mainnav :is(a, [data-submenu-toggle]) {
   /* configuration */
   --nav-item-background: transparent;
-  --nav-item-text-color: var(--color-text);
+  --nav-item-text-color: color-mix(in oklab, var(--color-text) 70%, black);
   --nav-item-padding: var(--space-xs) var(--space-2xs);
   --nav-item-decoration-color: transparent;
-  --nav-item-font-size: var(--size-step-0);
+  --nav-item-font-size: var(--size-step-min-2);
   --nav-item-font-weight: var(--font-bold);
+
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 
   background: var(--nav-item-background);
   color: var(--nav-item-text-color);
   font-size: var(--nav-item-font-size);
+  font-weight: var(--nav-item-font-weight);
   padding: var(--nav-item-padding);
   display: block;
   border-radius: var(--border-radius-medium);
   text-decoration-line: underline;
   text-decoration-color: var(--nav-item-decoration-color);
   text-decoration-thickness: 3px;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.4em;
 }
 
 .mainnav:has(.nav-sublist) :is(a, [data-submenu-toggle]) {
-  font-weight: var(--nav-item-font-weight);
+  /* font-weight: var(--nav-item-font-weight); */
 }
 
 .mainnav [data-submenu-toggle] {
@@ -148,15 +152,15 @@ body:has([data-drawer-toggle][aria-expanded='true']) {
 .mainnav [aria-current='page'],
 .mainnav [data-state='active'] {
   --nav-item-background: var(--color-bg);
-  --nav-item-text-color: var(--color-primary);
-  --nav-item-decoration-color: var(--color-primary);
+  --nav-item-text-color: var(--color-text);
+  --nav-item-decoration-color: var(--color-themecolordark);
 }
 
 /* current parent (if submenu) */
 li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
   --nav-item-background: var(--color-bg);
   --nav-item-text-color: var(--color-text);
-  --nav-item-decoration-color: var(--color-text);
+  --nav-item-decoration-color: var(--color-orange-500);
 }
 
 /* sub menu */
@@ -194,7 +198,7 @@ li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
   }
 
   .mainnav :is(a, [data-submenu-toggle]) {
-    --nav-item-font-weight: var(--font-regular);
+    /* --nav-item-font-weight: var(--font-regular); */
   }
 
   .mainnav ul {
@@ -214,8 +218,8 @@ li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
   .mainnav [data-state='active'],
   li:has(ul a[aria-current='page']) > [data-submenu-toggle] {
     --nav-item-background: transparent;
-    --nav-item-text-color: var(--color-primary);
-    --nav-item-decoration-color: var(--color-primary);
+    --nav-item-text-color: var(--color-text);
+    --nav-item-decoration-color: var(--color-orange-500);
   }
 
   .mainnav [data-submenu-toggle] {

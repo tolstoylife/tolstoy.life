@@ -1,6 +1,7 @@
 @import 'tailwindcss/base' layer(tailwindBase);
 
 @import 'base/reset.css' layer(reset);
+/* web fonts: */
 @import 'base/fonts.css' layer(fonts);
 
 @import 'tailwindcss/components' layer(tailwindComponents);
