@@ -1,13 +1,13 @@
 # CLAUDE.md — tolstoy.life
 
-A web app and progressive web app(PWA) about the life and works of Leo Tolstoy(LT). The app should have two main functions: present a wiki with all info(people, events, terms, 
+A web app and progressive web app(PWA) about the life and works of Leo Tolstoy(LT). The app should have two main functions: present a wiki using Obsidian and Obsidian markup with wikilinks with all info relating to LT (people, events, family etc). The project also aims to be a complete bibliography of all works written by LT with at least one edition to read of every work.
 
 ---
 
 ## Project overview
 
 **Domain:** tolstoy.life
-**Stack:** Eleventy (11ty) · Supabase (PostgreSQL) · Vanilla HTML/CSS/JS
+**Stack:** Eleventy (11ty) - Obsidian · Supabase (PostgreSQL) · Vanilla HTML/CSS/JS
 **Purpose:** Encyclopedic reference as a wiki covering Tolstoy's biography, works, manuscripts, transcriptions, and related identifiers.
 
 ---
@@ -49,6 +49,7 @@ tolstoy.life/
 ```
 
 > The folder structure above is the intended target; adjust if the actual layout differs.
+
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Project:** tolstoy.life
 **Convention:** camelCase (YAML frontmatter) → snake_case (Supabase/PostgreSQL)
-**Date:** 2026-03-29 (v4)
+**Date:** 2026-03-31 (v5)
 
 ---
 
@@ -11,6 +11,7 @@
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `id` | string | ✓ | Unique project slug, e.g. `anna-karenina` |
+| `recordStatus` | string | ✓ | Editorial quality flag: `draft` · `reviewed` · `verified` |
 | `titleEn` | string | ✓ | English title |
 | `titleRu` | string | ✓ | Russian title in Cyrillic |
 | `titleAlternatives` | object[] | | Working titles, translations, subtitles — see sub-fields below |
@@ -20,6 +21,7 @@
 
 ```yaml
 id: "anna-karenina"
+recordStatus: "draft"
 titleEn: "Anna Karenina"
 titleRu: "Анна Каренина"
 titleAlternatives:
@@ -37,7 +39,7 @@ titleAlternatives:
 
 | Field | Type | Required | Controlled Values |
 |---|---|---|---|
-| `genre` | string | ✓ | `novel` · `novella` · `short_story` · `play` · `essay` · `philosophical` · `religious` · `diary` · `letter` · `poem` · `fragment` |
+| `genre` | string | ✓ | `novel` · `novella` · `short_story` · `parable` · `play` · `essay` · `philosophical` · `religious` · `diary` · `letter` · `poem` · `fragment` |
 | `language` | string | ✓ | ISO 639-1, e.g. `ru` · `fr` |
 | `completionStatus` | string | ✓ | `complete` · `incomplete` · `fragmentary` |
 | `publishedDuringLifetime` | boolean | ✓ | `true` if published anywhere (in any language) before Tolstoy's death (November 1910) |
@@ -74,7 +76,7 @@ publishedInRussiaDuringLifetime: true
 | `dateFirstPublishedApproximate` | boolean | | `true` if exact date is uncertain |
 | `firstPublishedVenue` | string | | Name of journal, newspaper, or publisher |
 | `firstPublishedVenueType` | string | | `journal` · `newspaper` · `book` · `samizdat` |
-| `dateFirstPublishedInRussia` | string | | Gregorian (NS). ISO 8601: date of first legal Russian publication. Leave blank if never legally published in Russia during Tolstoy's lifetime. |
+| `dateFirstPublishedInRussia` | string | | Gregorian (NS). ISO 8601: date of first legal Russian publication — whether during Tolstoy's lifetime or posthumously. Leave blank only if never legally published in Russia at all. |
 | `dateFirstPublishedInRussiaOldStyle` | string | | Julian (OS) date as recorded in Russian sources |
 | `dateFirstPublishedInRussiaApproximate` | boolean | | `true` if exact date is uncertain |
 | `firstPublishedInRussiaVenue` | string | | Name of journal, newspaper, or publisher of first Russian edition |
@@ -119,8 +121,10 @@ An ordered list. One entry per distinct location where the work was written.
 | `authoringLocations[].coordinates.lng` | number | Longitude (decimal degrees) |
 | `authoringLocations[].dateFrom` | string | Gregorian (NS). ISO 8601: start of time at this location |
 | `authoringLocations[].dateFromOldStyle` | string | Julian (OS) date as recorded in Russian sources |
+| `authoringLocations[].dateFromApproximate` | boolean | `true` if exact start date is uncertain |
 | `authoringLocations[].dateTo` | string | Gregorian (NS). ISO 8601: end of time at this location |
 | `authoringLocations[].dateToOldStyle` | string | Julian (OS) date as recorded in Russian sources |
+| `authoringLocations[].dateToApproximate` | boolean | `true` if exact end date is uncertain |
 | `authoringLocations[].notes` | string | Free text |
 
 ```yaml
@@ -136,8 +140,10 @@ authoringLocations:
       lng: 37.5167
     dateFrom: "1873-03-31"
     dateFromOldStyle: "1873-03-19"
+    dateFromApproximate: false
     dateTo: "1875-12-13"
     dateToOldStyle: "1875-12-01"
+    dateToApproximate: false
     notes: "Primary location, drafts 1–4"
   - country: "Russia"
     region: "Moscow"
@@ -150,8 +156,10 @@ authoringLocations:
       lng: 37.5720
     dateFrom: "1875-12-13"
     dateFromOldStyle: "1875-12-01"
+    dateFromApproximate: false
     dateTo: "1876-03-13"
     dateToOldStyle: "1876-03-01"
+    dateToApproximate: false
     notes: "Winter 1875–76"
 ```
 
@@ -165,7 +173,7 @@ One entry per known draft. Writing materials and scans are recorded at the indiv
 |---|---|---|
 | `manuscripts[].draftId` | string | Unique ID within this work, e.g. `ms-01` |
 | `manuscripts[].draftNumber` | integer | Ordinal position |
-| `manuscripts[].draftLabel` | string | `First draft` · `Intermediate draft` · `Final draft` · `Fair copy` · `Printer's copy` |
+| `manuscripts[].draftLabel` | string | `first-draft` · `intermediate-draft` · `final-draft` · `fair-copy` · `printers-copy` |
 | `manuscripts[].dateCreated` | string | Gregorian (NS). ISO 8601: approximate date this draft was written |
 | `manuscripts[].dateCreatedOldStyle` | string | Julian (OS) date as recorded in Russian sources |
 | `manuscripts[].dateCreatedApproximate` | boolean | `true` if date is uncertain |
@@ -191,7 +199,7 @@ One entry per known draft. Writing materials and scans are recorded at the indiv
 manuscripts:
   - draftId: "ms-01"
     draftNumber: 1
-    draftLabel: "First draft"
+    draftLabel: "first-draft"
     dateCreated: "1873"
     dateCreatedOldStyle: "1873"
     dateCreatedApproximate: true
@@ -234,9 +242,10 @@ One entry per known transcription. Transcriber is drawn from a controlled list.
 
 | Field | Type | Description |
 |---|---|---|
+| `transcriptions[].sourceManuscriptId` | string | `draftId` of the manuscript this transcription was made from, e.g. `ms-01`. Leave blank if unknown. |
 | `transcriptions[].transcriberId` | string | From controlled list above |
 | `transcriptions[].transcriberName` | string | Full name (required when `transcriberId` is `other`) |
-| `transcriptions[].relationToAuthor` | string | e.g. `wife` · `daughter` · `secretary` · `self` |
+| `transcriptions[].relationToAuthor` | string | `wife` · `daughter` · `son` · `secretary` · `physician` · `friend` · `self` · `other` |
 | `transcriptions[].dateTranscribed` | string | Gregorian (NS). ISO 8601: approximate date of transcription |
 | `transcriptions[].dateTranscribedOldStyle` | string | Julian (OS) date as recorded in Russian sources |
 | `transcriptions[].dateTranscribedApproximate` | boolean | `true` if date is uncertain |
@@ -255,7 +264,8 @@ One entry per known transcription. Transcriber is drawn from a controlled list.
 
 ```yaml
 transcriptions:
-  - transcriberId: "sophia-tolstaya"
+  - sourceManuscriptId: "ms-01"
+    transcriberId: "sophia-tolstaya"
     transcriberName: "Sophia Andreevna Tolstaya"
     relationToAuthor: "wife"
     dateTranscribed: "1873"
@@ -284,6 +294,7 @@ transcriptions:
 | `dedicatedToEn` | string | Dedication recipient (English) |
 | `dedicatedToRu` | string | Dedication recipient (Russian) |
 | `epigraph` | string | Full epigraph text |
+| `epigraphLanguage` | string | ISO 639-1 language code of the epigraph, e.g. `ru` · `fr` · `cu` (Church Slavonic) |
 | `epigraphAuthor` | string | Author of epigraph |
 | `epigraphSource` | string | Source work of epigraph |
 | `themes` | string[] | Free keyword tags |
@@ -307,15 +318,17 @@ transcriptions:
 | `censoredVersionNotes` | string | Details of the censored edition — what was cut, which venue published the cut version, which editor intervened |
 | `censorshipNotes` | string | Broader censorship narrative — history, context, reception, any aspects not captured in structured fields |
 | `wordCount` | integer | Word count of canonical text |
+| `wordCountEdition` | string | Edition the word count is based on, e.g. `Jubilee Edition, vol. 18` · `Maude translation (1918)` |
 | `relatedWorks` | object[] | Links to related works with relationship type |
 | `relatedWorks[].id` | string | tolstoy.life ID of the related work |
-| `relatedWorks[].relationshipType` | string | `cycle` · `sequel` · `prequel` · `source` · `companion` · `adaptation` |
+| `relatedWorks[].relationshipType` | string | `cycle` · `sequel` · `prequel` · `revision` · `source` · `companion` · `adaptation` |
 | `notes` | string | General free-text remarks |
 
 ```yaml
 dedicatedToEn: ""
 dedicatedToRu: ""
 epigraph: "Vengeance is mine; I will repay."
+epigraphLanguage: "ru"
 epigraphAuthor: ""
 epigraphSource: "Romans 12:19"
 themes:
@@ -328,23 +341,35 @@ subjectHeadings:
   - "Russia -- Social life and customs -- 19th century"
 synopsis: ""
 bans:
-  - banningAuthority: "Holy Synod and Imperial Russian civil censors"
+  - banningAuthority: "Main Administration for Press Affairs"
     authorityType: "imperial-state"
     jurisdiction: "Russia"
-    scope: "complete-ban"
+    scope: "pre-publication-rejected"
     banDate: ""
     banDateOldStyle: ""
     banDateApproximate: true
     banLiftedDate: "1905"
     banLiftedDateOldStyle: "1905"
     banLiftedDateApproximate: true
-    notes: "Banned before publication. First published abroad in German translation (Leipzig, 1894)."
+    notes: "Rejected before publication. First published abroad (Leipzig, 1894)."
+  - banningAuthority: "Holy Synod of the Russian Orthodox Church"
+    authorityType: "holy-synod"
+    jurisdiction: "Russia"
+    scope: "complete-ban"
+    banDate: ""
+    banDateOldStyle: ""
+    banDateApproximate: true
+    banLiftedDate: ""
+    banLiftedDateOldStyle: ""
+    banLiftedDateApproximate: false
+    notes: "Ecclesiastical ban enforced independently of state censorship. Never formally lifted."
 samizdatCirculation: false
 excommunicationRelated: false
 censoredVersionExists: false
 censoredVersionNotes: ""
 censorshipNotes: ""
 wordCount: 349736
+wordCountEdition: "Jubilee Edition, vol. 18–19"
 relatedWorks:
   - id: "war-and-peace"
     relationshipType: "companion"
@@ -440,6 +465,7 @@ fieldSources:
 ```yaml
 # ── Core Identity ────────────────────────────────────────────
 id: ""
+recordStatus: "draft"
 titleEn: ""
 titleRu: ""
 titleAlternatives:
@@ -487,15 +513,17 @@ authoringLocations:
       lng: 0
     dateFrom: ""
     dateFromOldStyle: ""
+    dateFromApproximate: false
     dateTo: ""
     dateToOldStyle: ""
+    dateToApproximate: false
     notes: ""
 
 # ── Manuscripts ──────────────────────────────────────────────
 manuscripts:
   - draftId: "ms-01"
     draftNumber: 1
-    draftLabel: ""
+    draftLabel: "first-draft"
     dateCreated: ""
     dateCreatedOldStyle: ""
     dateCreatedApproximate: false
@@ -520,7 +548,8 @@ manuscripts:
 
 # ── Transcriptions ───────────────────────────────────────────
 transcriptions:
-  - transcriberId: ""
+  - sourceManuscriptId: ""
+    transcriberId: ""
     transcriberName: ""
     relationToAuthor: ""
     dateTranscribed: ""
@@ -543,6 +572,7 @@ transcriptions:
 dedicatedToEn: ""
 dedicatedToRu: ""
 epigraph: ""
+epigraphLanguage: ""
 epigraphAuthor: ""
 epigraphSource: ""
 themes: []
@@ -555,6 +585,7 @@ censoredVersionExists: false
 censoredVersionNotes: ""
 censorshipNotes: ""
 wordCount: 0
+wordCountEdition: ""
 relatedWorks:
   - id: ""
     relationshipType: ""

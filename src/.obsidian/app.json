@@ -3,5 +3,7 @@
   "newFileFolderPath": "wiki",
   "attachmentFolderPath": "assets/images/wiki",
   "useMarkdownLinks": false,
-  "newLinkFormat": "shortest"
+  "newLinkFormat": "shortest",
+  "alwaysUpdateLinks": true,
+  "showLineNumber": false
 }

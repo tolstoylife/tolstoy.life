@@ -1,5 +1,6 @@
 # ── Core Identity ────────────────────────────────────────────
 id: "the-kingdom-of-god-is-within-you"
+recordStatus: "draft"
 titleEn: "The Kingdom of God Is Within You"
 titleRu: "Царство Божие внутри вас"
 titleAlternatives:
@@ -56,8 +57,10 @@ authoringLocations:
       lng: 37.5167
     dateFrom: "1890"
     dateFromOldStyle: "1890"
+    dateFromApproximate: true
     dateTo: "1893"
     dateToOldStyle: "1893"
+    dateToApproximate: true
     notes: "Primary location. Dates approximate — needs archival verification."
   - country: "Russia"
     region: "Moscow"
@@ -70,8 +73,10 @@ authoringLocations:
       lng: 37.5720
     dateFrom: ""
     dateFromOldStyle: ""
+    dateFromApproximate: true
     dateTo: ""
     dateToOldStyle: ""
+    dateToApproximate: true
     notes: "Likely used during winter periods. Needs verification."
 
 # ── Manuscripts ──────────────────────────────────────────────
@@ -79,7 +84,7 @@ authoringLocations:
 manuscripts:
   - draftId: "ms-01"
     draftNumber: 1
-    draftLabel: "First draft"
+    draftLabel: "first-draft"
     dateCreated: "1890"
     dateCreatedOldStyle: "1890"
     dateCreatedApproximate: true
@@ -105,7 +110,8 @@ manuscripts:
 # ── Transcriptions ───────────────────────────────────────────
 # NOTE: Transcription details need archival verification
 transcriptions:
-  - transcriberId: "sophia-tolstaya"
+  - sourceManuscriptId: "ms-01"    # needs verification
+    transcriberId: "sophia-tolstaya"
     transcriberName: "Sophia Andreevna Tolstaya"
     relationToAuthor: "wife"
     dateTranscribed: ""
@@ -128,6 +134,7 @@ transcriptions:
 dedicatedToEn: ""
 dedicatedToRu: ""
 epigraph: ""
+epigraphLanguage: ""
 epigraphAuthor: ""
 epigraphSource: ""
 themes:
@@ -188,6 +195,7 @@ censorshipNotes: >
   (England) distributed Russian-language copies that were smuggled back into
   Russia. The 1901 excommunication further cemented ecclesiastical opposition.
 wordCount: 0    # needs verification
+wordCountEdition: ""
 relatedWorks:
   - id: "what-i-believe"
     relationshipType: "companion"
