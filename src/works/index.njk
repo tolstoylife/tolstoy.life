@@ -1,0 +1,16 @@
+---
+layout: page
+title: Works
+description: 'Complete bibliography of works by Leo Tolstoy.'
+permalink: /works/
+---
+<ul class="flow">
+  {%- for work in collections.allWorks -%}
+    <li>
+      <a href="{{ work.url }}">{{ work.data.title }}</a>
+      {%- if work.data.titleRu %} — <span lang="ru">{{ work.data.titleRu }}</span>{% endif %}
+    </li>
+  {%- else -%}
+    <li>No works yet.</li>
+  {%- endfor -%}
+</ul>
