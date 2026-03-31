@@ -15,7 +15,7 @@ dotenv.config();
 import yaml from 'js-yaml';
 
 //  config import
-import { getAllPosts, getAllArticles, getAllNotes, getAllReading, getAllListening, showInSitemap, tagList } from './src/_config/collections.js';
+import { getAllPosts, getAllArticles, getAllNotes, getAllReading, getAllListening, showInSitemap, tagList, getAllWiki, getAllWorks } from './src/_config/collections.js';
 import events from './src/_config/events.js';
 import filters from './src/_config/filters.js';
 import plugins from './src/_config/plugins.js';
@@ -44,6 +44,8 @@ export default async function(eleventyConfig) {
   eleventyConfig.addLayoutAlias('listening', 'listening.njk');
   eleventyConfig.addLayoutAlias('post', 'post.njk');
   eleventyConfig.addLayoutAlias('tags', 'tags.njk');
+  eleventyConfig.addLayoutAlias('wiki', 'wiki.njk');
+  eleventyConfig.addLayoutAlias('work', 'work.njk');
 
   //	---------------------  Collections
   eleventyConfig.addCollection('allPosts', getAllPosts);
@@ -53,6 +55,8 @@ export default async function(eleventyConfig) {
   eleventyConfig.addCollection('allListening', getAllListening);
   eleventyConfig.addCollection('showInSitemap', showInSitemap);
   eleventyConfig.addCollection('tagList', tagList);
+  eleventyConfig.addCollection('allWiki', getAllWiki);
+  eleventyConfig.addCollection('allWorks', getAllWorks);
 
   // ---------------------  Plugins
   eleventyConfig.addPlugin(plugins.interlinker);

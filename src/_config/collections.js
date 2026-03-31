@@ -37,3 +37,13 @@ export const tagList = collection => {
   });
   return Array.from(tagsSet).sort();
 };
+
+/** All wiki entries as a collection. */
+export const getAllWiki = collection => {
+  return collection.getFilteredByGlob('./src/wiki/**/*.md').reverse();
+};
+
+/** All works as a collection. */
+export const getAllWorks = collection => {
+  return collection.getFilteredByGlob('./src/works/**/*.md').reverse();
+};
