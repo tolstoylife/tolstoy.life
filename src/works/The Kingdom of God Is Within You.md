@@ -1,9 +1,13 @@
 ---
-# GENERATED — do not edit above this line
+# ELEVENTY — derived from schema, do not edit
+title: The Kingdom of God Is Within You
+description: A philosophical treatise arguing true Christianity demands nonresistance to evil by force. A major influence on Gandhi.
+titleRu: Царство Божие внутри вас
+
+# GENERATED — do not edit below this line
 id: the-kingdom-of-god-is-within-you
 recordStatus: draft
 titleEn: The Kingdom of God Is Within You
-titleRu: Царство Божие внутри вас
 titleAlternatives: 
   -
     title: Das Reich Gottes ist in euch

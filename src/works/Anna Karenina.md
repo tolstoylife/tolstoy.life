@@ -1,9 +1,13 @@
 ---
-# GENERATED — do not edit above this line
+# ELEVENTY — derived from schema, do not edit
+title: Anna Karenina
+description: "A novel tracing the parallel stories of Anna Karenina, an aristocratic woman who abandons her husband and son for a passionate affair with Count Vronsky, and Konstantin Levin, a landowner searching for meaning through work, love, and faith."
+titleRu: Анна Каренина
+
+# GENERATED — do not edit below this line
 id: anna-karenina
 recordStatus: draft
 titleEn: Anna Karenina
-titleRu: Анна Каренина
 titleAlternatives: 
   -
     title: Anna Karénine

@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 241.50260543823242
   },
   "right": {
     "id": "right",
@@ -184,8 +184,14 @@
   },
   "active": "9bd75e9cab94b262",
   "lastOpenFiles": [
+    "pages/privacy.md",
+    "pages/offline.md",
+    "pages/sustainability.md",
+    "pages/legal.md",
+    "pages/accessibility.md",
     "works/Anna Karenina.md",
     "wiki/Leo Tolstoy.md",
+    "works/The Kingdom of God Is Within You.md",
     "pages/about.md"
   ]
 }

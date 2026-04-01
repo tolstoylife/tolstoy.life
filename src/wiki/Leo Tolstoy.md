@@ -1,11 +1,14 @@
 ---
-# GENERATED — do not edit above this line
+# ELEVENTY — derived from schema, do not edit
+title: Leo Tolstoy
+description: Russian novelist and moral philosopher (1828–1910).
+titleRu: Лев Николаевич Толстой
+
+# GENERATED — do not edit below this line
 id: leo-tolstoy
 recordStatus: draft
 titleEn: Leo Tolstoy
-titleRu: Лев Николаевич Толстой
 type: person
-description: Russian novelist and moral philosopher (1828–1910).
 birthDate: "1828-09-09"
 birthDateOldStyle: "1828-08-28"
 birthDateApproximate: false

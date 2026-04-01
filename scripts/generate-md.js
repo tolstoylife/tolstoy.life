@@ -263,12 +263,56 @@ function toYaml(value, indent = 0) {
 }
 
 /**
+ * Build the Eleventy-specific frontmatter fields that layouts and meta partials
+ * depend on (title, description, titleRu). These are derived from schema fields
+ * and placed at the top of the frontmatter block so Eleventy always finds them.
+ *
+ * Kept in a clearly labelled section so it's obvious they come from the schema
+ * and should not be hand-edited — edit the source fields in Supabase instead.
+ */
+function eleventyFields(row, table) {
+  if (table === 'works') {
+    return [
+      '# ELEVENTY — derived from schema, do not edit',
+      `title: ${toYaml(row.titleEn || '')}`,
+      `description: ${toYaml(row.synopsis || row.titleEn || '')}`,
+      ...(row.titleRu ? [`titleRu: ${toYaml(row.titleRu)}`] : []),
+    ];
+  }
+  if (table === 'wiki_articles') {
+    return [
+      '# ELEVENTY — derived from schema, do not edit',
+      `title: ${toYaml(row.titleEn || '')}`,
+      `description: ${toYaml(row.description || '')}`,
+      ...(row.titleRu ? [`titleRu: ${toYaml(row.titleRu)}`] : []),
+    ];
+  }
+  return [];
+}
+
+// Fields emitted in the ELEVENTY block — must not be repeated in the GENERATED block.
+// titleEn and titleRu are represented as title/titleRu in the Eleventy block,
+// description is carried through directly. All would cause YAML duplicate key errors.
+const ELEVENTY_ONLY_FIELDS = new Set(['titleRu', 'description']);
+
+/**
  * Serialize a full camelCase row object to a YAML frontmatter block string.
  * Returns the block including the opening and closing --- delimiters.
+ *
+ * Fields duplicated in both the Eleventy block and the schema (titleEn, titleRu,
+ * description) are emitted only once — in the Eleventy block — to avoid the
+ * YAML duplicate key error Eleventy throws.
  */
-function buildFrontmatter(row) {
-  const lines = ['---', '# GENERATED — do not edit above this line'];
+function buildFrontmatter(row, table) {
+  const lines = ['---'];
+  const eleventy = eleventyFields(row, table);
+  if (eleventy.length) {
+    lines.push(...eleventy, '');
+  }
+  lines.push('# GENERATED — do not edit below this line');
   for (const [key, val] of Object.entries(row)) {
+    // Skip fields already present in the Eleventy block
+    if (ELEVENTY_ONLY_FIELDS.has(key)) continue;
     lines.push(`${key}: ${toYaml(val)}`);
   }
   lines.push('---');
@@ -458,8 +502,8 @@ function transformWikiRow(row) {
 /**
  * Build the full .md file content from a Supabase row and existing file (if any).
  */
-function buildFileContent(camelRow, existingContent) {
-  const frontmatter = buildFrontmatter(camelRow);
+function buildFileContent(camelRow, existingContent, table) {
+  const frontmatter = buildFrontmatter(camelRow, table);
   const prose = extractProse(existingContent, camelRow.titleEn);
   return `${frontmatter}\n\n${prose}`;
 }
@@ -538,7 +582,7 @@ async function processSource({ table, dir, filename }) {
       isNew = true;
     }
 
-    const newContent = buildFileContent(camelRow, existingContent);
+    const newContent = buildFileContent(camelRow, existingContent, table);
 
     // Skip if content is unchanged (avoids unnecessary file writes + git noise)
     if (existingContent && newContent === existingContent) {
