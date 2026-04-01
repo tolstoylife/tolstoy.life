@@ -13,6 +13,9 @@ src/_includes/scripts
 # secret data
 .env
 
+# Claude
+.claude
+
 # Editor configs mm
 .nova
 .vscode
