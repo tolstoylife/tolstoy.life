@@ -54,7 +54,7 @@ It does not take positions on interpretive or theological questions. It does not
 
 ## Technical foundation
 
-- **Vault:** Obsidian (`tolstoy-life/src/`) — wiki articles, work pages, source cards, and source texts in a single shared wikilink namespace.
+- **Vault:** Obsidian (`website/src/`) — wiki articles, work pages, source cards, and source texts in a single shared wikilink namespace.
 - **Frontend:** Eleventy PWA, deployed on Netlify at tolstoy.life.
 - **Schema:** Tolstoy Works Schema v5 (work metadata) + Wiki Schema (person, place, event, and concept pages).
 - **Primary sources:** tolstoydigital TEI/XML (CC BY-SA), Project Gutenberg, British Library digitised editions, Yasnaya Polyana Museum open archive.
