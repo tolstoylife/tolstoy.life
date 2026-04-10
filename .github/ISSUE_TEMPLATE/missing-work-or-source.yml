@@ -1,0 +1,57 @@
+name: Missing work or source
+description: Point to a work, translation, manuscript, or primary source that should be included but isn't.
+title: "[Missing] "
+labels: ["missing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project aims to cover Tolstoy's writings as completely as possible, with particular attention to the late period and English-language translations. If you know of something that belongs here and isn't yet included, please let us know.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: What is missing?
+      options:
+        - A work by Tolstoy (not yet in the bibliography)
+        - An English translation of a work
+        - A primary source (biography, diary, correspondence, archive)
+        - A manuscript or archival record
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: The title of the missing work or source, in English and/or Russian if you have both.
+      placeholder: e.g. "The Kingdom of God Is Within You" / «Царство Божие внутри вас»
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Briefly describe what this is and why it belongs in the project.
+      placeholder: "This is Tolstoy's 1893 philosophical treatise on non-violent resistance. It is one of his most influential late works and has several English translations, none of which are currently listed."
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Where to find it
+      description: A link, library reference, archive location, or other pointer to the item.
+      placeholder: "Available on Project Gutenberg: https://www.gutenberg.org/ebooks/4602. Also in the Jubilee Edition, vol. 28."
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else — related works, translation quality, known gaps, or questions.
+    validations:
+      required: false

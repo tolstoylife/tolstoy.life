@@ -1,0 +1,44 @@
+name: Prose suggestion
+description: Suggest an improvement to the wording, clarity, or structure of a page — without changing any factual claims.
+title: "[Prose] "
+labels: ["prose"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for suggestions about how something is written — clarity, phrasing, missing context, or structure — rather than corrections to facts. If you believe something is factually wrong, please use the **Factual correction** template instead.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page or section
+      description: Which page or section does your suggestion apply to?
+      placeholder: e.g. Anna Karenina — tolstoy.life/works/anna-karenina
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: Quote the passage you would like to see changed, if applicable.
+      placeholder: "\"Tolstoy's later religious views were considered extreme by many contemporaries.\""
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: Describe what you would change and why. You can offer alternative wording if you have it, or just explain what feels unclear or missing.
+      placeholder: "The phrase 'considered extreme' is vague. It might be more precise to name the specific institutions or individuals who objected, e.g. the Holy Synod."
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else you'd like to add.
+    validations:
+      required: false

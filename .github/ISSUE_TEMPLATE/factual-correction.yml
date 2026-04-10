@@ -1,0 +1,53 @@
+name: Factual correction
+description: Report a factual error — a wrong date, misattributed source, incorrect name, or other verifiable mistake.
+title: "[Correction] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the accuracy of this resource. All corrections require a primary source. Please be as specific as possible.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page or work
+      description: Which wiki page or work entry contains the error? Link to the live page or give the title.
+      placeholder: e.g. Sophia Tolstaya — tolstoy.life/wiki/sophia-tolstaya
+    validations:
+      required: true
+
+  - type: textarea
+    id: claim
+    attributes:
+      label: The claim as it currently appears
+      description: Quote the exact text or describe what the page currently says.
+      placeholder: "The page states that Sophia copied the final draft of War and Peace seven times."
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: What it should say
+      description: Describe the correct information.
+      placeholder: "The correct number is eight times, as recorded in Sophia's diary."
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Primary source
+      description: Cite the source that supports your correction — title, author, volume/page number, or URL if applicable. The more specific the better.
+      placeholder: "Sophia Tolstaya, *My Life* (translated by John Woodsworth and Arkadi Korchagin), Part III, p. 214."
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else that might be relevant — conflicting sources, uncertainty, related pages that may also need updating.
+    validations:
+      required: false

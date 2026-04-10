@@ -2,6 +2,7 @@
 website/
 splash/
 corpus/
+_generated/
 
 # tools/ is registered as a git submodule (https://github.com/tolstoylife/tools)
 
