@@ -1,0 +1,29 @@
+# Subprojects — these have their own git repositories
+tolstoy-life/
+tolstoy-life-splash/
+corpus/
+
+# tools/ is registered as a git submodule (https://github.com/tolstoylife/tools)
+
+# Large binary source files
+primary-sources/
+
+# Internal working folders — not tracked
+_design/
+_docs/
+_resources/
+__backup/
+
+# Obsidian internals
+.obsidian/
+
+# Local config
+.claude/
+.python-version
+.vault-nickname
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.tmp
