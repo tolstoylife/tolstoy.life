@@ -1,5 +1,0 @@
-{
-  "layout": "work",
-  "tags": ["work"],
-  "permalink": "/works/{{ mainCategory | normalizeFolderName }}/{{ subcategory | normalizeFolderName }}/{{ id }}/"
-}

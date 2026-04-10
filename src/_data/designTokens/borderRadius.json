@@ -1,5 +1,0 @@
-{
-  "$type": "dimension",
-  "small": { "$value": "0.1875rem" },
-  "medium": { "$value": "0.3rem" }
-}

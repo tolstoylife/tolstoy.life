@@ -1,9 +1,0 @@
-{
-  "newFileLocation": "folder",
-  "newFileFolderPath": "wiki",
-  "attachmentFolderPath": "assets/images/wiki",
-  "useMarkdownLinks": false,
-  "newLinkFormat": "shortest",
-  "alwaysUpdateLinks": true,
-  "showLineNumber": false
-}
