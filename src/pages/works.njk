@@ -1,0 +1,38 @@
+---
+layout: base
+title: Works
+description: A complete bibliography of the works of Leo Tolstoy, organised by genre and category.
+permalink: /works/
+---
+
+<div class="wrapper">
+  <header class="full | section" style="--spot-color: var(--color-secondary)">
+    <div class="section__inner flow region" style="--region-space-top: var(--space-xl-2xl)">
+      <h1 class="text-center" style="color: var(--color-light);">Works</h1>
+      <p class="text-center" style="color: var(--color-light);">{{ collections.allWorks.length }} works across {{ collections.allWorks | groupby('data.mainCategory') | length }} categories</p>
+    </div>
+    {% svg "divider/edgy", null, "divider" %}
+  </header>
+
+  <div class="region flow prose">
+    {% set categories = collections.allWorks | groupby('data.mainCategory') %}
+    {% for category, works in categories %}
+      <section>
+        <h2>{{ category }}</h2>
+        {% set subcategories = works | groupby('data.subcategory') %}
+        {% for subcategory, subcatWorks in subcategories %}
+          <h3>{{ subcategory }}</h3>
+          <ul>
+            {% for work in subcatWorks | sort(false, false, 'data.dateFirstPublished') %}
+              <li>
+                <a href="{{ work.url }}">{{ work.data.title }}</a>
+                {% if work.data.titleRu %}<span lang="ru"> — {{ work.data.titleRu }}</span>{% endif %}
+                {% if work.data.dateFirstPublished %}<span class="work-year"> ({{ work.data.dateFirstPublished | truncate(4, true, '') }})</span>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+</div>

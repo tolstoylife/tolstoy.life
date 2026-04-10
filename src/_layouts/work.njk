@@ -1,0 +1,12 @@
+---
+layout: base
+---
+<article class="region wrapper flow prose work-entry">
+  <header class="work-entry__header">
+    <h1>{{ title }}</h1>
+    {% if titleRu %}<p class="work-entry__title-ru" lang="ru">{{ titleRu }}</p>{% endif %}
+  </header>
+  <div class="work-entry__content flow">
+    {{ content | safe }}
+  </div>
+</article>

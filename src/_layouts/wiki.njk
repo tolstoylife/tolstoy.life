@@ -1,0 +1,12 @@
+---
+layout: base
+---
+<article class="region wrapper flow prose wiki-entry" data-type="{{ type }}">
+  <header class="wiki-entry__header">
+    <h1>{{ title }}</h1>
+    {% if type %}<span class="wiki-entry__type">{{ type }}</span>{% endif %}
+  </header>
+  <div class="wiki-entry__content flow">
+    {{ content | safe }}
+  </div>
+</article>
