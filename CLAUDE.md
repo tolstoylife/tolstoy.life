@@ -5,10 +5,12 @@ This folder contains the projects that together form a scholarly publishing plat
 ```
 /Volumes/Graugear/Tolstoy/
 ├── CLAUDE.md              ← this file — shared context for all projects
-├── tolstoy-life/          ← front-end PWA, e-reader, and Obsidian vault (tolstoy.life)
-├── tolstoy-life-splash/   ← temporary splash site (pre-launch placeholder)
+├── MANIFEST.md            ← public project statement
+├── website/               ← front-end PWA, e-reader, and Obsidian vault (tolstoy.life)
+├── splash/                ← temporary splash site (pre-launch placeholder)
 ├── corpus/                ← archived data pipeline (LightRAG, now retired)
 ├── primary-sources/       ← immutable primary source files (EPUBs, TEI/XML, images)
+├── _generated/            ← internal outputs from Claude (tasks, analyses, notes)
 └── tools/                 ← utilities and helper scripts
 ```
 
@@ -35,7 +37,7 @@ The three layers:
 
    Claude reads from both locations but never modifies the binaries in `primary-sources/`. Source cards are maintained by Claude.
 2. **The wiki** (the Obsidian vault: `src/wiki/` + `src/works/`) — a structured, interlinked collection of markdown files maintained by Claude. Wiki articles cover people, places, events, and concepts. Work files hold the full bibliography with metadata and prose. Source texts live in `text/` subfolders with wikilinks woven in.
-3. **The schema** (this file + `tolstoy-life/schema/wiki-schema.md` + `tolstoy-life/schema/tolstoy-works-schema.md`) — conventions, controlled vocabularies, page templates, and workflow definitions. Evolved collaboratively between Johan and Claude.
+3. **The schema** (this file + `website/schema/wiki-schema.md` + `website/schema/tolstoy-works-schema.md`) — conventions, controlled vocabularies, page templates, and workflow definitions. Evolved collaboratively between Johan and Claude.
 
 ### What was retired
 
@@ -136,7 +138,7 @@ Both files live in `src/sources/` — which is excluded from Eleventy — so the
 
 ## Canonical schema reference
 
-All work metadata follows the schema defined in `tolstoy-life/schema/tolstoy-works-schema.md` (v5). Wiki article metadata follows `tolstoy-life/schema/wiki-schema.md`. These are the single references for field names, types, controlled vocabulary values, and examples.
+All work metadata follows the schema defined in `website/schema/tolstoy-works-schema.md` (v5). Wiki article metadata follows `website/schema/wiki-schema.md`. These are the single references for field names, types, controlled vocabulary values, and examples.
 
 ### Naming convention
 

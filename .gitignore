@@ -1,6 +1,6 @@
 # Subprojects — these have their own git repositories
-tolstoy-life/
-tolstoy-life-splash/
+website/
+splash/
 corpus/
 
 # tools/ is registered as a git submodule (https://github.com/tolstoylife/tools)
