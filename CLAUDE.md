@@ -8,7 +8,7 @@ This folder contains the projects that together form a scholarly publishing plat
 ├── MANIFEST.md            ← public project statement
 ├── website/               ← front-end PWA, e-reader, and Obsidian vault (tolstoy.life)
 ├── splash/                ← temporary splash site (pre-launch placeholder)
-├── corpus/                ← archived data pipeline (LightRAG, now retired)
+├── corpus/                ← archived data pipeline (LightRAG, now retiredd)
 ├── primary-sources/       ← immutable primary source files (EPUBs, TEI/XML, images)
 ├── _generated/            ← internal outputs from Claude (tasks, analyses, notes)
 └── tools/                 ← utilities and helper scripts
