@@ -74,6 +74,7 @@ For contributors comfortable with git, pull requests are welcome. Any PR touchin
 ## Primary sources used
 
 - [tolstoydigital TEI/XML](https://github.com/tolstoydigital/TEI) (CC BY-SA) — 3,113 persons, 770 locations, 767 works
+- [Standard Ebooks](https://standardebooks.org/ebooks/leo-tolstoy) — free, carefully formatted Tolstoy editions; toolchain at [standardebooks/tools](https://github.com/standardebooks/tools)
 - [Project Gutenberg](https://www.gutenberg.org/) — English translations
 - British Library digitised editions
 - Yasnaya Polyana Museum open archive

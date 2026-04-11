@@ -33,9 +33,9 @@ The three layers:
 1. **Raw sources** — two locations, one role:
    - `primary-sources/` (project root, outside the vault) — large binary files: EPUBs, PDFs, TEI/XML archives, high-res images. Too large or non-renderable for Obsidian.
    - `src/sources/` (inside the vault) — source cards (small `.md` stubs), plus `index.md` and `log.md`. Source cards make sources wikilink-able and visible in Obsidian's graph. Also contains the canonical index of all wiki pages and the chronological operation log.
-   - `src/_staging/` — staging area for unverified clippings, notes, and extracted passages. Not committed to git, not compiled by Eleventy.
-
    Claude reads from both locations but never modifies the binaries in `primary-sources/`. Source cards are maintained by Claude.
+
+   **Staging:** `src/_staging/` is a holding area for unverified clippings, notes, and extracted passages. It lives inside the Obsidian vault directory (so materials can be wikilinked during review) but is excluded from git and from the Eleventy build via `.gitignore`. It is not a "source" in the same sense as the two locations above — nothing in staging is used to write wiki content until it has been human-verified.
 2. **The wiki** (the Obsidian vault: `src/wiki/` + `src/works/`) — a structured, interlinked collection of markdown files maintained by Claude. Wiki articles cover people, places, events, and concepts. Work files hold the full bibliography with metadata and prose. Source texts live in `text/` subfolders with wikilinks woven in.
 3. **The schema** (this file + `website/schema/wiki-schema.md` + `website/schema/tolstoy-works-schema.md`) — conventions, controlled vocabularies, page templates, and workflow definitions. Evolved collaboratively between Johan and Claude.
 
@@ -70,7 +70,7 @@ src/_staging/                   (staging — clippings, notes, extracted passage
 **The rules:**
 - Binary source files in `primary-sources/` are immutable. Claude reads from them but never modifies them.
 - Each major source gets a **source card** in `src/sources/` — a small `.md` stub with metadata, a path to the binary, and ingestion status. Source cards are wikilink-able, so sources appear in Obsidian's graph alongside the wiki articles they feed.
-- `src/_staging/` is the staging area for unverified source material — clipped articles, notes, PDFs. It lives inside the Obsidian vault so materials can be wikilinked and cross-referenced, but nothing in `src/_staging/` is used to write wiki content until it has been human-verified.
+- `src/_staging/` is described in the Architecture section above. Nothing in staging is used to write wiki content until it has been human-verified.
 - During the **R&D phase** (current), Claude writes directly to vault files. Johan reviews changes in Obsidian and git.
 - When the project **goes live**, Claude shifts to a **PR workflow**: changes are proposed on a git branch and merged after maintainer review.
 - All historical claims must cite a primary source. No unattributed facts, no literary interpretation.
@@ -195,7 +195,7 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 - Russian text in Cyrillic script. Romanisation follows Library of Congress transliteration unless the source uses a different convention.
 - Work titles must appear in both `titleEn` (English) and `titleRu` (Cyrillic).
 - Primary sources take precedence. In order of authority: Jubilee Edition → Tolstoy's diaries and letters → Birukoff biography → Chertkov correspondence → Maude biography.
-- When sources conflict, record both values and note the conflict in the relevant `notes` field. Never silently prefer one source over another.
+- When sources conflict, record **all** values and note the conflict in the relevant `notes` field. The authority order above determines which value is used as canonical, but the competing claims must always be preserved — never silently discard a source's value.
 
 ---
 
@@ -245,7 +245,7 @@ Works are rendered from Markdown in the e-reader, preserving Obsidian-style `[[w
 
 ## Implementation plan
 
-### Phase 1 — Wiki schema and conventions (current)
+### Phase 1 — Wiki schema and conventions
 
 Define `wiki-schema.md` with page types (person, place, event, concept), frontmatter templates, and the index/log conventions. Update all CLAUDE.md files. Establish the sidecar pattern for works metadata.
 
