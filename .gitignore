@@ -5,6 +5,7 @@ corpus/
 _generated/
 
 # tools/ is registered as a git submodule (https://github.com/tolstoylife/tools)
+tools
 
 # Large binary source files
 primary-sources/
