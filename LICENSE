@@ -1,0 +1,66 @@
+# Soli Deo Gloria — A Public Domain Dedication
+
+*All glory to God.*
+
+Johann Sebastian Bach inscribed these words on his manuscripts to
+declare that his work belonged not to himself but to something greater.
+Leo Tolstoy held the same conviction. In the final decades of his life
+he renounced copyright on his writings, insisting that ideas and art
+should flow freely to all who need them.
+
+This project follows in that tradition. The original work across all
+repositories in the tolstoy.life organisation — wiki content, editorial
+prose, markup, metadata, design, and code created by its contributors —
+is dedicated to the worldwide public domain.
+
+## Dedication
+
+To the extent possible under law, the contributors to this project
+waive all copyright and related or neighbouring rights to their
+original contributions. This dedication applies worldwide and is
+intended to be irrevocable. Anyone is free to copy, modify, publish,
+use, compile, sell, or distribute this work, in any form and for any
+purpose, commercial or non-commercial, without asking permission.
+
+Where the law does not recognise a waiver of copyright, the
+contributors grant every person an unconditional, perpetual,
+irrevocable, royalty-free licence to exercise all rights under
+copyright in their contributions, for any purpose whatsoever and
+without any conditions.
+
+## Source texts
+
+The literary works of Leo Tolstoy reproduced in this project were
+first published in the 19th and early 20th centuries and are in the
+public domain worldwide. The contributors make no claim of copyright
+over these source texts.
+
+## Third-party sources and dependencies
+
+This project draws on data and tools from third parties. Their licences
+apply to their respective materials and are not altered by this
+dedication.
+
+**tolstoydigital TEI/XML** — person, location, and work reference data
+extracted from the [tolstoydigital](https://tolstoydigital.org/) TEI
+corpus is licensed under **CC BY-SA**. Attribution is required, and
+derivative works incorporating this data must carry the same licence.
+Wiki pages that draw on tolstoydigital data cite the source per the
+project's sourcing rules.
+
+**Standard Ebooks tools** — the ebook production toolchain in `tools/`
+is a fork of [Standard Ebooks](https://standardebooks.org/) and is
+released under **GPLv3**, with the exception of ebook templates in
+`se/data/templates/` which are **CC0** (public domain). See
+`tools/LICENSE.md` for details.
+
+**Eleventy Excellent** — the website frontend is built on the Eleventy
+Excellent starter (**ISC licence**, Lene Saile) which uses Cube
+Boilerplate (**MIT licence**, Set Studio). See `website/LICENSE` for
+the full text of these licences.
+
+## No warranty
+
+THIS WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED. IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY
+CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THIS WORK.
