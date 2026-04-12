@@ -1,0 +1,6 @@
+Task,Status,Priority,Due,Assignee,Notes
+Review PR #456,In Progress,High,2025-10-25,John Smith,Check security implications & update documentation
+Update API documentation,Not Started,Medium,2025-10-28,Jane Doe,Include new endpoints from v2.0 release
+Fix bug in login system,Done,Critical,2025-10-22,John Smith,Issue resolved - deployed to production
+Plan Q4 sprint,In Progress,High,2025-10-24,Sarah Johnson,Coordinate with product team on priorities
+Refactor database queries,Not Started,Low,2025-11-05,Mike Chen,Optimize for better performance

@@ -1,0 +1,49 @@
+{
+  "title": "",
+  "created": "",
+  "objective": "",
+  "success_criteria": [
+    "All tests pass",
+    "No regressions introduced",
+    "Documentation updated"
+  ],
+  "phases": [
+    {
+      "name": "Phase 1: Discovery",
+      "tasks": [
+        "Analyze existing codebase",
+        "Identify affected components",
+        "Document current behavior"
+      ],
+      "completion": 0,
+      "estimated_iterations": 1
+    },
+    {
+      "name": "Phase 2: Implementation",
+      "tasks": [
+        "Implement core functionality",
+        "Add error handling",
+        "Write unit tests"
+      ],
+      "completion": 0,
+      "estimated_iterations": 3
+    },
+    {
+      "name": "Phase 3: Verification",
+      "tasks": [
+        "Run full test suite",
+        "Manual testing",
+        "Code review preparation"
+      ],
+      "completion": 0,
+      "estimated_iterations": 1
+    }
+  ],
+  "constraints": [],
+  "exit_conditions": [
+    "All success criteria met",
+    "All phase tasks completed",
+    "No blocking issues remain"
+  ],
+  "notes": ""
+}

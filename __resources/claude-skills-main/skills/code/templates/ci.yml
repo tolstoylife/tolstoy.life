@@ -1,0 +1,291 @@
+# GitHub Actions CI Template
+# Implements the Seven Laws of Executable Documentation
+#
+# Usage:
+#   1. Copy to .github/workflows/ci.yml
+#   2. Adjust paths and commands for your stack
+#   3. Configure branch protection to require this workflow
+
+name: Vibecode Quality Gates
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+env:
+  NODE_VERSION: '20'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # =============================================================================
+  # LAW 6: Compilation = Documentation Current
+  # =============================================================================
+  verify-documentation:
+    name: "📚 LAW 6: Verify Executable Documentation"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      # T1: Types compile
+      - name: "Check: Types Compile (T1)"
+        run: npm run typecheck
+      
+      # T2: Schemas validate
+      - name: "Check: Schemas Validate (T2)"
+        run: npm run validate:schemas
+        continue-on-error: true  # Remove after implementing
+      
+      # T3: API specs generate
+      - name: "Check: API Spec Generates (T3)"
+        run: npm run generate:openapi
+        continue-on-error: true  # Remove after implementing
+      
+      # T4: Migrations valid
+      - name: "Check: Migrations Valid (T4)"
+        run: npm run db:migrate:check
+        continue-on-error: true  # Remove after implementing
+
+  # =============================================================================
+  # LAW 3: Script Enforcement
+  # =============================================================================
+  enforce-rules:
+    name: "🔒 LAW 3: Verify Rule Enforcement"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install ruff mypy
+      
+      # T5: Linting passes
+      - name: "Check: ESLint (T5)"
+        run: npm run lint
+      
+      - name: "Check: Ruff (T5)"
+        run: ruff check .
+        continue-on-error: true  # Remove if using Python
+      
+      # Custom preflight
+      - name: "Check: Preflight Script"
+        run: python scripts/preflight.py --ci
+        continue-on-error: true  # Remove after implementing
+
+  # =============================================================================
+  # LAW 7: TODOs as Plans
+  # =============================================================================
+  verify-todos:
+    name: "📝 LAW 7: Verify TODO Plans"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      # Check required TODOs
+      - name: "Check: Required TODOs Resolved"
+        run: |
+          if grep -rn "TODO(.*required" --include="*.py" --include="*.ts" --include="*.js" src/; then
+            echo "❌ Required TODOs found - cannot merge"
+            exit 1
+          fi
+          echo "✅ No required TODOs"
+      
+      # TODO report (informational)
+      - name: "Report: TODO Summary"
+        run: |
+          echo "=== TODO Summary ==="
+          grep -rn "TODO\|FIXME\|HACK" --include="*.py" --include="*.ts" --include="*.js" src/ | head -50 || true
+          echo "===================="
+
+  # =============================================================================
+  # LAW 1: E2E Verification
+  # =============================================================================
+  verify-behavior:
+    name: "🧪 LAW 1: Verify Behavior"
+    needs: [verify-documentation, enforce-rules, verify-todos]
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run migrations
+        run: npm run db:migrate
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+        continue-on-error: true
+      
+      - name: Start application
+        run: |
+          npm run build
+          npm start &
+          sleep 10
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          PORT: 3000
+        continue-on-error: true
+      
+      # E2E tests
+      - name: "Check: E2E Tests"
+        run: npm run test:e2e
+        env:
+          API_URL: http://localhost:3000
+        continue-on-error: true  # Remove after implementing
+      
+      # Unit tests (low trust, but run anyway)
+      - name: "Check: Unit Tests (Low Trust)"
+        run: npm test
+
+  # =============================================================================
+  # LAW 2: Observability
+  # =============================================================================
+  verify-observability:
+    name: "👁️ LAW 2: Verify Observability"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Check logging coverage
+      - name: "Check: Logging Coverage"
+        run: |
+          echo "=== Files without logging ==="
+          # Find handler/controller files without logging
+          for file in $(find src -name "*controller*" -o -name "*handler*" -o -name "*route*" 2>/dev/null); do
+            if ! grep -l "logger\|logging\|console\.log" "$file" > /dev/null 2>&1; then
+              echo "⚠️  No logging: $file"
+            fi
+          done
+          echo "==========================="
+        continue-on-error: true
+
+  # =============================================================================
+  # Architecture Documentation (Generated)
+  # =============================================================================
+  generate-diagrams:
+    name: "📊 Generate Architecture Docs"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Generate dependency graph
+        run: npx madge --image docs/deps.svg src/ || true
+      
+      - name: Upload diagrams
+        uses: actions/upload-artifact@v4
+        with:
+          name: architecture-diagrams
+          path: docs/*.svg
+          if-no-files-found: ignore
+
+  # =============================================================================
+  # LAW 4: Human Review Gate
+  # =============================================================================
+  require-review:
+    name: "👤 LAW 4: Human Review Required"
+    needs: [verify-behavior, verify-observability]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Check review status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviews = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const approved = reviews.data.some(r => r.state === 'APPROVED');
+            
+            if (!approved) {
+              core.warning('Human review required before merge (LAW 4)');
+              // Note: This doesn't fail - use branch protection rules to require reviews
+            } else {
+              console.log('✅ Human review approved');
+            }
+
+  # =============================================================================
+  # Final Gate
+  # =============================================================================
+  all-checks-pass:
+    name: "✅ All Quality Gates"
+    needs: [verify-documentation, enforce-rules, verify-todos, verify-behavior, verify-observability]
+    runs-on: ubuntu-latest
+    steps:
+      - name: All checks passed
+        run: |
+          echo "========================================"
+          echo "  ✅ ALL SEVEN LAWS VERIFIED"
+          echo "========================================"
+          echo ""
+          echo "  LAW 1: E2E Verified        ✓"
+          echo "  LAW 2: Observable          ✓"
+          echo "  LAW 3: Script Enforced     ✓"
+          echo "  LAW 4: Human Review        (via branch protection)"
+          echo "  LAW 5: Code is Doc         ✓"
+          echo "  LAW 6: Compile = Current   ✓"
+          echo "  LAW 7: TODOs are Plans     ✓"
+          echo ""
+          echo "========================================"

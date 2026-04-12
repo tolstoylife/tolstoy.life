@@ -1,0 +1,29 @@
+# PDF Processing
+pymupdf==1.23.*
+pdfplumber==0.10.*
+camelot-py[cv]==0.11.*
+tabula-py==2.9.*
+pdf2image==1.17.*
+
+# NLP & Semantic Analysis
+sentence-transformers==2.3.*
+spacy==3.7.*
+scispacy==0.5.*
+
+# Statistical & Graph Analysis
+scipy==1.11.*
+networkx==3.2.*
+
+# Data Processing
+pandas==2.1.*
+numpy==1.26.*
+pydantic==2.5.*
+
+# OCR & Vision
+pytesseract==0.3.*
+Pillow==10.1.*
+opencv-python==4.9.*
+
+# Additional Tools
+sympy==1.12.*
+pyyaml==6.0.*

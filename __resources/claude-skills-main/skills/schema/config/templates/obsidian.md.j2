@@ -1,0 +1,75 @@
+---
+created: {{ metadata.timestamp }}
+{% if tags %}tags: [{{ tags | join(', ') }}]{% endif %}
+ontology_type: {{ metadata.mode }}
+source: {{ metadata.source_type }}
+node_count: {{ nodes | length }}
+edge_count: {{ edges | length }}
+{% if metadata.topology_score %}topology_score: {{ "%.2f" | format(metadata.topology_score) }}{% endif %}
+{% if root.aliases %}aliases: [{{ root.aliases | join(', ') }}]{% endif %}
+---
+
+# {{ root.label }}
+
+{% if root.description %}
+> [!info] Schema Overview
+> {{ root.description }}
+{% endif %}
+
+## Structure
+
+```mermaid
+graph TD
+{% for edge in hierarchical_edges %}
+    {{ edge.source_id }}["{{ nodes[edge.source_id].label }}"]
+    {{ edge.target_id }}["{{ nodes[edge.target_id].label }}"]
+    {{ edge.source_id }} --> {{ edge.target_id }}
+    class {{ edge.source_id }},{{ edge.target_id }} internal-link
+{% endfor %}
+```
+
+## Entities
+
+{% for node in nodes_sorted %}
+### {{ node.label }}
+
+{% if node.description %}
+{{ node.description }}
+{% endif %}
+
+{% if node.properties %}
+**Properties:**
+{% for key, value in node.properties.items() %}
+- `{{ key }}`: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if node.inherited_properties %}
+**Inherited:**
+{% for key, info in node.inherited_properties.items() %}
+- `{{ key }}`: {{ info.value }} (from [[{{ nodes[info.from].label }}]])
+{% endfor %}
+{% endif %}
+
+{% if node_relationships[node.id] %}
+**Relationships:**
+{% for edge in node_relationships[node.id] %}
+- {{ edge.edge_type | replace('_', ' ') }} → [[{{ nodes[edge.target_id].label }}]]{% if edge.inferred %} _(inferred)_{% endif %}
+{% endfor %}
+{% endif %}
+
+---
+
+{% endfor %}
+
+## Metadata
+
+| Property | Value |
+|----------|-------|
+| Generated | {{ metadata.timestamp }} |
+| Mode | {{ metadata.mode }} |
+| Source | {{ metadata.source_type }} |
+| Nodes | {{ nodes | length }} |
+| Edges | {{ edges | length }} |
+{% if metadata.topology_score %}| Topology Score | {{ "%.2f" | format(metadata.topology_score) }} |{% endif %}
+{% if metadata.processing_time %}| Processing Time | {{ metadata.processing_time }}ms |{% endif %}

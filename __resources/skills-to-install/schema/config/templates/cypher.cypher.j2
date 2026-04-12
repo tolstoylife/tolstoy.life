@@ -1,0 +1,35 @@
+// Cypher export for Neo4j graph database
+// Generated from ontology: {{ metadata.get('source_file', 'unknown') }}
+// Timestamp: {{ metadata.get('timestamp', 'unknown') }}
+
+// Create nodes
+{% for node in nodes_sorted %}
+CREATE (n{{ loop.index }}:{{ node.node_type | title }} {
+  id: "{{ node.id }}",
+  label: "{{ node.label }}"
+  {% if node.description %},description: "{{ node.description }}"{% endif %}
+  {% if node.stem %},stem: "{{ node.stem }}"{% endif %}
+  ,depth: {{ node.depth }}
+})
+{% endfor %}
+
+// Create parent-child relationships
+{% for node in nodes_sorted %}
+{% if node.parent_id %}
+MATCH (parent { id: "{{ node.parent_id }}" })
+MATCH (child { id: "{{ node.id }}" })
+CREATE (parent)-[:HAS_CHILD]->(child)
+{% endif %}
+{% endfor %}
+
+// Create additional edges
+{% for edge in edges %}
+MATCH (source { id: "{{ edge.source_id }}" })
+MATCH (target { id: "{{ edge.target_id }}" })
+CREATE (source)-[:{{ edge.edge_type | upper }}]->(target)
+{% endfor %}
+
+// Create indexes for performance
+CREATE INDEX ON :Concept(id);
+CREATE INDEX ON :Category(id);
+CREATE INDEX ON :Document(id);

@@ -1,0 +1,97 @@
+================================================================================
+TOLSTOY VOLUME 91 INTEGRATION PACKAGE
+================================================================================
+
+Date:     April 5, 2026
+Contents: Complete audit, analysis, and schema upgrade proposal
+Size:     184 KB (8 files)
+
+================================================================================
+READ THESE FIRST (in order):
+================================================================================
+
+1. CHAT_SUMMARY.md
+   - Conversation arc and key insights
+   - Explains how Volume 91 discovery led to schema v6 proposal
+   - START HERE to understand the context
+
+2. INTEGRATION_SUMMARY.md
+   - Executive summary and key metrics
+   - Why Volume 91 is valuable (8-point breakdown)
+   - Next steps checklist
+
+3. SCHEMA_v6_UPDATE.docx
+   - Formal schema upgrade proposal
+   - Four optional fields with rationale
+   - Implementation priority matrix
+   - Share this with your team
+
+================================================================================
+REFERENCE DOCUMENTS:
+================================================================================
+
+4. README.md
+   - Usage guide for all files
+   - Related resources and pathways
+
+5. WORKS_AUDIT_REPORT.html
+   - Detailed analysis with charts
+   - Work type breakdown
+   - Open in any web browser
+
+6. VOLUME_91_SLUG_MAPPING.xlsx
+   - All 495 Volume 91 works
+   - Slug format conversion
+   - Color-coded corpus matching
+   - PRIMARY TOOL for systematic expansion
+
+================================================================================
+DATA FILES:
+================================================================================
+
+7. volume_91_works.csv
+   - Raw Volume 91 data (id, title, date)
+
+8. tolstoy_life_works.csv
+   - Your current corpus (id, title, date, file)
+
+================================================================================
+QUICK FACTS:
+================================================================================
+
+Volume 91:
+- 495 works catalogued
+- 3,113 persons (Wikidata-linked)
+- 770 locations (coordinates)
+- Complete TEI/XML encoding
+- CC BY-SA licensed
+- From tolstoydigital/TEI repository
+
+Your Corpus:
+- 13 works (2.6% coverage)
+- 482 additional works available
+- Schema v5 is comprehensive
+- 4 optional fields unlock full integration
+
+================================================================================
+KEY INSIGHT:
+================================================================================
+
+Volume 91 transforms the Jubilee Edition from a historical printed artifact
+into a structured, machine-readable, Wikidata-linked knowledge layer that can
+seed and systematically expand your entire corpus.
+
+MULTIPLIER: 38x potential expansion with existing reference data
+
+================================================================================
+NEXT ACTION:
+================================================================================
+
+1. Read CHAT_SUMMARY.md to understand discovery arc
+2. Read INTEGRATION_SUMMARY.md for strategic overview
+3. Share SCHEMA_v6_UPDATE.docx with your team
+4. Use VOLUME_91_SLUG_MAPPING.xlsx to plan expansion
+
+All files are final and ready for stakeholder review.
+
+================================================================================

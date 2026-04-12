@@ -1,0 +1,73 @@
+{
+  "title": "",
+  "created": "",
+  "objective": "",
+  "feature_type": "new|enhancement|bugfix|refactor",
+  "success_criteria": [
+    "Feature works as specified",
+    "All edge cases handled",
+    "Performance acceptable",
+    "Tests provide adequate coverage"
+  ],
+  "phases": [
+    {
+      "name": "Phase 1: Requirements",
+      "tasks": [
+        "Define user stories",
+        "Identify edge cases",
+        "Document API contract"
+      ],
+      "completion": 0,
+      "estimated_iterations": 1
+    },
+    {
+      "name": "Phase 2: Design",
+      "tasks": [
+        "Design component structure",
+        "Define data flow",
+        "Plan test strategy"
+      ],
+      "completion": 0,
+      "estimated_iterations": 1
+    },
+    {
+      "name": "Phase 3: Core Implementation",
+      "tasks": [
+        "Implement main logic",
+        "Add validation",
+        "Handle errors"
+      ],
+      "completion": 0,
+      "estimated_iterations": 2
+    },
+    {
+      "name": "Phase 4: Testing",
+      "tasks": [
+        "Write unit tests",
+        "Write integration tests",
+        "Test edge cases"
+      ],
+      "completion": 0,
+      "estimated_iterations": 2
+    },
+    {
+      "name": "Phase 5: Polish",
+      "tasks": [
+        "Code cleanup",
+        "Documentation",
+        "Performance optimization"
+      ],
+      "completion": 0,
+      "estimated_iterations": 1
+    }
+  ],
+  "constraints": [],
+  "dependencies": [],
+  "exit_conditions": [
+    "All tests pass",
+    "Documentation complete",
+    "Code review ready",
+    "No known bugs"
+  ],
+  "notes": ""
+}

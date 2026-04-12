@@ -1,0 +1,112 @@
+# GraphQL Schema
+# Generated from ontology: {{ metadata.get('source_file', 'unknown') }}
+# Timestamp: {{ metadata.get('timestamp', 'unknown') }}
+
+{% set node_types = nodes_sorted | map(attribute='node_type') | unique | list %}
+
+# Node Types
+{% for node_type in node_types %}
+type {{ node_type | title }} {
+  id: ID!
+  label: String!
+  description: String
+  depth: Int!
+  parent: Node
+  children: [Node!]!
+}
+
+{% endfor %}
+
+# Union type for all nodes
+union Node = {{ node_types | map('title') | join(' | ') }}
+
+# Edge Types
+type Edge {
+  source: Node!
+  target: Node!
+  edgeType: String!
+}
+
+# Root Query
+type Query {
+  # Get node by ID
+  node(id: ID!): Node
+
+  # Get all nodes
+  nodes: [Node!]!
+
+  # Get nodes by type
+  nodesByType(type: String!): [Node!]!
+
+  # Get nodes by depth
+  nodesByDepth(depth: Int!): [Node!]!
+
+  # Get all edges
+  edges: [Edge!]!
+
+  # Get edges by type
+  edgesByType(type: String!): [Edge!]!
+
+  # Search nodes by label
+  searchNodes(query: String!): [Node!]!
+
+  # Get root nodes (depth 0)
+  rootNodes: [Node!]!
+
+  # Get topology score
+  topologyScore: Float!
+}
+
+# Mutations (optional - for dynamic graph updates)
+type Mutation {
+  # Add a new node
+  addNode(
+    id: ID!
+    label: String!
+    nodeType: String!
+    parentId: ID
+    description: String
+  ): Node
+
+  # Add a new edge
+  addEdge(
+    sourceId: ID!
+    targetId: ID!
+    edgeType: String!
+  ): Edge
+
+  # Update node
+  updateNode(
+    id: ID!
+    label: String
+    description: String
+  ): Node
+
+  # Delete node
+  deleteNode(id: ID!): Boolean
+}
+
+# Sample data structure (for reference)
+# {
+#   "nodes": [
+{% for node in nodes_sorted %}
+#     {
+#       "id": "{{ node.id }}",
+#       "label": "{{ node.label }}",
+#       "nodeType": "{{ node.node_type }}",
+#       "depth": {{ node.depth }}{% if node.description %},
+#       "description": "{{ node.description }}"{% endif %}{% if node.parent_id %},
+#       "parentId": "{{ node.parent_id }}"{% endif %}
+#     }{% if not loop.last %},{% endif %}
+{% endfor %}
+#   ],
+#   "edges": [
+{% for edge in edges %}
+#     {
+#       "sourceId": "{{ edge.source_id }}",
+#       "targetId": "{{ edge.target_id }}",
+#       "edgeType": "{{ edge.edge_type }}"
+#     }{% if not loop.last %},{% endif %}
+{% endfor %}
+#   ]
+# }

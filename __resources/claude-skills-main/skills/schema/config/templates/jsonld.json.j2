@@ -1,0 +1,17 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/",
+    "ontology": "http://example.org/ontology#"
+  },
+  "@graph": [
+{% for node in nodes_sorted %}
+    {
+      "@id": "ontology:{{ node.id }}",
+      "@type": "{{ node.node_type | title }}",
+      "name": "{{ node.label }}"
+      {% if node.description %},"description": "{{ node.description }}"{% endif %}
+      {% if node.parent_id %},"isPartOf": {"@id": "ontology:{{ node.parent_id }}"}{% endif %}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}

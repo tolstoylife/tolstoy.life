@@ -1,0 +1,122 @@
+# Government AI — Civic agent, policy research, compliance, and public data workflows
+# Routers & Orchestrators (12)
+meta-router
+skills-router
+reasoning-router
+research-router
+analysis-router
+context-router
+data-router
+documentation-router
+agents-router
+tools-router
+development-router
+commands-router
+
+# Reasoning & Cognitive (11) — heavy reasoning for policy analysis
+think
+reason
+dialectical
+critique
+hierarchical-reasoning
+thought-based-reasoning
+constraints
+grounding-router
+textbook-grounding
+context-engineering
+prompt-engineering
+
+# Research & Knowledge (10)
+gpt-researcher
+repo-rag
+exa-automation
+tavily-automation
+semanticscholar-automation
+news-api-automation
+hackernews-automation
+knowledge-graph-builder
+article-extractor
+perplexityai-automation
+
+# Agent Frameworks (8)
+multi-agent-patterns
+multi-agent-coordination
+agents-v2-py
+agent-evaluation
+agent-observability
+agent-prompt-evolution
+maker-framework
+copilot-sdk
+
+# Data & Analysis (10)
+csv-analysis
+spreadsheet
+xlsx
+pdf
+docx
+database-optimizer
+googlebigquery-automation
+google-analytics-automation
+airtable-automation
+census-bureau-automation
+
+# Document & Knowledge Management (10)
+notion-automation
+notion-knowledge-capture
+notion-research-documentation
+notion-spec-to-implementation
+obsidian
+obsidian-data-importer
+confluence-automation
+google-drive-automation
+googledocs-automation
+docusign-automation
+
+# Communication & Outreach (10)
+gmail-automation
+slack-automation
+microsoft-teams-automation
+zoom-automation
+google-calendar-automation
+sendgrid-automation
+todoist-automation
+discord-automation
+telegram-automation
+whatsapp-automation
+
+# Development & Quality (10)
+software-architecture
+architecture-decision-records
+code-refactor
+test-generation
+test-driven-development
+api-design
+security-best-practices
+security-threat-model
+ci-cd-optimization
+testing-strategy
+
+# Infrastructure (5)
+supabase-automation
+vercel-deploy
+cloudflare-deploy
+iac-terraform
+observability-instrumentation
+
+# Government & Public Data (4)
+nasa-automation
+openweather-api-automation
+geoapify-automation
+opencage-automation
+
+# Creative & Media (10)
+speech
+transcribe
+youtube-transcript
+imagegen
+podcast-generation
+fabric
+canva-automation
+heygen-automation
+elevenlabs-automation
+lmnt-automation

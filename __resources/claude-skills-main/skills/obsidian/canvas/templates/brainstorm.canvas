@@ -1,0 +1,80 @@
+{
+	"nodes": [
+		{
+			"id": "1a2b3c4d5e6f7g8h",
+			"type": "text",
+			"text": "# Main Idea\n\nYour central concept here",
+			"x": 0,
+			"y": 0,
+			"width": 260,
+			"height": 140,
+			"color": "5"
+		},
+		{
+			"id": "2a3b4c5d6e7f8g9h",
+			"type": "text",
+			"text": "## Branch\n\nIdea or subtopic",
+			"x": 0,
+			"y": -300,
+			"width": 220,
+			"height": 120
+		},
+		{
+			"id": "3a4b5c6d7e8f9g0h",
+			"type": "text",
+			"text": "## Branch\n\nIdea or subtopic",
+			"x": 300,
+			"y": 0,
+			"width": 220,
+			"height": 120
+		},
+		{
+			"id": "4a5b6c7d8e9f0g1h",
+			"type": "text",
+			"text": "## Branch\n\nIdea or subtopic",
+			"x": 0,
+			"y": 300,
+			"width": 220,
+			"height": 120
+		},
+		{
+			"id": "5a6b7c8d9e0f1g2h",
+			"type": "text",
+			"text": "## Branch\n\nIdea or subtopic",
+			"x": -300,
+			"y": 0,
+			"width": 220,
+			"height": 120
+		}
+	],
+	"edges": [
+		{
+			"id": "e1a2b3c4d5e6f7g8",
+			"fromNode": "1a2b3c4d5e6f7g8h",
+			"fromSide": "top",
+			"toNode": "2a3b4c5d6e7f8g9h",
+			"toSide": "bottom"
+		},
+		{
+			"id": "e2a3b4c5d6e7f8g9",
+			"fromNode": "1a2b3c4d5e6f7g8h",
+			"fromSide": "right",
+			"toNode": "3a4b5c6d7e8f9g0h",
+			"toSide": "left"
+		},
+		{
+			"id": "e3a4b5c6d7e8f9g0",
+			"fromNode": "1a2b3c4d5e6f7g8h",
+			"fromSide": "bottom",
+			"toNode": "4a5b6c7d8e9f0g1h",
+			"toSide": "top"
+		},
+		{
+			"id": "e4a5b6c7d8e9f0g1",
+			"fromNode": "1a2b3c4d5e6f7g8h",
+			"fromSide": "left",
+			"toNode": "5a6b7c8d9e0f1g2h",
+			"toSide": "right"
+		}
+	]
+}

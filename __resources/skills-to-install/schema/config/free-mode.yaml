@@ -1,0 +1,45 @@
+# Free Mode Configuration
+# Flexible generation optimized for semantic coherence
+
+mode: free
+
+constraints:
+  branching:
+    min_children: 1
+    max_children: 10
+    enforce_non_leaf: false
+
+  naming:
+    homonymic_inheritance: false
+    max_label_words: 5
+    require_stem: false
+
+  relations:
+    uniform_per_parent: false
+    allowed_types:
+      - parent_of
+      - part_of
+      - opposite_of
+      - causes
+      - related_to
+      - instance_of
+      - has_property
+
+  topology:
+    min_score: 2.0
+    require_cross_links: false
+
+  depth:
+    max_depth: 10
+    warn_shallow: null
+
+validation:
+  strict: false
+  auto_repair: true
+  max_repair_attempts: 1
+  stagnation_detection: false
+
+output:
+  include_constraints_report: false
+  include_topology_metrics: true
+  include_validation_report: false

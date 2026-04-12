@@ -1,0 +1,177 @@
+{
+  "metadata": {
+    "version": "3.0.0",
+    "generated": "2025-12-17",
+    "source": "Quantitative Human Physiology 3rd Edition - Joseph J. Feher",
+    "total_equations": 248,
+    "total_units": 9
+  },
+  "units": {
+    "1_foundations": {
+      "equation_count": 20,
+      "subdomains": ["transport", "electrical", "diffusion", "thermodynamics"],
+      "is_foundational": true
+    },
+    "2_membrane": {
+      "equation_count": 18,
+      "subdomains": ["structure", "potential", "transport", "osmosis", "signaling", "metabolism"],
+      "depends_on_units": [1]
+    },
+    "3_excitable": {
+      "equation_count": 22,
+      "subdomains": ["membrane_potential", "action_potential", "muscle", "synapse", "energetics"],
+      "depends_on_units": [1, 2]
+    },
+    "4_nervous": {
+      "equation_count": 27,
+      "subdomains": ["synaptic", "integration", "sensory", "motor", "plasticity"],
+      "depends_on_units": [1, 2, 3]
+    },
+    "5_cardiovascular": {
+      "equation_count": 31,
+      "subdomains": ["blood", "ecg", "cardiac", "hemodynamics", "microcirculation"],
+      "depends_on_units": [1, 2, 3]
+    },
+    "6_respiratory": {
+      "equation_count": 41,
+      "subdomains": ["volumes", "mechanics", "gas_exchange", "vq_matching", "oxygen_transport", "co2_transport", "ventilatory_control", "acid_base"],
+      "depends_on_units": [1, 5]
+    },
+    "7_renal": {
+      "equation_count": 30,
+      "subdomains": ["blood_flow", "glomerular", "clearance", "tubular", "concentration", "acid_base", "potassium"],
+      "depends_on_units": [1, 5, 6]
+    },
+    "8_gastrointestinal": {
+      "equation_count": 34,
+      "subdomains": ["motility", "secretion", "digestion", "absorption", "hormones", "liver"],
+      "depends_on_units": [1, 2]
+    },
+    "9_endocrine": {
+      "equation_count": 25,
+      "subdomains": ["kinetics", "receptor", "feedback", "thyroid", "adrenal", "pancreatic", "calcium", "reproductive"],
+      "depends_on_units": [1, 2, 7, 8]
+    }
+  },
+  "cross_domain_equations": {
+    "nernst_equation": {
+      "primary_unit": 1,
+      "used_in": [2, 3, 4, 5, 7],
+      "category": "foundational"
+    },
+    "fick_diffusion": {
+      "primary_unit": 1,
+      "used_in": [5, 6, 7],
+      "category": "transport"
+    },
+    "poiseuille_flow": {
+      "primary_unit": 1,
+      "used_in": [5, 7],
+      "category": "hemodynamics"
+    },
+    "laplace_law": {
+      "primary_unit": 1,
+      "used_in": [5, 6],
+      "category": "mechanics"
+    },
+    "michaelis_menten": {
+      "primary_unit": 1,
+      "used_in": [2, 7, 8, 9],
+      "category": "kinetics"
+    },
+    "hill_equation": {
+      "primary_unit": 1,
+      "used_in": [3, 5, 6, 9],
+      "category": "binding"
+    },
+    "henderson_hasselbalch": {
+      "primary_unit": 1,
+      "used_in": [6, 7],
+      "category": "acid_base"
+    },
+    "starling_forces": {
+      "primary_unit": 5,
+      "used_in": [6, 7, 8],
+      "category": "microcirculation"
+    },
+    "goldman_hodgkin_katz": {
+      "primary_unit": 2,
+      "used_in": [3, 4, 5],
+      "category": "membrane_potential"
+    },
+    "cable_equation": {
+      "primary_unit": 3,
+      "used_in": [4, 5],
+      "category": "electrophysiology"
+    }
+  },
+  "dependency_chains": {
+    "membrane_to_action_potential": [
+      "nernst_equation",
+      "goldman_hodgkin_katz",
+      "hh_membrane_current",
+      "hh_sodium_current",
+      "hh_potassium_current"
+    ],
+    "cardiovascular_oxygen_cascade": [
+      "hill_saturation",
+      "blood_oxygen_content",
+      "systemic_oxygen_delivery",
+      "cardiac_output",
+      "fick_principle"
+    ],
+    "renal_clearance_chain": [
+      "renal_plasma_flow",
+      "filtration_fraction",
+      "gfr_from_nfp",
+      "clearance",
+      "fractional_excretion"
+    ],
+    "hpa_axis": [
+      "crh_dynamics_equation",
+      "acth_dynamics_equation",
+      "cortisol_dynamics_equation",
+      "feedback_gain_equation"
+    ],
+    "respiratory_gas_exchange": [
+      "alveolar_gas_equation",
+      "diffusing_capacity",
+      "hill_equation",
+      "respiratory_oxygen_content",
+      "tissue_oxygen_delivery",
+      "aa_gradient"
+    ]
+  },
+  "topological_layers": {
+    "layer_0_foundations": [
+      "gibbs_free_energy",
+      "coulomb_law",
+      "diffusion_coefficient",
+      "volume_flux",
+      "nernst_equation"
+    ],
+    "layer_1_membrane": [
+      "membrane_capacitance",
+      "donnan_potential",
+      "goldman_hodgkin_katz",
+      "osmotic_pressure"
+    ],
+    "layer_2_excitable": [
+      "hh_membrane_current",
+      "cable_equation",
+      "hill_force_velocity"
+    ],
+    "layer_3_integration": [
+      "cardiac_output",
+      "alveolar_gas_equation",
+      "gfr_from_nfp",
+      "synaptic_current"
+    ],
+    "layer_4_systems": [
+      "systemic_oxygen_delivery",
+      "tissue_oxygen_delivery",
+      "acid_base_compensation",
+      "hormone_feedback_loops"
+    ]
+  }
+}

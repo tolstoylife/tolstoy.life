@@ -1,0 +1,37 @@
+# Kanban-Style Grouped View Template
+# Groups notes by status field (e.g., todo, in-progress, done)
+
+version: v0.1
+
+filter:
+  # Change this tag to match your task/project tag
+  # Example: '#tasks' or '#project/current'
+  tag: '#your-tag'
+
+views:
+  - type: table
+    # Group notes by the status field from frontmatter
+    # Ensure your notes have a 'status' field
+    groupBy: status
+
+    # Fields shown in each grouped section
+    order:
+      - file.name      # File name
+      - status         # Status (will be the group header)
+      - priority       # Priority field (add if needed)
+
+    # Optional: sort within groups
+    # sort:
+    #   field: priority
+    #   direction: asc
+
+# CUSTOMIZATION TIPS:
+# - Change 'groupBy' to any frontmatter field (e.g., category, type, area)
+# - Common status values: todo, in-progress, done, blocked, archived
+# - Add date fields: due-date, start-date
+# - Use priority for task ordering: high, medium, low
+# - Example frontmatter in your notes:
+#   ---
+#   status: in-progress
+#   priority: high
+#   ---

@@ -1,0 +1,63 @@
+{
+  "description": "Obsidian skill hooks for self-iterative learning and context management",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/session-start.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Analyze if this prompt relates to Obsidian (markdown notes, .base databases, .canvas diagrams, wikilinks, callouts, embeds, filters, formulas). If Obsidian-related, return JSON with {\"additionalContext\": \"<relevant tips based on detected topic>\"} otherwise return {\"continue\": true}. Keywords to detect: obsidian, vault, wikilink, callout, embed, .base, .canvas, frontmatter, property, tag, markdown note."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/post-tool-use.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review the session. If Obsidian files (.md, .base, .canvas) were created or modified, extract key patterns used (e.g., wikilinks, callouts, formulas, node types). Return JSON: {\"decision\": \"approve\", \"systemMessage\": \"Obsidian session complete. Patterns used: <list>\"}. If no Obsidian work, return {\"decision\": \"approve\"}."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/session-end.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

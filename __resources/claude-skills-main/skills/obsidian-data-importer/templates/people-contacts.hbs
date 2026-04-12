@@ -1,0 +1,31 @@
+---
+title: '{{Name}}'
+type: person
+{{#if Email}}
+email: '{{Email}}'
+{{/if}}
+{{#if Company}}
+company: '[[{{Company}}]]'
+{{/if}}
+tags: [people{{#if Company}}, company/{{Company}}{{/if}}]
+---
+
+# {{Name}}
+
+{{#if Role}}
+**Role:** {{Role}}{{#if Company}} at [[{{Company}}]]{{/if}}
+{{/if}}
+
+{{#if Email}}
+**Email:** {{Email}}
+{{/if}}
+
+{{#if Phone}}
+**Phone:** {{Phone}}
+{{/if}}
+
+## Notes
+[Add notes about interactions and relationship]
+
+## Related
+[Link to projects, meetings, etc.]

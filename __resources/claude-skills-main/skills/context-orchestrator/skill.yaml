@@ -1,0 +1,110 @@
+# Context Orchestrator Skill Manifest
+# Registration for Skill tool invocation
+
+name: context-orchestrator
+version: "1.0.0"
+description: |
+  Three-CLI context extraction system for personal (limitless), online (research),
+  and local (pieces) context retrieval. Supports single, parallel, and augmented modes.
+
+# Primary skill file
+entrypoint: SKILL.md
+
+# Skill metadata
+author: system
+category: context
+tags:
+  - context
+  - memory
+  - research
+  - ltm
+  - personal
+  - documentation
+
+# Invocation triggers
+triggers:
+  patterns:
+    - "context"
+    - "lifelog"
+    - "research"
+    - "ltm"
+    - "recall"
+    - "lookup"
+    - "pieces"
+    - "limitless"
+    - "pendant"
+    - "documentation"
+    - "fact-check"
+  commands:
+    - "/context"
+    - "/limitless"
+    - "/research"
+    - "/pieces"
+
+# Dependencies
+dependencies:
+  cli_tools:
+    - name: limitless
+      required: false
+      fallback: "Personal context unavailable"
+    - name: research
+      path: "~/.local/bin/research"
+      required: false
+      fallback: "Online research unavailable"
+    - name: pieces
+      path: "/opt/homebrew/bin/pieces"
+      required: false
+      fallback: "Local context unavailable"
+  hooks:
+    - context-intent-detector.ts
+    - session-context-primer.sh
+  rules:
+    - rules/context/orchestrator.md
+    - rules/context/limitless.md
+    - rules/context/research.md
+    - rules/context/pieces.md
+
+# Subagents
+subagents:
+  - name: limitless-agent
+    file: agents/limitless-agent.md
+    type: general-purpose
+  - name: research-agent
+    file: agents/research-agent.md
+    type: researcher
+  - name: pieces-agent
+    file: agents/pieces-agent.md
+    type: general-purpose
+
+# Output configuration
+output:
+  format: json
+  cache:
+    enabled: true
+    location: ~/.claude/.context-cache/
+    ttl:
+      limitless: 1800  # 30 minutes
+      research: 3600   # 60 minutes
+      pieces: 900      # 15 minutes
+
+# Integration points
+integrations:
+  deep_research:
+    phase: 0
+    mode: pre-enrichment
+    file: DEEP-RESEARCH-INTEGRATION.md
+  routers:
+    - skills/routers/context-router/SKILL.md
+  claude_md:
+    section: "Context Orchestration System"
+
+# Metrics
+metrics:
+  enabled: true
+  script: scripts/metrics.py
+
+# Testing
+testing:
+  enabled: true
+  script: tests/test-hooks.ts
+  runner: bun

@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "8a9b0c1d2e3f4a5b",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 300,
+      "height": 150,
+      "text": "# Main Idea\n\nThis is the central concept."
+    },
+    {
+      "id": "1a2b3c4d5e6f7a8b",
+      "type": "text",
+      "x": 400,
+      "y": -100,
+      "width": 250,
+      "height": 100,
+      "text": "## Supporting Point A\n\nDetails here."
+    },
+    {
+      "id": "2b3c4d5e6f7a8b9c",
+      "type": "text",
+      "x": 400,
+      "y": 100,
+      "width": 250,
+      "height": 100,
+      "text": "## Supporting Point B\n\nMore details."
+    }
+  ],
+  "edges": [
+    {
+      "id": "3c4d5e6f7a8b9c0d",
+      "fromNode": "8a9b0c1d2e3f4a5b",
+      "fromSide": "right",
+      "toNode": "1a2b3c4d5e6f7a8b",
+      "toSide": "left"
+    },
+    {
+      "id": "4d5e6f7a8b9c0d1e",
+      "fromNode": "8a9b0c1d2e3f4a5b",
+      "fromSide": "right",
+      "toNode": "2b3c4d5e6f7a8b9c",
+      "toSide": "left"
+    }
+  ]
+}

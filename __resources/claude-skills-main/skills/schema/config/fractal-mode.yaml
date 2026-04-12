@@ -1,0 +1,42 @@
+# Fractal Mode Configuration
+# Strict hierarchical constraints for self-similar structures
+
+mode: fractal
+
+constraints:
+  branching:
+    min_children: 2
+    max_children: 3
+    enforce_non_leaf: true
+
+  naming:
+    homonymic_inheritance: true  # Children must contain parent stem
+    max_label_words: 3
+    require_stem: true
+
+  relations:
+    uniform_per_parent: true     # All children same relation type
+    allowed_types:
+      - parent_of
+      - part_of
+      - opposite_of
+      - causes
+
+  topology:
+    min_score: 4.0               # Edge-to-node ratio
+    require_cross_links: true
+
+  depth:
+    max_depth: 5
+    warn_shallow: 2
+
+validation:
+  strict: true
+  auto_repair: true
+  max_repair_attempts: 3
+  stagnation_detection: true
+
+output:
+  include_constraints_report: true
+  include_topology_metrics: true
+  include_validation_report: true

@@ -1,0 +1,124 @@
+# DevOps — Infrastructure, CI/CD, cloud, monitoring, and platform engineering
+# Routers & Orchestrators (10)
+meta-router
+skills-router
+infrastructure-router
+build-router
+tools-router
+cli-router
+development-router
+commands-router
+context-router
+agents-router
+
+# Infrastructure as Code (6)
+iac-terraform
+k8s-troubleshooter
+observability-instrumentation
+cloudflare-deploy
+vercel-deploy
+render-deploy
+
+# Azure SDK & Cloud (20)
+azure-ai-projects-py
+azure-ai-projects-dotnet
+azure-cosmos-db-py
+azure-storage-blob-py
+azure-storage-blob-java
+azure-eventhub-py
+azure-eventhub-java
+azure-eventgrid-py
+azure-servicebus-py
+azure-identity-py
+azure-identity-dotnet
+azure-keyvault-py
+azure-appconfiguration-py
+azure-containerregistry-py
+azure-monitor-query-py
+azure-monitor-ingestion-py
+azure-monitor-opentelemetry-py
+azure-search-documents-py
+azure-communication-sms-java
+azure-compute-batch-java
+
+# CI/CD & Build (8)
+ci-cd-optimization
+github-automation
+gitlab-automation
+circleci-automation
+buildkite-automation
+npm-automation
+appveyor-automation
+bitbucket-automation
+
+# Monitoring & Observability (8)
+datadog-automation
+sentry-automation
+new-relic-automation
+posthog-automation
+bugsnag-automation
+honeybadger-automation
+pingdom-automation
+uptimerobot-automation
+
+# Security & Compliance (8)
+vulnerability-scanning
+security-threat-model
+security-best-practices
+security-ownership-map
+osgrep
+virustotal-automation
+cloudflare-api-key-automation
+bitwarden-automation
+
+# Database & Storage (6)
+database-optimizer
+supabase-automation
+neon-automation
+snowflake-automation
+turso-automation
+influxdb-cloud-automation
+
+# Containers & Cloud Services (8)
+docker-hub-automation
+digital-ocean-automation
+cloudflare-automation
+netlify-deploy
+azd-deployment
+jumpcloud-automation
+ngrok-automation
+bunnycdn-automation
+
+# Development & Quality (10)
+software-architecture
+architecture-decision-records
+code-refactor
+test-generation
+test-driven-development
+api-design
+dependency-health
+technical-debt-management
+testing-strategy
+property-based-testing
+
+# Reasoning (6)
+think
+reason
+critique
+constraints
+context-engineering
+prompt-engineering
+
+# Communication & Docs (5)
+slack-automation
+notion-automation
+confluence-automation
+jira-automation
+linear-automation
+
+# File & Data (5)
+pdf
+csv-analysis
+xlsx
+yaml-parse
+json-canvas

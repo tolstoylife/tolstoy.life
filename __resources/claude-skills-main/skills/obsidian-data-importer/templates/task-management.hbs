@@ -1,0 +1,138 @@
+{{!-- 
+TASK MANAGEMENT TEMPLATE
+========================
+
+Purpose: Create Obsidian notes for tasks, projects, or work items with status tracking.
+
+Required Fields:
+- Task/Title: Name of the task
+- Status: Current state (e.g., "Not Started", "In Progress", "Done")
+
+Optional Fields:
+- Priority: Importance level
+- DueDate: Deadline
+- Assignee: Person responsible
+- Project: Parent project
+- Notes: Additional context
+- Subtasks: List of sub-items
+- Tags: Categorical labels
+
+Customization:
+- Adjust frontmatter fields based on your data
+- Modify status/priority values to match your workflow
+- Add custom sections as needed
+- Change tag format to match your system
+
+Usage:
+1. Replace {{FieldName}} with your actual CSV/JSON field names
+2. Remove sections for fields you don't have
+3. Add conditional logic for optional fields
+4. Ensure YAML safety (quote strings with special chars)
+--}}
+---
+{{!-- Core Metadata --}}
+title: '{{Task}}'
+type: task
+
+{{!-- Status Tracking --}}
+status: '{{Status}}'
+{{#if Priority}}
+priority: '{{Priority}}'
+{{/if}}
+
+{{!-- Dates --}}
+{{#if DueDate}}
+due: '{{DueDate}}'
+{{/if}}
+{{#if CreatedDate}}
+created: '{{CreatedDate}}'
+{{/if}}
+
+{{!-- Relationships --}}
+{{#if Assignee}}
+assigned: '[[{{Assignee}}]]'
+{{/if}}
+{{#if Project}}
+project: '[[{{Project}}]]'
+{{/if}}
+
+{{!-- Tags for Filtering --}}
+tags: [task{{#if Status}}, status/{{Status}}{{/if}}{{#if Priority}}, priority/{{Priority}}{{/if}}{{#if Project}}, project/{{Project}}{{/if}}]
+
+{{!-- Optional URL --}}
+{{#if URL}}
+source: '{{URL}}'
+{{/if}}
+---
+
+# {{Task}}
+
+{{!-- Status Badge --}}
+**Status:** {{Status}}{{#if Priority}} | **Priority:** {{Priority}}{{/if}}{{#if DueDate}} | **Due:** {{DueDate}}{{/if}}
+
+{{!-- Assignment --}}
+{{#if Assignee}}
+**Assigned to:** [[{{Assignee}}]]
+{{/if}}
+
+{{!-- Project Context --}}
+{{#if Project}}
+**Project:** [[{{Project}}]]
+{{/if}}
+
+{{!-- External Link --}}
+{{#if URL}}
+**Source:** [View in System]({{URL}})
+{{/if}}
+
+---
+
+{{!-- Main Content --}}
+{{#if Description}}
+## Description
+
+{{Description}}
+{{/if}}
+
+{{!-- Subtasks Section --}}
+{{#if Subtasks}}
+## Subtasks
+
+{{#each Subtasks}}
+- [ ] {{this}}
+{{/each}}
+{{/if}}
+
+{{!-- Additional Notes --}}
+{{#if Notes}}
+## Notes
+
+{{Notes}}
+{{/if}}
+
+{{!-- Dependencies Section --}}
+{{#if BlockedBy}}
+## Dependencies
+
+**Blocked by:**
+{{#each BlockedBy}}
+- [[{{this}}]]
+{{/each}}
+{{/if}}
+
+{{#if Blocks}}
+**Blocking:**
+{{#each Blocks}}
+- [[{{this}}]]
+{{/each}}
+{{/if}}
+
+---
+
+## Activity Log
+
+[Track work and updates here]
+
+## Related Tasks
+
+[Link related tasks and notes]

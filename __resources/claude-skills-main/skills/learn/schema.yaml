@@ -1,0 +1,50 @@
+# Learn Skill Schema v4.2
+# Triadic λ.ο.τ metadata framework
+
+spec: agent-skills-1.0
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CORE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signature: "λ(ο,Κ,Σ).τ'"
+meaning: "Query + Knowledge + Schema → Response' + Knowledge' + Schema'"
+
+invariants:
+  Κ-monotonicity: "len(Κ') ≥ len(Κ)"
+  topology: "η ≥ 4"
+  homoiconicity: "Σ.can_process(Σ)"
+  vertex-sharing: "shared_vertices ≠ ∅"
+
+routing:
+  formula: "domains×2 + depth×3 + stakes×1.5 + novelty×2"
+  thresholds: {R0: 2, R1: 4, R2: 8, R3: ∞}
+
+convergence:
+  formula: "0.5×strategic + 0.3×tactical + 0.2×operational"
+  thresholds: {R1: 0.85, R2: 0.92, R3: 0.96}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TRIADIC λ.ο.τ METADATA (6 properties)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  # ο (ontos) — BEING: what things ARE
+  ο.class: {values: [continuant, occurrent], meaning: "things vs processes"}
+  ο.mode: {values: [independent, dependent], meaning: "self-sufficient vs requires bearer"}
+
+  # λ (logos) — RELATION: how things CONNECT  
+  λ.in: {meaning: "dependencies — incoming edges"}
+  λ.out: {meaning: "enables — outgoing edges"}
+  λ.kin: {meaning: "related — lateral edges"}
+
+  # τ (telos) — PURPOSE: why things EXIST
+  τ.goal: {meaning: "purpose + invariants to preserve"}
+
+types:
+  concept: {ο.class: continuant}
+  operation: {ο.class: occurrent, ο.mode: dependent}
+  phase: {ο.class: occurrent, ο.mode: dependent}
+  domain: {ο.class: continuant, ο.mode: independent}
+  integration: {ο.mode: dependent}
+  meta: {ο.class: continuant, ο.mode: independent}

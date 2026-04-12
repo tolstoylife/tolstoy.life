@@ -1,0 +1,122 @@
+# Manus Platform — Multi-agent AI chat UI with orchestration, real-time comms, and tool use
+# Routers & Orchestrators (15)
+meta-router
+skills-router
+agents-router
+reasoning-router
+development-router
+tools-router
+context-router
+build-router
+data-router
+analysis-router
+research-router
+infrastructure-router
+documentation-router
+cli-router
+commands-router
+
+# Reasoning & Cognitive (9)
+think
+reason
+dialectical
+critique
+hierarchical-reasoning
+thought-based-reasoning
+constraints
+context-engineering
+prompt-engineering
+
+# Agent & Multi-Agent (10) — core to Manus architecture
+multi-agent-patterns
+multi-agent-coordination
+agents-v2-py
+hosted-agents-v2-py
+agent-evaluation
+agent-prompt-evolution
+agent-observability
+maker-framework
+copilot-sdk
+subagent-prompt-construction
+
+# Development & Architecture (12)
+software-architecture
+architecture-decision-records
+code-refactor
+test-generation
+test-driven-development
+api-design
+database-optimizer
+ci-cd-optimization
+dependency-health
+technical-debt-management
+testing-strategy
+property-based-testing
+
+# Frontend & UI (5)
+frontend-ui-dark-ts
+frontend-ui-ux
+component-architect
+vercel-react-best-practices
+vercel-composition-patterns
+
+# Real-time & Messaging (8)
+slack-automation
+discord-automation
+telegram-automation
+whatsapp-automation
+microsoft-teams-automation
+sendbird-automation
+zoom-automation
+webex-automation
+
+# AI/ML & LLM (8)
+hugging-face-model-trainer
+hugging-face-evaluation
+hugging-face-datasets
+dspy
+dspy-code
+openai-automation
+mistral-ai-automation
+groqcloud-automation
+
+# Infrastructure & Deploy (8)
+supabase-automation
+vercel-deploy
+cloudflare-deploy
+iac-terraform
+k8s-troubleshooter
+observability-instrumentation
+neon-automation
+render-deploy
+
+# Security (5)
+vulnerability-scanning
+security-threat-model
+security-best-practices
+security-ownership-map
+osgrep
+
+# Data & Knowledge (10)
+notion-automation
+notion-knowledge-capture
+notion-spec-to-implementation
+github-automation
+firecrawl-automation
+exa-automation
+repo-rag
+knowledge-graph-builder
+airtable-automation
+posthog-automation
+
+# File & Media (10)
+pdf
+docx
+xlsx
+csv-analysis
+json-canvas
+imagegen
+youtube-transcript
+speech
+transcribe
+fabric

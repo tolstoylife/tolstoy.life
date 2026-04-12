@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "description": "Functional clusters of related equations across physiological domains",
+    "generated": "2025-12-17"
+  },
+  "clusters": {
+    "transport_mechanics": {
+      "name": "Transport & Fluid Mechanics",
+      "equations": [
+        "foundations.transport.poiseuille_flow",
+        "foundations.transport.hydraulic_resistance",
+        "foundations.transport.laplace_cylinder",
+        "foundations.transport.laplace_sphere",
+        "cardiovascular.hemodynamics.poiseuille_resistance",
+        "cardiovascular.hemodynamics.tpr",
+        "respiratory.mechanics.airway_resistance"
+      ],
+      "unifying_principle": "Pressure-driven flow in tubes"
+    },
+    "membrane_potential": {
+      "name": "Electrochemical Gradients",
+      "equations": [
+        "foundations.thermodynamics.nernst_equation",
+        "membrane.potential.donnan_potential",
+        "membrane.potential.donnan_ratio",
+        "excitable.membrane_potential.ghk_potential",
+        "excitable.membrane_potential.chord_conductance"
+      ],
+      "unifying_principle": "Ion distributions create electrical potentials"
+    },
+    "excitation_contraction": {
+      "name": "Excitation-Contraction Coupling",
+      "equations": [
+        "excitable.action_potential.hh_membrane_current",
+        "excitable.action_potential.cable_equation",
+        "excitable.muscle.ca_force_relationship",
+        "excitable.muscle.hill_force_velocity",
+        "cardiovascular.cardiac.espvr"
+      ],
+      "unifying_principle": "Electrical signals to mechanical force"
+    },
+    "oxygen_cascade": {
+      "name": "Oxygen Transport Cascade",
+      "equations": [
+        "respiratory.gas_exchange.alveolar_gas_equation",
+        "respiratory.gas_exchange.diffusing_capacity",
+        "respiratory.oxygen_transport.hill_equation",
+        "cardiovascular.blood.oxygen_content:blood_oxygen_content",
+        "respiratory.oxygen_transport.oxygen_content:respiratory_oxygen_content",
+        "cardiovascular.blood.oxygen_delivery:systemic_oxygen_delivery",
+        "respiratory.oxygen_transport.oxygen_delivery:tissue_oxygen_delivery",
+        "cardiovascular.cardiac.fick_principle"
+      ],
+      "unifying_principle": "O2 from air to mitochondria",
+      "cross_domain_note": "Oxygen content and delivery equations exist in both cardiovascular and respiratory domains with different parameter contexts"
+    },
+    "acid_base": {
+      "name": "Acid-Base Homeostasis",
+      "equations": [
+        "respiratory.acid_base.henderson_hasselbalch",
+        "respiratory.acid_base.anion_gap",
+        "respiratory.acid_base.winters_formula",
+        "renal.acid_base.net_acid_excretion",
+        "renal.acid_base.new_bicarbonate_generation"
+      ],
+      "unifying_principle": "pH regulation via buffers and compensation"
+    },
+    "renal_function": {
+      "name": "Renal Filtration & Clearance",
+      "equations": [
+        "renal.glomerular.net_filtration_pressure",
+        "renal.glomerular.gfr_from_nfp",
+        "renal.clearance.clearance",
+        "renal.clearance.filtered_load",
+        "renal.tubular.fractional_excretion",
+        "cardiovascular.microcirculation.starling_filtration"
+      ],
+      "unifying_principle": "Glomerular filtration and tubular processing"
+    },
+    "hormone_kinetics": {
+      "name": "Hormone Kinetics & Feedback",
+      "equations": [
+        "endocrine.kinetics.kd_equation",
+        "endocrine.kinetics.mcr_equation",
+        "endocrine.receptor.fractional_occupancy",
+        "endocrine.feedback.feedback_gain_equation",
+        "membrane.signaling.receptor_occupancy"
+      ],
+      "unifying_principle": "Ligand-receptor binding and feedback loops"
+    },
+    "synaptic_transmission": {
+      "name": "Synaptic & Neural Signaling",
+      "equations": [
+        "nervous.synaptic.quantal_content",
+        "nervous.synaptic.synaptic_current",
+        "nervous.synaptic.epsp_amplitude",
+        "nervous.plasticity.stdp",
+        "excitable.synapse.safety_factor"
+      ],
+      "unifying_principle": "Chemical neurotransmission"
+    },
+    "gastrointestinal_function": {
+      "name": "GI Secretion & Absorption",
+      "equations": [
+        "gastrointestinal.secretion.gastric_acid_output",
+        "gastrointestinal.digestion.enzyme_kinetics",
+        "gastrointestinal.absorption.sglt1_glucose",
+        "gastrointestinal.liver.hepatic_clearance",
+        "gastrointestinal.hormones.incretin_effect"
+      ],
+      "unifying_principle": "Digestion and nutrient absorption"
+    },
+    "cardiovascular_regulation": {
+      "name": "CV Regulation & Control",
+      "equations": [
+        "cardiovascular.cardiac.cardiac_output",
+        "cardiovascular.hemodynamics.mean_arterial_pressure",
+        "cardiovascular.microcirculation.baroreceptor_sensitivity",
+        "cardiovascular.hemodynamics.compliance",
+        "renal.concentration.adh_water_permeability"
+      ],
+      "unifying_principle": "Blood pressure and volume regulation"
+    }
+  }
+}
