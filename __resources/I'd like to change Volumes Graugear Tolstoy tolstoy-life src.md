@@ -1,3 +1,0 @@
-Can you evaluate this folder structure? Perhaps change Volumes/Graugear/Tolstoy/tolstoy-life/src/research so that it is called wiki_sources instead in order to avoid confusion. An let /Volumes/Graugear/Tolstoy/tolstoy-life/src/research/sources be called ingested_sources and be located at /Volumes/Graugear/Tolstoy/tolstoy-life/src/research/sources
-
-Volumes/Graugear/Tolstoy/tolstoy-life/tolstoy-person-schema.md

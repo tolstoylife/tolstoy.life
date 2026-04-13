@@ -14,6 +14,7 @@ primary-sources/
 _design/
 _docs/
 _resources/
+__resources/
 __backup/
 
 # Obsidian internals
