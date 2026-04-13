@@ -110,6 +110,31 @@ Both files live in `website/src/sources/` — which is excluded from Eleventy �
 
 ---
 
+## Changelog
+
+**`website/src/pages/changelog.md`** — public-facing record of all notable changes, rendered at `/changelog/` on tolstoy.life. Uses date-based versioning (`YYYY-MM-DD`), not semver. Entries are grouped by date under three categories: **New content**, **Improvements**, and **Corrections**.
+
+**When to update:** Claude appends an entry to the changelog whenever Johan pushes changes to GitHub. The entry should summarise what changed from a reader's perspective — new wiki articles, new works, site improvements, factual corrections. Internal refactoring, schema tweaks, and other changes invisible to visitors do not need entries.
+
+**Format:**
+
+```md
+## YYYY-MM-DD
+
+### New content
+- Wiki article: Sophia Tolstaya — biography sourced from Birukoff and Maude
+
+### Improvements
+- E-reader now shows chapter table of contents in side menu
+
+### Corrections
+- Fixed first publication date for Anna Karenina (1878 → 1877)
+```
+
+Omit any category that has no entries for a given date. Most recent date goes at the top, below the introductory paragraph.
+
+---
+
 ## Shared vocabulary
 
 **LT** — Leo Nikolaevich Tolstoy (1828–1910).
