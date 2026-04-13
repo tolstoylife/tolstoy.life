@@ -44,8 +44,15 @@ Every factual claim requires a named primary source. Sources are weighed in a fi
 |------|-------------|
 | [`tolstoy.life`](https://github.com/tolstoylife/tolstoy.life) | Parent repo — shared schema, CLAUDE.md, and project documentation |
 | [`website`](https://github.com/tolstoylife/website) | Eleventy PWA, Obsidian vault, e-reader frontend |
+| [`tools`](https://github.com/tolstoylife/tools) | Ebook build toolset — `tl` CLI for producing publication-quality EPUBs |
 | [`splash`](https://github.com/tolstoylife/splash) | Temporary splash site (pre-launch placeholder) |
-| [`tools`](https://github.com/tolstoylife/tools) | Utilities and helper scripts |
+
+## Active projects
+
+| Project | Description |
+|---------|-------------|
+| `projects/birukoff-biography/` | Re-OCR and epub production of Paul Birukoff's *Leo Tolstoy: His Life and Work* (1906 Heinemann edition) — the first readable digital transcription of this illustrated edition |
+| `projects/bethink-yourselves/` | Epub production of Tolstoy's *Bethink Yourselves!* — including a Swedish edition (*Betänken Eder*) scanned from a physical copy |
 
 ---
 

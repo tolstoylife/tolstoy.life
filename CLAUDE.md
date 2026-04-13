@@ -58,8 +58,10 @@ website/src/_staging/                                (unverified clippings; not 
 
 **The rules:**
 
-- Binary source files in `primary-sources/` are immutable. Claude reads from them but never modifies them.
+- Binary source files in `primary-sources/` are immutable. Claude reads from them but never modifies them. The folder is organised by **provenance** (where the material came from: `archive-org`, `jubilee-edition`, `standard-ebooks`, etc.) — never by genre or work type.
 - Each major source gets a **source card** in `website/src/sources/` — a small `.md` stub with metadata, a path to the binary, and ingestion status. Source cards are wikilink-able.
+- `_resources/` is a free-form scratchpad for downloaded texts, research clippings, and unverified material that has not yet been promoted to `primary-sources/`. It is not tracked in git.
+- `projects/` holds active production projects (e.g. epub scanning/production) that need their own version control. A project moves its finished output into `primary-sources/` once complete and verified.
 - `website/src/_staging/` is for unverified material. Nothing in staging is used to write wiki content until it has been human-verified.
 - During the **R&D phase** (current), Claude writes directly to vault files. Johan reviews changes in Obsidian and git.
 - When the project **goes live**, Claude shifts to a **PR workflow**: changes are proposed on a git branch and merged after maintainer review.
@@ -228,7 +230,11 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 ├── .gitignore                   ← excludes subfolders, binaries, _generated
 ├── .gitmodules                  ← tracks tools/ as a git submodule
 ├── _generated/                  ← internal outputs from Claude (tasks, analyses, notes)
-├── primary-sources/             ← immutable binary source files
+├── _resources/                  ← untracked workspace: scratchpad, downloaded texts, research clippings
+├── primary-sources/             ← immutable source files, organised by provenance (not genre)
+├── projects/                    ← active production projects with own version control
+│   ├── bethink-yourselves/      ← epub scanning + production project (Swedish + English)
+│   └── birukoff-biography/      ← re-OCR and epub production of 1906 Heinemann edition
 ├── website/                     ← PWA, e-reader, vault (GitHub: tolstoylife/website)
 │   ├── src/                     ← Obsidian vault root + Eleventy input
 │   │   ├── .obsidian/           ← Obsidian config
