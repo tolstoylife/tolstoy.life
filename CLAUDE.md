@@ -28,16 +28,6 @@ This project uses the **LLM Wiki** pattern: Claude incrementally builds and main
 
 3. **The schema** (sections below + `website/schema/wiki-schema.md` + `website/schema/tolstoy-works-schema.md`) — conventions, controlled vocabularies, page templates, and workflow definitions. Evolved collaboratively between Johan and Claude.
 
-### What was retired
-
-The previous architecture used **LightRAG** (a local knowledge graph on Ollama) and **Supabase** (a hosted database) as intermediate layers between raw sources and the vault. These have been retired in favour of the direct LLM Wiki model:
-
-- **LightRAG / corpus pipeline** — the `corpus/` project is archived. The graph database, ingestion scripts, and local Ollama dependency are no longer used. Raw source files that lived in `corpus/data/` should be moved to `primary-sources/` or `website/src/_staging/`.
-- **Supabase** — the hosted database that stored works metadata is no longer the source of truth. YAML frontmatter in the vault files is now canonical.
-- **generate-md.js** — the sync script that fetched from Supabase and wrote frontmatter is retired. Claude writes frontmatter directly.
-
-The `corpus/` directory is preserved as an archive for reference but is not part of the active workflow.
-
 ---
 
 ## Data flow
@@ -225,16 +215,19 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 ├── CLAUDE.md                    ← this file
 ├── MANIFEST.md                  ← public project statement
 ├── README.md                    ← GitHub repo overview
-├── LICENSE                      ← license (specify which one)
+├── LICENSE                      ← Soli Deo Gloria public-domain dedication
 ├── .git/                        ← version control (GitHub: tolstoylife/tolstoy.life)
 ├── .gitignore                   ← excludes subfolders, binaries, _generated
 ├── .gitmodules                  ← tracks tools/ as a git submodule
 ├── _generated/                  ← internal outputs from Claude (tasks, analyses, notes)
 ├── _resources/                  ← untracked workspace: scratchpad, downloaded texts, research clippings
+├── _design/                     ← presentation assets, infographics (untracked)
+├── _docs/                       ← project docs, research notes, source guides (untracked)
 ├── primary-sources/             ← immutable source files, organised by provenance (not genre)
 ├── projects/                    ← active production projects with own version control
 │   ├── bethink-yourselves/      ← epub scanning + production project (Swedish + English)
-│   └── birukoff-biography/      ← re-OCR and epub production of 1906 Heinemann edition
+│   ├── birukoff-biography/      ← re-OCR and epub production of 1906 Heinemann edition
+│   └── korrektur/               ← OCR/proofreading workspace
 ├── website/                     ← PWA, e-reader, vault (GitHub: tolstoylife/website)
 │   ├── src/                     ← Obsidian vault root + Eleventy input
 │   │   ├── .obsidian/           ← Obsidian config
@@ -262,7 +255,7 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 │   ├── se/                      ← Standard Ebooks fork
 │   ├── setup.py                 ← installs as `tl` command
 │   └── CLAUDE.md                ← (deprecated; use parent CLAUDE.md)
-└── corpus/                      ← archived data pipeline (LightRAG, retired)
+└── __backup/                    ← archived material (retired corpus/, prior CLAUDE.md, etc.)
 ```
 
 ---
@@ -371,6 +364,14 @@ Wiki article files (`website/src/wiki/Sophia Tolstaya.md`) follow the templates 
 ### Build pipeline
 
 `npm run build` works purely from committed `.md` files — no scripts, no external dependencies, no network calls.
+
+**Commands** (run from `website/`):
+
+```bash
+npm start            # Eleventy dev server (alias for dev:11ty)
+npm run build        # Clean + production build
+npm run test:a11y    # Pa11y accessibility checks against a test build
+```
 
 **Local development workflow:**
 
