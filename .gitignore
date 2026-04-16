@@ -7,6 +7,10 @@ _generated/
 # tools/ is registered as a git submodule (https://github.com/tolstoylife/tools)
 tools
 
+# Production projects — each has its own git repo
+# bethink-yourselves, birukoff-biography, korrektur
+projects/
+
 # Large binary source files
 primary-sources/
 
