@@ -24,7 +24,7 @@ This project uses the **LLM Wiki** pattern: Claude incrementally builds and main
    
    **Staging:** `website/src/_staging/` is a holding area for unverified clippings, notes, and extracted passages. It lives inside the Obsidian vault directory (so materials can be wikilinked during review) but is excluded from git and from the Eleventy build via `.gitignore`. Nothing in staging is used to write wiki content until it has been human-verified.
 
-2. **The wiki** (the Obsidian vault: `website/src/wiki/` + `website/src/works/`) — a structured, interlinked collection of markdown files maintained by Claude. Wiki articles cover people, places, events, and concepts. Work files hold the full bibliography with metadata and prose. Source texts live in `text/` subfolders with wikilinks woven in.
+2. **The wiki** (the Obsidian vault: `website/src/wiki/` + `website/src/works/` + `website/src/letters/` + `website/src/images/`) — a structured, interlinked collection of markdown files maintained by Claude. Wiki articles cover people, places, events, concepts, translators, institutions, adaptations, critical works, and archival fonds. Work files hold the full bibliography with metadata and prose. Source texts live in `text/` subfolders with wikilinks woven in. Letters have their own section (`letters/`) to keep `works/` focused on literary output. Image metadata stubs live in `images/`.
 
 3. **The schema** (sections below + `website/schema/wiki-schema.md` + `website/schema/tolstoy-works-schema.md`) — conventions, controlled vocabularies, page templates, and workflow definitions. Evolved collaboratively between Johan and Claude.
 
@@ -38,8 +38,10 @@ website/src/sources/*.md                             (source cards — wikilink-
 website/src/_staging/                                (unverified clippings; not in git)
   └── Claude reads source, discusses with Johan
         └── Claude writes/updates vault files directly
-              ├── website/src/wiki/*.md               (people, places, events, concepts)
+              ├── website/src/wiki/*.md               (people, places, events, concepts, translators, institutions, etc.)
               ├── website/src/works/**/*.md           (work overviews + text chapters)
+              ├── website/src/letters/*.md            (correspondence)
+              ├── website/src/images/*.md             (image metadata stubs)
               ├── website/src/sources/*.md            (source card updates)
               ├── website/src/sources/index.md        (catalog of all pages)
               └── website/src/sources/log.md          (operation log)
@@ -67,7 +69,7 @@ Following the LLM Wiki pattern, there are three core operations:
 
 Add a new source to the project. Claude reads the source, discusses key findings with Johan, then:
 
-1. Creates or updates relevant wiki pages (people, places, events, concepts)
+1. Creates or updates relevant wiki pages (people, places, events, concepts, translators, institutions, adaptations, critical works, archival fonds)
 2. Creates or updates relevant work pages (metadata + prose)
 3. Adds wikilinks connecting the new content to existing pages
 4. Updates `website/src/sources/index.md`
@@ -92,11 +94,49 @@ Periodic health checks. Claude reviews the wiki for:
 
 ---
 
+## Scaled architecture: three-layer processing model
+
+At full scope the vault will contain ~26,500 files (~72 MB, ~115,000 wikilinks). That volume exceeds what a single Claude context window can hold. The solution separates intelligence from computation across three layers:
+
+### Layer 1 — Scripted pipeline (nightly cron, zero tokens)
+
+Python scripts run as cron jobs overnight. They handle all mechanical, deterministic work: graph extraction from wikilinks and frontmatter, frontmatter indexing, change detection (new/modified/deleted files), dead-link and orphan detection, contradiction flagging, and daily briefing generation. These scripts dramatically reduce AI token costs by pre-computing what would otherwise require Claude to read and parse files.
+
+Key scripts (build priority):
+
+- `extract-graph.py` — parse `[[wikilinks]]` across all `.md` files, output adjacency list
+- `extract-frontmatter.py` — index all YAML frontmatter into a single queryable JSON
+- `generate-briefing.py` — produce a daily summary of vault state, changes since last session, and flagged issues
+
+### Layer 2 — LightRAG (nightly cron, zero API tokens)
+
+LightRAG provides semantic search and knowledge graph querying as a complement to Obsidian. It runs locally via Ollama with Qwen2.5-14B. No cloud APIs, no ongoing costs.
+
+Configuration: standard local backends (JSON files for KV + document status, NetworkX for graph, NanoVectorDB for vectors). No OpenSearch or external databases needed at our scale.
+
+Sync model: a nightly cron job (`lightrag_sync.py`) identifies changed files since last run and performs incremental re-indexing.
+
+LightRAG is exposed as a local query API that Claude can call during wiki operations (query, lint, cross-reference checks).
+
+### Layer 3 — Claude sessions (on demand, API tokens)
+
+Claude handles work that requires judgement: source reading, claim extraction, prose writing, contradiction resolution, significance assessment. Claude produces an **update manifest** (JSON) listing every factual claim and affected pages. Scripts in Layer 1 verify manifest completeness post-session.
+
+### When each layer activates
+
+- **Phase 2 (current):** Build the scripted pipeline. LightRAG not yet needed — vault is small enough for direct Claude access.
+- **Phase 3 (TEI ingestion, ~8,000 files):** LightRAG must be operational before bulk TEI ingestion begins.
+- **Phase 5+ (~26,500 files):** All three layers active. Update manifest tooling may need an agent swarm coordinator.
+
+> **Cost and capacity details** (token budgets, hardware specs, indexing times) are in `_generated/internal-operations.md` — not tracked in git.
+
+---
+
 ## Index and log
 
 Both files live in `website/src/sources/` — which is excluded from Eleventy — so they never generate pages on the live site.
 
-**`website/src/sources/index.md`** — content-oriented catalog of every page in the wiki (both `website/src/wiki/` and `website/src/works/`). Each entry has a wikilink, a one-line summary, and optionally metadata. Organised by type (people, places, events, concepts, works). Updated on every ingest. Claude reads this first when navigating the vault.
+**`website/src/sources/index.md`** — content-oriented catalog of every page in the wiki (both `website/src/wiki/` and `website/src/works/`). Each entry has a wikilink, a one-line summary, and optionally metadata. Organised by type (people, places, events, concepts, translators, institutions, adaptations, critical works, archival fonds, works, letters, images). Updated on every ingest. Claude reads this first when navigating the vault.
 
 **`website/src/sources/log.md`** — chronological, append-only record of operations. Each entry starts with a consistent prefix: `## [YYYY-MM-DD] operation | Subject`. Operations: `ingest`, `query`, `lint`, `edit`. The log gives narrative context that git history alone doesn't capture — *why* something was ingested, what was found, what questions remain.
 
@@ -147,7 +187,7 @@ Omit any category that has no entries for a given date. Most recent date goes at
 
 ## Canonical schema reference
 
-All work metadata follows the schema defined in `website/schema/tolstoy-works-schema.md` (v5). Wiki article metadata follows `website/schema/wiki-schema.md`. These are the single references for field names, types, controlled vocabulary values, and examples.
+All work metadata follows the schema defined in `website/schema/tolstoy-works-schema.md` (v6). Wiki article metadata follows `website/schema/wiki-schema.md` (v1.1). These are the single references for field names, types, controlled vocabulary values, and examples.
 
 ### Naming convention
 
@@ -184,6 +224,8 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 **relationshipType (relatedWorks):** `cycle` · `sequel` · `prequel` · `revision` · `source` · `companion` · `adaptation`
 
 **recordStatus:** `draft` · `reviewed` · `verified`
+
+**wiki type:** `person` · `place` · `event` · `concept` · `translator` · `institution` · `adaptation` · `criticalWork` · `archivalFond`
 
 ### Controlled transcribers
 
@@ -243,8 +285,10 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 │   │   ├── posts/               ← blog / news posts
 │   │   ├── sources/             ← source cards + index + log
 │   │   ├── _staging/            ← unverified clippings (not in git)
-│   │   ├── wiki/                ← wiki articles (people, places, events, concepts)
-│   │   └── works/               ← work folders: [Title].md + sidecar + text/
+│   │   ├── wiki/                ← wiki articles (people, places, events, concepts, translators, institutions, etc.)
+│   │   ├── works/               ← work folders: [Title].md + sidecar + text/
+│   │   ├── letters/             ← correspondence (genre: letter)
+│   │   └── images/              ← image metadata stubs
 │   ├── schema/                  ← schema and convention docs
 │   │   ├── tolstoy-works-schema.md
 │   │   └── wiki-schema.md
@@ -266,12 +310,14 @@ The `website/` folder contains the public-facing progressive web app (PWA), the 
 
 ### What it does
 
-Four core sections:
+Six core sections:
 
-1. **Wiki** — Obsidian markdown articles with wikilinks covering people, events, places, and concepts. Note: wiki articles cover entities — *not* works. There is no separate wiki article for *Anna Karenina*; the work's own overview file is the canonical article for it.
+1. **Wiki** — Obsidian markdown articles with wikilinks covering people, places, events, concepts, translators, institutions, adaptations, critical works, and archival fonds. Wiki articles cover entities — *not* works. There is no separate wiki article for *Anna Karenina*; the work's own overview file is the canonical article for it.
 2. **Works** — complete bibliography. Each work has an overview page (frontmatter + prose) inside a named folder, with an optional sidecar `.data.yaml` for deep scholarly metadata. Long-form works also have a `text/` subfolder containing one file per chapter.
-3. **My Library** — users add editions to a personal library cached on-device for offline reading (`IndexedDB`, no backend).
-4. **E-reader** — focus-mode reading view with togglable wikilinks, footnotes, and a chapter Table of Contents.
+3. **Letters** — correspondence (10,000+ letters). Separate from `works/` to keep the literary bibliography focused. Letters use the works schema with `genre: letter`.
+4. **Images** — image metadata stubs (2,360 records). Each image gets a small `.md` file making it fully wikilink-able across the vault.
+5. **My Library** — users add editions to a personal library cached on-device for offline reading (`IndexedDB`, no backend).
+6. **E-reader** — focus-mode reading view with togglable wikilinks, footnotes, and a chapter Table of Contents.
 
 Plus **posts** (blog/news) and **pages** (about, legal, accessibility).
 
@@ -283,9 +329,9 @@ Plus **posts** (blog/news) and **pages** (about, legal, accessibility).
 
 ### Vault and file structure
 
-The Obsidian vault (`website/src/`) is unified — `wiki/` articles, `works/` overview pages, and source texts all live in the same graph and share the same wikilink namespace.
+The Obsidian vault (`website/src/`) is unified — `wiki/` articles, `works/` overview pages, `letters/`, `images/`, and source texts all live in the same graph and share the same wikilink namespace.
 
-**There is no separate wiki article for a work.** The work's own file (`website/src/works/fiction/novels/anna-karenina/Anna Karenina.md`) is the canonical article for that work. Wiki articles in `website/src/wiki/` cover people, places, events, and concepts — not works.
+**There is no separate wiki article for a work.** The work's own file (`website/src/works/fiction/novels/anna-karenina/Anna Karenina.md`) is the canonical article for that work. Wiki articles in `website/src/wiki/` cover people, places, events, concepts, translators, institutions, adaptations, critical works, and archival fonds — not works.
 
 **Work folder structure:**
 
@@ -302,7 +348,7 @@ website/src/works/fiction/novels/anna-karenina/
         └── repin-portrait-1887.jpg
 ```
 
-**Sidecar convention:** Each work's `.md` file contains core frontmatter (identity, dates, genre, locations, identifiers, themes). The full schema v5 metadata — manuscripts, transcriptions, bans, fieldSources — lives in a companion `[id].data.yaml` file in the same folder. This keeps the markdown readable in Obsidian while preserving the complete scholarly record. Eleventy consumes the sidecar via data cascade.
+**Sidecar convention:** Each work's `.md` file contains core frontmatter (identity, dates, genre, locations, identifiers, themes). The full schema v6 metadata — manuscripts, transcriptions, bans, fieldSources — lives in a companion `[id].data.yaml` file in the same folder. This keeps the markdown readable in Obsidian while preserving the complete scholarly record. Eleventy consumes the sidecar via data cascade.
 
 **Filename convention:** Files use human-readable title-case names (e.g. `Anna Karenina.md`, not `index.md` or `anna-karenina.md`). This is required for Obsidian wikilinks to resolve correctly. Clean URLs on the live site are handled by the `permalink` field in `works.11tydata.json`, derived from the `id` slug — not from the filename.
 
@@ -359,7 +405,7 @@ Wiki article files (`website/src/wiki/Sophia Tolstaya.md`) follow the templates 
 
 ### Obsidian vault
 
-`website/src/` is the Obsidian vault. Open `website/src/` directly in Obsidian. Wikilinks, backlinks, and graph view work against all `.md` files in `wiki/`, `works/`, and `sources/`.
+`website/src/` is the Obsidian vault. Open `website/src/` directly in Obsidian. Wikilinks, backlinks, and graph view work against all `.md` files in `wiki/`, `works/`, `letters/`, `images/`, and `sources/`.
 
 ### Build pipeline
 
@@ -559,25 +605,31 @@ For contributors comfortable with git, pull requests remain welcome:
 
 ## Implementation plan
 
-### Phase 1 — Wiki schema and conventions
+### Phase 1 — Wiki schema and conventions ✓
 
-Define `wiki-schema.md` with page types (person, place, event, concept), frontmatter templates, and the index/log conventions. Establish the sidecar pattern for works metadata.
+Define `wiki-schema.md` with page types (person, place, event, concept, institution, translator, adaptation, criticalWork, archivalFond), frontmatter templates, and the index/log conventions. Establish the sidecar pattern for works metadata.
 
-### Phase 2 — Test run
+### Phase 2 — Test run + scripted pipeline (current)
 
 Pick 5–10 well-covered entities (e.g. Sophia Tolstaya, Yasnaya Polyana, Anna Karenina, War and Peace) and run the full wiki cycle: read TEI reference data + biographical sources, create/update wiki pages, populate frontmatter, add wikilinks, update index, log the operation. Validate the format in Obsidian before scaling up.
+
+**Parallel track:** Build the scripted pipeline (Layer 1 of the scaled architecture): `extract-graph.py`, `extract-frontmatter.py`, `generate-briefing.py`. These scripts must be operational before Phase 3.
 
 ### Phase 3 — TEI reference data ingestion
 
 Ingest `personList.xml` and `locationList.xml` from the tolstoydigital TEI data — 3,113 persons and 770 locations. Create wiki pages tiered by proximity to Tolstoy: inner circle first, then wider associates, then the full dataset.
 
+**Prerequisite:** LightRAG + Ollama (Qwen2.5-14B) must be set up and indexed before bulk ingestion begins (~8,000 files at this point). Set up nightly cron job for incremental sync.
+
 ### Phase 4 — Biographical source ingestion
 
-Ingest the cleaned Birukoff biography, then Maude, then supplementary sources. Each ingestion enriches existing pages and creates new ones. After each major source, run a lint pass.
+Ingest the cleaned Birukoff biography, then Maude, then supplementary sources. Each ingestion enriches existing pages and creates new ones. After each major source, run a lint pass. LightRAG provides semantic querying across the growing vault.
 
 ### Phase 5 — Source texts and wikilinks
 
 Convert TEI/XML chapter files to markdown in `text/` subfolders. Build a lookup table from the wiki (all person/place/work pages) and insert wikilinks on first occurrence per chapter. Human review in Obsidian.
+
+At this scale (~26,500 files) all three layers of the scaled architecture are active.
 
 ### Phase 6 — Production workflow
 
