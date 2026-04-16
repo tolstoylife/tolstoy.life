@@ -269,7 +269,7 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 ├── projects/                    ← active production projects with own version control
 │   ├── bethink-yourselves/      ← epub scanning + production project (Swedish + English)
 │   ├── birukoff-biography/      ← re-OCR and epub production of 1906 Heinemann edition
-│   └── korrektur/               ← OCR/proofreading workspace
+│   └── korrektur/               ← full ebook production pipeline (scan → OCR → proofread → EPUB + wiki MD)
 ├── website/                     ← PWA, e-reader, vault (GitHub: tolstoylife/website)
 │   ├── src/                     ← Obsidian vault root + Eleventy input
 │   │   ├── .obsidian/           ← Obsidian config
