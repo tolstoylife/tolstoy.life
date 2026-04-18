@@ -110,13 +110,13 @@ Key scripts (build priority):
 
 ### Layer 2 — LightRAG (nightly cron, zero API tokens)
 
-LightRAG provides semantic search and knowledge graph querying as a complement to Obsidian. It runs locally via Ollama with Qwen2.5-14B. No cloud APIs, no ongoing costs.
+LightRAG provides semantic search and knowledge graph querying as a complement to Obsidian. It runs locally via Ollama with Qwen2.5:7b (the 14B model exceeds 24 GB with a 32K context window). No cloud APIs, no ongoing costs.
 
-Configuration: standard local backends (JSON files for KV + document status, NetworkX for graph, NanoVectorDB for vectors). No OpenSearch or external databases needed at our scale.
+Configuration: standard local backends (JSON files for KV + document status, NetworkX for graph, NanoVectorDB for vectors). No OpenSearch or external databases needed at our scale. All scripts live in `lightrag/`; generated data in `lightrag/data/` (gitignored).
 
-Sync model: a nightly cron job (`lightrag_sync.py`) identifies changed files since last run and performs incremental re-indexing.
+Sync model: `lightrag/sync.py` runs as a nightly cron job, identifies changed files since last run, and performs incremental re-indexing. Initial full indexing via `lightrag/ingest.py`.
 
-LightRAG is exposed as a local query API that Claude can call during wiki operations (query, lint, cross-reference checks).
+LightRAG is exposed as a local query API (`lightrag/server.py`, port 8420) that Claude can call during wiki operations (query, lint, cross-reference checks). The vault path can be overridden via the `TOLSTOY_VAULT` environment variable.
 
 ### Layer 3 — Claude sessions (on demand, API tokens)
 
@@ -265,6 +265,14 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 ├── _resources/                  ← untracked workspace: scratchpad, downloaded texts, research clippings
 ├── _design/                     ← presentation assets, infographics (untracked)
 ├── _docs/                       ← project docs, research notes, source guides (untracked)
+├── lightrag/                    ← LightRAG semantic search + knowledge graph (Layer 2)
+│   ├── config.py                ← all settings (paths, models, ports)
+│   ├── rag.py                   ← LightRAG instance factory (Ollama backends)
+│   ├── vault_reader.py          ← vault file reader
+│   ├── ingest.py                ← full batch indexing
+│   ├── sync.py                  ← incremental sync (nightly cron)
+│   ├── server.py                ← HTTP query API (port 8420)
+│   └── data/                    ← index, vectors, graph (gitignored, regenerable)
 ├── primary-sources/             ← immutable source files, organised by provenance (not genre)
 ├── projects/                    ← active production projects with own version control
 │   ├── bethink-yourselves/      ← epub scanning + production project (Swedish + English)
@@ -619,7 +627,7 @@ Pick 5–10 well-covered entities (e.g. Sophia Tolstaya, Yasnaya Polyana, Anna K
 
 Ingest `personList.xml` and `locationList.xml` from the tolstoydigital TEI data — 3,113 persons and 770 locations. Create wiki pages tiered by proximity to Tolstoy: inner circle first, then wider associates, then the full dataset.
 
-**Prerequisite:** LightRAG + Ollama (Qwen2.5-14B) must be set up and indexed before bulk ingestion begins (~8,000 files at this point). Set up nightly cron job for incremental sync.
+**Prerequisite:** LightRAG + Ollama (Qwen2.5:7b) must be set up and indexed before bulk ingestion begins (~8,000 files at this point). Set up nightly cron job for incremental sync.
 
 ### Phase 4 — Biographical source ingestion
 

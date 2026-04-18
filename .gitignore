@@ -18,8 +18,8 @@ primary-sources/
 _design/
 _docs/
 _resources/
-__resources/
 __backup/
+__scrap
 
 # Obsidian internals
 .obsidian/
@@ -34,3 +34,5 @@ __backup/
 
 # Temporary files
 *.tmp
+*.skill
+ziYV7S8m

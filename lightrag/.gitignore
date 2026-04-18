@@ -1,0 +1,7 @@
+# LightRAG database (regenerable from vault)
+data/
+
+# Python
+venv/
+__pycache__/
+*.pyc
