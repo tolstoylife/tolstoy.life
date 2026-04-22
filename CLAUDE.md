@@ -108,6 +108,15 @@ Key scripts (build priority):
 - `extract-frontmatter.py` — index all YAML frontmatter into a single queryable JSON
 - `generate-briefing.py` — produce a daily summary of vault state, changes since last session, and flagged issues
 
+Additional Layer-1 generators produce build artefacts consumed by the PWA e-reader (see `_generated/PWA/tl-pipeline-integration.md`):
+
+- `generate-wiki-previews.py` — walks `website/src/wiki/` and emits a hashed `wiki-previews-v<YYYY-MM-DD>-<hash6>.json` bundle of summary stubs for every wiki article. Precached with the PWA app shell so wikilink modal previews work offline from first load.
+- `generate-related-wiki.py` — for each work, parses every chapter file in its `text/` subfolder for `[[wikilinks]]`, resolves them to wiki article slugs, and emits the deduplicated `relatedWiki` list used by the PWA's download coordinator to populate the shared wiki cache.
+- `generate-asset-manifests.py` — walks each work's post-Eleventy build output, computes SHA-256 of every served file, and emits `manifest.json` with the deterministic version (`v<YYYY-MM-DD>-<hash6>` — first-commit date plus content-hash prefix), asset list, `relatedWiki`, and wiki-previews pointer.
+- `generate-works-index.py` — aggregates every per-work manifest into `works.json` (the top-level index fetched on app open).
+
+All four generators use a shared canonical-JSON serialiser so builds are byte-deterministic (CI verifies by building twice from the same git revision).
+
 ### Layer 2 — LightRAG (nightly cron, zero API tokens)
 
 LightRAG provides semantic search and knowledge graph querying as a complement to Obsidian. It runs locally via Ollama with Qwen2.5:7b (the 14B model exceeds 24 GB with a 32K context window). No cloud APIs, no ongoing costs.
@@ -479,6 +488,56 @@ Rules:
 - Images in WebP/AVIF with `width`/`height` attributes and `loading="lazy"`.
 - All interactive elements must be keyboard-accessible.
 
+### PWA architecture
+
+Architectural documentation for the local-first PWA / e-reader lives in `_generated/PWA/`. These are not editorial documents — they specify the data model, build outputs, service-worker behaviour, sync layer, and pipeline contracts the PWA depends on. Read the relevant document before changing anything in the area it covers:
+
+- `_generated/PWA/README.md` — index of PWA documents and reading order.
+- `_generated/PWA/local-first-architecture.md` — the four data layers (works, wiki, app shell, user annotations), staged roadmap (Stage 1 = offline works, Stage 4 = sync), Workbox adoption, decision log.
+- `_generated/PWA/wiki-integration.md` — shared wiki cache, bundled previews, GitHub contribution surface integration.
+- `_generated/PWA/stage-1-implementation.md` — concrete plan for the first local-first capability (download a work for offline reading, including its referenced wiki articles).
+- `_generated/PWA/tl-pipeline-integration.md` — the build-pipeline contract: deterministic content-addressed versioning (`v<YYYY-MM-DD>-<hash6>`), per-work asset manifests, `relatedWiki` lists, the wiki-previews bundle, the works.json index, and the chapter-URI frontmatter convention.
+- `_generated/PWA/yjs-schema-and-sync.md` — the Stage-4 CRDT layer: Y.Doc shape, IndexedDB persistence, Cloudflare Worker + Durable Object relay, fragment-URL QR pairing, BIP-39 fallback, encryption-at-rest, device list, key rotation.
+- `_generated/PWA/ultraplan-brief-01-sync.md`, `ultraplan-brief-02-stage-1.md`, `ultraplan-brief-03-tl-integration.md` — `/ultraplan` planning prompts derived from the design documents above.
+
+#### Build artefacts the PWA depends on
+
+The Layer-1 generators (see *Scaled architecture*) emit four artefacts at build time that the PWA consumes:
+
+1. `/works.json` — top-level index of every published work with current and prior served versions, manifest URLs, and a pointer to the current wiki-previews bundle.
+2. `/<work>/manifest.json` — per-work asset manifest with deterministic version, asset list (URL + SHA-256 + bytes per file), `relatedWiki` slug list, and a `wikiPreviewsUrl` redundant pointer. Both unversioned (current) and versioned (`/<work>/<version>/manifest.json`) URLs exist.
+3. `/wiki-previews-v<YYYY-MM-DD>-<hash6>.json` — bundled summary stubs for every wiki article in the vault. Hashed URL → immutable per build → precached with the app shell so wikilink modal previews work offline from first load.
+4. Versioned subtrees: `/<work>/<version>/...` for the current version + the two most recent prior versions. Older versions live in git only.
+
+#### Chapter URI convention
+
+Every chapter file in `website/src/works/.../text/*.md` must declare an explicit `chapterUri` in its frontmatter. The build fails if it is missing. The format is:
+
+```yaml
+---
+title: Book 1, Chapter 1
+work: war-and-peace
+part: 1
+chapter: 1
+chapterUri: urn:tolstoy-life:war-and-peace:book-1-chapter-1
+---
+```
+
+This URI is the stable target for annotations across version changes — never derive it from URL or position. A chapter that is moved or renumbered keeps its URI; the URL can change but annotations follow the URI.
+
+#### GitHub contribution-tier infrastructure
+
+The contribution model (below) depends on GitHub repository configuration that lives outside the markdown content but is part of the project's infrastructure:
+
+- `.github/ISSUE_TEMPLATE/` in each repo (factual correction, prose suggestion, missing source) — referenced from PWA "Improve this article" deep links.
+- `CODEOWNERS` (in `.github/`) — defines maintainer review requirements for `wiki/`, `works/`, `letters/`, and `images/` PRs.
+- `.github/PULL_REQUEST_TEMPLATE.md` — primary-source citation requirement for wiki content PRs; lighter expectations for text-wikilink PRs.
+- Branch protection on `main` (in repo settings) — required reviews and CI checks.
+- GitHub Actions in `.github/workflows/` — schema validation, wikilink resolution, dead-link checks, `relatedWiki` completeness checks (every wikilink in every chapter resolves to either a vault file or a known external target).
+- Repository Discussions enabled for community Q&A separate from issue trackers.
+
+When the PWA links to GitHub for "Improve this article" (see `wiki-integration.md` §4), the deep-link URLs assume these resources exist — keep them in place.
+
 ### Git remotes
 
 - `origin` → `https://github.com/tolstoylife/website.git`
@@ -546,6 +605,12 @@ This structure is created by `tl create-draft` and then populated with the sourc
 | `tl prepare-release` | Final pre-release checks and metadata updates |
 | `tl import-text` | Import a local .txt, .md, .html, or .epub into chapter files |
 | `tl ia-import` | Download from Internet Archive, scaffold, and import in one step |
+| `tl ocr` | Re-OCR JP2 scans with Tesseract; `--hocr` also emits word-level hOCR |
+| `tl convert-scans` | Convert JP2 scans to JPEG and generate an `index.html` scan browser |
+| `tl lint-ocr` | Find and auto-fix OCR artifacts in per-page XHTML files |
+| `tl detect-italics` | Wrap italics via phrase list (`--mode phrase-list`) or hOCR (`--mode hocr`) |
+| `tl ocr-confidence-report` | List low-confidence words from hOCR for manual review |
+| `tl merge-pages` | Combine proofread per-page files into chapter XHTML (guided by page-map.json) |
 | `tl export-wiki` | Export ebook text + metadata as wiki-ready Obsidian Markdown |
 
 Run `tl help` for the full list, or `tl <command> --help` for per-command options.
