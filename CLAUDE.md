@@ -266,6 +266,8 @@ All work metadata follows the schema defined in `website/schema/tolstoy-works-sc
 ├── CLAUDE.md                    ← this file
 ├── MANIFEST.md                  ← public project statement
 ├── README.md                    ← GitHub repo overview
+├── TODO.md                      ← active backlog (surface file per project template)
+├── LOG.md                       ← project-level work log (project template surface file)
 ├── LICENSE                      ← Soli Deo Gloria public-domain dedication
 ├── .git/                        ← version control (GitHub: tolstoylife/tolstoy.life)
 ├── .gitignore                   ← excludes subfolders, binaries, _generated
