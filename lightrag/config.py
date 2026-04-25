@@ -38,10 +38,10 @@ OLLAMA_TIMEOUT = 600  # seconds — local models can be slow; default 60s causes
 LLM_MODEL = "qwen2.5:7b"
 LLM_CONTEXT_WINDOW = 32768  # LightRAG requires >= 32k for entity extraction
 
-# Embedding model: nomic-embed-text (768 dims, fast, good quality)
-# Alternative: bge-m3 (1024 dims, better multilingual/Russian support, slower)
-EMBED_MODEL = "nomic-embed-text"
-EMBED_DIM = 768
+# Embedding model: bge-m3 (1024 dims, strong multilingual/Russian support)
+# Previous: nomic-embed-text (768d) — adequate for English but poor Russian retrieval
+EMBED_MODEL = "bge-m3"
+EMBED_DIM = 1024
 EMBED_MAX_TOKENS = 8192
 
 # --- File filtering ---
