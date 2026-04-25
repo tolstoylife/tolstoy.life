@@ -1,6 +1,6 @@
 # Tolstoy Research Platform — Backlog
 
-Last updated: 2026-04-24
+Last updated: 2026-04-25
 
 ---
 
@@ -17,13 +17,13 @@ Tre nya kommandon behöver byggas för att komplettera Phase A–C i Johan-workf
 **Referens:** `projects/birukoff-biography/` + `uploads/johan-workflow.md`
 
 ### 2. LightRAG + Ollama — kvarstående steg
-Grundinstallation klar (2026-04-18). Qwen2.5:7b + nomic-embed-text operativt. Första ingestion av 29 filer OK (43 min, 192 noder, 196 kanter). Se `docs/architecture/lightrag-performance-report-2026-04-18.md`.
+Grundinstallation klar (2026-04-18). Qwen2.5:7b + bge-m3 (1024d) operativt sedan 2026-04-25. Första ingestion av 29 filer OK (43 min, 192 noder, 196 kanter). Se `docs/architecture/lightrag-performance-report-2026-04-18.md`.
 
 **Kvarstående:**
-- ~~Byt embedding-modell till bge-m3 (1024d) för ryska+engelska~~ — Klart.
+- ~~Byt embedding-modell till bge-m3 (1024d) för ryska+engelska~~ — Klart 2026-04-25 (commit `9775cab5`).
 - Sätt upp nattligt cron-job för `sync.py`
 - Testa inkrementell sync efter wiki-redigeringar
-- Committa LightRAG-scaffolden (staged i git)
+- ~~Committa LightRAG-scaffolden (staged i git)~~ — Klart 2026-04-25 (commit `9775cab5` tog med `config.py` + `requirements.txt` ändringarna och `diagnose.sh` + `start-ui.sh` helpers).
 
 ### 3. GitHub Projects för `projects/`-mappen
 Bethink Yourselves, Birukoff-biografin och Korrektur ligger i `projects/` men är exkluderade från parent-repot via `.gitignore`. Undersök hur GitHub Projects kan användas för att tracka och organisera dessa produktionsprojekt — issues, boards, milestones. Kolla om varje projekt bör ha ett eget repo under `tolstoylife/` eller om ett gemensamt projekt-board räcker.
