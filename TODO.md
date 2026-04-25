@@ -1,6 +1,6 @@
 # Tolstoy Research Platform — Backlog
 
-Last updated: 2026-04-22
+Last updated: 2026-04-24
 
 ---
 
@@ -17,7 +17,7 @@ Tre nya kommandon behöver byggas för att komplettera Phase A–C i Johan-workf
 **Referens:** `projects/birukoff-biography/` + `uploads/johan-workflow.md`
 
 ### 2. LightRAG + Ollama — kvarstående steg
-Grundinstallation klar (2026-04-18). Qwen2.5:7b + nomic-embed-text operativt. Första ingestion av 29 filer OK (43 min, 192 noder, 196 kanter). Se `_generated/lightrag-performance-report-2026-04-18.md`.
+Grundinstallation klar (2026-04-18). Qwen2.5:7b + nomic-embed-text operativt. Första ingestion av 29 filer OK (43 min, 192 noder, 196 kanter). Se `docs/architecture/lightrag-performance-report-2026-04-18.md`.
 
 **Kvarstående:**
 - ~~Byt embedding-modell till bge-m3 (1024d) för ryska+engelska~~ — Klart.
@@ -38,31 +38,48 @@ Bethink Yourselves, Birukoff-biografin och Korrektur ligger i `projects/` men ä
 - Verifiera Alexandra Tolstayas deathPlace (Valley Cottage, NY)
 
 ### 5. PWA-arkitektur — follow-up efter 2026-04-23 review
-Revisionen är klar. Se `_generated/PWA/architecture-review.html` (renderad rapport) och `_generated/PWA/handoff-2026-04-23.md` (handoff). Följande gaps behöver åtgärdas innan Stage 1 kan skeppas — rankade efter severity.
+Revisionen är klar. Se `_generated/PWA/architecture-review.html` (renderad rapport) och `_generated/PWA/handoff-2026-04-23.md` (handoff). Följande gaps behöver åtgärdas innan Stage 1 kan skeppas — grupperade per arbetsområde.
 
-**Blockers för Stage 1:**
-- [ ] **Fix the wiki-previews/manifest cascade** (critical) — exclude `manifest.json` and all generated cross-references from the work-hash input. Compute content hash over rendered chapters/CSS/images only. Without this, every wiki edit re-versions every work and the 3-version retention discipline collapses. See architecture-review.html Part 7.
-- [ ] **Reconcile `yjs-schema-and-sync.md` §2.3 vs §8** — decision log says Y.Text, §2.3 says Y.Array of plain objects. They have different concurrency semantics. Pick one before Stage 4 implementation begins; a Y.Array of plain objects produces silent duplicates on concurrent edit.
-- [ ] **Publish deterministic-build CI test** — build twice, diff SHA-256 trees, block merge on mismatch. Referenced throughout `tl-pipeline-integration.md` but not wired in.
-- [ ] **Add `chapterUri` validator + one-shot migration** — no corpus files have `chapterUri` yet; the fail-loud rule (§8.1) would block every deploy on rollout. Need an `assign-chapter-uris.py` script with `--confirm-assign` gate, plus a uniqueness checker.
-- [ ] **Replace `git_first_commit_date_for_dir` with stateful `contentDate`** in `works.json` — current approach breaks on Netlify's shallow clones.
-- [ ] **Adopt a canonical JSON encoder** (`rfc8785`) and NFC-normalise all strings before hashing.
+**A. Blockers for Stage 1 (pipeline + spec fixes):**
+- [x] **Fix the wiki-previews/manifest cascade** (critical) — spec updated 2026-04-24 in `tl-pipeline-integration.md`: removed `wikiPreviewsUrl` from per-work manifests, added §4.6 cross-reference isolation rule, updated §3.2 hash-input definition and §6.2 sketch with `HASH_EXCLUDE` filter. Follow-up (separate task C3): align `wiki-integration.md` §2.2 nested `relatedWiki` shape with the flat-slug-array shape now canonical in §4.3.
+- [x] **Reconcile `yjs-schema-and-sync.md` §2.3 vs §8** — resolved 2026-04-24 in favour of §8's Y.Text decision. §2.3 rewritten to walk through the silent-duplicate failure mode with plain objects and show why Y.Map body items + Y.Text `value` fix it. §2.2 example updated, §8 item 1 wording tightened, `createTextualBody` factory specified, and a concurrent-edit regression test fixture is called out as required from the annotation-layer package's first commit. JSON-LD wire shape unchanged.
+- [x] **Publish deterministic-build CI test** — wired in 2026-04-24 at `website/.github/scripts/check-determinism.mjs` + `website/.github/workflows/determinism.yml`. Runs `npm run build` twice, hashes every file under `dist/`, exits non-zero on mismatch. Spec promoted to `tl-pipeline-integration.md` §6.4. **Known drifts (installed-but-not-enforced posture):** the first local run identified two non-deterministic files, both shelved until their natural replacement moments:
+  - **`serviceworker.js`** — `CACHE_NAME = 'cache-{buildTime}'` uses build-time timestamp. Shelved: Workbox replaces the hand-written service worker in Stage 1 and supplies content-hashed cache names out of the box. No fix needed before then.
+  - **`feed.xml`** — Atom `<updated>` field falls back to `new Date()` because `collections.posts` is empty. Partial fix applied (`src/common/feed-atom.njk` — moved `{% set postslist = collections.posts %}` above the `<feed>` element so it's defined before use; a genuine correctness bug that would have surfaced once posts existed). Full determinism fix shelved pending a product decision on whether the project has a blog section and what the project's public-timeline start date is — either would give a stable fallback. See 2026-04-24 LOG entry for the full analysis.
+  
+  Action before flipping this workflow to a *required* status check in branch protection: resolve both drifts (which happens naturally when Workbox lands and when the first post is written / the "no blog" decision is made), then re-run `node .github/scripts/check-determinism.mjs` locally to confirm ✓. Until then: workflow runs on every PR as a visible-but-non-blocking check, catches any *new* non-determinism regressions elsewhere in the build.
+- [x] **Add `chapterUri` validator + one-shot migration** — resolved 2026-04-24 at smaller scope than originally planned. The corpus today has *zero* chapter files (no work has a `text/` subfolder yet), so no migration is needed — the rule is enforced prospectively. Augmented `website/.github/scripts/validate-frontmatter.mjs` with a `validateChapterFile()` function that checks four invariants on any chapter file (`work` + `chapter`/`part` frontmatter): (1) `chapterUri` present, (2) format `urn:tolstoy-life:<work-slug>:<chapter-id>` with both kebab-case, (3) work-slug in URI matches the `work` field, (4) globally unique across the corpus. Existing `validate.yml` workflow picks it up automatically on every PR touching `src/works/**/*.md`. Spec promoted to `tl-pipeline-integration.md` §8.2. Smoke-tested all four failure modes with temporary fixtures — each produces a specific, actionable error message and cites §8.1. When Phase 5 TEI ingestion begins, the import pipeline emits `chapterUri` from day one; a bulk-migration script can be added alongside *that* pipeline only if a batch of URI-less chapter files ever actually lands.
+- [ ] **Replace `git_first_commit_date_for_dir` with stateful `contentDate`** in `works.json` — current approach breaks on Netlify's shallow clones. **Deferred 2026-04-24, pending Layer-1 pipeline:** this is a fix to `generate-asset-manifests.py`, which doesn't exist yet. Spec direction is already recorded — the §6.2 sketch uses a `resolve_content_date(work_dir, content_hash)` placeholder that calls out this task by reference. Implement alongside the first real version of the asset-manifest generator.
+- [ ] **Adopt a canonical JSON encoder** (`rfc8785`) and NFC-normalise all strings before hashing. **Deferred 2026-04-24, pending Layer-1 pipeline:** applies to the four Layer-1 generators (`generate-wiki-previews.py`, `generate-related-wiki.py`, `generate-asset-manifests.py`, `generate-works-index.py`) — none of which exist yet. Land as part of their shared helpers module when the generators are first written (one canonical-json function imported by all four).
 
-**Infrastructure decisions (committed 2026-04-23):**
-- [ ] Sign up for Cloudflare Pages account ✓ (done)
+**B. UX components to build (scoped in review, not yet implemented):**
+- [ ] **Install-UX web component** (~80-line vanilla, per handoff decision) — triggers on first "Make available offline" tap; per-platform copy drafted in architecture-review.html Part 3. Load-bearing for iOS (7-day ITP eviction makes install-before-download necessary for the "train reader" user story).
+- [ ] **Sync-visibility glyph indicator** — five-state (synced / syncing / offline / error / needs attention) shape+animation component, WCAG 1.4.1 compliant (colour is reinforcement only). Full legend + toast mockup in architecture-review.html Part 4.
+- [ ] **iOS install-before-download flow** — wire the install component into the Stage 1 download coordinator so iOS users are prompted before the first offline download.
+
+**C. Spec propagation (update the 5 design docs with review findings):**
+- [ ] Propagate findings #8–#14 from architecture-review.html back into the source documents so the specs stay coherent (currently only the review carries these corrections).
+- [ ] Update `yjs-schema-and-sync.md` §6.2 — remove the `handle_links` / `capture_links` assumption (not available on iOS; QR scanning always lands in Safari first).
+- [ ] Align `wiki-integration.md` §2.2 with `tl-pipeline-integration.md` §4.3 on the `relatedWiki` shape (pick one and propagate).
+- [ ] Add a Phase-5 architecture note about the CF Pages + R2 split — the 20,000-file / 25 MB-per-file per-deployment cap makes the split load-bearing, not optional.
+- [ ] Write a two-page **sync security spec** before Stage 4 coding — HKDF labels, SAS protocol, rate-limit numbers, device-registration authorisation, rotation-export atomicity.
+
+**D. Infrastructure decisions (committed 2026-04-23):**
+- [x] Sign up for Cloudflare Pages account (done)
 - [ ] Connect `tolstoylife/website` repo to CF Pages as a parallel deploy target (verify builds match Netlify byte-for-byte)
 - [ ] Transfer domain to Cloudflare Registrar at next Netlify renewal (~$22/yr saved; CF at $28.20, Netlify at ~$50)
-- [ ] Add `netlify.toml` with `[build.processing] skip_processing = true` (minimum-change determinism fix — see architecture-review.html)
+- [ ] Add `netlify.toml` with `[build.processing] skip_processing = true` (minimum-change determinism fix — see architecture-review.html Part 8)
 - [ ] Add `_headers` file with per-path Cache-Control (immutable for versioned, short max-age for `works.json`/`manifest.json`)
 - [ ] Implement cached file-hashing in `generate-asset-manifests.py` (keyed by mtime+size) before Phase 3 ingestion
+- [ ] Write the Hocuspocus-on-Fly fallback Dockerfile (committed to the repo, not deployed) — operationalises the "operator can be swapped" claim.
 
-**Stage-4 fixes (before sync ships — not urgent yet):**
+**E. Stage-4 fixes (before sync ships — not urgent yet):**
 - [ ] HKDF key separation for HMAC / AEAD / export (currently one key used for multiple purposes — crypto footgun)
 - [ ] SAS confirmation handshake replacing the yes/no pairing confirm (real MITM protection vs theatre)
 - [ ] Device-registration authorisation — existing device must sign new-device registration (otherwise revocation is a placebo)
 - [ ] Rate-limit pairing attempts at the Durable Object; one-use BIP-39 tokens
 - [ ] Resolve the "relay doesn't parse user data" contradiction (can't be literally true if server-side snapshot compaction is enabled)
-- [ ] Promote BIP-39 pairing to iOS-primary (BarcodeDetector is not available on iOS Safari as earlier drafts assumed)
+- [ ] Promote BIP-39 pairing to iOS-primary (BarcodeDetector is not available on iOS Safari as earlier drafts assumed) — ship a bundled JS decoder (jsQR / zxing-wasm), never hosted
 - [ ] `history.replaceState` on `/pair` to mitigate iCloud Tabs fragment leak
 - [ ] Dormant-user heartbeat (keep relay room alive while paired devices are active)
 
