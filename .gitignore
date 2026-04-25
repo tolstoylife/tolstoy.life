@@ -1,5 +1,4 @@
 # Subprojects — these have their own git repositories
-website/
 splash/
 corpus/
 _generated/
