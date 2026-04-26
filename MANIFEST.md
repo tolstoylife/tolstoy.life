@@ -40,7 +40,7 @@ The knowledge base is maintained by [Claude](https://claude.ai) — Anthropic's 
 
 Every factual claim requires a named primary source. Uncertain information is flagged openly. Sources are weighed in a fixed order of authority: Jubilee Edition → Tolstoy's own diaries and letters → Birukoff biography → Chertkov correspondence → Maude biography.
 
-The code is open. The content is free. Contributions are welcome via GitHub. All of Tolstoy's writings are in the public domain — a status he anticipated and welcomed. From 1891 onward he renounced the copyright to his works, insisting that knowledge and art belong to everyone. This project honours that conviction.
+The code is open. The content is free. Contributions are welcome via GitHub. Tolstoy's writings are in the public domain — a status he anticipated and welcomed. In his later years he sought to renounce copyright on his work; the clearest renunciations cover his religious-moral writings, but his stated position pointed further: he wanted his work to belong to no one. This project honours that conviction.
 
 ---
 

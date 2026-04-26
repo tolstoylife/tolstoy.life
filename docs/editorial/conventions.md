@@ -1,8 +1,8 @@
-# Documentation Conventions — tolstoy.life
+# Documentation conventions — tolstoy.life
 
 Last updated: 2026-04-26
 
-How internal project documentation in `docs/` and `_generated/` is maintained over time. Complements `PRINCIPLES.md`, which covers content stance and voice for the public wiki and works.
+How internal project documentation in `docs/` and `_generated/` is maintained over time. Complements `editorial.md`, which covers content stance and voice for the public wiki and works.
 
 The question this file answers: when reality changes, what do you do to the doc that described the old reality?
 
@@ -10,7 +10,7 @@ The question this file answers: when reality changes, what do you do to the doc 
 
 ## Two kinds of doc
 
-**Evergreen docs.** Design specifications, principles, operational references. They describe the *current* state and are expected to evolve. Examples: `PRINCIPLES.md`, `internal-operations.md`, the PWA design specs (`local-first-architecture.md`, `wiki-integration.md`, `stage-1-implementation.md`, `tl-pipeline-integration.md`, `yjs-schema-and-sync.md`).
+**Evergreen docs.** Design specifications, principles, operational references. They describe the *current* state and are expected to evolve. Examples: `editorial.md`, `internal-operations.md`, the PWA design specs (`local-first-architecture.md`, `wiki-integration.md`, `stage-1-implementation.md`, `tl-pipeline-integration.md`, `yjs-schema-and-sync.md`).
 
 **Dated reports.** Snapshot documents — research reports, session handoffs, audits, plans. The date in the filename or at the top is meaningful: it records what was known on that day. Examples: `architecture-review.html`, `lightrag-performance-report-2026-04-18.md`, `epub-a11y-w3c-review-2026-04-22.md`, `scalability-deep-dive-2026-04-15.md`.
 
@@ -60,4 +60,4 @@ An evergreen doc never gracefully degrades to dated. If it is no longer the curr
 
 ## Scope
 
-This file covers documentation maintenance over time. It does not cover voice or content stance — those are in `PRINCIPLES.md`. It does not cover commit messages or git workflow — those are in `AGENTS.md`. It is specifically about how documents in `docs/` and `_generated/` are maintained when the underlying reality changes.
+This file covers documentation maintenance over time. It does not cover voice or content stance — those are in `editorial.md`. It does not cover commit messages or git workflow — those are in `AGENTS.md`. It is specifically about how documents in `docs/` and `_generated/` are maintained when the underlying reality changes.

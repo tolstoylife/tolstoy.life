@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Documentation Conventions — tolstoy.life — tolstoy.life docs</title>
+<title>Documentation conventions — tolstoy.life — tolstoy.life docs</title>
 <style>
 :root {
   --ink: #1e1a17;
@@ -363,16 +363,16 @@ mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
 </div>
 <header class="doc-header">
   <p class="eyebrow">editorial</p>
-  <h1>Documentation Conventions — tolstoy.life</h1>
-  <p class="meta">Last modified 26 April 2026 · <a href="/editorial/CONVENTIONS.md">view source</a></p>
+  <h1>Documentation conventions — tolstoy.life</h1>
+  <p class="meta">Last modified 26 April 2026 · <a href="/editorial/conventions.md">view source</a></p>
 </header>
 <main>
 <p>Last updated: 2026-04-26</p>
-<p>How internal project documentation in <code>docs/</code> and <code>_generated/</code> is maintained over time. Complements <code>PRINCIPLES.md</code>, which covers content stance and voice for the public wiki and works.</p>
+<p>How internal project documentation in <code>docs/</code> and <code>_generated/</code> is maintained over time. Complements <code>editorial.md</code>, which covers content stance and voice for the public wiki and works.</p>
 <p>The question this file answers: when reality changes, what do you do to the doc that described the old reality?</p>
 <hr />
 <h2>Two kinds of doc</h2>
-<p><strong>Evergreen docs.</strong> Design specifications, principles, operational references. They describe the <em>current</em> state and are expected to evolve. Examples: <code>PRINCIPLES.md</code>, <code>internal-operations.md</code>, the PWA design specs (<code>local-first-architecture.md</code>, <code>wiki-integration.md</code>, <code>stage-1-implementation.md</code>, <code>tl-pipeline-integration.md</code>, <code>yjs-schema-and-sync.md</code>).</p>
+<p><strong>Evergreen docs.</strong> Design specifications, principles, operational references. They describe the <em>current</em> state and are expected to evolve. Examples: <code>editorial.md</code>, <code>internal-operations.md</code>, the PWA design specs (<code>local-first-architecture.md</code>, <code>wiki-integration.md</code>, <code>stage-1-implementation.md</code>, <code>tl-pipeline-integration.md</code>, <code>yjs-schema-and-sync.md</code>).</p>
 <p><strong>Dated reports.</strong> Snapshot documents — research reports, session handoffs, audits, plans. The date in the filename or at the top is meaningful: it records what was known on that day. Examples: <code>architecture-review.html</code>, <code>lightrag-performance-report-2026-04-18.md</code>, <code>epub-a11y-w3c-review-2026-04-22.md</code>, <code>scalability-deep-dive-2026-04-15.md</code>.</p>
 <p>The two get treated differently when the world moves on.</p>
 <hr />
@@ -398,7 +398,7 @@ mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
 <p>An evergreen doc never gracefully degrades to dated. If it is no longer the current spec, archive it (move to <code>_generated/</code>, add a Status block) rather than continue editing it as evergreen.</p>
 <hr />
 <h2>Scope</h2>
-<p>This file covers documentation maintenance over time. It does not cover voice or content stance — those are in <code>PRINCIPLES.md</code>. It does not cover commit messages or git workflow — those are in <code>AGENTS.md</code>. It is specifically about how documents in <code>docs/</code> and <code>_generated/</code> are maintained when the underlying reality changes.</p>
+<p>This file covers documentation maintenance over time. It does not cover voice or content stance — those are in <code>editorial.md</code>. It does not cover commit messages or git workflow — those are in <code>AGENTS.md</code>. It is specifically about how documents in <code>docs/</code> and <code>_generated/</code> are maintained when the underlying reality changes.</p>
 </main>
 <footer>tolstoy.life · public documentation</footer>
 
@@ -419,7 +419,7 @@ mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
 
 <script>
 (function() {
-  const DOC_KEY = 'docs/editorial/CONVENTIONS';
+  const DOC_KEY = 'docs/editorial/conventions';
   const STORE_KEY = 'tolstoy_annotations';
 
   // ── Storage ──────────────────────────────────────────────────────────────

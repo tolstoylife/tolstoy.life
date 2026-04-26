@@ -131,7 +131,7 @@ Gå igenom projektet ur en kritisk akademisk institutions perspektiv. Identifier
 - **Akademisk trovärdighet:** Hur ser projektet ut för en forskare som granskar det? Vilka svagheter skulle de peka på?
 - **Tonläge:** Finns det formuleringar i wikin som kan uppfattas som ideologiska snarare än sakliga?
 
-Se PRINCIPLES.md för projektets hållning till dessa frågor.
+Se docs/editorial/editorial.md för projektets hållning till dessa frågor.
 
 
 ---
@@ -141,7 +141,7 @@ Se PRINCIPLES.md för projektets hållning till dessa frågor.
 - ~~Testa end-of-day-skillen~~ — Testad 2026-04-14. Triggar korrekt, flödet fungerar.
 - ~~Korrektur-app: pipeline-design~~ — Pipeline-workflow (typogrify → clean → semanticate som batch) designat och testat 2026-04-15. 30 Playwright-tester gröna. Appen byggs vidare av Johan (se prio 1).
 - ~~Skalbarhet-rapport~~ — Färdig 2026-04-15. Slutsats: Obsidian som redigeringsverktyg, LightRAG + Ollama som nödvändigt query-lager. LightRAG-setup nu aktiv prioritet (prio 2).
-- ~~PRINCIPLES.md~~ — Skapad 2026-04-16. Redaktionell hållning, tonläge, förhållningssätt till institutioner, beredskap för kritik.
+- ~~PRINCIPLES.md~~ — Skapad 2026-04-16. Redaktionell hållning, tonläge, förhållningssätt till institutioner, beredskap för kritik. *(2026-04-26: omstrukturerad till `docs/editorial/editorial.md` — public-statement-delar flyttade till MANIFEST.md, taktiska delar till `_generated/editorial/institutional-strategy.md`.)*
 - ~~LightRAG grundinstallation~~ — 2026-04-18. Qwen2.5:7b (14B passar inte 24 GB). Första ingestion OK. Prestandarapport i `_generated/`.
 - ~~Korrektur Slice 1.C~~ — 2026-04-18. Autosave, git checkpoint, search & replace. 19+59 tester gröna.
 - ~~Korrektur-appen~~ — Lagd på is 2026-04-22. Ersätts av macOS split-screen + git som checkpoint-system (se johan-workflow.md).
