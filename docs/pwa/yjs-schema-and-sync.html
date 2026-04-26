@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tolstoy e-reader: Yjs schema and sync architecture — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          pwa
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">pwa</p>
+  <h1>Tolstoy e-reader: Yjs schema and sync architecture</h1>
+  <p class="meta">Last modified 24 April 2026 · <a href="/pwa/yjs-schema-and-sync.md">view source</a></p>
+</header>
+<main>
+<h1>Tolstoy e-reader: Yjs schema and sync architecture</h1>
+<p>This document specifies the concrete CRDT shape, the IndexedDB layout, and the sync-relay contract. It assumes the overall architecture from <code>local-first-architecture.md</code> and focuses on the "how exactly" of the annotation layer's storage and sync.</p>
+<h2>1. Design principles for the CRDT layer</h2>
+<p>Four rules that all the specific choices below follow from:</p>
+<ol>
+<li><strong>The server never parses user data.</strong> The relay stores opaque binary updates. It cannot tell the difference between a bookmark and a note. This is both a privacy property and a simplicity win.</li>
+<li><strong>Every annotation is independent.</strong> Moving, merging, or deleting one annotation never requires understanding any other. This keeps the CRDT shape flat and the merge semantics predictable.</li>
+<li><strong>Offline writes always succeed.</strong> The local Y.Doc accepts writes with no network involvement. Sync is reconciliation, not coordination.</li>
+<li><strong>The on-wire format is a Yjs update blob.</strong> Not JSON. Not a custom delta. This means the full Yjs ecosystem (y-indexeddb, y-websocket, y-webrtc) works without adaptation.</li>
+</ol>
+<h2>2. The Y.Doc shape</h2>
+<p>One Y.Doc per user. Not one per work, not one per device — one.</p>
+<p>Why one doc for everything: the user's annotation set is a single semantic unit. They want to search across it, export it, delete it. A single Y.Doc with well-chosen top-level types keeps this simple and keeps the sync contract clean.</p>
+<h3>2.1 Top-level types</h3>
+<pre><code class="language-javascript">const ydoc = new Y.Doc()
+
+// The annotations themselves, keyed by UUID.
+// Each value is a Y.Map representing one W3C annotation.
+const annotations = ydoc.getMap('annotations')
+
+// Per-work metadata the user has explicitly set
+// (custom titles, reading-list ordering, etc.).
+// Keyed by work URI.
+const workMeta = ydoc.getMap('workMeta')
+
+// Reading positions, keyed by work URI.
+// Updated frequently; separated so position updates
+// don't churn the annotations map.
+const readingPositions = ydoc.getMap('readingPositions')
+
+// Tags the user has defined, keyed by tag slug.
+// Value is a Y.Map with the tag's display name,
+// colour, and description.
+const tags = ydoc.getMap('tags')
+
+// User preferences that should sync across devices
+// (font size, theme, reading goals).
+// Distinct from session state, which stays device-local.
+const preferences = ydoc.getMap('preferences')
+</code></pre>
+<p>Five top-level maps. Each one represents a kind of user-owned data. Session state (scroll position within the current view, current UI panel) is deliberately <em>not</em> in the Y.Doc — it stays in sessionStorage and never syncs.</p>
+<h3>2.2 Annotation shape</h3>
+<p>Each entry in the <code>annotations</code> map is itself a Y.Map. Using Y.Map rather than a plain object lets individual fields be updated without rewriting the whole annotation, which matters when two devices edit the same annotation's body concurrently.</p>
+<pre><code class="language-javascript">// Creating a new annotation
+const annotation = new Y.Map()
+annotation.set('id', 'urn:uuid:9c5b2f...')
+annotation.set('type', 'Annotation')
+annotation.set('created', new Date().toISOString())
+annotation.set('modified', new Date().toISOString())
+annotation.set('creator', 'local:johan')
+annotation.set('motivation', 'highlighting')
+
+// Body: Y.Array of body items (W3C allows a list of bodies —
+// e.g., a highlight with a note AND a tag reference).
+// Each body item is itself a Y.Map so individual fields can be
+// updated concurrently without replacing the whole item.
+// A TextualBody's `value` is a Y.Text so concurrent edits to a note
+// merge at character level rather than producing silent duplicates.
+// See §2.3 for the reasoning.
+const body = new Y.Array()
+
+const textBody = new Y.Map()
+textBody.set('type', 'TextualBody')
+textBody.set('value', new Y.Text('The most Tolstoyan sentence.'))
+body.push([textBody])
+
+annotation.set('body', body)
+
+// Target: single target per annotation.
+// Stored as a Y.Map so selectors can be updated if the anchoring changes.
+const target = new Y.Map()
+target.set('source', 'urn:tolstoy-life:war-and-peace:book-1-chapter-3#v2026-03-01-a3f5c8')
+
+// Selectors: array of selector objects, tried in order.
+const selectors = new Y.Array()
+selectors.push([
+  { type: 'TextPositionSelector', start: 15420, end: 15467 },
+  {
+    type: 'TextQuoteSelector',
+    exact: 'The most Tolstoyan sentence in the book.',
+    prefix: 'After a long digression, he wrote: ',
+    suffix: ' Nothing more needed saying.'
+  }
+])
+target.set('selector', selectors)
+annotation.set('target', target)
+
+annotations.set(annotation.get('id'), annotation)
+</code></pre>
+<h3>2.3 The body Y.Array, reasoned out</h3>
+<p>The <code>body</code> field is a <code>Y.Array</code> of <code>Y.Map</code>s. A <code>TextualBody</code> item's <code>value</code> is a <code>Y.Text</code>. This matches §8 item 1. Earlier drafts of this section argued for a <code>Y.Array</code> of plain objects on "plain replacement is a better semantic fit" grounds; that reasoning was wrong. The cost of the wrong shape is a <strong>silent duplicate</strong> on concurrent edit, walked through below.</p>
+<p><strong>The failure mode with plain objects.</strong> Two devices are offline with the same annotation. Each user edits the note text. On each device the only available operation on a plain-object body item is to replace it wholesale:</p>
+<pre><code class="language-javascript">// Naïve plain-object replace, running independently on each device:
+body.delete(0)                                       // remove the old TextualBody
+body.insert(0, { type: 'TextualBody', value: newText })   // insert a new one
+</code></pre>
+<p>When the devices come online and Yjs merges:</p>
+<ul>
+<li>Each <code>delete(0)</code> removes the original. The original is tombstoned once. Fine.</li>
+<li>Each <code>insert(0, …)</code> appends a new object. Y.Array has no "same logical item" concept for plain objects — it sees two unrelated inserts.</li>
+<li>The merged array ends up with <strong>both</strong> new objects: <code>[{…user A's text}, {…user B's text}]</code>.</li>
+</ul>
+<p>The user opens the annotation and sees two TextualBody entries where they expect one. No conflict indicator. No "choose one" prompt. A phantom duplicate. This is exactly the class of bug that makes users stop trusting a tool.</p>
+<p><strong>Why <code>Y.Map</code> + <code>Y.Text</code> fixes it.</strong> A <code>Y.Map</code> representing a body item has a stable identity across merges — both devices mutate the <em>same</em> Y.Map rather than replacing it. A <code>Y.Text</code> <code>value</code> merges at character level using Yjs's text CRDT: a deterministic interleaving based on Lamport timestamps. The concurrent-edit result is one coherent string (e.g., <code>"Tolstoy notesBook club notes"</code>) — not elegant, but visible as a single merged field the user can clean up.</p>
+<p>Interleaved text is not beautiful, but it is <em>visible</em>. A silent duplicate is not. Making conflicts visible is the correct trade-off for a project where data integrity is load-bearing.</p>
+<p><strong>Non-text body items.</strong> A body item referencing a tag (<code>SpecificResource</code> with a <code>source</code> URI) or a linked resource is identity-by-URI. If two devices add the same tag concurrently, both inserts produce items whose <code>source</code> is the same, and a render-time or observe-time deduplication pass collapses them. These items do not need a <code>Y.Text</code> — their "content" is the URI, and the URI is the same on both devices. They live in the Y.Array as <code>Y.Map</code>s whose fields are plain values.</p>
+<p><strong>Wire format is unchanged.</strong> JSON-LD export (the W3C Web Annotation serialisation) projects <code>Y.Text</code> back to a plain string and <code>Y.Map</code> back to a plain object. External consumers see a standard W3C Annotation body; only the internal storage shape is Yjs-typed.</p>
+<p><strong>A thin helper.</strong> Because the construction is slightly fiddly, a single factory function hides it:</p>
+<pre><code class="language-javascript">function createTextualBody(value) {
+  const m = new Y.Map()
+  m.set('type', 'TextualBody')
+  m.set('value', new Y.Text(value))
+  return m
+}
+</code></pre>
+<p>All call sites that add or replace a TextualBody use this helper. Consistency is mechanical rather than cultural.</p>
+<p><strong>Test fixture to prevent regression.</strong> A single vitest/mocha case covers the concurrent-edit scenario end-to-end: two Y.Doc instances, offline edits to the same TextualBody on each, cross-merge via <code>Y.applyUpdate</code>, assertion that the resulting body array has length 1 and the value is a Y.Text. This test belongs in the annotation-layer package from its first commit; without it, a future refactor could silently reintroduce the plain-object shape and the bug comes back invisibly.</p>
+<h3>2.4 Reading positions</h3>
+<p>Reading position is a high-churn field — it updates every few seconds of reading. Keeping it out of the annotations map prevents those updates from bloating the annotation history.</p>
+<pre><code class="language-javascript">readingPositions.set('urn:tolstoy-life:war-and-peace', {
+  workUri: 'urn:tolstoy-life:war-and-peace',
+  lastVersion: 'v2026-03-01-a3f5c8',
+  chapterUri: 'urn:tolstoy-life:war-and-peace:book-1-chapter-3',
+  selector: {
+    type: 'TextPositionSelector',
+    start: 15420,
+    end: 15420  // zero-length range = cursor position
+  },
+  updated: new Date().toISOString()
+})
+</code></pre>
+<p>Last-write-wins is fine here. The user's position on their laptop five minutes ago is more relevant than their position on their phone an hour ago. Yjs's default Y.Map semantics handle this correctly.</p>
+<h3>2.5 Tags</h3>
+<p>Tags are a separate concept from annotations because one tag can be applied to many annotations, and the tag itself has properties (display name, colour) that the user may edit.</p>
+<pre><code class="language-javascript">const tag = new Y.Map()
+tag.set('slug', 'non-resistance')
+tag.set('name', 'Non-resistance')
+tag.set('colour', '#7a5c3f')
+tag.set('description', 'Passages about non-resistance to evil.')
+tags.set('non-resistance', tag)
+</code></pre>
+<p>An annotation references a tag by putting it in its body:</p>
+<pre><code class="language-javascript">body.push([
+  { type: 'SpecificResource', source: 'local:tags/non-resistance' }
+])
+</code></pre>
+<p>When the tag's colour changes, every annotation using it immediately reflects the change, because the annotation doesn't copy the tag — it points to it.</p>
+<h2>3. Persistence: y-indexeddb</h2>
+<p>The full Y.Doc persists to IndexedDB via y-indexeddb. This is the whole persistence story on the local side:</p>
+<pre><code class="language-javascript">import * as Y from 'yjs'
+import { IndexeddbPersistence } from 'y-indexeddb'
+
+const ydoc = new Y.Doc()
+const persistence = new IndexeddbPersistence('tolstoy-life-annotations', ydoc)
+
+persistence.on('synced', () =&gt; {
+  // Local IndexedDB has loaded into the Y.Doc.
+  // Safe to render the UI now.
+})
+</code></pre>
+<p>The IndexedDB database created by y-indexeddb stores Yjs updates, not parsed annotations. Querying "all annotations on <em>War and Peace</em>" is done against the Y.Doc in memory, not against IndexedDB directly.</p>
+<h3>3.1 When the annotation set grows large</h3>
+<p>For a typical reader with a few hundred annotations, the whole Y.Doc fits comfortably in memory. For power users with tens of thousands, two strategies:</p>
+<ol>
+<li><strong>Incremental loading.</strong> y-indexeddb already loads in the background and emits <code>synced</code> when done. The UI should work with a partial Y.Doc, rendering what's loaded and filling in as more arrives.</li>
+<li><strong>Secondary index in IndexedDB.</strong> In parallel with the Y.Doc, maintain a plain IndexedDB object store indexed by work URI. When the Y.Doc observes a change, update the index. Queries like "all annotations on <em>War and Peace</em>" hit the index first, then pull full annotations from the Y.Doc only for the matching IDs.</li>
+</ol>
+<p>The secondary index is a Stage 5 concern. Stage 3 and Stage 4 can scan the Y.Doc directly.</p>
+<h2>4. The sync relay</h2>
+<h3>4.1 What it is</h3>
+<p>A Cloudflare Worker that accepts WebSocket connections from clients and relays Yjs updates between them. It uses Durable Objects to maintain per-room state, where "room" means "one user's annotation set".</p>
+<p><strong>Implementation: y-durableobjects-style, not Node y-websocket-server.</strong> The reference implementation follows the open-source <code>y-durableobjects</code> pattern: each room is a Durable Object instance that handles WebSocket connections for that room directly (via Cloudflare's <code>hibernatable WebSockets</code>), stores the compacted Yjs state in Durable Object storage, and forwards updates between clients without running any Node process. This gives the relay global edge distribution, hibernation-based billing (no idle cost for inactive rooms), and no servers to maintain. The alternative — running Node y-websocket-server on a VPS — trades these properties for a more familiar stack and is rejected.</p>
+<p>The Worker + per-room Durable Object is around 150-200 lines of TypeScript.</p>
+<h3>4.2 What it is not</h3>
+<ul>
+<li>Not a parser of user data.</li>
+<li>Not an authoritative store of annotations.</li>
+<li>Not a conflict resolver.</li>
+<li>Not an access-control system beyond "do you have the room key?"</li>
+</ul>
+<h3>4.3 Authentication model</h3>
+<p>A user's annotation set is identified by a room ID — a UUID. Knowledge of the room ID plus a shared secret (the "sync key") is sufficient to connect. No accounts, no email, no passwords.</p>
+<p>The sync key is generated on first device setup and transferred to additional devices via the pairing flow in §6. The key never leaves the user's devices; the relay only sees HMACs of messages signed with the key, which lets it verify connection attempts without learning the key itself.</p>
+<h3>4.3.1 Threat model and what this does not protect against</h3>
+<p>The "the server never parses user data" property (§1, rule 1) is an integrity-of-design claim, not a cryptographic guarantee. In the default Stage-4 design, Yjs update blobs are opaque to a casual observer but <strong>not encrypted at rest</strong>. A reader should understand the threat model precisely:</p>
+<ul>
+<li><strong>Protected against:</strong> accidental leaks in relay logs, server operators casually browsing data, subpoena-level requests that ask "what is user X reading" (there is no user X; there is an opaque blob in room Y).</li>
+<li><strong>Not protected against:</strong> a motivated adversary with access to the Durable Object storage <em>and</em> knowledge of the Yjs wire format. Yjs blobs are a documented format; parsing them without the sync key is tedious but not cryptographic.</li>
+<li><strong>Elevated protection via opt-in encryption-at-rest:</strong> Stage 4+ adds client-side symmetric encryption of every update blob with the sync key before upload, using an AEAD cipher (AES-GCM with a per-update nonce). With this enabled, the relay stores ciphertext that is infeasible to decrypt without the sync key. This is the recommended default once the encryption path is implemented.</li>
+</ul>
+<p>The UI is honest about this: settings shows "End-to-end encryption: on / off" with a one-line explanation. The goal is that a user who reads the setting knows what they're getting.</p>
+<h3>4.4 Message flow</h3>
+<pre><code>client A                  relay (CF Worker)              client B
+   |                              |                          |
+   |---[connect, roomId, HMAC]---&gt;|                          |
+   |&lt;---[connected]---------------|                          |
+   |                              |&lt;---[connect, HMAC]-------|
+   |                              |--&gt;[connected]-----------&gt;|
+   |                              |                          |
+   |---[sync step 1, state]------&gt;|                          |
+   |&lt;---[sync step 2, update]-----|                          |
+   |                              |&lt;---[sync step 1, state]--|
+   |                              |--&gt;[sync step 2, update]-&gt;|
+   |                              |                          |
+   |---[update blob]-------------&gt;|--&gt;[update blob]---------&gt;|
+   |&lt;---[update blob]-------------|&lt;---[update blob]---------|
+</code></pre>
+<p>Every update is a Yjs binary encoding. The relay forwards it to all other connected clients in the same room and stores it in the Durable Object's state for clients that connect later.</p>
+<h3>4.5 Storage on the relay</h3>
+<p>The Durable Object for a room keeps:</p>
+<ul>
+<li>A merged Yjs state (the full update history compressed into a single blob, refreshed periodically — typically when the in-memory update log reaches ~100 entries or 30 minutes pass).</li>
+<li>The last update timestamp (for quota pruning).</li>
+<li>A count of connected clients.</li>
+<li>A device ID list (opaque per-device tokens; see §4.7).</li>
+</ul>
+<p>That's it. No user ID, no email, no annotation content in parseable form. A subpoena of the relay's data would reveal: N rooms exist, each containing binary CRDT blobs of sizes X, Y, Z. It could not reveal what anyone was reading or annotating (and with encryption-at-rest enabled, §4.3.1, even the blob structure is opaque).</p>
+<h3>4.6 Quotas and pruning</h3>
+<p>A sensible policy: rooms with no connection for 90 days are flagged; after 180 days they're pruned unless the user has opted for longer retention. Users should be able to see how much relay storage their account uses and explicitly extend retention or download their state for safekeeping.</p>
+<p>This is important: the relay is a <em>courier</em>, not a storage guarantee. The user's devices are the authoritative copy. The relay going away — which it should be able to, without tragedy — means users fall back to local-only mode, which is the mode they started in.</p>
+<h3>4.7 Device list and revocation</h3>
+<p>Each paired device gets a unique 128-bit device ID issued during pairing (not derived from any device-identifying property — it's a fresh random value). The Durable Object maintains the set of authorized device IDs for the room.</p>
+<p>A connecting client supplies its device ID alongside the HMAC. The relay refuses connections from device IDs not in the room's authorized set.</p>
+<p>This enables device management:</p>
+<ul>
+<li>Settings → "Synced devices" lists every paired device with a friendly name (chosen by the user at pairing time, e.g., "iPhone", "Work laptop"), the date it was paired, and a "Remove" action.</li>
+<li>Removing a device deletes its device ID from the Durable Object's authorized set. The removed device can no longer connect; if it tries, it falls back cleanly to local-only mode.</li>
+<li>A new pairing generates a new device ID and adds it to the set. The old device's ID stays authorized.</li>
+<li>The full device list is itself stored in the Y.Doc's <code>preferences</code> map so all devices see a consistent view; the relay's authorized set is the <em>enforcement</em> copy, kept in sync by the device-list owner (the device that initiates each pairing or revocation).</li>
+</ul>
+<p>Revocation is immediate from the relay's perspective. Any update the revoked device made before revocation is still in the Y.Doc on other devices — that's how CRDTs work; the relay revokes future <em>connections</em>, not past <em>content</em>.</p>
+<h3>4.8 Key rotation</h3>
+<p>If a user suspects their sync key is compromised (e.g., a stolen device they couldn't remotely revoke before it synced):</p>
+<ol>
+<li>From a device they still control, settings → "Rotate sync key".</li>
+<li>The device generates a new sync key and a new room ID.</li>
+<li>It re-encrypts the current Y.Doc state with the new key (if encryption-at-rest is on) and uploads it to the new room.</li>
+<li>It updates its own local sync key + room ID.</li>
+<li>All other still-trusted devices need to be re-paired using the new key (the user is told this explicitly).</li>
+<li>The old room is left to be pruned by the §4.6 inactivity policy.</li>
+</ol>
+<p>This is a deliberate, manual flow. There is no automatic rotation — the user knows when they want to rotate and why.</p>
+<h2>5. Connection lifecycle</h2>
+<pre><code class="language-javascript">import { WebsocketProvider } from 'y-websocket'
+
+const provider = new WebsocketProvider(
+  'wss://sync.tolstoy.life',
+  roomId,
+  ydoc,
+  {
+    params: { hmac: computeHmac(syncKey, connectNonce) }
+  }
+)
+
+provider.on('status', ({ status }) =&gt; {
+  // 'connecting' | 'connected' | 'disconnected'
+  // Show appropriate UI, but never block the user.
+})
+
+provider.on('sync', (isSynced) =&gt; {
+  if (isSynced) {
+    // Peer has sent us all updates we didn't have.
+    // Local state is now at least as fresh as the peer's.
+  }
+})
+</code></pre>
+<p>The WebSocket provider runs alongside y-indexeddb. Writes go to the Y.Doc, y-indexeddb persists them locally, and the WebSocket provider broadcasts them to peers. If the WebSocket is disconnected, everything else keeps working. When it reconnects, Yjs's sync protocol reconciles missing updates both ways.</p>
+<h2>6. Pairing flow for a new device</h2>
+<h3>6.1 Happy path: QR code</h3>
+<ol>
+<li>Device A (already set up) navigates to Settings → Pair a device.</li>
+<li>It generates a fresh device ID for device B, signs an expiring pairing payload with the sync key, and displays a QR code encoding the URL described in §6.2.</li>
+<li>Device B scans the QR code (via the browser's <code>BarcodeDetector</code> API or a hosted decoder fallback if <code>BarcodeDetector</code> is unavailable — see §6.3).</li>
+<li>Device B follows the URL, which opens the PWA (already installed via the same origin) and initiates the pairing handshake.</li>
+<li>Device A and device B exchange a confirmation through the relay (so that an attacker who somehow obtained the QR can't silently pair without device A noticing).</li>
+<li>Device B stores the roomId, sync key, and assigned device ID in its local secure storage.</li>
+<li>Device A adds device B to the authorized device set on the relay (§4.7).</li>
+<li>Device B connects to the relay and syncs.</li>
+</ol>
+<p>The QR code is valid for five minutes. After that it expires (the <code>exp</code> parameter, §6.2) and a new one must be generated. This mitigates the "user screenshots QR code, leaves it on desktop forever" risk.</p>
+<h3>6.2 The pairing URL scheme</h3>
+<p>The QR encodes a URL to the live origin so a scanned code can be opened by any browser:</p>
+<pre><code>https://tolstoy.life/pair#room=&lt;roomId&gt;&amp;key=&lt;base64url-syncKey&gt;&amp;did=&lt;deviceId&gt;&amp;exp=&lt;unix-timestamp&gt;&amp;sig=&lt;hmac&gt;
+</code></pre>
+<p>Properties of this scheme:</p>
+<ul>
+<li><strong>All sensitive material is in the URL fragment</strong> (after <code>#</code>). Browsers do not transmit fragments to servers, so even though the URL hits <code>tolstoy.life</code>, the origin's logs see only <code>/pair</code> — never the room ID, sync key, device ID, expiry, or signature.</li>
+<li><strong>No new domain to whitelist.</strong> Camera apps, browser scanners, and OS-level QR readers all open <code>https://</code> URLs without prompting for permission to a strange custom scheme.</li>
+<li><strong>The PWA installed from this origin can register a handler for <code>/pair</code></strong> so scanning the code opens the app directly when installed, falls back to the website otherwise.</li>
+<li><strong><code>sig</code> is an HMAC-SHA-256 of the other parameters</strong>, signed with the sync key. The receiving device verifies the signature before importing — so an injected malicious URL with a different room ID can't trick the user into pairing into someone else's room.</li>
+</ul>
+<h3>6.3 Fallback: BIP-39 six-word phrase</h3>
+<p><code>BarcodeDetector</code> is not available in Firefox and was only enabled by default in Safari 17. For browsers without it — and for any time the user doesn't want to use a camera (e.g., they are pairing two devices in two different physical locations over a phone call) — the pairing flow falls back to a six-word BIP-39 phrase:</p>
+<ol>
+<li>Device A displays six words from the BIP-39 English wordlist (e.g., <code>tribe vintage forum patient nominee piano</code>).</li>
+<li>Device B has a six-input field and the user types the words.</li>
+<li>The six-word phrase encodes a one-time pairing token (66 bits — well above brute-force reach for a five-minute window) that device B presents to device A through the relay; once device A confirms it, the same handshake as §6.1 step 5 onwards completes.</li>
+</ol>
+<p>The wordlist is BIP-39 because it's well-tested, has high redundancy (no two words share a prefix), and is widely localised (a future Russian, Spanish, or French interface gets the same UX automatically).</p>
+<p>The phrase fallback is exposed prominently in the Pair-a-device UI — it's not a hidden last-resort; it's a peer of the QR code option.</p>
+<h3>6.4 Recovery when all devices are lost</h3>
+<p>With no account system, losing all devices means losing access to the sync key. Mitigations, in increasing strength of trade-off against the no-account principle:</p>
+<ul>
+<li><strong>Explicit backup (default).</strong> Settings → Export sync key. Saves a plain text file the user can put in a password manager, a safe-deposit box, or a paper wallet. The export bundle includes the room ID, the sync key, and the BIP-39 phrase form of the key for paper resilience.</li>
+<li><strong>Encrypted backup to a user-controlled URL (opt-in).</strong> Settings → "Back up my annotations to my own server". The user provides a writeable URL (their own server, an S3 bucket, a Nextcloud share, etc.) and a passphrase. The PWA uploads an encrypted snapshot of the Y.Doc plus the sync key wrapped under the passphrase. Recovery is by re-installing the PWA, supplying the URL and passphrase, and pulling the snapshot back. The relay is not involved. Anthropic's word for this elsewhere is "bring-your-own-storage"; in this design it deliberately does not introduce a Tolstoy-operated storage service.</li>
+<li><strong>Optional email recovery (opt-in, reluctantly).</strong> A user who wants the simplest possible recovery story can associate an email with their room and use magic-link authentication. This moves the user away from "no accounts" but is fully opt-in and visible in settings. Where possible the magic-link verifier runs on the same Cloudflare Worker so no third-party email service is in the trust path.</li>
+</ul>
+<p>The trade-off is stated clearly in settings: "We don't have your annotations on our servers in a form we can read. If you lose every device and you've made no backup, your data is gone. This is a property of the system, not a bug."</p>
+<h2>7. What this costs to run</h2>
+<p>Rough back-of-envelope for hosting the sync relay:</p>
+<ul>
+<li>Cloudflare Workers free tier: 100,000 requests per day. Each sync session might be a few hundred messages.</li>
+<li>Durable Objects: free tier covers low thousands of rooms.</li>
+<li>Realistically, until the project has thousands of active synced readers, this fits in the free tier.</li>
+</ul>
+<p>At scale, the cost scales linearly with active users and is bounded. There's no surprise cost growth because the relay doesn't do any work beyond forwarding bytes.</p>
+<h2>8. Resolved decisions</h2>
+<p>Captured here so the design intent is explicit (these were the open questions in earlier drafts):</p>
+<ol>
+<li><strong>Y.Text for TextualBody value; Y.Map for every body item.</strong> Decision: the <code>body</code> Y.Array contains <code>Y.Map</code> entries (not plain objects), and any <code>TextualBody</code> item's <code>value</code> is a <code>Y.Text</code> (not a plain string). Concurrent edits to the same note therefore merge at character level — an interleaved-but-visible result — rather than producing the silent duplicate that a Y.Array of plain objects would produce (see §2.3 for the failure-mode walk-through). JSON-LD wire shape is unchanged: Y.Text projects to a plain string on export.</li>
+<li><strong>HMAC vs JWT for connection auth.</strong> Decision: HMAC-SHA-256. The relay only needs to verify "did you sign with the room's sync key", not parse capabilities.</li>
+<li><strong>Single Y.Doc vs per-work sub-docs.</strong> Decision: one Y.Doc per user. Add sub-doc partitioning only if real users hit performance walls.</li>
+<li><strong>Relay endpoint discovery.</strong> Decision: hardcoded <code>wss://sync.tolstoy.life</code> in build, overridable via preferences for self-hosters.</li>
+<li><strong>Encryption at rest on the relay.</strong> Decision: ship Stage 4 with opt-in encryption-at-rest (§4.3.1). Default it on once the implementation has stabilised on the three target browsers.</li>
+<li><strong>Relay implementation.</strong> Decision: Cloudflare Worker + Durable Object per room, following the <code>y-durableobjects</code> pattern, hibernatable WebSockets. Not a Node y-websocket-server. (§4.1)</li>
+<li><strong>Pairing URL scheme.</strong> Decision: fragment-based URL on the live origin (§6.2). All sensitive material in the fragment so the origin's logs see only <code>/pair</code>.</li>
+<li><strong>No-camera fallback.</strong> Decision: BIP-39 six-word phrase (§6.3), exposed as a peer of the QR option, not a buried last resort.</li>
+<li><strong>Recovery options.</strong> Decision: explicit sync-key export (default), encrypted-backup-to-user-URL (opt-in), email-magic-link (opt-in, reluctant). No always-on cloud backup.</li>
+<li><strong>Device list and revocation.</strong> Decision: per-device IDs maintained in the Durable Object; Settings → "Synced devices" shows and removes (§4.7).</li>
+<li><strong>Key rotation.</strong> Decision: explicit, manual, user-initiated; new room ID + new key; old room left to inactivity-prune (§4.8).</li>
+</ol>
+<h2>9. Remaining questions for <code>/ultraplan</code></h2>
+<ol>
+<li>What's the right cadence for merging the in-memory update log into a snapshot in the Durable Object? Current intuition: every ~100 updates or every 30 minutes, whichever first. Confirm against <code>y-durableobjects</code> reference numbers.</li>
+<li>The pairing handshake (§6.1 step 5) requires the relay to ferry one round-trip between the two devices before authorization completes. What is the message format and does it need to be in-band on the WebSocket protocol or out-of-band over a separate HTTP endpoint?</li>
+<li>For the encrypted-backup-to-user-URL recovery option, what is the snapshot format (raw Y.Doc state vs JSON-LD export of annotations)? Trade-off: raw is smaller and exact; JSON-LD is portable to other systems but loses CRDT history.</li>
+<li>Should the device's friendly name be set on device A (the inviter) or device B (the joiner)? Either works; the choice affects UX.</li>
+</ol>
+<h2>10. Summary</h2>
+<ul>
+<li>One Y.Doc per user, with five top-level maps (annotations, workMeta, readingPositions, tags, preferences).</li>
+<li>Each annotation is a Y.Map using the W3C Web Annotation shape.</li>
+<li>y-indexeddb handles local persistence.</li>
+<li>y-websocket connects to a Cloudflare Worker + Durable Object relay (<code>y-durableobjects</code> pattern, hibernatable WebSockets) that stores opaque CRDT blobs, with opt-in client-side AEAD encryption-at-rest.</li>
+<li>Pairing between devices uses a fragment-based URL QR code or a BIP-39 six-word phrase, with a confirmation handshake; HMAC for connection auth; per-device IDs for revocation.</li>
+<li>Recovery is sync-key export by default, encrypted-backup-to-user-URL or email magic link as opt-in alternatives.</li>
+<li>The server is a courier; the user's devices are the source of truth.</li>
+</ul>
+<p>The whole sync layer, from local storage to pairing and recovery, fits in around 600 lines of client code plus 150–200 lines of TypeScript on the Worker side. Yjs does the hard work.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/pwa/yjs-schema-and-sync';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

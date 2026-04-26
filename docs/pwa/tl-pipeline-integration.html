@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tolstoy e-reader: tl pipeline integration — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          pwa
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">pwa</p>
+  <h1>Tolstoy e-reader: tl pipeline integration</h1>
+  <p class="meta">Last modified 26 April 2026 · <a href="/pwa/tl-pipeline-integration.md">view source</a></p>
+</header>
+<main>
+<h1>Tolstoy e-reader: tl pipeline integration</h1>
+<p>The PWA architecture depends on the <code>tl</code> build producing a few additional artifacts. This document specifies exactly what those are and how the existing pipeline extends to produce them, so that the web side and the EPUB side stay coherent.</p>
+<p>This is a sibling document to <code>stage-1-implementation.md</code> and <code>yjs-schema-and-sync.md</code> and will be fed into <code>/ultraplan</code> alongside them.</p>
+<h2>1. What the pipeline already does</h2>
+<p>The <code>tl</code> CLI already produces publication-quality EPUBs from typogrified, semanticated source XHTML. The ebook-creator skill documents the full lifecycle: create-draft, typogrify, semanticate, build-manifest, build-toc, build-images, lint, build, prepare-release.</p>
+<p>The web build — whatever turns the source content into the tolstoy.life site — is the other half of the story. This document focuses on what needs to come out of the web build (or a closely related build step) for the PWA to do its job.</p>
+<p>For clarity: this document is not proposing changes to the EPUB pipeline. The EPUB side is already working and stable. It's proposing additions to the web build.</p>
+<h2>2. Five new artefacts</h2>
+<p>The PWA architecture needs five things from the build output that don't exist today:</p>
+<ol>
+<li><strong>A content-addressed versioning scheme</strong> applied to works and chapters, surfaced in URIs and identifiers.</li>
+<li><strong>An asset manifest</strong> per work listing every URL and hash needed for offline reading.</li>
+<li><strong>A <code>relatedWiki</code> list</strong> per work — the slugs of every wiki article referenced from any chapter of the work. Used by the download coordinator to populate the shared wiki cache. See <code>wiki-integration.md</code> §2.</li>
+<li><strong>A wiki-previews bundle</strong> (<code>wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code>) containing summary stubs for every wiki article in the vault. Hashed URL, immutable per build. See <code>wiki-integration.md</code> §3.</li>
+<li><strong>A works index</strong> listing every published work with metadata, including a pointer to the current wiki-previews bundle URL, for library and discovery UIs.</li>
+</ol>
+<p>None of these require changing the content itself. They're metadata and summaries, derived from the build.</p>
+<h3>2.1 Where these artefacts come from</h3>
+<p>The web build is part of the Layer-1 scripted pipeline (CLAUDE.md, scaled architecture model). The asset manifest, <code>relatedWiki</code> list, wiki-previews bundle, and works index are emitted by Layer-1 generators that run after Eleventy renders the site. Two new Python scripts live alongside the existing <code>extract-graph.py</code> / <code>extract-frontmatter.py</code> family:</p>
+<ul>
+<li><code>generate-wiki-previews.py</code> — walks <code>website/src/wiki/</code> and emits the wiki-previews bundle as a hashed JSON file written into the build output. See <code>wiki-integration.md</code> §3.</li>
+<li><code>generate-related-wiki.py</code> — for each work, parses every chapter file in its <code>text/</code> subfolder for <code>[[wikilinks]]</code>, resolves them to wiki article slugs, and emits the resolved set as the work's <code>relatedWiki</code> list, written into the work's manifest.json.</li>
+</ul>
+<p>The asset manifest and works-index generators are existing-or-new build scripts in the same family; they consume the outputs of the two scripts above.</p>
+<h2>3. Content-addressed versioning</h2>
+<h3>3.1 Why it matters</h3>
+<p>Annotations in later stages will anchor to specific versions of works. If the URL <code>/war-and-peace/chapter-3/</code> means different content on Monday and Tuesday, every annotation anchored to "chapter 3" becomes potentially ambiguous. Content-addressing resolves this: each version of a work is identified by a stable hash, and the URL or URI includes that hash.</p>
+<h3>3.2 The versioning scheme</h3>
+<p>Two identifiers per work, both produced by the build:</p>
+<p><strong>Work URI (stable across versions).</strong></p>
+<pre><code>urn:tolstoy-life:war-and-peace
+</code></pre>
+<p>This is the canonical identifier for "War and Peace as a work." It never changes.</p>
+<p><strong>Work version identifier.</strong></p>
+<pre><code>v2026-03-01-a3f5c8
+</code></pre>
+<p>A deterministic, human-readable version tag composed of two parts joined by a hyphen:</p>
+<ul>
+<li>The date of the first commit that produced this content hash, in <code>YYYY-MM-DD</code> form. This is the <em>content's own</em> canonical date, not the build date — re-running the build on a later day does not advance it.</li>
+<li>A short (6 hex characters) prefix of the SHA-256 content hash of the work's post-Eleventy rendered artefacts (chapters, CSS, images, TOC). Computed over the sorted set of file hashes so ordering is deterministic.</li>
+</ul>
+<p>The hash input is <strong>rendered content files only</strong>. Generated metadata files (<code>manifest.json</code>, <code>_related-wiki.json</code>) and fields that reference <em>other</em> build artefacts (e.g. cross-references to the wiki-previews bundle) are explicitly excluded. See §4.6 for the full isolation rule and why it matters.</p>
+<p>Two different builds of the same source content produce the same version; a change anywhere in the work's rendered output produces a new version. This means the version is a pure function of the work's <em>own</em> content — no build-time randomness, no system-clock drift, and no cascade from unrelated parts of the site (a wiki edit, for example, must not re-version an untouched work).</p>
+<p>The hash is computed over <strong>post-Eleventy</strong> artefacts rather than source markdown, because the PWA downloads and caches post-Eleventy HTML; hashing the source would let non-rendering changes (e.g., a schema-only field tweak) change the version without changing what the client actually stores, and vice versa.</p>
+<p>Together, a specific version of a work is:</p>
+<pre><code>urn:tolstoy-life:war-and-peace#v2026-03-01-a3f5c8
+</code></pre>
+<h3>3.3 Where versions live</h3>
+<ul>
+<li>In the work's HTML <code>&lt;head&gt;</code> as a <code>&lt;meta name="tl:version" content="v2026-03-01-a3f5c8"&gt;</code>.</li>
+<li>In the asset manifest (see below).</li>
+<li>In the works index.</li>
+<li>In the URL structure, <em>optionally</em> — for readers who want to link to a specific version, a URL pattern like <code>/war-and-peace/v2026-03-01-a3f5c8/book-1-chapter-3/</code> should resolve to the specific historical version. The canonical URL <code>/war-and-peace/book-1-chapter-3/</code> always points to the latest version.</li>
+</ul>
+<h3>3.4 Keeping old versions accessible</h3>
+<p>Old versions should remain accessible for some retention period. This is what lets annotations anchored to <code>v2025-11-15-9b2c11</code> still find their content after <code>v2026-03-01-a3f5c8</code> ships.</p>
+<p><strong>Decision: serve current + the two most recent prior versions</strong> at versioned URLs (<code>/war-and-peace/v2026-03-01-a3f5c8/...</code>). Older versions live in git history only — they can always be reconstructed by checking out the relevant commit and re-running the build, but they are not served from the live site.</p>
+<p>Rationale:</p>
+<ul>
+<li>Three concurrent versions covers ordinary update churn (most readers will be on current; some on the previous; rare stragglers on the one before that).</li>
+<li>Anyone with an annotation pointing at a version older than the live retention can still recover the content via git, and the project can offer a recovery tool if it ever becomes a real user need.</li>
+<li>Served-version retention is bounded — the build always emits at most three versions per work, regardless of corpus age.</li>
+<li>Git is the source of truth for everything older.</li>
+</ul>
+<p>Implementation: the build script reads the previous build's <code>works.json</code> to discover the prior version slugs, and emits versioned subtrees for current + prior + prior-prior. Versions older than that are pruned from the build output (but remain in git).</p>
+<h2>4. The asset manifest</h2>
+<h3>4.1 Purpose</h3>
+<p>The download coordinator in the PWA needs to know, given a work URI, exactly what URLs to fetch for complete offline availability. It also needs to verify integrity after download. The asset manifest provides both.</p>
+<h3>4.2 Shape</h3>
+<p>One JSON document per work-version, served at a predictable URL:</p>
+<pre><code>https://tolstoy.life/war-and-peace/v2026-03-01-a3f5c8/manifest.json
+</code></pre>
+<p>Or, for the current version:</p>
+<pre><code>https://tolstoy.life/war-and-peace/manifest.json
+</code></pre>
+<p>Both should exist: the versioned URL is stable, the unversioned URL points to the current version.</p>
+<h3>4.3 Schema</h3>
+<pre><code class="language-json">{
+  &quot;manifestFormat&quot;: &quot;v1&quot;,
+  &quot;workUri&quot;: &quot;urn:tolstoy-life:war-and-peace&quot;,
+  &quot;version&quot;: &quot;v2026-03-01-a3f5c8&quot;,
+  &quot;title&quot;: &quot;War and Peace&quot;,
+  &quot;author&quot;: &quot;Leo Tolstoy&quot;,
+  &quot;language&quot;: &quot;en&quot;,
+  &quot;translator&quot;: &quot;Louise and Aylmer Maude&quot;,
+  &quot;description&quot;: &quot;A novel of Russia during the Napoleonic wars.&quot;,
+  &quot;published&quot;: &quot;2026-03-01T12:00:00Z&quot;,
+  &quot;totalBytes&quot;: 8421554,
+  &quot;chapters&quot;: 361,
+  &quot;relatedWiki&quot;: [
+    &quot;napoleon-bonaparte&quot;,
+    &quot;moscow-1812&quot;,
+    &quot;battle-of-borodino&quot;,
+    &quot;yasnaya-polyana&quot;,
+    &quot;tula&quot;
+  ],
+  &quot;assets&quot;: [
+    {
+      &quot;url&quot;: &quot;/war-and-peace/v2026-03-01-a3f5c8/&quot;,
+      &quot;type&quot;: &quot;text/html&quot;,
+      &quot;sha256&quot;: &quot;a3f5c8...&quot;,
+      &quot;bytes&quot;: 4521,
+      &quot;role&quot;: &quot;table-of-contents&quot;
+    },
+    {
+      &quot;url&quot;: &quot;/war-and-peace/v2026-03-01-a3f5c8/book-1/chapter-1/&quot;,
+      &quot;type&quot;: &quot;text/html&quot;,
+      &quot;sha256&quot;: &quot;9b2c11...&quot;,
+      &quot;bytes&quot;: 24108,
+      &quot;role&quot;: &quot;chapter&quot;,
+      &quot;chapterUri&quot;: &quot;urn:tolstoy-life:war-and-peace:book-1-chapter-1&quot;
+    },
+    {
+      &quot;url&quot;: &quot;/war-and-peace/v2026-03-01-a3f5c8/styles/reading.css&quot;,
+      &quot;type&quot;: &quot;text/css&quot;,
+      &quot;sha256&quot;: &quot;c4d7e9...&quot;,
+      &quot;bytes&quot;: 2847,
+      &quot;role&quot;: &quot;style&quot;
+    }
+  ]
+}
+</code></pre>
+<h3>4.4 Field notes</h3>
+<ul>
+<li><code>manifestFormat</code> declares the schema version (currently <code>v1</code>). Clients reject unknown formats rather than guessing.</li>
+<li><code>sha256</code> is the hash of the raw bytes served at that URL — the post-Eleventy artefact actually transmitted to the browser. Not the hash of source markdown, not the hash after any CDN transformation. This has to match what the browser actually downloads.</li>
+<li><code>bytes</code> is the content-length the server will report.</li>
+<li><code>role</code> is a hint for grouping in UI (e.g., "show me just the chapters, not the CSS").</li>
+<li><code>chapterUri</code> is the canonical identifier for the chapter, sourced from explicit <code>chapterUri</code> frontmatter on the chapter file (not derived from URL or position). It must be present on every chapter file; the build script fails if a chapter is missing it. This guarantees stability across reorganisation: a chapter can be moved or renumbered and its URI still matches existing annotations.</li>
+<li><code>relatedWiki</code> is the deduplicated set of wiki article slugs referenced by any chapter of this work. The download coordinator iterates this list, fetching any article not already in the shared wiki cache. Only slugs — no per-article hashes, versions, or sizes. The coordinator resolves each slug against the shared wiki cache (<code>tolstoy-wiki-v&lt;version&gt;</code>) whose version is known from <code>/works.json</code>.</li>
+<li><strong>No <code>wikiPreviewsUrl</code> in per-work manifests.</strong> The canonical pointer to the current wiki-previews bundle lives only in <code>/works.json</code> (see §5.2). Embedding it in every work manifest would re-version every work on every wiki edit — see §4.6.</li>
+<li>Every URL in the manifest is an absolute path on the origin. The download coordinator prepends the origin at fetch time.</li>
+</ul>
+<h3>4.5 Stability guarantees</h3>
+<p>Once a manifest for a specific version is published, it never changes. If an error is found in the content, a new version is produced with a new manifest. This means a client with a cached manifest for <code>v2026-03-01-a3f5c8</code> can trust it forever.</p>
+<p>The unversioned manifest (<code>/war-and-peace/manifest.json</code>) can change, but only by pointing at a new version's manifest. It should always redirect to or embed the same content as the current versioned manifest.</p>
+<h3>4.6 Cross-reference isolation (the no-cascade rule)</h3>
+<p>The work hash and the work's manifest must not transitively depend on other parts of the site. If a wiki edit — or anything else outside the work folder — can change a work's version, the three-version retention discipline in §3.4 collapses: every work in the corpus re-versions on every unrelated edit, the served-retention count blows up, and every download client is forced to re-download unchanged works.</p>
+<p>Two concrete rules enforce the isolation:</p>
+<p><strong>Rule 1 — The work hash is computed over rendered content files only.</strong> Chapters, CSS, images, TOC. Not <code>manifest.json</code>. Not <code>_related-wiki.json</code>. Not anything else produced by a Layer-1 generator. This is a walk-time exclusion: <code>generate-asset-manifests.py</code> must filter those filenames out when assembling the list to hash, even if the files happen to already exist in the work directory (e.g. from a previous build on a persisted workspace).</p>
+<p><strong>Rule 2 — The per-work manifest carries no cross-references to the wiki-previews bundle.</strong> The wiki-previews bundle URL lives at the top level of <code>/works.json</code> (§5.2) and nowhere else in the per-work artefacts. The <code>relatedWiki</code> array is slugs only — no per-article hashes, no wiki-bundle version. A work's slugs change only when <em>that work's own chapters</em> change their wikilinks, which is a legitimate content change for that work.</p>
+<p>Together these rules mean: a wiki article edit changes <code>/works.json</code> and the wiki-previews bundle URL, but no work's hash, no work's manifest, and no work's versioned subtree. The retention discipline holds.</p>
+<p>This is the fix for the cascade bug identified in the 2026-04-23 architecture review (<code>../architecture/architecture-review.html</code> Part 7).</p>
+<h2>5. The works index</h2>
+<h3>5.1 Purpose</h3>
+<p>For library UIs ("show me all works I can read"), search, and discovery, the PWA needs a list of every published work with its metadata. This is the works index.</p>
+<h3>5.2 Shape</h3>
+<p>One JSON document for the whole site, served at:</p>
+<pre><code>https://tolstoy.life/works.json
+</code></pre>
+<pre><code class="language-json">{
+  &quot;indexFormat&quot;: &quot;v1&quot;,
+  &quot;updated&quot;: &quot;2026-04-20T10:00:00Z&quot;,
+  &quot;wikiPreviewsUrl&quot;: &quot;/wiki-previews-v2026-04-20-a3f5c8.json&quot;,
+  &quot;works&quot;: [
+    {
+      &quot;workUri&quot;: &quot;urn:tolstoy-life:war-and-peace&quot;,
+      &quot;title&quot;: &quot;War and Peace&quot;,
+      &quot;author&quot;: &quot;Leo Tolstoy&quot;,
+      &quot;currentVersion&quot;: &quot;v2026-03-01-a3f5c8&quot;,
+      &quot;priorVersions&quot;: [&quot;v2025-11-15-9b2c11&quot;, &quot;v2025-08-02-7e3a4f&quot;],
+      &quot;manifestUrl&quot;: &quot;/war-and-peace/v2026-03-01-a3f5c8/manifest.json&quot;,
+      &quot;indexUrl&quot;: &quot;/war-and-peace/&quot;,
+      &quot;totalBytes&quot;: 8421554,
+      &quot;relatedWikiBytes&quot;: 412800,
+      &quot;chapters&quot;: 361,
+      &quot;language&quot;: &quot;en&quot;,
+      &quot;translator&quot;: &quot;Louise and Aylmer Maude&quot;,
+      &quot;description&quot;: &quot;A novel of Russia during the Napoleonic wars.&quot;,
+      &quot;tags&quot;: [&quot;novel&quot;, &quot;war&quot;, &quot;peace&quot;, &quot;historical&quot;]
+    },
+    {
+      &quot;workUri&quot;: &quot;urn:tolstoy-life:anna-karenina&quot;,
+      &quot;title&quot;: &quot;Anna Karenina&quot;,
+      &quot;author&quot;: &quot;Leo Tolstoy&quot;,
+      &quot;currentVersion&quot;: &quot;v2026-03-01-d4e9f1&quot;,
+      &quot;priorVersions&quot;: [&quot;v2025-12-20-c83a17&quot;],
+      &quot;manifestUrl&quot;: &quot;/anna-karenina/v2026-03-01-d4e9f1/manifest.json&quot;,
+      &quot;indexUrl&quot;: &quot;/anna-karenina/&quot;,
+      &quot;totalBytes&quot;: 5318412,
+      &quot;relatedWikiBytes&quot;: 287400,
+      &quot;chapters&quot;: 239,
+      &quot;language&quot;: &quot;en&quot;,
+      &quot;translator&quot;: &quot;Louise and Aylmer Maude&quot;
+    }
+  ]
+}
+</code></pre>
+<p>The top-level <code>wikiPreviewsUrl</code> is the <strong>sole</strong> canonical pointer to the current wiki-previews bundle. The service worker reads <code>works.json</code> on startup to discover this URL and precaches the bundle. It is deliberately <em>not</em> duplicated in per-work manifests — doing so would cascade every wiki edit into every work's hash (see §4.6).</p>
+<p><code>relatedWikiBytes</code> is the total size of the work's <code>relatedWiki</code> articles when fetched fresh — used by the storage panel and quota check (§9 of <code>stage-1-implementation.md</code>) to estimate combined download size.</p>
+<p><code>priorVersions</code> lists the served prior versions (per the retention policy in §3.4).</p>
+<h3>5.3 Size considerations</h3>
+<p>The works index is fetched on every app open (to check for new works and version updates). It should stay small — a few kilobytes per entry is fine, but multi-kilobyte descriptions for every work will bloat it unnecessarily.</p>
+<p>If the index grows beyond, say, 100 KB, it should be paginated or split by language. For the current corpus size, this isn't a concern.</p>
+<h3>5.4 Caching</h3>
+<p>The works index should be served with aggressive cache headers that still allow revalidation — e.g., <code>Cache-Control: public, max-age=300, must-revalidate</code>. Five minutes of staleness is fine; longer would make new-version detection slow.</p>
+<p>The service worker can implement stale-while-revalidate for the index: serve the cached version instantly, fetch a fresh version in the background, notify the UI if it changed.</p>
+<h2>6. The build step</h2>
+<h3>6.1 Where it fits</h3>
+<p>All five artefacts are produced by Layer-1 scripted-pipeline generators that run after Eleventy renders the site, but before deployment. They live in the same Python script family as <code>extract-graph.py</code> and <code>extract-frontmatter.py</code> (CLAUDE.md, scaled architecture). The order is:</p>
+<ol>
+<li>Eleventy renders the site to a build output directory.</li>
+<li><code>generate-wiki-previews.py</code> walks <code>website/src/wiki/</code>, builds the previews JSON, hashes it, and writes <code>wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code> to the build output root.</li>
+<li><code>generate-related-wiki.py</code> walks each work's <code>text/</code> subfolder for <code>[[wikilinks]]</code>, resolves them to wiki article slugs, and writes the <code>relatedWiki</code> array to a sidecar <code>_related-wiki.json</code> next to the work folder for the next step to consume.</li>
+<li><code>generate-asset-manifests.py</code> walks each work's build output, computes SHA-256 of each file, gathers frontmatter metadata, reads the <code>_related-wiki.json</code> sidecar, and writes <code>manifest.json</code> to both the unversioned and versioned URLs.</li>
+<li><code>generate-works-index.py</code> aggregates every per-work manifest plus the wiki-previews URL into the top-level <code>works.json</code>.</li>
+</ol>
+<h3>6.2 Implementation sketch</h3>
+<p>Roughly (Python, fitting the existing Layer-1 toolchain):</p>
+<pre><code># generate-wiki-previews.py
+previews = {}
+for article in walk_md(vault_root / &quot;wiki&quot;):
+    previews[article.slug] = extract_summary(article)
+bundle_bytes = canonical_json(previews)
+hash6 = sha256(bundle_bytes)[:6]
+date = first_commit_date(vault_root / &quot;wiki&quot;)  # YYYY-MM-DD, deterministic
+filename = f&quot;wiki-previews-v{date}-{hash6}.json&quot;
+write(build_root / filename, bundle_bytes)
+write(build_root / &quot;wiki-previews-current.txt&quot;, filename)
+
+# generate-related-wiki.py
+for work_dir in build_root.glob(&quot;**/*.md&quot;):  # works only
+    related = set()
+    for chapter in work_dir.glob(&quot;text/*.md&quot;):
+        related.update(extract_wikilink_targets(chapter))
+    write(work_dir / &quot;_related-wiki.json&quot;, sorted(related))
+
+# generate-asset-manifests.py
+
+# Filenames that must never contribute to the work's content hash.
+# See §4.6 — these are generated cross-references, not rendered content.
+HASH_EXCLUDE = {&quot;manifest.json&quot;, &quot;_related-wiki.json&quot;}
+
+for work_dir in iter_works(build_root):
+    assets = []
+    for path in walk_files(work_dir):
+        if path.name in HASH_EXCLUDE:
+            continue  # exclude generated artefacts from the work hash
+        assets.append({
+            &quot;url&quot;: make_url(path),
+            &quot;sha256&quot;: sha256(path.read_bytes()),
+            &quot;bytes&quot;: path.stat().st_size,
+            &quot;type&quot;: detect_mime(path),
+            &quot;role&quot;: detect_role(path),
+            &quot;chapterUri&quot;: frontmatter(path).get(&quot;chapterUri&quot;),
+        })
+    assets.sort(key=lambda a: a[&quot;url&quot;])
+
+    # Content hash is computed over rendered content files only (§4.6).
+    # It does NOT include relatedWiki, wiki-previews URL, or any other
+    # cross-reference to another build artefact.
+    content_hash = sha256(canonical_json(assets))[:6]
+    content_date = resolve_content_date(work_dir, content_hash)  # §3 — stateful, not git-derived
+    version = f&quot;v{content_date}-{content_hash}&quot;
+
+    related_wiki = read_json(work_dir / &quot;_related-wiki.json&quot;)  # flat list of slugs
+    manifest = {
+        &quot;manifestFormat&quot;: &quot;v1&quot;,
+        &quot;workUri&quot;: work_uri(work_dir),
+        &quot;version&quot;: version,
+        &quot;relatedWiki&quot;: related_wiki,
+        &quot;totalBytes&quot;: sum(a[&quot;bytes&quot;] for a in assets),
+        &quot;assets&quot;: assets,
+        ...
+        # Note: wikiPreviewsUrl intentionally absent — see §4.4 and §4.6.
+    }
+    # Manifests are written AFTER the hash is computed, so they can't feed back
+    # into it. The versioned subtree is materialised from the asset list, not
+    # by re-walking work_dir.
+    write(work_dir / &quot;manifest.json&quot;, manifest)
+    write(work_dir / version / &quot;manifest.json&quot;, manifest)
+    materialize_versioned_subtree(work_dir, version, retention=3)
+
+# generate-works-index.py
+index = {&quot;indexFormat&quot;: &quot;v1&quot;, &quot;updated&quot;: iso_now(), &quot;wikiPreviewsUrl&quot;: ..., &quot;works&quot;: [...]}
+write(build_root / &quot;works.json&quot;, index)
+</code></pre>
+<h3>6.3 Determinism</h3>
+<p>The build must be deterministic: same source input produces identical manifest, wiki-previews, and works-index bytes. Non-determinism would mean every build looks like a new version even when nothing changed, breaking the version-retention discipline and forcing clients to re-download unchanged works.</p>
+<p>Sources of non-determinism to eliminate:</p>
+<ul>
+<li>File ordering in the <code>assets</code> array (sort by URL — done above).</li>
+<li>Slug ordering in <code>relatedWiki</code> (sort lexicographically — done above).</li>
+<li>Key ordering in JSON serialization (use a canonical JSON encoder with sorted keys).</li>
+<li>Timestamps in the manifest. The <code>published</code> field is the content's first-commit date, not build time. The <code>updated</code> field in <code>works.json</code> is the only build-time timestamp; it does not affect any hash.</li>
+<li>Locale-dependent formatting of numbers or strings (force C locale).</li>
+<li>Floating-point round-trips (avoid floats in metadata; use integers for bytes).</li>
+<li>Filesystem walk order (sort directory entries explicitly).</li>
+</ul>
+<p>A determinism test in CI: build twice in succession from the same git revision; the artefact set must be byte-identical.</p>
+<h3>6.4 The deterministic-build CI check (implemented 2026-04-24)</h3>
+<p>The determinism test in §6.3 is wired in as a blocking CI job in the <code>tolstoylife/website</code> repository:</p>
+<ul>
+<li><strong>Script:</strong> <code>.github/scripts/check-determinism.mjs</code> — a self-contained Node harness that runs <code>npm run build</code> twice, computes SHA-256 of every file under <code>dist/</code>, and diffs the two hash maps. Prints the differing paths, short hash prefixes, and common non-determinism sources on failure. Exits non-zero if any file differs.</li>
+<li><strong>Workflow:</strong> <code>.github/workflows/determinism.yml</code> — runs on every PR to <code>main</code> and on push to <code>main</code>, plus <code>workflow_dispatch</code> for ad-hoc manual runs.</li>
+<li><strong>Block policy:</strong> failures return a red check on the PR. Enforcement as a <em>required</em> status check is a branch-protection policy decision, separate from this file.</li>
+</ul>
+<p>Scope: the check currently covers the Eleventy output in <code>dist/</code>. When the four Layer-1 generators (<code>generate-wiki-previews.py</code>, <code>generate-related-wiki.py</code>, <code>generate-asset-manifests.py</code>, <code>generate-works-index.py</code>) land, they emit into the same <code>dist/</code> tree and inherit the determinism coverage automatically — no changes to the harness are required.</p>
+<p>Limitation: the check runs both builds in the <em>same</em> environment, so it catches within-environment non-determinism (timestamps, walk order, random IDs, PID-based names). Cross-environment determinism — e.g. Netlify vs. Cloudflare Pages producing identical bytes — is the companion test introduced in <code>../architecture/architecture-review.html</code> Part 8 and will be added alongside the CF Pages parallel deploy (TODO priority 5, subsection D).</p>
+<h2>7. Integration with the existing <code>tl</code> CLI</h2>
+<p>The web build is separate from the <code>tl</code> EPUB pipeline, but the two share source content. Decision on division of labour:</p>
+<ul>
+<li><strong>Manifest, versioning, wiki-previews, <code>relatedWiki</code>, works index: all in the Layer-1 scripted pipeline (Python), not in <code>tl</code>.</strong> The EPUB pipeline doesn't need asset manifests (EPUBs are self-contained files with their own internal manifest). The web build is the consumer of the metadata and is where the post-Eleventy assets actually exist. Adding it to <code>tl</code> would couple the EPUB side to the web side unnecessarily.</li>
+<li><strong><code>tl export-wiki</code> stays scoped to plain markdown export.</strong> The <code>tl</code> toolset's job is to round-trip between source XHTML and Obsidian markdown; it does not infuse wikilinks, generate previews, or compute manifests. Wikilink infusion (matching plain text against the wiki to insert <code>[[…]]</code> references) is a separate downstream pass run by an LLM + LightRAG, operating on the markdown that <code>tl</code> already produced.</li>
+<li><strong>Shared metadata source.</strong> The canonical work metadata (title, author, translator, description, language, dates, genre, themes) lives in the work's <code>.md</code> frontmatter and <code>.data.yaml</code> sidecar inside the vault. Both the EPUB pipeline (<code>content.opf</code> population) and the web build (manifest + works-index population) read from the same vault files. There is no duplicate metadata store.</li>
+</ul>
+<h2>8. Chapter URIs and stable anchoring</h2>
+<p>For annotations to anchor to specific chapters, each chapter needs a stable URI that survives reorganisation. Two properties matter:</p>
+<ol>
+<li>The URI identifies the chapter, not its position in the book. Moving "Chapter 5" to become "Chapter 6" shouldn't break annotations on it.</li>
+<li>The URI is human-readable enough to be useful in URLs if desired.</li>
+</ol>
+<p>Pattern:</p>
+<pre><code>urn:tolstoy-life:war-and-peace:book-1-chapter-1
+urn:tolstoy-life:war-and-peace:epilogue-2-chapter-4
+</code></pre>
+<p>The URI is based on the chapter's structural identity within the work (book and chapter number, or a meaningful slug), not its position in a flat list. For a work where "chapter 5" genuinely moves to become "chapter 6" because new content was added, a decision has to be made: keep the URI (so annotations don't break) or renumber (so URIs match the new numbering). Preferring stability is almost always right.</p>
+<h3>8.1 Explicit frontmatter, not derivation</h3>
+<p><code>chapterUri</code> is <strong>declared explicitly in each chapter file's frontmatter</strong>, not derived from URL or filename. Example:</p>
+<pre><code class="language-yaml">---
+title: Book 1, Chapter 1
+work: war-and-peace
+part: 1
+chapter: 1
+chapterUri: urn:tolstoy-life:war-and-peace:book-1-chapter-1
+---
+</code></pre>
+<p>The build script reads this field directly into the asset manifest's <code>chapterUri</code> field. If a chapter file is missing it, the build fails loudly — silent derivation from URL or position would re-introduce the very fragility this scheme is meant to prevent.</p>
+<p>Why explicit:</p>
+<ul>
+<li>Annotations point at this URI for the lifetime of the project. A typo or unintended change ought to be visible in a diff, not invisibly silent in build logic.</li>
+<li>A chapter that legitimately needs renumbering (rare) keeps its URI; the URL changes but annotations follow the URI.</li>
+<li>A chapter that legitimately needs a new URI (also rare — only on a structural redefinition) is an explicit, reviewable change.</li>
+</ul>
+<p>This URI is what appears in the <code>chapterUri</code> field of the asset manifest.</p>
+<h3>8.2 Validation (implemented 2026-04-24)</h3>
+<p>Enforcement of the §8.1 rule lives in <code>website/.github/scripts/validate-frontmatter.mjs</code>, which the existing <code>validate.yml</code> workflow runs on every PR that touches <code>src/works/**/*.md</code>. The validator checks four invariants on every chapter file (anything in <code>src/works/**/text/*.md</code> whose frontmatter has <code>work</code> and <code>part</code>/<code>chapter</code> keys):</p>
+<ol>
+<li><code>chapterUri</code> is present.</li>
+<li>The value matches <code>urn:tolstoy-life:&lt;work-slug&gt;:&lt;chapter-id&gt;</code> (both segments kebab-case).</li>
+<li>The work-slug inside the URI matches the chapter's <code>work</code> frontmatter field (catches the common copy-paste-and-forget-to-update case).</li>
+<li>The URI is globally unique across the corpus (catches duplication, which would make annotations anchored at that URI ambiguous).</li>
+</ol>
+<p>No migration script is needed today: the corpus currently contains zero chapter files (no work has a <code>text/</code> subfolder yet). When chapter files begin to appear — Phase 5 TEI ingestion, or the first manual import — they must carry <code>chapterUri</code> from file one. The validator catches any miss on the PR rather than after the fact.</p>
+<p>Should a bulk import ever produce a batch of chapter files without URIs (e.g. a scan-and-OCR pipeline not yet wired to emit them), a one-shot migration script can be added alongside that pipeline. Deferring it until a concrete need exists avoids speculative tooling.</p>
+<h2>9. Metadata vocabulary</h2>
+<p>A small, disciplined vocabulary of metadata fields used across the manifests:</p>
+<p>Required per work:<br />
+- <code>workUri</code>, <code>version</code>, <code>title</code>, <code>author</code>, <code>language</code>, <code>published</code>, <code>totalBytes</code></p>
+<p>Recommended per work:<br />
+- <code>translator</code>, <code>description</code>, <code>tags</code>, <code>originalLanguage</code>, <code>originalPublished</code></p>
+<p>Required per asset:<br />
+- <code>url</code>, <code>type</code>, <code>sha256</code>, <code>bytes</code></p>
+<p>Recommended per asset:<br />
+- <code>role</code>, <code>chapterUri</code> (for chapters)</p>
+<p>Extensible: additional fields can be added without breaking older clients, as long as they're additive and optional.</p>
+<h2>10. Testing the pipeline changes</h2>
+<p>Two kinds of tests:</p>
+<ol>
+<li><strong>Unit tests on the build script.</strong> Given a fixture work directory, the manifest output matches a golden file. Catches regressions in manifest shape.</li>
+<li><strong>End-to-end.</strong> After a build, the download coordinator can successfully fetch the manifest, download every asset, and verify every hash. Catches discrepancies between the manifest and the actual served content.</li>
+</ol>
+<p>The end-to-end test is the important one. It verifies that the contract between the build and the PWA is honoured.</p>
+<h2>11. Migration</h2>
+<h3>11.1 Rolling out to existing works</h3>
+<p>The first build after the pipeline change produces manifests and the works index for every existing work. No content changes. Deploy normally.</p>
+<h3>11.2 Versioning the first time</h3>
+<p>The first build's version for each work is <code>v&lt;build-date&gt;</code>. All works get the same version tag on first rollout, which is fine — they're all at their current state. Subsequent changes produce new versions per-work.</p>
+<h3>11.3 Backwards compatibility</h3>
+<p>The existing site continues to work. URLs don't change. The manifest and index are new files that didn't exist before; their absence didn't break anything and their presence doesn't break anything.</p>
+<p>A client that doesn't know about manifests (say, an old service worker) simply doesn't fetch them. Nothing degrades.</p>
+<h2>12. Future extensions</h2>
+<p>Things enabled by this scheme but not needed for Stage 1:</p>
+<ul>
+<li><strong>Multi-format downloads.</strong> The same manifest could list an EPUB and a plain-text version alongside the HTML, letting users download their preferred format.</li>
+<li><strong>Signed manifests.</strong> The manifest could be signed so clients verify it hasn't been tampered with. Interesting for high-trust use cases, probably overkill for public domain literature.</li>
+<li><strong>Incremental updates.</strong> Instead of re-downloading a whole work on version change, the manifest could list only changed assets.</li>
+<li><strong>Alternative translations and editions.</strong> A single work URI could group multiple translations as versions, or a higher-level "work family" concept could emerge.</li>
+</ul>
+<p>None of these are blocking. The current scheme leaves room for all of them without baking assumptions that would close doors.</p>
+<h2>13. Open questions for <code>/ultraplan</code></h2>
+<ol>
+<li>Where does the web build currently run (Netlify build environment, primarily)? The Layer-1 generators (<code>generate-wiki-previews.py</code>, <code>generate-related-wiki.py</code>, <code>generate-asset-manifests.py</code>, <code>generate-works-index.py</code>) need to be runnable both in the Netlify build and locally for development. Confirm Python availability in Netlify's build image.</li>
+<li>Is Netlify's hosting such that we can serve <code>manifest.json</code> alongside <code>index.html</code> for every work, or is there a constraint that would push manifests to a single <code>/manifests/</code> directory? (Default Eleventy + Netlify behaviour should accommodate the per-work layout.)</li>
+<li>How should we handle works that are split across multiple translations? One work URI with multiple versions distinguished by translator, or separate work URIs? Current inclination: separate work URIs (e.g., <code>urn:tolstoy-life:war-and-peace-maude</code> and <code>urn:tolstoy-life:war-and-peace-garnett</code>) to keep the per-work asset hash meaningful.</li>
+<li>The version scheme is <code>v&lt;date&gt;-&lt;hash&gt;</code> (§3.2); the manifest carries <code>"manifestFormat": "v1"</code> (§4.3). The works-index also carries <code>"indexFormat": "v1"</code>. Confirm both schema-version markers are present in <code>/ultraplan</code> planning so future format changes are non-breaking.</li>
+<li>Does Netlify's CDN respect the <code>Cache-Control: public, max-age=300, must-revalidate</code> header on <code>works.json</code> and the per-work <code>manifest.json</code>? Netlify-specific overrides may be needed in <code>netlify.toml</code> to prevent over-caching of the version-pointer files.</li>
+<li>The wiki-previews bundle URL is <code>/wiki-previews-v&lt;hash&gt;.json</code> (immutable). When the bundle changes hash, the old file is left in the build output for one build cycle (so existing service workers can still resolve their precached URL during the swap). Is that retention sufficient, or should we keep more historical bundles for slow-updating clients?</li>
+<li>The <code>relatedWiki</code> resolver runs on post-Eleventy markdown. It must resolve wikilinks the same way Eleventy does (Obsidian-compatible name resolution, including aliases). Confirm the resolver shares the resolution logic with the rendering layer rather than re-implementing it.</li>
+</ol>
+<h2>14. Summary</h2>
+<p>Five additions to the Layer-1 scripted pipeline (web build):</p>
+<ol>
+<li>Deterministic content-addressed versioning (<code>v&lt;date&gt;-&lt;hash6&gt;</code>) with stable work URIs and explicit chapter URIs in frontmatter.</li>
+<li>An asset manifest per work-version, listing every URL with hash and size, plus a <code>relatedWiki</code> list.</li>
+<li>A site-wide works index linking to every manifest, with a top-level pointer to the current wiki-previews bundle.</li>
+<li>A wiki-previews bundle (<code>wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code>) containing summary stubs for every wiki article, hashed and immutable per build.</li>
+<li>A served retention of current + 2 prior versions per work; older versions remain in git only.</li>
+</ol>
+<p>These are metadata and summary additions. They don't touch primary content, don't change canonical URLs, don't modify the EPUB pipeline. They provide the contract the PWA consumes to make offline reading real.</p>
+<p>With these in place, the Stage 1 download coordinator has everything it needs, and future stages — annotations (Stage 3), sync (Stage 4+), cross-work search — all inherit the same versioning and identification scheme.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/pwa/tl-pipeline-integration';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

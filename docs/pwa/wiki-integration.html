@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tolstoy e-reader: wiki integration — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          pwa
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">pwa</p>
+  <h1>Tolstoy e-reader: wiki integration</h1>
+  <p class="meta">Last modified 20 April 2026 · <a href="/pwa/wiki-integration.md">view source</a></p>
+</header>
+<main>
+<h1>Tolstoy e-reader: wiki integration</h1>
+<p>This document specifies how the wiki layer (<code>website/src/wiki/</code>) participates in the local-first PWA. It sits alongside <code>local-first-architecture.md</code>, <code>stage-1-implementation.md</code>, <code>yjs-schema-and-sync.md</code>, and <code>tl-pipeline-integration.md</code>, and resolves three questions left open by them:</p>
+<ol>
+<li>When a reader downloads a work for offline use, what happens to the wiki articles that work references?</li>
+<li>How does the wikilink modal preview load — instantly, online, or both?</li>
+<li>How does the PWA surface the path from "I noticed something" to "I made a contribution" without taking on identity infrastructure?</li>
+</ol>
+<p>Editorial questions — voice, mission, source authority — are out of scope here. They live in <code>MANIFEST.md</code> and are handled separately.</p>
+<h2>1. The wiki as a layer</h2>
+<p>The three-layer separation in <code>local-first-architecture.md</code> (works / annotations / session state) is incomplete. The wiki is a fourth kind of data:</p>
+<p><strong>Layer 1a — Works</strong> (read-only, content-addressed). The XHTML chapters, images, and CSS for a published work.</p>
+<p><strong>Layer 1b — Wiki articles</strong> (read-only, content-addressed). The markdown files in <code>website/src/wiki/</code> that the works reference via <code>[[wikilinks]]</code>. Same lifecycle as works — produced by the build, immutable from the user's perspective, versioned by content hash.</p>
+<p><strong>Layer 2 — Annotations</strong> (local-first, sync-capable). Unchanged.</p>
+<p><strong>Layer 3 — Session state</strong> (ephemeral, local-only). Unchanged.</p>
+<p>Wiki and works share a layer-class — both are content-addressed, both are immutable from the user's perspective, both are produced by the same build pipeline. They differ in granularity: a work is a large unit (hundreds of files, tens of MB), a wiki article is a small unit (one markdown file, a few KB). This difference shapes the download and caching strategy.</p>
+<h2>2. The wiki download model</h2>
+<p>Three plausible models were considered. The chosen one is Model B.</p>
+<h3>2.1 Models considered</h3>
+<p><strong>Model A — Download the entire wiki with every work.</strong></p>
+<p>Generous but wasteful. At full project scope (~26,500 wiki articles, ~72 MB), every work download would trigger a 72 MB transfer regardless of which articles the work actually references. Mobile-data-hostile. Storage-wasteful for users with multiple downloaded works.</p>
+<p><strong>Model B — Download only the wiki articles a work references.</strong></p>
+<p>Each work declares its referenced wiki articles in its asset manifest. The download coordinator fetches those alongside the work's chapters. Articles are stored in a shared wiki cache, deduplicating across multiple downloaded works. Modal previews work fully offline for referenced articles; non-referenced articles need network or fall back to title-only.</p>
+<p><strong>Model C — Wiki is online-only, never downloaded.</strong></p>
+<p>Simplest to build, worst experience. A reader on a train who downloaded <em>War and Peace</em> would tap <code>[[Natasha Rostova]]</code> and see a network error. Contradicts the local-first promise.</p>
+<h3>2.2 Model B in detail</h3>
+<p><strong>Per-work <code>relatedWiki</code> declaration.</strong> Each work's asset manifest (see <code>tl-pipeline-integration.md</code>) gains a <code>relatedWiki</code> array listing every wiki article the work directly references via <code>[[wikilinks]]</code> in its source text. This is computed at build time by walking the work's text files and collecting all wikilink targets.</p>
+<pre><code class="language-json">{
+  &quot;workUri&quot;: &quot;urn:tolstoy-life:war-and-peace&quot;,
+  &quot;version&quot;: &quot;v2026-03-01-a3f5c8&quot;,
+  ...
+  &quot;relatedWiki&quot;: {
+    &quot;version&quot;: &quot;v2026-04-20-a3f5c8&quot;,
+    &quot;articles&quot;: [
+      {
+        &quot;uri&quot;: &quot;urn:tolstoy-life:wiki:natasha-rostova&quot;,
+        &quot;url&quot;: &quot;/wiki/natasha-rostova/&quot;,
+        &quot;sha256&quot;: &quot;9b2c11...&quot;,
+        &quot;bytes&quot;: 8421
+      },
+      {
+        &quot;uri&quot;: &quot;urn:tolstoy-life:wiki:borodino&quot;,
+        &quot;url&quot;: &quot;/wiki/borodino/&quot;,
+        &quot;sha256&quot;: &quot;c4d7e9...&quot;,
+        &quot;bytes&quot;: 12483
+      }
+    ],
+    &quot;totalBytes&quot;: 1842559
+  }
+}
+</code></pre>
+<p><strong>Transitive depth: one hop, not closure.</strong> A wiki article on Sophia Tolstaya itself contains wikilinks to other articles. The download includes the <em>directly</em> referenced articles only — not the transitive closure. The transitive closure would drag in nearly the whole wiki for any major work, defeating the purpose of selective download. Articles reached via "wikilink-from-a-wikilink" are available online or via the bundled previews (section 3) but not as full offline articles.</p>
+<p><strong>Shared cache, deduplication.</strong> Wiki articles live in a single named cache: <code>tolstoy-wiki-v&lt;version&gt;</code>. Multiple downloaded works reference the same cache; if <code>Anna Karenina</code> and <code>War and Peace</code> both reference <code>[[Sophia Tolstaya]]</code>, the article downloads once. The cache version is the wiki bundle's content hash; updating the wiki bundle creates a new cache and the old one is pruned after no work references it.</p>
+<p><strong>Cache lifecycle.</strong> When the user removes a downloaded work, the download coordinator checks whether any <em>remaining</em> downloaded work still references each of that work's wiki articles. Articles still referenced stay; articles no longer referenced by any downloaded work are removed. The shared cache shrinks correctly on work removal without orphaning articles still in use.</p>
+<p><strong>Settings visibility.</strong> The settings storage panel surfaces wiki storage as a distinct line item:</p>
+<pre><code>Downloaded works
+  War and Peace               8.2 MB
+  Anna Karenina               5.1 MB
+Wiki articles (shared)        3.4 MB
+Total                        16.7 MB
+</code></pre>
+<p>This makes the dedup model explicit to the user — they understand that downloading another work won't necessarily double the wiki cost.</p>
+<p><strong>User control.</strong> A setting in the storage panel, default on: "Download related wiki articles when I download a work." A user who wants to save space can turn it off; in that case, the modal preview (section 3) still works for in-bundle previews but full articles require network. The setting is per-device, not synced.</p>
+<p><strong>Standalone wiki download.</strong> A separate explicit action in settings: "Download the entire wiki for offline use." For scholars who want full offline access, this is a single deliberate choice with a clear size warning. At full project scope this is a ~72 MB download. Not the default.</p>
+<h2>3. Wikilink preview bundling</h2>
+<p>The modal preview that appears when a reader hovers or taps a <code>[[wikilink]]</code> should render instantly, work offline, and not require the user to have downloaded the full wiki article. The mechanism is a bundled summaries file produced by the build.</p>
+<h3>3.1 The bundle</h3>
+<p>A single JSON document, served at a hash-stable URL:</p>
+<pre><code>/wiki-previews-v2026-04-20-a3f5c8.json
+</code></pre>
+<p>The current bundle's URL is referenced from <code>/works.json</code> (see <code>tl-pipeline-integration.md</code>), so the client always knows which version to fetch.</p>
+<h3>3.2 Bundle structure</h3>
+<p>Keyed by article slug for O(1) lookup, not as a flat array:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;v2026-04-20-a3f5c8&quot;,
+  &quot;generated&quot;: &quot;2026-04-20T03:00:00Z&quot;,
+  &quot;schema&quot;: &quot;wiki-previews-v1&quot;,
+  &quot;articles&quot;: {
+    &quot;sophia-tolstaya&quot;: {
+      &quot;title&quot;: &quot;Sophia Tolstaya&quot;,
+      &quot;type&quot;: &quot;person&quot;,
+      &quot;summary&quot;: &quot;Sophia Andreevna Tolstaya (1844–1919) was Tolstoy's wife from 1862, the mother of his thirteen children, and the first transcriber of his manuscripts.&quot;,
+      &quot;dates&quot;: &quot;1844–1919&quot;,
+      &quot;image&quot;: &quot;/images/sophia-tolstaya-thumb.webp&quot;,
+      &quot;wordCount&quot;: 4521
+    },
+    &quot;yasnaya-polyana&quot;: {
+      &quot;title&quot;: &quot;Yasnaya Polyana&quot;,
+      &quot;type&quot;: &quot;place&quot;,
+      &quot;summary&quot;: &quot;Tolstoy's family estate in Tula Oblast, where he was born, wrote his major works, and is buried.&quot;,
+      &quot;coordinates&quot;: [54.0667, 37.5167],
+      &quot;wordCount&quot;: 2103
+    }
+  }
+}
+</code></pre>
+<p>Per-article fields:</p>
+<ul>
+<li><code>title</code> (required) — the article's display title.</li>
+<li><code>type</code> (required) — wiki schema type: <code>person</code>, <code>place</code>, <code>event</code>, <code>concept</code>, <code>translator</code>, <code>institution</code>, <code>adaptation</code>, <code>criticalWork</code>, <code>archivalFond</code>. Drives modal layout.</li>
+<li><code>summary</code> (required, may be <code>null</code>) — the preview prose. ≤ 250 chars after extraction.</li>
+<li>Type-specific optional fields: <code>dates</code> (person/event), <code>coordinates</code> (place), <code>image</code> (any).</li>
+<li><code>wordCount</code> (recommended) — the full article's length, useful for "read more" UX.</li>
+</ul>
+<p>Thumbnail images are referenced by URL; the bundle does not embed image bytes. Images load on-demand when their preview is opened, then service-worker-cache organically.</p>
+<h3>3.3 Summary extraction logic</h3>
+<p>The Layer-1 script that builds the bundle (<code>generate-wiki-previews.py</code>) follows these rules in order:</p>
+<ol>
+<li>If the article's frontmatter contains a <code>summary:</code> field, use it verbatim.</li>
+<li>Else, extract the first paragraph of prose. Strip wikilink brackets (<code>[[Sophia Tolstaya]]</code> becomes <code>Sophia Tolstaya</code>). Strip markdown formatting. Truncate at the nearest sentence boundary under 250 characters.</li>
+<li>If the first paragraph is shorter than 50 characters, append the second paragraph up to the same limit.</li>
+<li>If no prose exists, set <code>"summary": null</code>. The modal renders title and type only — not fake content.</li>
+</ol>
+<p>This logic is a single Python function with fixture-based tests. Refining it is cheap; the bundled output regenerates nightly anyway.</p>
+<h3>3.4 Size and growth</h3>
+<p>Per-article cost is roughly 370 bytes raw (title, type, summary, optional fields, JSON overhead). At full scope (~26,500 articles), the bundle is ~10 MB raw, ~2-3 MB gzipped. For the MVP corpus (first ~1,000 articles), it's ~100 KB gzipped — negligible.</p>
+<p>If the bundle ever crosses 5 MB gzipped, two strategies become viable:</p>
+<ol>
+<li><strong>Lazy-load.</strong> Don't ship the bundle with the app shell; fetch it after first paint. By the time the reader taps their first wikilink, it's loaded.</li>
+<li><strong>Split by domain.</strong> One bundle per wiki type (people, places, events, concepts). Client loads only the bundle relevant to the article currently open.</li>
+</ol>
+<p>Neither is needed today. Plain bundled JSON is the right answer until the file gets uncomfortably large.</p>
+<h3>3.5 Compression and caching</h3>
+<p>The bundle is served with brotli or gzip (both compress repeated field names like <code>"title"</code> and <code>"summary"</code> extremely well). Cache headers:</p>
+<pre><code>Cache-Control: public, max-age=31536000, immutable
+</code></pre>
+<p>The hashed URL (<code>wiki-previews-v2026-04-20-a3f5c8.json</code>) makes immutable safe — when the bundle changes, the URL changes, the old version ages out naturally. The pointer to the current bundle URL lives in <code>/works.json</code>, which has a short max-age and is the actual cache-bust mechanism.</p>
+<h3>3.6 Render path</h3>
+<p>When the reader hovers or taps a <code>[[wikilink]]</code>:</p>
+<ol>
+<li>The wikilink element's <code>data-wiki-slug</code> attribute carries the slug.</li>
+<li>Client looks up <code>previews.articles[slug]</code> — synchronous, sub-millisecond.</li>
+<li>Modal renders from a template using the type field for layout.</li>
+<li>Optionally, the thumbnail starts loading (service worker may have it cached).</li>
+</ol>
+<p>Sub-millisecond first render. No network call required for the preview itself. This is the user-experience reason for bundling: the modal is instant rather than "wait 200 ms for a fetch."</p>
+<h3>3.7 "Read more" — the full article</h3>
+<p>The modal includes a "Read more" link to the full wiki article. The reader's click resolves through this priority:</p>
+<ol>
+<li><strong>Offline wiki cache</strong> (the article was downloaded with a work). Open immediately.</li>
+<li><strong>Network fetch</strong> of <code>/wiki/&lt;slug&gt;/</code>. Standard navigation.</li>
+<li><strong>Offline fallback</strong> — if neither cache nor network works, show "Full article available online" with a retry button.</li>
+</ol>
+<h3>3.8 Settings toggle</h3>
+<p>A user setting, default on: "Show wiki previews on hover." Some readers find hover previews fiddly, especially with imprecise pointing devices. When off, wikilinks open the full article on click without a preview step. The setting is per-device, not synced.</p>
+<h2>4. The contributor surface</h2>
+<p>The PWA is the reader surface. Contribution lives on GitHub. The PWA's job is to make the path from "I noticed something" to "I made a contribution" cheap, without taking on identity or moderation infrastructure of its own.</p>
+<h3>4.1 The "Improve this article" link</h3>
+<p>Every wiki article and work page in the PWA carries a small footer link:</p>
+<pre><code>Improve this article on GitHub →
+</code></pre>
+<p>The link goes to GitHub's web editor for the source file:</p>
+<pre><code>https://github.com/tolstoylife/website/edit/main/src/wiki/Sophia%20Tolstaya.md
+</code></pre>
+<p>A reader who wants to fix a typo:</p>
+<ol>
+<li>Clicks the footer link.</li>
+<li>Lands in GitHub's in-browser editor with the file open.</li>
+<li>Edits, scrolls down, writes a commit message (template provided).</li>
+<li>Clicks "Propose changes" — GitHub forks, branches, and opens a PR.</li>
+</ol>
+<p>Total reader friction: ~90 seconds for someone with a GitHub account. Zero infrastructure on the PWA side.</p>
+<p>The link's URL is templated at build time from each page's source file path. The PWA stays a static site; no runtime backend needed.</p>
+<h3>4.2 Issue-template links for non-edit contributions</h3>
+<p>Some contributions don't fit the edit-this-file flow: reporting a factual error that needs research, requesting a missing wiki article, flagging a broken wikilink across multiple pages. For these, deep links to GitHub Issue templates:</p>
+<pre><code>https://github.com/tolstoylife/website/issues/new?template=factual-correction.yml&amp;article=/wiki/sophia-tolstaya/
+</code></pre>
+<p>GitHub's issue-template URL parameters pre-fill the form. The PWA generates these links per-page, so the issue arrives already tagged with the article it concerns.</p>
+<p>Three templates worth shipping with the project:</p>
+<ol>
+<li><strong>Factual correction</strong> — required fields: article URL, the claim being corrected, the corrected claim, the source citation.</li>
+<li><strong>Missing wikilink</strong> — fields: source text URL, passage where the link should go, target wiki article URL.</li>
+<li><strong>Wiki article request</strong> — fields: subject (person / place / concept), why it deserves an article, suggested sources to consult.</li>
+</ol>
+<p>The factual-correction template enforces the schema's source-citation rule at submission. No source means the form won't submit. This pushes quality control upstream of human review.</p>
+<h3>4.3 GitHub-side infrastructure (out of PWA scope, but referenced)</h3>
+<p>For completeness, the GitHub-side mechanisms the PWA's contribution links rely on:</p>
+<ul>
+<li><strong>Issue templates</strong> (<code>.github/ISSUE_TEMPLATE/*.yml</code>) — the structured forms the PWA links to.</li>
+<li><strong>PR template</strong> (<code>.github/PULL_REQUEST_TEMPLATE.md</code>) — checklist for source citations, schema compliance, wikilink resolution.</li>
+<li><strong>CODEOWNERS</strong> (<code>.github/CODEOWNERS</code>) — path-based approval requirements. Schema files require maintainer approval; wiki articles can be approved by trusted contributors.</li>
+<li><strong>GitHub Actions</strong> — automated validation on every PR (frontmatter schema, wikilink resolution, build success). Failures comment on the PR with what's wrong.</li>
+<li><strong>Branch protection</strong> on <code>main</code> — required reviews, required status checks, no direct pushes.</li>
+</ul>
+<p>These are configured once in the <code>tolstoylife/website</code> repo and don't change as the PWA evolves.</p>
+<h3>4.4 Attribution surface</h3>
+<p>For wiki articles with non-trivial contribution history, the article's footer can include a quiet attribution:</p>
+<pre><code>Contributors: [GitHub username 1], [username 2], and 3 others →
+</code></pre>
+<p>The link goes to the file's GitHub history. This is build-time data — Eleventy can read git log for each file at build and embed contributor lists in the rendered page. No runtime API call to GitHub needed.</p>
+<p>Attribution is per-article, not site-wide. Readers see who has contributed to the specific article they're reading, which makes the contribution path concrete: "this article was improved by other readers; I can do that too."</p>
+<h3>4.5 What the PWA does not do</h3>
+<ul>
+<li>The PWA does not run any auth flow. GitHub login happens entirely on github.com.</li>
+<li>The PWA does not show contributor profiles, comment threads, or issue lists. Those live on GitHub.</li>
+<li>The PWA does not bridge GitHub identity with the QR-pairing identity used for annotation sync. The two identity systems are completely independent — a reader can sync annotations across devices with no GitHub account; a contributor can have a GitHub account with no synced annotations.</li>
+</ul>
+<p>Keeping these surfaces separate is the architectural discipline. Bridging them would create a "platform" — exactly what the project is trying to avoid.</p>
+<h2>5. Integration with the three-layer architecture</h2>
+<p>The Tolstoy Research Platform's three-layer model (CLAUDE.md §"Scaled architecture: three-layer processing model") describes Layer 1 as scripted, deterministic, nightly cron jobs. The PWA's wiki integration plugs in cleanly here.</p>
+<h3>5.1 New Layer-1 outputs</h3>
+<p>Two new generated artifacts, both produced nightly by Layer-1 scripts:</p>
+<ul>
+<li><strong><code>/works.json</code></strong> — the works index (per <code>tl-pipeline-integration.md</code> §5). Includes a <code>currentWikiPreviewsUrl</code> field pointing to the current preview bundle.</li>
+<li><strong><code>/wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code></strong> — the bundled preview file (this document §3).</li>
+</ul>
+<p>A new script, <code>generate-wiki-previews.py</code>, walks <code>website/src/wiki/</code>, applies the extraction logic in §3.3, and writes the bundle. Lives alongside the existing <code>extract-graph.py</code>, <code>extract-frontmatter.py</code>, and <code>generate-briefing.py</code>.</p>
+<p>A second new script, <code>generate-related-wiki.py</code>, walks each work's text files, collects <code>[[wikilinks]]</code>, resolves them to wiki article URIs, and emits the <code>relatedWiki</code> section consumed by the work's manifest.</p>
+<h3>5.2 Eleventy build consumption</h3>
+<p>Eleventy's build reads the Layer-1 outputs as global data:</p>
+<ul>
+<li>The works index becomes <code>_data/works.json</code>, available to every template.</li>
+<li>The wiki previews bundle is referenced by URL only — Eleventy doesn't embed it; the PWA fetches it at runtime.</li>
+<li>The relatedWiki sections are merged into each work's manifest at the manifest-generation step (which runs as part of the Eleventy build, per <code>tl-pipeline-integration.md</code> §6).</li>
+</ul>
+<p>This keeps Layer 1 (scripted, deterministic, content-derived) and the Eleventy build (template rendering) cleanly separated. Layer 1 produces the data, Eleventy consumes it.</p>
+<h3>5.3 Source of truth</h3>
+<p>Wiki article metadata (title, type, summary if explicit) lives in the article's frontmatter. The previews bundle is derived; the articles are canonical. The bundle can be regenerated from the articles at any time, byte-identical given the same input.</p>
+<p>Wiki article URIs (<code>urn:tolstoy-life:wiki:sophia-tolstaya</code>) are derived deterministically from the article's filename via the slug rule documented in <code>nice-permalinks</code> (the existing skill). The URI is what appears in the <code>relatedWiki</code> arrays and in annotation tag references; it is the cross-system identifier.</p>
+<h2>6. Consequences for the staged roadmap</h2>
+<p>This document changes how <code>local-first-architecture.md</code>'s staged roadmap should be read:</p>
+<ul>
+<li><strong>Stage 1</strong> (offline works) gains the wiki download alongside it. The download coordinator handles both the work's chapters and its <code>relatedWiki</code> articles. The wiki previews bundle is fetched as part of app shell.</li>
+<li><strong>Stage 2 / 3</strong> (annotations and highlights) inherit working wikilink previews and offline wiki articles. Tags can reference wiki article URIs as <code>urn:tolstoy-life:wiki:non-resistance</code>.</li>
+<li><strong>Stage 4</strong> (sync) is unchanged.</li>
+<li><strong>Stage 5+</strong> (search) can use the previews bundle as a basis for client-side wiki search — the same data that powers modal previews indexes naturally for full-text search.</li>
+</ul>
+<p>Wiki integration is not a separate stage. It threads through every stage from 1 onward, because the wiki is part of the reading experience, not a feature on top of it.</p>
+<h2>7. Open questions</h2>
+<p>Things to flag for <code>/ultraplan</code>:</p>
+<ol>
+<li>Should the <code>summary:</code> frontmatter field be required for high-traffic articles (people in Tolstoy's inner circle, his major works), or is the auto-extracted first paragraph good enough across the board?</li>
+<li>Should the PWA provide a "Why is this article here?" link from each preview, opening the source citation list? Useful for transparency, costs a few bytes per preview.</li>
+<li>Should <code>relatedWiki</code> distinguish between articles linked from the work's prose vs. from the work's overview metadata? Could affect download granularity for very large works.</li>
+<li>For users with the standalone "download entire wiki" option, should subsequent work downloads skip the per-work <code>relatedWiki</code> step (since everything is already cached)? Likely yes; mostly a coordinator implementation detail.</li>
+<li>Should the contributor footer link be present on every page, or only on pages a reader has spent meaningful time on? The former is honest about how the project works; the latter is less visually noisy.</li>
+</ol>
+<h2>8. Summary</h2>
+<ul>
+<li>A fourth data layer: wiki articles, content-addressed and immutable like works, but smaller-grained.</li>
+<li>Per-work <code>relatedWiki</code> declarations drive selective wiki downloading. Shared cache deduplicates across works.</li>
+<li>A bundled previews file (~370 bytes per article) ships with the app shell and powers instant offline modal previews. "Read more" promotes to the full article.</li>
+<li>Contribution lives on GitHub, reached via deep links (edit URLs, issue-template URLs) embedded in the PWA. The PWA carries no auth, no comments, no contributor profiles.</li>
+<li>Two new Layer-1 scripts (<code>generate-wiki-previews.py</code>, <code>generate-related-wiki.py</code>) produce the artifacts the PWA consumes.</li>
+<li>Wiki integration threads through every PWA stage rather than being a stage of its own.</li>
+</ul>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/pwa/wiki-integration';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

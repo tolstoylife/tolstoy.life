@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tolstoy e-reader: Stage 1 implementation plan — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          pwa
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">pwa</p>
+  <h1>Tolstoy e-reader: Stage 1 implementation plan</h1>
+  <p class="meta">Last modified 20 April 2026 · <a href="/pwa/stage-1-implementation.md">view source</a></p>
+</header>
+<main>
+<h1>Tolstoy e-reader: Stage 1 implementation plan</h1>
+<p>The first real local-first step. This stage does not introduce annotations, sync, or CRDTs. It introduces one capability: a user can choose to download a work and have it available offline, forever, on the device they chose.</p>
+<p>This document assumes the architecture in <code>local-first-architecture.md</code> and is sized to be executed through <code>/ultraplan</code> when ready. It's written so a reviewer can read it linearly and know exactly what should exist after Stage 1 is shipped.</p>
+<h2>1. Scope</h2>
+<h3>1.1 In scope</h3>
+<ul>
+<li>A "Make available offline" control on each work's page.</li>
+<li>A local store of downloaded works, surviving page reloads and app closes.</li>
+<li>An offline-aware reading experience: downloaded works read identically with or without network.</li>
+<li>Wiki articles referenced by each downloaded work are cached alongside it. Shared cache across works, deduplicated. See <code>wiki-integration.md</code> §2.</li>
+<li>The bundled wiki-previews file ships with the app shell, so wikilink modal previews work offline for every article in the bundle from first load. See <code>wiki-integration.md</code> §3.</li>
+<li>A storage panel in settings showing what's downloaded (works and shared wiki cache) and how much space it takes.</li>
+<li>Graceful handling of browser storage eviction and quota errors.</li>
+<li>Workbox adopted for the service worker's routing and caching-strategy layer (see <code>local-first-architecture.md</code> §5.8).</li>
+</ul>
+<h3>1.2 Out of scope</h3>
+<p>Deliberately excluded from Stage 1:</p>
+<ul>
+<li>Any form of annotation, bookmark, or highlight (the CSS Custom Highlights API and its Safari &lt; 17.4 fallback concern Stage 3, not here).</li>
+<li>Any sync across devices.</li>
+<li>Any account system.</li>
+<li>Push notifications or background updates.</li>
+<li>Automatic pre-caching of works the user hasn't explicitly downloaded.</li>
+<li>Any UI that exists only when offline (the UI is the same; only availability changes).</li>
+<li>A standalone "download the entire wiki" action — present in settings but a separate explicit choice, not part of a work download.</li>
+</ul>
+<p>Keeping scope narrow is the whole point of the staged approach. Stage 1 should be shippable and useful on its own, with no latent dependency on stages that haven't been built yet.</p>
+<h2>2. User stories</h2>
+<p>Three stories define "done" for Stage 1:</p>
+<ol>
+<li><strong>The train reader.</strong> A user browses tolstoy.life at home, sees <em>War and Peace</em>, taps "Make available offline." They see a progress indicator and a confirmation. The next morning on the train with no signal, they open the app and read <em>War and Peace</em> seamlessly.</li>
+<li><strong>The storage-conscious user.</strong> A user has downloaded three works. They visit settings and see each work listed with its size. They remove one work and see the storage figure decrease. They close and reopen the app; the change persists.</li>
+<li><strong>The accidental offline user.</strong> A user has the app open. Their Wi-Fi drops. They try to navigate to a work they haven't downloaded. They get a clear, friendly message explaining that this work isn't available offline and suggesting they download it when they're back online, without any scary error language.</li>
+</ol>
+<p>If all three stories work cleanly, Stage 1 is done.</p>
+<h2>3. Architecture delta</h2>
+<h3>3.1 What exists today</h3>
+<p>The tolstoy.life site is already a PWA with a service worker. At the page level, the site works offline — the shell caches, navigation works, previously-visited pages come out of the cache. What doesn't exist yet is <em>deliberate, persistent, user-controlled</em> offline availability of whole works.</p>
+<h3>3.2 What changes in Stage 1</h3>
+<p>Five additions:</p>
+<ol>
+<li>A new <strong>offline works store</strong> (Cache API, one named cache per work version) that holds the XHTML, CSS, images, and metadata of each downloaded work.</li>
+<li>A new <strong>shared wiki cache</strong> (Cache API, <code>tolstoy-wiki-v&lt;bundle-version&gt;</code>) holding wiki articles referenced by any downloaded work. Deduplicated across works.</li>
+<li>A new <strong>download coordinator</strong> module in the client that fetches all assets for a work (chapters + referenced wiki articles), verifies their integrity, and writes them to the appropriate cache.</li>
+<li>An updated <strong>service worker</strong>, adopting Workbox for routing and caching strategies. The new routes: cache-first for downloaded works, cache-first with network fallback for wiki articles in the shared cache, network-only with graceful fallback for non-downloaded works.</li>
+<li>The <strong>wiki-previews bundle</strong> (<code>/wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code>) is precached with the app shell. Its URL is discovered from <code>/works.json</code>.</li>
+</ol>
+<p>Everything else — the rendering, the routing, the navigation — stays the same.</p>
+<h2>4. The offline works store</h2>
+<h3>4.1 Storage backend choice</h3>
+<p>Two viable options:</p>
+<p><strong>Cache API.</strong> Simpler model: each work gets a named Cache instance, with asset URLs as keys and Response objects as values. Native integration with the service worker fetch handler. Well-understood quota behaviour.</p>
+<p><strong>OPFS.</strong> More control: each work is a directory, assets are files. Better for large binary blobs. More code to write, but finer-grained access.</p>
+<p><strong>Decision: Cache API for Stage 1.</strong> The Cache API is designed precisely for this use case, the integration with the service worker is almost free, and there's no compelling reason yet to reach for OPFS. If storage or access-pattern issues show up later, switching to OPFS is a self-contained migration.</p>
+<h3>4.2 Cache layout</h3>
+<p>One named Cache per work:</p>
+<pre><code>tolstoy-work-v1:war-and-peace:v2026-03-01-a3f5c8
+tolstoy-work-v1:anna-karenina:v2026-03-01-7b2d19
+tolstoy-work-v1:confession:v2025-11-15-9b2c11
+</code></pre>
+<p>The format is <code>tolstoy-work-v1:&lt;work-slug&gt;:&lt;version&gt;</code>.</p>
+<p>Why include the version in the cache name: when a new version of a work ships, the old cache stays intact until the user explicitly migrates. This means an annotation (in later stages) that points to a specific version can still find its content even after a new version exists.</p>
+<p>Why the <code>v1</code> schema prefix: leaves room to change the cache format in future without colliding with the old one.</p>
+<h3>4.3 Manifest per work</h3>
+<p>Each cache contains a special key <code>__manifest</code> whose value is a JSON document listing every asset in the cache along with its hash and size.</p>
+<pre><code class="language-json">{
+  &quot;workUri&quot;: &quot;urn:tolstoy-life:war-and-peace&quot;,
+  &quot;version&quot;: &quot;v2026-03-01-a3f5c8&quot;,
+  &quot;title&quot;: &quot;War and Peace&quot;,
+  &quot;author&quot;: &quot;Leo Tolstoy&quot;,
+  &quot;downloaded&quot;: &quot;2026-04-20T14:15:00Z&quot;,
+  &quot;totalBytes&quot;: 8421554,
+  &quot;assets&quot;: [
+    {
+      &quot;url&quot;: &quot;/war-and-peace/&quot;,
+      &quot;type&quot;: &quot;text/html&quot;,
+      &quot;sha256&quot;: &quot;a3f5...&quot;,
+      &quot;bytes&quot;: 4521
+    },
+    {
+      &quot;url&quot;: &quot;/war-and-peace/chapter-1/&quot;,
+      &quot;type&quot;: &quot;text/html&quot;,
+      &quot;sha256&quot;: &quot;9b2c...&quot;,
+      &quot;bytes&quot;: 24108
+    }
+  ]
+}
+</code></pre>
+<p>The manifest is what the settings panel reads to display storage usage. It's also used to verify cache integrity on open: if any asset is missing or has an unexpected size, the work is flagged as damaged and the user is offered a re-download.</p>
+<h3>4.4 Work metadata store</h3>
+<p>A separate IndexedDB store tracks which works are downloaded, keyed by work URI. This is what the UI reads to know whether to show "Make available offline" or "Downloaded".</p>
+<pre><code>ObjectStore: downloadedWorks
+Key: workUri (string)
+Value: {
+  workUri: string,
+  version: string,
+  cacheName: string,
+  title: string,
+  downloadedAt: ISO8601 string,
+  totalBytes: number,
+  status: 'downloading' | 'ready' | 'damaged' | 'outdated'
+}
+</code></pre>
+<p>Separating this from the Cache API lets the UI render a list of downloaded works without opening every Cache, which is faster and simpler.</p>
+<h2>5. The download coordinator</h2>
+<h3>5.1 What it does</h3>
+<p>Given a work URI, the download coordinator:</p>
+<ol>
+<li>Fetches the work's asset list (a JSON document produced by the <code>tl</code> pipeline — see the <code>tl</code> integration document for details).</li>
+<li>Downloads each asset, tracking progress.</li>
+<li>Writes each asset to the Cache.</li>
+<li>Verifies each asset's hash against the asset list.</li>
+<li>Writes the manifest.</li>
+<li>Updates the <code>downloadedWorks</code> record to status <code>ready</code>.</li>
+</ol>
+<h3>5.2 Progress and cancellation</h3>
+<p>The download emits progress events: <code>started</code>, <code>progress</code> (with bytes downloaded and total), <code>complete</code>, <code>error</code>, <code>cancelled</code>. The UI subscribes to these and updates an inline progress indicator.</p>
+<p>Cancellation is important. Users will start downloads they change their minds about. Cancelling mid-download:</p>
+<ul>
+<li>Stops further fetches.</li>
+<li>Deletes the partial cache.</li>
+<li>Removes the <code>downloadedWorks</code> record.</li>
+<li>Leaves no trace.</li>
+</ul>
+<h3>5.3 Parallelism</h3>
+<p>Assets download in parallel up to a concurrency limit (say, 6 simultaneous fetches). Higher isn't better — it can saturate mobile connections and slow the download as a whole. Lower wastes time on sequential latency.</p>
+<h3>5.4 Retry and failure handling</h3>
+<p>Transient network errors retry with exponential backoff, up to a limit. Hash mismatches are hard failures — they indicate corruption or tampering and the whole download is marked failed. The user sees "Download failed — try again" and can retry; nothing partial is kept.</p>
+<h3>5.5 Resumability</h3>
+<p>Deferred to Stage 2 or later. For Stage 1, a failed or cancelled download starts over from scratch. This is acceptable for works of reasonable size; if it becomes a problem for the Jubilee Edition's larger volumes, resumability can be added without changing the wire format.</p>
+<h2>6. The service worker update</h2>
+<h3>6.1 Workbox adoption</h3>
+<p>The service worker is structured around Workbox's routing and strategies modules (<code>workbox-routing</code>, <code>workbox-strategies</code>, <code>workbox-precaching</code>). Hand-rolled code is limited to the routing callbacks that need project-specific logic — principally, checking whether a request targets an asset of a downloaded work.</p>
+<p>Rationale in <code>local-first-architecture.md</code> §5.8. Bundle budget 30 KB gzipped for the service worker layer including Workbox.</p>
+<h3>6.2 Routing rules</h3>
+<p>Each rule registered via <code>registerRoute</code> with a matcher and a strategy:</p>
+<table>
+<thead>
+<tr>
+<th>URL pattern</th>
+<th>Strategy</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App shell (CSS, JS, fonts)</td>
+<td><code>StaleWhileRevalidate</code></td>
+<td>Standard Workbox precache.</td>
+</tr>
+<tr>
+<td><code>/works.json</code></td>
+<td><code>StaleWhileRevalidate</code> (5-minute max-age)</td>
+<td>The version-discovery pointer.</td>
+</tr>
+<tr>
+<td><code>/wiki-previews-v*.json</code></td>
+<td><code>CacheFirst</code> (immutable)</td>
+<td>Hashed URL, precached with shell.</td>
+</tr>
+<tr>
+<td>Asset in a downloaded work (per <code>downloadedWorks</code> lookup)</td>
+<td><code>CacheFirst</code> against the work's named cache</td>
+<td>Requires IndexedDB lookup in the matcher.</td>
+</tr>
+<tr>
+<td>Asset of a non-downloaded work</td>
+<td><code>NetworkOnly</code> with graceful offline fallback</td>
+<td>Shows the "not available offline" page.</td>
+</tr>
+<tr>
+<td>Wiki article in shared wiki cache</td>
+<td><code>CacheFirst</code> against <code>tolstoy-wiki-v*</code></td>
+<td>Also handles downloads for standalone-wiki mode.</td>
+</tr>
+<tr>
+<td>Any other site page</td>
+<td><code>NetworkFirst</code> with cache fallback</td>
+<td>Wiki, essays, works metadata pages.</td>
+</tr>
+</tbody>
+</table>
+<h3>6.3 The downloaded-work matcher</h3>
+<p>This matcher needs IndexedDB access (to know whether the request's work URI is currently downloaded and to look up the cache name). Workbox matchers can be async; they return a truthy value to activate the route or a falsy value to skip to the next rule. The IndexedDB lookup is a single keyed read, so latency is negligible.</p>
+<h3>6.4 Interaction with existing caches</h3>
+<p>The existing service worker caches — app shell, previously-visited pages — keep working. Workbox precaching manages the shell; the downloaded-works caches and the shared wiki cache are independent and take priority over generic runtime caching.</p>
+<h3>6.5 Cache-versioning discipline</h3>
+<p>Workbox's precache manifest is versioned by build hash; the shell cache rotates automatically on deploy. The work-specific caches (<code>tolstoy-work-v1:&lt;slug&gt;:&lt;version&gt;</code>) and the wiki cache (<code>tolstoy-wiki-v&lt;bundle-version&gt;</code>) are independently versioned by their content. Old caches prune when no download references them.</p>
+<h2>7. UI surfaces</h2>
+<h3>7.1 Per-work control</h3>
+<p>On a work's page, somewhere near the top-of-work metadata:</p>
+<ul>
+<li>If not downloaded: a button labelled "Make available offline" with a secondary line showing the size (e.g., "about 8 MB").</li>
+<li>If downloading: a progress indicator with bytes downloaded / total and a "Cancel" link.</li>
+<li>If downloaded: a subtle indicator ("Available offline") and a "Remove" link.</li>
+<li>If an update is available: "A new version is available — update offline copy".</li>
+</ul>
+<p>The language matters. "Download" suggests a file. "Make available offline" suggests a capability. The latter is what's actually happening.</p>
+<h3>7.2 Storage panel in settings</h3>
+<p>A settings page showing:</p>
+<ul>
+<li>Total storage used by the app.</li>
+<li>A list of downloaded works, each with size, download date, and a remove button.</li>
+<li>A single line for the shared wiki cache showing total size and article count (e.g., "Wiki articles: 184 articles, about 2.3 MB"). Not per-work — the cache is shared.</li>
+<li>The bundled wiki-previews file is not shown separately (it's part of the app shell).</li>
+<li>The browser's reported storage quota (via <code>navigator.storage.estimate()</code>).</li>
+<li>A "Request persistent storage" button if persistent storage hasn't been granted.</li>
+<li>A separate "Download the entire wiki" toggle in an advanced section, clearly labelled as an explicit opt-in for users who want the full wiki available offline independent of any work.</li>
+</ul>
+<h3>7.3 The "not available offline" screen</h3>
+<p>When a user tries to navigate to a non-downloaded work while offline, they see a screen that says, in substance:</p>
+<blockquote>
+<p>This work isn't available offline yet. When you're back online, you can tap "Make available offline" on its page and it'll be there next time you lose signal.</p>
+</blockquote>
+<p>Not an error. Not a modal with an OK button. A clear, friendly page with a link back to the works they do have.</p>
+<h3>7.4 Onboarding and discovery</h3>
+<p>A first-time visitor should eventually learn that offline availability exists. Options:</p>
+<ul>
+<li>A one-time banner: "Want to read offline? You can save any work to your device."</li>
+<li>An empty-state message in the (yet-to-be-built) "My library" view when the user has zero downloads.</li>
+<li>The "Make available offline" button itself, placed prominently enough to be discovered organically.</li>
+</ul>
+<p>For Stage 1, the button alone is probably enough. The banner and library can come later.</p>
+<h2>8. Persistent storage request</h2>
+<p>Once a user has downloaded a work, the app should request persistent storage via <code>navigator.storage.persist()</code>. This significantly reduces the chance the browser evicts the caches under storage pressure.</p>
+<p>The request should be:</p>
+<ul>
+<li>Made <em>after</em> the first download completes, not on first visit (browsers are more likely to grant persistence to a site the user has meaningfully engaged with).</li>
+<li>Shown with a short explanation if the browser surfaces a permission prompt.</li>
+<li>Silent-failure-tolerant: if not granted, everything still works, just with higher eviction risk.</li>
+</ul>
+<h2>9. Quota handling</h2>
+<p>The browser may refuse a download or an asset write because the quota is exceeded. Behaviour:</p>
+<ul>
+<li>Before starting a download, sum the work's declared size <em>and</em> the size of any wiki articles in the work's <code>relatedWiki</code> list that are not already in the shared wiki cache. The user-facing estimate is "this work plus N new wiki articles".</li>
+<li>Check the estimated free quota via <code>navigator.storage.estimate()</code>. If the combined size exceeds free quota, show an honest warning before starting: "This work and its wiki articles are about 9 MB. You have about 5 MB free in your browser's storage. You may need to remove another downloaded work first."</li>
+<li>If a quota error occurs mid-download, abort cleanly, remove the partial work cache, leave the shared wiki cache intact (entries already added are useful for other downloads), and tell the user what happened.</li>
+<li>Never fail silently.</li>
+</ul>
+<h2>10. Testing strategy</h2>
+<p>Stage 1 needs tests at three levels:</p>
+<ol>
+<li><strong>Unit tests</strong> for the manifest serialisation, hash verification, cache layout, and the <code>relatedWiki</code> deduplication logic (a wiki article referenced by two downloaded works must not be fetched twice or counted twice in storage figures).</li>
+<li><strong>Integration tests</strong> for the download coordinator using a mock service worker and fake fetches. Cover success, partial failure, cancellation, quota exceeded, wiki-cache-already-populated (skip fetch), and the wiki-previews bundle precaching.</li>
+<li><strong>Manual acceptance tests</strong> for the three user stories in section 2, plus a wiki-specific acceptance test: download two works that share several wiki articles, verify the shared cache contains each article once, verify wikilink modal previews work offline both for articles in the shared cache (full content) and for articles only in the previews bundle (summary only). These are the ones that matter.</li>
+</ol>
+<p>Browser-specific edge cases to check manually:</p>
+<ul>
+<li>Safari on iOS (aggressive cache eviction, limited storage).</li>
+<li>Chrome on Android (background tab eviction).</li>
+<li>Firefox (different quota logic).</li>
+<li>Safari on desktop (generally more permissive than mobile).</li>
+</ul>
+<h2>11. Migration and rollback</h2>
+<p>Because Stage 1 adds new storage without modifying existing structures, rolling back is clean: remove the new service worker rule, stop writing to the new stores, and the existing site behaviour is unchanged. Users who downloaded works during the Stage 1 rollout retain their local data; it just becomes inert.</p>
+<h2>12. Dependencies on the <code>tl</code> pipeline</h2>
+<p>Stage 1 requires three additions to the build pipeline. See <code>tl-pipeline-integration.md</code> for the full specification.</p>
+<ol>
+<li>An <strong>asset manifest</strong> per work — the list of URLs and hashes the download coordinator consumes.</li>
+<li>A <strong><code>relatedWiki</code></strong> field on each work's manifest entry — the list of wiki article slugs referenced from any chapter of the work, used by the download coordinator to populate the shared wiki cache.</li>
+<li>A <strong>wiki-previews bundle</strong> (<code>wiki-previews-v&lt;YYYY-MM-DD&gt;-&lt;hash6&gt;.json</code>) emitted at build time, containing summary stubs for every wiki article. Its hashed URL is referenced from <code>/works.json</code> so the service worker can precache it deterministically.</li>
+</ol>
+<p>If for some reason the pipeline changes can't all ship with Stage 1, two graceful fallbacks exist:</p>
+<ul>
+<li>Without an asset manifest: the download coordinator crawls the work's HTML to discover assets, computes hashes on the fly, and skips verification. Worse — no integrity check — but implementable without pipeline changes.</li>
+<li>Without <code>relatedWiki</code>: the download coordinator parses each downloaded chapter for wikilinks and resolves them at download time. Worse — slower, requires HTML parsing in the client, and miscounts size estimates — but acceptable as an interim.</li>
+<li>Without a wiki-previews bundle: wikilink modal previews fall back to network fetch on hover, breaking the offline preview experience. Stage 1 should not ship without the bundle; it's small enough that there's no reason to defer it.</li>
+</ul>
+<h2>13. Estimated scope</h2>
+<p>Roughly:</p>
+<ul>
+<li>Client code: 800–1,200 lines (download coordinator with wiki-aware deduplication, storage layer, UI surfaces, wikilink modal preview component reading from the bundled previews and falling through to the wiki cache).</li>
+<li>Service worker changes: ~150 lines of project-specific code on top of Workbox (routing registrations, the downloaded-work matcher, the shared wiki cache strategy).</li>
+<li>Workbox dependency: ~30 KB gzipped (within the budget set in <code>local-first-architecture.md</code> §5.8).</li>
+<li><code>tl</code> pipeline changes: covered in the pipeline document.</li>
+<li>Settings UI: 150–250 lines (work list, shared wiki cache line, advanced full-wiki download toggle).</li>
+</ul>
+<p>Small enough to fit in a focused work session, large enough to deserve real planning. A good fit for <code>/ultraplan</code>.</p>
+<h2>14. Open questions for <code>/ultraplan</code></h2>
+<p>Things worth flagging for the planning session:</p>
+<ol>
+<li>Should downloads retry automatically on reconnection, or only on user action?</li>
+<li>Should the storage panel show a breakdown by asset type (text vs images) or just a total per work?</li>
+<li>What happens when the user visits a work whose new version is available — passive banner, active prompt, automatic update?</li>
+<li>How do we handle the very first visit, where the user has no works downloaded and may not know the feature exists?</li>
+<li>Should we ship a "download everything" option (sized to the Jubilee Edition), or deliberately force granular choice?</li>
+<li>When a work is removed, should its <code>relatedWiki</code> entries be pruned from the shared cache if no other downloaded work references them, or should the wiki cache only be cleared via an explicit "Clear wiki cache" action?</li>
+<li>When the wiki-previews bundle gets a new hash (e.g., a wiki article was added), how should the service worker behave for users who have a downloaded work pointing at the older bundle URL — silent precache swap on next visit, or wait for the work itself to update?</li>
+</ol>
+<p>On question 5, the architectural inclination is to deliberately <em>not</em> ship a one-click "download everything" option. Making the user choose each work reinforces the idea that storage on their device is a resource, not a free dumping ground, and it aligns with the project's respect-the-reader ethos. The "download the entire wiki" toggle in settings (§7.2) is the deliberate exception — it's a single coherent corpus that some users will reasonably want.</p>
+<p>On question 6, the recommended default is automatic pruning (a wiki article with zero referencing downloaded works is removed on the next storage check), with an explicit "Keep all downloaded wiki articles" override in settings for users who prefer manual control.</p>
+<h2>15. Definition of done</h2>
+<p>Stage 1 is done when:</p>
+<ul>
+<li>[ ] The three user stories in section 2 pass on Chrome, Safari, and Firefox.</li>
+<li>[ ] The storage panel shows correct usage and updates on add/remove, including a single line for the shared wiki cache.</li>
+<li>[ ] Persistent storage is requested after the first download.</li>
+<li>[ ] The service worker, built on Workbox, serves downloaded works offline identically to online, fits within the 30 KB gzipped budget, and uses the routing rules in §6.2.</li>
+<li>[ ] Cancelling a download leaves no trace.</li>
+<li>[ ] The <code>tl</code> pipeline produces an asset manifest, a <code>relatedWiki</code> list, and a hashed wiki-previews bundle for every build.</li>
+<li>[ ] Downloading a work also populates the shared wiki cache with its <code>relatedWiki</code> articles, deduplicated against any wiki entries already present from earlier downloads.</li>
+<li>[ ] Wikilink modal previews work fully offline: bundled summaries appear immediately for any wiki article in the previews bundle; full content is shown for articles in the shared wiki cache.</li>
+<li>[ ] The advanced "Download the entire wiki" toggle in settings works and is clearly distinguished from the per-work flow.</li>
+<li>[ ] The quota-exceeded message is clear and the behaviour is graceful.</li>
+<li>[ ] No regression in non-offline site functionality.</li>
+</ul>
+<p>At which point the site is genuinely local-first for the content layer. Stage 2 (bookmarks and reading position) can build on this foundation.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/pwa/stage-1-implementation';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

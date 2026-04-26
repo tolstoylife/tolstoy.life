@@ -183,7 +183,7 @@ Tier-2 platform (per `~/Projects/PROJECT-TEMPLATE.md`): root surface files plus 
 ├── AGENTS.md · CLAUDE.md                  ← AI instructions
 ├── ROADMAP.md                             ← phase plan
 ├── MANIFEST.md · LICENSE                  ← public statement, public-domain dedication
-├── docs/                                  ← tracked operational docs (architecture/, pwa/, editorial/)
+├── docs/                                  ← tracked operational docs (architecture/, pwa/, editorial/, design/)
 ├── _generated/                            ← UNTRACKED: session handoffs, rendered HTML, drafts, decks
 ├── _resources/ · _design/ · _docs/        ← untracked workspaces
 ├── lightrag/                              ← Layer 2: semantic search + KG (port 8420)

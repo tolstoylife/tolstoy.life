@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LightRAG Performance Report — Mac Mini M4 24GB — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          architecture
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">architecture</p>
+  <h1>LightRAG Performance Report — Mac Mini M4 24GB</h1>
+  <p class="meta">Last modified 18 April 2026 · <a href="/architecture/lightrag-performance-report-2026-04-18.md">view source</a></p>
+</header>
+<main>
+<p>Report: 2026-04-18 (updated same day — second ingestion run with bge-m3 embedding model)<br />
+Context: This report covers two ingestion runs on the same 29-file vault. The first run used nomic-embed-text (768d). The second run used bge-m3 (1024d, multilingual) after the embedding model was switched. Both runs used qwen2.5:7b as the LLM. This document is the authoritative hardware, model, and performance reference for the Tolstoy Research Platform's LightRAG Layer 2.</p>
+<hr />
+<h2>1. Hardware profile</h2>
+<table>
+<thead>
+<tr>
+<th>Spec</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine</td>
+<td>Mac Mini M4</td>
+</tr>
+<tr>
+<td>Unified memory</td>
+<td>24 GB</td>
+</tr>
+<tr>
+<td>GPU available (reported by Ollama)</td>
+<td>17.8 GiB</td>
+</tr>
+<tr>
+<td>Memory bandwidth</td>
+<td>~120 GB/s</td>
+</tr>
+<tr>
+<td>GPU memory limit (<code>iogpu.wired_limit_mb</code>)</td>
+<td>0 (no cap — macOS manages dynamically)</td>
+</tr>
+<tr>
+<td>Ollama version</td>
+<td>0.21.0</td>
+</tr>
+</tbody>
+</table>
+<h3>Effective memory budget</h3>
+<p>macOS and background services consume approximately 4–5 GB at idle. That leaves ~19–20 GB for Ollama and the LightRAG Python process. With <code>OLLAMA_MAX_LOADED_MODELS=1</code>, the LLM and embedding model swap rather than coexist.</p>
+<hr />
+<h2>2. Model testing results</h2>
+<h3>Models tested</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Parameters</th>
+<th>Quantization</th>
+<th>Weight size</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qwen2.5:14b</td>
+<td>14B</td>
+<td>Q4_K_M</td>
+<td>~9 GB</td>
+<td>LLM (entity extraction) — rejected</td>
+</tr>
+<tr>
+<td>qwen2.5:7b</td>
+<td>7B</td>
+<td>Q4_K_M</td>
+<td>~4.7 GB</td>
+<td>LLM (entity extraction) — adopted</td>
+</tr>
+<tr>
+<td>nomic-embed-text</td>
+<td>137M</td>
+<td>—</td>
+<td>~274 MB</td>
+<td>Embedding (768d) — first run</td>
+</tr>
+<tr>
+<td>bge-m3</td>
+<td>568M</td>
+<td>—</td>
+<td>~1.2 GB</td>
+<td>Embedding (1024d) — second run, adopted</td>
+</tr>
+</tbody>
+</table>
+<h3>qwen2.5:14b — rejected for this hardware</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model weights</td>
+<td>~9 GB</td>
+</tr>
+<tr>
+<td>KV cache (32K context, 1 slot, FP16)</td>
+<td>~3–4 GB</td>
+</tr>
+<tr>
+<td>Total LLM footprint</td>
+<td>~12–13 GB</td>
+</tr>
+<tr>
+<td>Observed memory usage during ingestion</td>
+<td>93.4% (with swap)</td>
+</tr>
+<tr>
+<td>Swap usage</td>
+<td>63–79%</td>
+</tr>
+<tr>
+<td>Result</td>
+<td><strong>Unusable for unattended operation on 24 GB</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The 14B model consistently triggered memory pressure and swap, even after setting <code>OLLAMA_NUM_PARALLEL=1</code> and <code>OLLAMA_FLASH_ATTENTION=1</code>. The 32K context window requirement (non-negotiable for LightRAG entity extraction) pushes the KV cache to 3–4 GB on top of 9 GB of weights, leaving only 7–8 GB for macOS + Python — insufficient when combined with any background processes.</p>
+<p><strong>Root cause analysis:</strong> The earlier scalability report estimated the 14B model would use 9–11 GB VRAM. This was correct for the model weights alone, but underestimated the KV cache overhead at 32K context. Additionally, the default <code>OLLAMA_NUM_PARALLEL</code> setting may have allocated multiple KV cache slots (up to 4×), multiplying the cache memory by a factor of 2–4.</p>
+<h3>qwen2.5:7b — adopted</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model weights</td>
+<td>~4.7 GB</td>
+</tr>
+<tr>
+<td>KV cache (32K context, 1 slot, flash attention)</td>
+<td>~1 GB</td>
+</tr>
+<tr>
+<td>Total LLM footprint</td>
+<td>~7.2 GB</td>
+</tr>
+<tr>
+<td>Observed memory usage during ingestion</td>
+<td>68.1% (run 1) / 73.6% (run 2, heavy background load)</td>
+</tr>
+<tr>
+<td>Swap usage</td>
+<td>0.0% (both runs)</td>
+</tr>
+<tr>
+<td>Free memory during operation</td>
+<td>~7.6 GB (run 1) / ~6.3 GB (run 2)</td>
+</tr>
+<tr>
+<td>Ingestion time (29 documents, ~80 KB)</td>
+<td>43 min (run 1) / 64 min (run 2)</td>
+</tr>
+<tr>
+<td>Result</td>
+<td><strong>Stable, comfortable headroom — even under heavy background load</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The 7B model leaves approximately 15–16 GB for macOS and Python, well within safe margins for unattended cron operation.</p>
+<h3>Performance benchmarks (M4 Apple Silicon)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>qwen2.5:7b</th>
+<th>qwen2.5:14b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt processing</td>
+<td>~90–120 tok/s</td>
+<td>~45–60 tok/s</td>
+</tr>
+<tr>
+<td>Generation speed</td>
+<td>~35–45 tok/s</td>
+<td>~18–25 tok/s</td>
+</tr>
+<tr>
+<td>Model load time (cold)</td>
+<td>~5 s</td>
+<td>~10–15 s</td>
+</tr>
+<tr>
+<td>Memory headroom on 24 GB</td>
+<td>~16 GB</td>
+<td>~9 GB</td>
+</tr>
+</tbody>
+</table>
+<p>Generation speed is almost entirely memory-bandwidth-bound on Apple Silicon. The 14B model is roughly 2× slower, proportional to its weight size.</p>
+<hr />
+<h2>3. Ollama configuration</h2>
+<h3>Active environment variables</h3>
+<pre><code class="language-bash">export OLLAMA_KEEP_ALIVE=-1           # Keep model loaded between calls
+export OLLAMA_MAX_LOADED_MODELS=1     # One model at a time (swap, don't coexist)
+export OLLAMA_NUM_GPU=99              # Offload all layers to Metal GPU
+export OLLAMA_NUM_PARALLEL=1          # Single inference slot (prevents KV cache multiplication)
+export OLLAMA_FLASH_ATTENTION=1       # Quantized KV cache — halves cache memory
+</code></pre>
+<h3>Effect of each setting</h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Our value</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OLLAMA_NUM_PARALLEL</code></td>
+<td>4 (auto)</td>
+<td>1</td>
+<td>Saves ~3–6 GB by preventing multiple KV cache allocations</td>
+</tr>
+<tr>
+<td><code>OLLAMA_FLASH_ATTENTION</code></td>
+<td>0</td>
+<td>1</td>
+<td>Reduces KV cache by ~50% (FP16 → Q8/Q4)</td>
+</tr>
+<tr>
+<td><code>OLLAMA_KEEP_ALIVE</code></td>
+<td>5m</td>
+<td>-1</td>
+<td>Avoids 5–15s reload delay between cron calls</td>
+</tr>
+<tr>
+<td><code>OLLAMA_MAX_LOADED_MODELS</code></td>
+<td>auto</td>
+<td>1</td>
+<td>Prevents LLM + embedding model coexisting in memory</td>
+</tr>
+<tr>
+<td><code>OLLAMA_NUM_GPU</code></td>
+<td>auto</td>
+<td>99</td>
+<td>Ensures all layers run on Metal GPU, not CPU</td>
+</tr>
+</tbody>
+</table>
+<h3>Critical finding: <code>OLLAMA_NUM_PARALLEL</code></h3>
+<p>This was the most impactful setting. Without it, Ollama allocates a KV cache for each parallel slot. At 32K context with FP16:</p>
+<ul>
+<li><strong>Default (4 slots):</strong> 4 × 3–4 GB = 12–16 GB just for KV caches</li>
+<li><strong>NUM_PARALLEL=1:</strong> 1 × 3–4 GB = 3–4 GB for KV cache</li>
+<li><strong>NUM_PARALLEL=1 + flash attention:</strong> 1 × ~1 GB</li>
+</ul>
+<p>This alone can explain the difference between the 14B model working or failing on 24 GB hardware.</p>
+<hr />
+<h2>4. Embedding model comparison: nomic-embed-text vs bge-m3</h2>
+<h3>Run 1: nomic-embed-text (768d)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dimensions</td>
+<td>768</td>
+</tr>
+<tr>
+<td>Parameters</td>
+<td>137M</td>
+</tr>
+<tr>
+<td>RAM usage</td>
+<td>~0.5 GB</td>
+</tr>
+<tr>
+<td>Ollama download</td>
+<td>~274 MB</td>
+</tr>
+<tr>
+<td>MTEB retrieval score (avg)</td>
+<td>~52.8</td>
+</tr>
+<tr>
+<td>Multilingual support</td>
+<td>English-primary; limited non-English</td>
+</tr>
+<tr>
+<td>Russian performance</td>
+<td>Poor — no dedicated Russian training data</td>
+</tr>
+</tbody>
+</table>
+<h3>Run 2: bge-m3 (1024d) — adopted</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dimensions</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>Parameters</td>
+<td>568M</td>
+</tr>
+<tr>
+<td>RAM usage</td>
+<td>~1.5 GB</td>
+</tr>
+<tr>
+<td>Ollama download</td>
+<td>~1.2 GB</td>
+</tr>
+<tr>
+<td>MTEB retrieval score (avg)</td>
+<td>~54.3</td>
+</tr>
+<tr>
+<td>Multilingual support</td>
+<td>100+ languages, purpose-built</td>
+</tr>
+<tr>
+<td>Russian performance</td>
+<td>Strong — ~70+ nDCG@10 on MIRACL Russian benchmark</td>
+</tr>
+</tbody>
+</table>
+<h3>What the dimensions actually mean</h3>
+<p>Each dimension is a learned feature in the model's representation of meaning. More dimensions allow finer-grained distinctions:</p>
+<ul>
+<li><strong>768 dimensions</strong> — good resolution for English-language retrieval. Sufficient for distinguishing "Tolstoy the writer" from "Tolstoy the estate" from "Tolstoy the philosophy."</li>
+<li><strong>1024 dimensions</strong> — finer grain, especially for cross-lingual concepts. Better at placing Russian terms near their English equivalents in vector space.</li>
+</ul>
+<h3>Quality impact</h3>
+<p>The MTEB benchmark difference (52.8 vs 54.3) translates to roughly:</p>
+<ul>
+<li>At 768d: a query about "Софья Андреевна" may not reliably retrieve the "Sophia Tolstaya" wiki article</li>
+<li>At 1024d with bge-m3: the Russian and English name forms map to nearby vectors</li>
+</ul>
+<p>For the Tolstoy vault specifically — which contains Russian names in Cyrillic (<code>titleRu</code> fields), Cyrillic transliterations, and will eventually contain Russian-language source texts — the multilingual gap is significant.</p>
+<h3>Graph quality impact (observed)</h3>
+<p>Switching to bge-m3 produced a measurably richer knowledge graph from the same 29 documents:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>nomic (768d)</th>
+<th>bge-m3 (1024d)</th>
+<th>Delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Graph nodes</td>
+<td>192</td>
+<td>226</td>
+<td>+34 (+17.7%)</td>
+</tr>
+<tr>
+<td>Graph edges</td>
+<td>196</td>
+<td>227</td>
+<td>+31 (+15.8%)</td>
+</tr>
+<tr>
+<td>Ingestion time (29 docs)</td>
+<td>43 min</td>
+<td>64 min</td>
+<td>+21 min (+49%)</td>
+</tr>
+<tr>
+<td>Memory peak</td>
+<td>68.1%</td>
+<td>73.6%*</td>
+<td>+5.5 pp</td>
+</tr>
+<tr>
+<td>Swap usage</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>*Run 2 had significantly more background applications running (Comet, NordVPN, multiple Claude Helper renderer processes, Alfred, Mail, etc.), so the memory delta is not attributable to bge-m3 alone. True bge-m3 overhead is likely under 1–2 pp vs nomic.</p>
+<p>The +34 nodes and +31 edges represent genuine additional knowledge structure extracted from the same source material — not re-indexed duplicates. The richer embedding space appears to help the LightRAG graph merge step discriminate entities more cleanly, avoiding over-merging that would collapse distinct entities into one node.</p>
+<h3>Storage and speed impact</h3>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>768d storage</th>
+<th>1024d storage</th>
+<th>Delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>29 files (current)</td>
+<td>~90 KB</td>
+<td>~120 KB</td>
+<td>+30 KB</td>
+</tr>
+<tr>
+<td>4,600 files (Phase 3)</td>
+<td>~14 MB</td>
+<td>~19 MB</td>
+<td>+5 MB</td>
+</tr>
+<tr>
+<td>26,500 files (Phase 5)</td>
+<td>~80 MB</td>
+<td>~106 MB</td>
+<td>+26 MB</td>
+</tr>
+</tbody>
+</table>
+<p>Storage difference is negligible at all projected scales. Search latency difference is sub-millisecond.</p>
+<h3>Memory impact with qwen2.5:7b</h3>
+<p>Since <code>OLLAMA_MAX_LOADED_MODELS=1</code>, the LLM and embedding model swap. Peak memory is determined by whichever is larger:</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Peak model memory</th>
+<th>Total with 32K KV</th>
+<th>Headroom on 24 GB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7b + nomic (768d)</td>
+<td>4.7 GB (LLM peak)</td>
+<td>~7.2 GB</td>
+<td>~16.8 GB</td>
+</tr>
+<tr>
+<td>7b + bge-m3 (1024d)</td>
+<td>4.7 GB (LLM peak)</td>
+<td>~7.2 GB</td>
+<td>~16.8 GB</td>
+</tr>
+</tbody>
+</table>
+<p>The embedding model is always smaller than the LLM, so it doesn't affect peak memory. bge-m3's 1.5 GB is well under qwen2.5:7b's 4.7 GB. <strong>No meaningful memory penalty for switching to bge-m3.</strong></p>
+<h3>Other embedding models considered</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Dims</th>
+<th>MTEB retrieval</th>
+<th>Russian</th>
+<th>RAM</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nomic-embed-text</td>
+<td>768</td>
+<td>52.8</td>
+<td>Poor</td>
+<td>0.5 GB</td>
+<td>Run 1 — adequate English, poor Russian</td>
+</tr>
+<tr>
+<td>bge-m3</td>
+<td>1024</td>
+<td>54.3</td>
+<td>Strong</td>
+<td>1.5 GB</td>
+<td><strong>Run 2 — adopted</strong></td>
+</tr>
+<tr>
+<td>mxbai-embed-large</td>
+<td>1024</td>
+<td>54.4</td>
+<td>Poor</td>
+<td>1.0 GB</td>
+<td>Slightly higher English score, no Russian</td>
+</tr>
+<tr>
+<td>snowflake-arctic-embed-l</td>
+<td>1024</td>
+<td>55.0</td>
+<td>Poor</td>
+<td>1.0 GB</td>
+<td>Highest English retrieval, no Russian</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. Ingestion time estimates</h2>
+<h3>Baseline measurements</h3>
+<h4>Run 1 — nomic-embed-text (768d)</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td>29</td>
+</tr>
+<tr>
+<td>Total content size</td>
+<td>~80 KB</td>
+</tr>
+<tr>
+<td>Average document size</td>
+<td>~2.8 KB</td>
+</tr>
+<tr>
+<td>Ingestion time</td>
+<td>43 minutes (2,577 seconds)</td>
+</tr>
+<tr>
+<td>Time per document</td>
+<td>~89 seconds</td>
+</tr>
+<tr>
+<td>Knowledge graph result</td>
+<td>192 nodes, 196 edges</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>qwen2.5:7b + nomic-embed-text</td>
+</tr>
+<tr>
+<td>Background load</td>
+<td>Light — few other applications running</td>
+</tr>
+</tbody>
+</table>
+<h4>Run 2 — bge-m3 (1024d)</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td>29</td>
+</tr>
+<tr>
+<td>Total content size</td>
+<td>~80 KB</td>
+</tr>
+<tr>
+<td>Average document size</td>
+<td>~2.8 KB</td>
+</tr>
+<tr>
+<td>Ingestion time</td>
+<td>64.4 minutes (3,865 seconds)</td>
+</tr>
+<tr>
+<td>Time per document</td>
+<td>~133 seconds</td>
+</tr>
+<tr>
+<td>Knowledge graph result</td>
+<td>226 nodes, 227 edges</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>qwen2.5:7b + bge-m3</td>
+</tr>
+<tr>
+<td>Background load</td>
+<td><strong>Heavy</strong> — Comet renderer (8+ processes), NordVPN, Claude Helper, Alfred, Mail, Ollama serve, ingest.py concurrently</td>
+</tr>
+</tbody>
+</table>
+<p>The ~50% increase in ingestion time (89 s → 133 s per document) should not be attributed solely to bge-m3. Run 2 was conducted under significantly heavier background load, which compresses CPU/GPU headroom and slows both the LLM extraction phase and disk I/O. The model swap overhead (bge-m3 is ~4× larger than nomic) contributes, but likely accounts for only ~15–20 s of the ~44 s increase per document.</p>
+<p><strong>Best estimate for bge-m3 under light load:</strong> ~100–110 seconds per document, vs ~89 seconds for nomic. That is the realistic per-document time to use for scaling projections.</p>
+<h3>Time per document breakdown (estimated, bge-m3, light load)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Estimated time</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM extraction (2 passes)</td>
+<td>~70 s</td>
+<td>Two LLM calls per document (extract + merge) — same as nomic</td>
+</tr>
+<tr>
+<td>Embedding generation</td>
+<td>~20 s</td>
+<td>bge-m3 is ~4× larger than nomic; swap overhead included</td>
+</tr>
+<tr>
+<td>Graph merge + storage</td>
+<td>~15 s</td>
+<td>In-memory operations, disk writes</td>
+</tr>
+</tbody>
+</table>
+<h3>Projections for future ingestion phases</h3>
+<p>All projections below use 105 s/document as the bge-m3 baseline (midpoint of 100–110 s estimate, light-load conditions).</p>
+<h4>TEI reference data (Phase 3)</h4>
+<p>The TEI dataset contains 3,113 persons and 770 locations. Each person/location becomes a wiki page.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New documents</td>
+<td>~3,883 wiki pages</td>
+</tr>
+<tr>
+<td>Average document size</td>
+<td>~1–2 KB (structured metadata, short descriptions)</td>
+</tr>
+<tr>
+<td>Estimated time per document</td>
+<td>~75 s (smaller docs = faster extraction)</td>
+</tr>
+<tr>
+<td>Total ingestion time</td>
+<td>~81 hours</td>
+</tr>
+<tr>
+<td>Recommended approach</td>
+<td>4 overnight runs (~20 hours each)</td>
+</tr>
+</tbody>
+</table>
+<p>Note: These are new additions to the vault. The existing 29 documents would not need re-indexing.</p>
+<h4>Birukoff biography</h4>
+<p>The Birukoff biography (Paul Birukoff, <em>Leo Tolstoy: His Life and Work</em>, 1906 Heinemann edition) is 150,135 words across 17 chapters.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td>17 chapter files</td>
+</tr>
+<tr>
+<td>Average chapter size</td>
+<td>~52 KB (~8,830 words)</td>
+</tr>
+<tr>
+<td>Total content</td>
+<td>~880 KB</td>
+</tr>
+<tr>
+<td>Estimated time per document</td>
+<td>~200 s (larger docs require more extraction passes)</td>
+</tr>
+<tr>
+<td>LightRAG chunking</td>
+<td>~5–8 chunks per chapter at default settings</td>
+</tr>
+<tr>
+<td>Total ingestion time</td>
+<td>~57 minutes</td>
+</tr>
+<tr>
+<td>Recommended approach</td>
+<td>Single run, daytime or overnight</td>
+</tr>
+</tbody>
+</table>
+<h4>Full corpus (Phase 5)</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total documents</td>
+<td>~26,500</td>
+</tr>
+<tr>
+<td>Total content</td>
+<td>~72 MB</td>
+</tr>
+<tr>
+<td>Average document size</td>
+<td>~2.7 KB</td>
+</tr>
+<tr>
+<td>Estimated time per document</td>
+<td>~90 s (blended: short wiki pages + long text chapters, bge-m3)</td>
+</tr>
+<tr>
+<td>Total initial ingestion</td>
+<td>~663 hours (~28 days)</td>
+</tr>
+<tr>
+<td>Recommended approach</td>
+<td>Batched overnight runs over 5–6 weeks</td>
+</tr>
+<tr>
+<td>Daily incremental sync (50 changed files)</td>
+<td>~75 minutes</td>
+</tr>
+</tbody>
+</table>
+<h3>Comparison with earlier estimates</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>14B estimate (theoretical)</th>
+<th>7B + nomic (measured)</th>
+<th>7B + bge-m3 (projected, light load)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>29 files</td>
+<td>~15 min</td>
+<td>43 min</td>
+<td>~51 min</td>
+</tr>
+<tr>
+<td>Phase 3 (~3,900 files)</td>
+<td>~38 hours</td>
+<td>~65 hours</td>
+<td>~81 hours</td>
+</tr>
+<tr>
+<td>Phase 5 (~26,500 files)</td>
+<td>~110 hours</td>
+<td>~550 hours</td>
+<td>~663 hours</td>
+</tr>
+</tbody>
+</table>
+<p>The bge-m3 overhead (~20%) is real but modest in the context of multi-week ingestion runs. The richer knowledge graph it produces (+17% more nodes and edges on the same corpus) justifies the additional time.</p>
+<hr />
+<h2>6. Token cost comparison</h2>
+<p>LightRAG uses Ollama locally — there are no API token costs. All processing runs on the Mac Mini's GPU. This is a key architectural advantage.</p>
+<p>For comparison, using cloud APIs for the same workload:</p>
+<h3>Claude API costs (if LightRAG were replaced with cloud processing)</h3>
+<p>From the wiki rewrite workflow report (2026-04-15):</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Files</th>
+<th>Monthly token estimate</th>
+<th>Claude API cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 2 (current, 29 files)</td>
+<td>29</td>
+<td>~500K tokens</td>
+<td>~$2/month</td>
+</tr>
+<tr>
+<td>Phase 3 (~8,000 files)</td>
+<td>8,000</td>
+<td>~3.2M tokens</td>
+<td>~$14/month</td>
+</tr>
+<tr>
+<td>Phase 5 (~26,500 files)</td>
+<td>26,500</td>
+<td>~6.3M tokens</td>
+<td>~$28/month</td>
+</tr>
+</tbody>
+</table>
+<h3>LightRAG local costs</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Files</th>
+<th>Electricity estimate</th>
+<th>API cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All phases</td>
+<td>Any</td>
+<td>~$1–3/month (Mac Mini idle + overnight runs)</td>
+<td><strong>$0</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The scripted pipeline (Layer 1) + LightRAG (Layer 2) together save approximately 65% of the token costs that would otherwise be spent on Claude reading and navigating the vault.</p>
+<hr />
+<h2>7. Optimization roadmap</h2>
+<h3>Immediate (no code changes)</h3>
+<ul>
+<li>[x] <code>OLLAMA_NUM_PARALLEL=1</code> — prevents KV cache multiplication</li>
+<li>[x] <code>OLLAMA_FLASH_ATTENTION=1</code> — halves KV cache memory</li>
+<li>[x] <code>OLLAMA_KEEP_ALIVE=-1</code> — avoids reload delays</li>
+<li>[x] <code>OLLAMA_MAX_LOADED_MODELS=1</code> — prevents model coexistence</li>
+</ul>
+<h3>Short-term (config changes)</h3>
+<ul>
+<li>[x] Switch embedding model to bge-m3 (1024d) for Russian+English support</li>
+<li>[x] Update <code>config.py</code>: <code>EMBED_MODEL = "bge-m3"</code>, <code>EMBED_DIM = 1024</code></li>
+<li>[ ] Set up nightly cron job for <code>sync.py</code></li>
+<li>[ ] Test incremental sync after editing wiki pages</li>
+</ul>
+<h3>Medium-term (when vault grows to ~4,600 files)</h3>
+<ul>
+<li>[ ] Benchmark whether qwen2.5:14b becomes viable with flash attention + NUM_PARALLEL=1 after macOS updates or Ollama improvements</li>
+<li>[ ] Consider Q3_K_M quantization of 14B as middle ground (saves ~2 GB vs Q4, quality trade-off is modest for structured extraction)</li>
+<li>[ ] Add rerank model for improved query result ordering (if query quality is insufficient)</li>
+</ul>
+<h3>Long-term (Phase 5, ~26,500 files)</h3>
+<ul>
+<li>[ ] Evaluate PostgreSQL with pgvector + AGE as unified backend (replaces JSON/NetworkX/NanoVectorDB)</li>
+<li>[ ] Consider batched overnight ingestion with progress tracking and resume capability</li>
+<li>[ ] Evaluate newer Qwen or Llama models as they release — 7B-class models are improving rapidly</li>
+</ul>
+<hr />
+<h2>8. Current production configuration</h2>
+<pre><code class="language-python"># config.py — active settings as of 2026-04-18
+LLM_MODEL = &quot;qwen2.5:7b&quot;
+LLM_CONTEXT_WINDOW = 32768
+EMBED_MODEL = &quot;bge-m3&quot;
+EMBED_DIM = 1024
+EMBED_MAX_TOKENS = 8192
+OLLAMA_TIMEOUT = 600
+</code></pre>
+<h3>Knowledge graph statistics — both ingestion runs</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Run 1 (nomic, 768d)</th>
+<th>Run 2 (bge-m3, 1024d)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents indexed</td>
+<td>29</td>
+<td>29</td>
+</tr>
+<tr>
+<td>Graph nodes</td>
+<td>192</td>
+<td>226</td>
+</tr>
+<tr>
+<td>Graph edges</td>
+<td>196</td>
+<td>227</td>
+</tr>
+<tr>
+<td>Ingestion time</td>
+<td>43 min</td>
+<td>64 min</td>
+</tr>
+<tr>
+<td>Memory usage (peak)</td>
+<td>68.1%</td>
+<td>73.6%*</td>
+</tr>
+<tr>
+<td>Swap usage</td>
+<td>0.0%</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Background load</td>
+<td>Light</td>
+<td>Heavy</td>
+</tr>
+</tbody>
+</table>
+<p>*Higher memory in run 2 is attributable primarily to heavier background application load, not to bge-m3.</p>
+<p>Query response time (hybrid): ~30–60 seconds (unchanged — query performance is LLM-bound, not embedding-bound).</p>
+<hr />
+<h2>Appendix: Key findings summary</h2>
+<ol>
+<li>
+<p><strong>qwen2.5:14b does not fit on 24 GB</strong> with a 32K context window, even with aggressive tuning. The KV cache at 32K is the bottleneck, not the model weights.</p>
+</li>
+<li>
+<p><strong><code>OLLAMA_NUM_PARALLEL</code> is the single most impactful configuration setting</strong> — the default allocates multiple KV caches that silently multiply memory usage.</p>
+</li>
+<li>
+<p><strong>qwen2.5:7b is the right model</strong> for 24 GB hardware running LightRAG. It provides stable, swap-free operation with ~16 GB headroom.</p>
+</li>
+<li>
+<p><strong>bge-m3 has been adopted as the embedding model.</strong> It produces a richer knowledge graph (+17% nodes and edges on the same 29-document corpus) and provides strong Russian+English multilingual retrieval. There is no meaningful memory penalty with <code>MAX_LOADED_MODELS=1</code>. The ~20% slower embedding speed is acceptable.</p>
+</li>
+<li>
+<p><strong>The system is robust under heavy background load.</strong> Run 2 was conducted with Comet, NordVPN, multiple Claude Helper renderer processes, and other applications running simultaneously. Memory stayed at 73.6% with no swap — confirming the architecture is safe for unattended cron operation even when the machine is in active use.</p>
+</li>
+<li>
+<p><strong>Full corpus ingestion will take approximately 663 hours</strong> (5–6 weeks of overnight runs) with bge-m3. This is ~20% longer than the nomic estimate but produces a meaningfully richer knowledge graph.</p>
+</li>
+<li>
+<p><strong>LightRAG eliminates all API token costs</strong> for vault indexing and querying. The three-layer architecture (scripts + LightRAG + Claude) reduces Claude API costs by approximately 65%.</p>
+</li>
+</ol>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/architecture/lightrag-performance-report-2026-04-18';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

@@ -38,7 +38,7 @@ Bethink Yourselves, Birukoff-biografin och Korrektur ligger i `projects/` men ä
 - Verifiera Alexandra Tolstayas deathPlace (Valley Cottage, NY)
 
 ### 5. PWA-arkitektur — follow-up efter 2026-04-23 review
-Revisionen är klar. Se `_generated/PWA/architecture-review.html` (renderad rapport) och `_generated/PWA/handoff-2026-04-23.md` (handoff). Följande gaps behöver åtgärdas innan Stage 1 kan skeppas — grupperade per arbetsområde.
+Revisionen är klar. Se `docs/architecture/architecture-review.html` (renderad rapport) och `_generated/PWA/handoff-2026-04-23.md` (handoff). Följande gaps behöver åtgärdas innan Stage 1 kan skeppas — grupperade per arbetsområde.
 
 **A. Blockers for Stage 1 (pipeline + spec fixes):**
 - [x] **Fix the wiki-previews/manifest cascade** (critical) — spec updated 2026-04-24 in `tl-pipeline-integration.md`: removed `wikiPreviewsUrl` from per-work manifests, added §4.6 cross-reference isolation rule, updated §3.2 hash-input definition and §6.2 sketch with `HASH_EXCLUDE` filter. Follow-up (separate task C3): align `wiki-integration.md` §2.2 nested `relatedWiki` shape with the flat-slug-array shape now canonical in §4.3.
@@ -83,10 +83,10 @@ Revisionen är klar. Se `_generated/PWA/architecture-review.html` (renderad rapp
 - [ ] `history.replaceState` on `/pair` to mitigate iCloud Tabs fragment leak
 - [ ] Dormant-user heartbeat (keep relay room alive while paired devices are active)
 
-**Referens:** `_generated/PWA/architecture-review.html` är den kanoniska renderingen; `_generated/PWA/handoff-2026-04-23.md` är orienteringsdokumentet för nästa session.
+**Referens:** `docs/architecture/architecture-review.html` är den kanoniska renderingen; `_generated/PWA/handoff-2026-04-23.md` är orienteringsdokumentet för nästa session.
 
 ### 6. EPUB 3.3 & Accessibility 1.1 — compliance and wikilink strategy
-*From W3C spec review 2026-04-22. Full findings: `_generated/epub-a11y-w3c-review-2026-04-22.md`*
+*From W3C spec review 2026-04-22. Full findings: `docs/architecture/epub-a11y-w3c-review-2026-04-22.md`*
 
 EPUB Accessibility 1.1 is now a W3C Recommendation and mandatory for all EPUB 3.3 publications. Several gaps identified in the `tl` toolset and in how wikilinks are handled in distributed EPUBs.
 

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPUB 3.3 & Accessibility 1.1 — W3C Spec Review — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          architecture
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">architecture</p>
+  <h1>EPUB 3.3 & Accessibility 1.1 — W3C Spec Review</h1>
+  <p class="meta">Last modified 22 April 2026 · <a href="/architecture/epub-a11y-w3c-review-2026-04-22.md">view source</a></p>
+</header>
+<main>
+<p><em>Reviewed: 2026-04-22 | Scope: tolstoy.life e-reader, <code>tl</code> toolset, distributed EPUBs</em></p>
+<hr />
+<h2>Spec status (as of April 2026)</h2>
+<ul>
+<li><strong>EPUB 3.3</strong> — W3C Recommendation, May 2025; updated January 2026. EPUB 3.4 drafts already in progress.</li>
+<li><strong>EPUB Accessibility 1.1</strong> — W3C Recommendation since October 2024. Now integrated <em>into</em> EPUB 3.3 core (no longer a separate annex).</li>
+<li><strong>EPUB Reading Systems 3.3</strong> — W3C Recommendation since October 2024.</li>
+<li><strong>EPUB Type to ARIA Role Authoring Guide 1.1</strong> — companion guidance for the epub:type → ARIA migration.</li>
+</ul>
+<hr />
+<h2>1. Mandatory accessibility metadata (EPUB A11y 1.1)</h2>
+<p>Every EPUB publication <strong>must</strong> include the following <code>schema.org</code> properties in <code>content.opf</code>, regardless of whether full conformance is claimed:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accessMode</code></td>
+<td>Yes</td>
+<td>e.g. <code>textual</code>, <code>visual</code></td>
+</tr>
+<tr>
+<td><code>accessibilityFeature</code></td>
+<td>Yes</td>
+<td>e.g. <code>tableOfContents</code>, <code>readingOrder</code>, <code>alternativeText</code></td>
+</tr>
+<tr>
+<td><code>accessibilityHazard</code></td>
+<td>Yes</td>
+<td>e.g. <code>noFlashingHazard</code>, <code>noMotionSimulationHazard</code></td>
+</tr>
+<tr>
+<td><code>accessibilitySummary</code></td>
+<td>Strongly recommended</td>
+<td>Human-readable prose summary</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important nuance:</strong> Features that are structurally guaranteed by EPUB (e.g. <code>tableOfContents</code>, <code>readingOrder</code>) must still be explicitly declared in <code>accessibilityFeature</code>. Omitting them reduces discoverability when users search by feature.</p>
+<p><strong>Current gap in <code>tl</code>:</strong> The <code>tl create-draft</code> templates likely do not auto-populate all required metadata. Every ebook produced under the tolstoy.life imprint should declare these fields. This is the highest-priority compliance item.</p>
+<hr />
+<h2>2. Semantic inflection: epub:type vs. ARIA roles</h2>
+<p>This is the area where the spec has shifted most significantly since EPUB 3.0.</p>
+<h3>What epub:type does (and doesn't do)</h3>
+<ul>
+<li><strong>Does:</strong> Triggers reading-system behaviours — footnote popups, media overlay associations, navigation identification.</li>
+<li><strong>Does not:</strong> Expose information to assistive technologies. Screen readers ignore it entirely.</li>
+</ul>
+<h3>What ARIA role does</h3>
+<ul>
+<li>Surfaces structural information directly to screen readers and AT.</li>
+<li>More restricted in where it can be applied — only use where semantically appropriate.</li>
+</ul>
+<h3>Rule: always use both together on interactive reference elements</h3>
+<pre><code class="language-html">&lt;!-- Note reference — correct markup --&gt;
+&lt;a href=&quot;#note-1&quot; epub:type=&quot;noteref&quot; role=&quot;doc-noteref&quot;&gt;[1]&lt;/a&gt;
+
+&lt;!-- Note content — correct markup --&gt;
+&lt;aside id=&quot;note-1&quot; epub:type=&quot;footnote&quot; role=&quot;doc-footnote&quot;&gt;
+  &lt;p&gt;Note text here.&lt;/p&gt;
+&lt;/aside&gt;
+</code></pre>
+<h3>Key pairs for tolstoy.life</h3>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>epub:type</th>
+<th>ARIA role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Footnote/note reference</td>
+<td><code>noteref</code></td>
+<td><code>doc-noteref</code></td>
+</tr>
+<tr>
+<td>Glossary term reference</td>
+<td><code>glossref</code></td>
+<td><code>doc-glossref</code></td>
+</tr>
+<tr>
+<td>Footnote content</td>
+<td><code>footnote</code></td>
+<td><code>doc-footnote</code></td>
+</tr>
+<tr>
+<td>Chapter</td>
+<td><code>chapter</code></td>
+<td><code>doc-chapter</code></td>
+</tr>
+<tr>
+<td>Endnotes section</td>
+<td><code>endnotes</code></td>
+<td><code>doc-endnotes</code></td>
+</tr>
+<tr>
+<td>Glossary section</td>
+<td><code>glossary</code></td>
+<td><code>doc-glossary</code></td>
+</tr>
+<tr>
+<td>Page break (print replica)</td>
+<td><code>pagebreak</code></td>
+<td><code>doc-pagebreak</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Wikilinks and W3C standards — analysis</h2>
+<p>The W3C has no concept of "wikilinks." From the spec's perspective, a rendered wikilink is either:<br />
+- A standard hyperlink (<code>&lt;a href="..."&gt;</code>) to content inside the EPUB container, or<br />
+- An interactive element with ARIA attributes presenting supplementary content.</p>
+<h3>Closest W3C analogue: <code>doc-glossref</code></h3>
+<p>The <code>role="doc-glossref"</code> pattern is semantically identical to what wikilinks do — an inline term reference that links to a defined article. Some reading systems (notably Apple Books) render glossary references with special UI (tap-to-preview). This is the closest standards-native equivalent.</p>
+<h3>The footnote popup pattern</h3>
+<p>EPUB 3.3's footnote popup mechanism — a <code>noteref</code> anchor linking to an <code>aside</code> containing note content — maps directly onto the wikilink modal preview pattern used by the tolstoy.life PWA. The wiki stub (summary prose from the wiki article) can be placed in an <code>aside</code> at chapter end, and the JS intercepts the tap to show a modal instead of navigating.</p>
+<pre><code class="language-html">&lt;!-- In chapter body --&gt;
+&lt;a href=&quot;#wiki-sophia-tolstaya&quot; epub:type=&quot;noteref&quot; role=&quot;doc-noteref&quot;&gt;
+  Sophia Tolstaya
+&lt;/a&gt;
+
+&lt;!-- At chapter end (or in separate spine doc) --&gt;
+&lt;aside id=&quot;wiki-sophia-tolstaya&quot; epub:type=&quot;footnote&quot; role=&quot;doc-footnote&quot;&gt;
+  &lt;p&gt;Sophia Andreevna Tolstaya (1844–1919), Tolstoy's wife and primary copyist...&lt;/p&gt;
+&lt;/aside&gt;
+</code></pre>
+<h3><code>aria-details</code> for richer cross-references</h3>
+<p>Where a full wiki article is included in the EPUB spine, <code>aria-details</code> on the inline term can point to that article section — more semantically appropriate for extended reference content than footnote markup.</p>
+<hr />
+<h2>4. Core problems and tensions</h2>
+<h3>Problem 1 — Spine vs. graph</h3>
+<p>An EPUB spine is a linear sequence. The wiki is a graph. Wikilinks in chapter text point to articles that are not in the spine. Options:</p>
+<ul>
+<li><strong>(a) In-EPUB glossary</strong> — include a condensed wiki as a spine document. Linked with <code>doc-glossref</code>. Keeps everything self-contained and epubcheck-clean.</li>
+<li><strong>(b) Strip wikilinks from distributed EPUBs</strong> — replace with plain text or endnotes. Wikilinks remain a PWA-only feature.</li>
+<li><strong>(c) External links</strong> — technically valid EPUB, but breaks offline reading and epubcheck flags unresolved fragment identifiers.</li>
+</ul>
+<p><strong>Recommended path:</strong> Option (a) for scholarly EPUBs where the wiki enrichment is core to the reading experience; option (b) for plain reading editions.</p>
+<h3>Problem 2 — Popup interoperability</h3>
+<p>The spec does not mandate how reading systems display footnote/glossary popups. Apple Books shows speech-bubble popups; Kobo navigates to the note and back; others do nothing. Any wikilink-as-popup behaviour cannot be guaranteed in distributed EPUBs. The PWA can implement a consistent experience; distributed EPUBs cannot.</p>
+<h3>Problem 3 — epubcheck validation</h3>
+<p>Any wikilink <code>href</code> pointing to a resource not in the EPUB spine will fail epubcheck. The <code>tl lint</code> pipeline will surface these as errors. All wiki cross-references in chapter files must either resolve to something inside the container or be stripped before distribution.</p>
+<h3>Problem 4 — epub:type deprecation trajectory</h3>
+<p>The spec increasingly steers authors toward ARIA roles. <code>epub:type</code> alone is not sufficient for accessibility. Long-term: prefer <code>role</code>, use <code>epub:type</code> only as a reading-system behaviour trigger alongside <code>role</code>.</p>
+<hr />
+<h2>5. Opportunities</h2>
+<h3>O1 — Compliance: accessibility metadata in <code>tl create-draft</code></h3>
+<p>Auto-populate mandatory schema.org fields in <code>content.opf</code> templates. This is a template change only — no logic required. Brings every <code>tl</code>-produced ebook into EPUB Accessibility 1.1 compliance by default.</p>
+<h3>O2 — Wikilinks as <code>doc-glossref</code> in the PWA e-reader</h3>
+<p>In the PWA's rendered XHTML, mark up wikilinks as:</p>
+<pre><code class="language-html">&lt;a role=&quot;doc-glossref&quot; epub:type=&quot;glossref&quot; href=&quot;#wiki-stub-id&quot;&gt;term&lt;/a&gt;
+</code></pre>
+<p>with matching <code>&lt;aside role="doc-glossary"&gt;</code> stubs at chapter end. Standards-compliant, degrades gracefully for screen readers, and the PWA JS can intercept clicks for modal previews. Also works in <code>tl recompose-epub</code> single-file output.</p>
+<h3>O3 — Landmarks nav</h3>
+<p>Include condensed wiki / key-figures appendix in the EPUB <code>&lt;nav epub:type="landmarks"&gt;</code> with <code>epub:type="glossary"</code>. Enables one-tap navigation to the reference section in supporting reading systems.</p>
+<h3>O4 — Page list nav (print replica ebooks)</h3>
+<p>EPUB 3.3 requires <code>&lt;nav epub:type="page-list"&gt;</code> for ebooks that reproduce a print edition. Applies to the Birukoff biography and similar scan-based projects. Required for EPUB A11y 1.1 <code>printPageNumbers</code> accessibilityFeature declaration. Also useful for scholarly citation (page references).</p>
+<h3>O5 — <code>aria-details</code> for in-EPUB wiki articles</h3>
+<p>Where a full wiki article appears in the EPUB spine (e.g. a key-figures appendix), use <code>aria-details</code> on inline terms to associate them with the article:</p>
+<pre><code class="language-html">&lt;span aria-details=&quot;wiki-sophia-tolstaya&quot;&gt;Sophia Tolstaya&lt;/span&gt;
+</code></pre>
+<p>More semantically correct than <code>aria-describedby</code> for extended reference content.</p>
+<h3>O6 — Future: Media Overlays</h3>
+<p>EPUB 3.3 supports synchronised text-audio (SMIL). Not relevant now, but correct semantic markup now (<code>id</code> attributes on structural elements, proper <code>epub:type</code> on chapters/sections) makes adding audio narration tractable later without structural rewrites.</p>
+<hr />
+<h2>6. Immediate action items</h2>
+<p>See <code>_generated/project/TODO.md</code> for the full tracked backlog. Summary of items flowing from this review:</p>
+<ol>
+<li><strong>Audit <code>tl create-draft</code> templates</strong> against EPUB A11y 1.1 mandatory metadata checklist</li>
+<li><strong>Add schema.org accessibility metadata</strong> defaults to <code>content.opf</code> template</li>
+<li><strong>Add <code>&lt;nav epub:type="page-list"&gt;</code></strong> support to <code>tl build-toc</code> for print-replica ebooks</li>
+<li><strong>Define wikilink strategy for distributed EPUBs</strong> — in-EPUB glossary vs. strip-and-endnote</li>
+<li><strong>Update chapter XHTML templates</strong> to use <code>epub:type</code> + <code>role</code> pairs on all interactive reference elements (not <code>epub:type</code> alone)</li>
+<li><strong>Document the <code>doc-glossref</code> pattern</strong> in the Manual of Style as the canonical wikilink representation in EPUB output</li>
+</ol>
+<hr />
+<h2>References</h2>
+<ul>
+<li><a href="https://www.w3.org/TR/epub-33/">EPUB 3.3 — W3C Recommendation</a></li>
+<li><a href="https://www.w3.org/TR/epub-a11y-11/">EPUB Accessibility 1.1 — W3C Recommendation</a></li>
+<li><a href="https://www.w3.org/TR/epub-a11y-tech-11/">EPUB Accessibility Techniques 1.1</a></li>
+<li><a href="https://www.w3.org/TR/epub-aria-authoring-11/">EPUB Type to ARIA Role Authoring Guide 1.1</a></li>
+<li><a href="https://www.w3.org/TR/epub-ssv-11/">EPUB Structural Semantics Vocabulary 1.1</a></li>
+<li><a href="https://www.w3.org/TR/dpub-aria-1.0/">Digital Publishing WAI-ARIA Module 1.0</a></li>
+<li><a href="https://www.w3.org/news/2025/updated-w3c-recommendation-epub-3-3/">Updated W3C Recommendation: EPUB 3.3 (Jan 2026)</a></li>
+<li><a href="https://www.edrlab.org/2025/04/08/w3c-pushes-epub-forward/">EDRLab: W3C Pushes EPUB Forward (April 2025)</a></li>
+<li><a href="https://daisy.org/news-events/articles/what-does-epub-3-3-mean-for-accessibility/">DAISY: What Does EPUB 3.3 Mean For Accessibility?</a></li>
+<li><a href="https://kb.daisy.org/publishing/docs/html/epub-type.html">DAISY Knowledge Base: epub:type attribute</a></li>
+</ul>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/architecture/epub-a11y-w3c-review-2026-04-22';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

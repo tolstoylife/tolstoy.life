@@ -209,7 +209,7 @@ Two concrete rules enforce the isolation:
 
 Together these rules mean: a wiki article edit changes `/works.json` and the wiki-previews bundle URL, but no work's hash, no work's manifest, and no work's versioned subtree. The retention discipline holds.
 
-This is the fix for the cascade bug identified in the 2026-04-23 architecture review (`architecture-review.html` Part 7).
+This is the fix for the cascade bug identified in the 2026-04-23 architecture review (`../architecture/architecture-review.html` Part 7).
 
 ## 5. The works index
 
@@ -395,7 +395,7 @@ The determinism test in §6.3 is wired in as a blocking CI job in the `tolstoyli
 
 Scope: the check currently covers the Eleventy output in `dist/`. When the four Layer-1 generators (`generate-wiki-previews.py`, `generate-related-wiki.py`, `generate-asset-manifests.py`, `generate-works-index.py`) land, they emit into the same `dist/` tree and inherit the determinism coverage automatically — no changes to the harness are required.
 
-Limitation: the check runs both builds in the *same* environment, so it catches within-environment non-determinism (timestamps, walk order, random IDs, PID-based names). Cross-environment determinism — e.g. Netlify vs. Cloudflare Pages producing identical bytes — is the companion test introduced in architecture-review.html Part 8 and will be added alongside the CF Pages parallel deploy (TODO priority 5, subsection D).
+Limitation: the check runs both builds in the *same* environment, so it catches within-environment non-determinism (timestamps, walk order, random IDs, PID-based names). Cross-environment determinism — e.g. Netlify vs. Cloudflare Pages producing identical bytes — is the companion test introduced in `../architecture/architecture-review.html` Part 8 and will be added alongside the CF Pages parallel deploy (TODO priority 5, subsection D).
 
 ## 7. Integration with the existing `tl` CLI
 

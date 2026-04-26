@@ -24,11 +24,11 @@ Five design documents and three `/ultraplan` briefs, meant to be read together. 
 
 ## Companion audit
 
-- **`architecture-review.html`** (2026-04-23) — A standalone, second-pass audit of the five design documents above. Ten parts covering: plain-English sync-model explainer, storage topology (what lives in Cache API vs IndexedDB), install UX across platforms (with CSS-only device mockups), sync-visibility UX (what the indicator should look like, accessibility-first), volume/bandwidth risk analysis, CRDT/QR sync problems, a critical build-pipeline cascade bug, hosting strategy (Netlify vs Cloudflare Pages vs R2 vs Bunny/Hetzner), build-minute economics, and a ranked priority-fix list. Open in a browser for the formatted reading experience. Session handoff with action items lives at `handoff-2026-04-23.md`.
+- **`../architecture/architecture-review.html`** (2026-04-23) — A standalone, second-pass audit of the five design documents above. Ten parts covering: plain-English sync-model explainer, storage topology (what lives in Cache API vs IndexedDB), install UX across platforms (with CSS-only device mockups), sync-visibility UX (what the indicator should look like, accessibility-first), volume/bandwidth risk analysis, CRDT/QR sync problems, a critical build-pipeline cascade bug, hosting strategy (Netlify vs Cloudflare Pages vs R2 vs Bunny/Hetzner), build-minute economics, and a ranked priority-fix list. Open in a browser for the formatted reading experience. Session handoff with action items lives at `handoff-2026-04-23.md`.
 
 ## Planning briefs (for `/ultraplan`)
 
-The three briefs are derivative of the design documents — they re-state the design in a form suitable for `/ultraplan` and explicitly call out which decisions are resolved versus which are open questions for the planning session.
+The three briefs are derivative of the design documents — they re-state the design in a form suitable for `/ultraplan` and explicitly call out which decisions are resolved versus which are open questions for the planning session. They live in `_generated/PWA/briefs/` as staging artefacts:
 
 - `ultraplan-brief-01-sync.md` — Stage 4: Yjs schema and sync relay.
 - `ultraplan-brief-02-stage-1.md` — Stage 1: offline works (with wiki integration).

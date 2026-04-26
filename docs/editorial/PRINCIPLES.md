@@ -40,7 +40,7 @@ The formula: *direct, plain, with as little editorialising as possible.* Let the
 
 ### The model: architecture-review style
 
-The file `_generated/PWA/architecture-review.html` is the tonal reference for all wiki and works content. Not in subject matter, but in register: it states what exists, what it does, and where the problems are — without marketing, without hedging, without performing expertise. Every sentence carries information. Nothing is there to sound good.
+The file `docs/architecture/architecture-review.html` is the tonal reference for all wiki and works content. Not in subject matter, but in register: it states what exists, what it does, and where the problems are — without marketing, without hedging, without performing expertise. Every sentence carries information. Nothing is there to sound good.
 
 Applied to the wiki this means: a person article states who the person was, what their documented relationship to Tolstoy was, what the primary sources record. A works article states what the work is, when it was written, what the manuscripts show, what the publication history was. No throat-clearing, no scene-setting, no verdicts on literary significance.
 
@@ -86,6 +86,7 @@ The principle: **build so that it withstands scrutiny.** Not by hiding weaknesse
 - **Skills** should reflect these principles. For example: the ebook-creator skill produces free, DRM-free EPUBs — that is not a technical detail, it is a matter of principle.
 - **The scalability report** inventories material that is largely controlled by institutions. The inventory itself is unproblematic. Actually acquiring the material requires the tone balance described above.
 - **The wiki's tone** should be encyclopedic — factual, verifiable, without agenda. Tolstoy's radical ideas are presented as historical fact, not as advocacy.
+- **Documentation discipline.** Evergreen docs are edited in place with `changelog:` frontmatter. Dated reports get a Status block at the top rather than retroactive body edits — the body stays as a record of what was known on its date. See `CONVENTIONS.md`.
 
 ---
 

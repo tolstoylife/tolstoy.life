@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wiki Rewrite Workflow at Scale — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          architecture
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">architecture</p>
+  <h1>Wiki Rewrite Workflow at Scale</h1>
+  <p class="meta">Last modified 15 April 2026 · <a href="/architecture/wiki-rewrite-workflow-2026-04-15.md">view source</a></p>
+</header>
+<main>
+<p>Report: 2026-04-15<br />
+Context: How do we keep 26,500+ wiki pages accurate and cross-referenced as new sources are ingested? The current approach (Claude reads everything sequentially) breaks down past ~5,000 files. This document designs the scaled workflow, separates what needs Claude from what can be scripted, and estimates the token costs.</p>
+<hr />
+<h2>The problem</h2>
+<p>The LLM Wiki pattern says: when new information arrives, update all affected pages. At small scale this works — Claude reads the source, reads the affected pages, rewrites them. But the cost grows multiplicatively:</p>
+<ul>
+<li>Each ingest session touches <strong>~35 wiki pages</strong></li>
+<li>Each page update requires reading <strong>~8 related pages</strong> for contradiction checks</li>
+<li>Total: <strong>~280 page reads per ingest</strong>, or <strong>~560K tokens of reading</strong></li>
+<li>Claude's context window: <strong>200K tokens</strong></li>
+</ul>
+<p>By Phase 3 (~8,000 files), a single ingest can't fit in one context window. By Phase 5 (~26,500 files), it's 3× the context window. We need a different architecture.</p>
+<hr />
+<h2>Design principle: separate intelligence from computation</h2>
+<p>Most of what happens during a wiki rewrite session is <strong>mechanical</strong> — reading files, comparing strings, checking wikilink targets, computing diffs. Only a fraction requires <strong>reasoning</strong> — deciding what a new source means for an existing claim, choosing how to phrase a correction, resolving ambiguity.</p>
+<p>The workflow splits into three layers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Runs when</th>
+<th style="text-align: center;">Requires Claude?</th>
+<th>Runs on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Scripted pipeline</strong> (Python/bash)</td>
+<td>Nightly cron</td>
+<td style="text-align: center;">No</td>
+<td>Mac Mini CPU</td>
+</tr>
+<tr>
+<td><strong>LightRAG index</strong> (Ollama + local model)</td>
+<td>Nightly cron</td>
+<td style="text-align: center;">No</td>
+<td>Mac Mini GPU (Qwen2.5-14B)</td>
+</tr>
+<tr>
+<td><strong>Claude sessions</strong> (interactive or scheduled)</td>
+<td>On demand</td>
+<td style="text-align: center;">Yes</td>
+<td>API</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>The three-phase rewrite workflow</h2>
+<h3>Phase A: Scripted pre-processing (cron, nightly, zero tokens)</h3>
+<p>Python/bash scripts that run as cron jobs with zero API cost. These prepare the ground for Claude.</p>
+<h4>A1. Wikilink graph extraction</h4>
+<pre><code class="language-bash"># Runs nightly. Parses all .md files, extracts [[wikilinks]], builds adjacency list.
+# Output: _generated/graph.json (nodes, edges, inbound/outbound counts)
+python3 scripts/extract-graph.py --vault-dir website/src/ --output _generated/graph.json
+</code></pre>
+<p><strong>What it produces:</strong> A JSON file mapping every page to its inbound and outbound wikilinks. Claude can query this instead of reading files to understand relationships.</p>
+<p><strong>Cost:</strong> 0 tokens. ~30 seconds for 26,500 files.</p>
+<h4>A2. Frontmatter index</h4>
+<pre><code class="language-bash"># Extracts all YAML frontmatter into a single searchable index.
+# Output: _generated/frontmatter-index.json
+python3 scripts/extract-frontmatter.py --vault-dir website/src/ --output _generated/frontmatter-index.json
+</code></pre>
+<p><strong>What it produces:</strong> Every page's frontmatter as a flat JSON array. Claude can search dates, people, places, relationships without reading individual files.</p>
+<p><strong>Cost:</strong> 0 tokens. ~15 seconds for 26,500 files.</p>
+<h4>A3. Change detection</h4>
+<pre><code class="language-bash"># Compares current vault state against last-indexed state.
+# Identifies new, modified, and deleted files since last LightRAG sync.
+# Output: _generated/changes-since-last-sync.json
+python3 scripts/detect-changes.py --vault-dir website/src/ --state-file _generated/last-sync-state.json
+</code></pre>
+<p><strong>What it produces:</strong> A list of files that changed since the last sync, with diffs.</p>
+<p><strong>Cost:</strong> 0 tokens. ~5 seconds.</p>
+<h4>A4. Orphan and dead-link detection</h4>
+<pre><code class="language-bash"># Uses graph.json to find: orphan pages (no inbound links),
+# dead wikilinks (targets that don't exist), pages with 0 outbound links.
+# Output: _generated/lint-report.json
+python3 scripts/lint-graph.py --graph _generated/graph.json --vault-dir website/src/
+</code></pre>
+<p><strong>What it produces:</strong> Mechanical lint issues that don't require judgement. Claude only needs to see the <em>results</em>, not do the scanning.</p>
+<p><strong>Cost:</strong> 0 tokens. ~10 seconds.</p>
+<h4>A5. LightRAG incremental sync</h4>
+<pre><code class="language-bash"># Re-indexes changed files in LightRAG. Uses Ollama locally.
+# Runs AFTER A3 to know which files changed.
+python3 scripts/lightrag-sync.py --changes _generated/changes-since-last-sync.json
+</code></pre>
+<p><strong>What it produces:</strong> Updated LightRAG index (entities, relationships, embeddings).</p>
+<p><strong>Cost:</strong> 0 API tokens. ~10 sec/file × number of changed files. Local compute only (Qwen2.5-14B via Ollama).</p>
+<h4>A6. Contradiction candidate detection</h4>
+<pre><code class="language-bash"># Compares frontmatter fields across pages that reference the same entities.
+# Flags cases where two pages disagree on a date, location, or relationship.
+# Output: _generated/contradiction-candidates.json
+python3 scripts/detect-contradictions.py --frontmatter _generated/frontmatter-index.json
+</code></pre>
+<p><strong>What it produces:</strong> Pairs of pages that have conflicting factual claims in their frontmatter (e.g., two pages disagree on a birth date). These are <em>candidates</em> — some may be legitimate (OS vs NS dates). Claude resolves the ambiguous ones.</p>
+<p><strong>Cost:</strong> 0 tokens. ~20 seconds.</p>
+<h3>Nightly cron summary</h3>
+<pre><code class="language-bash"># /etc/crontab or launchd plist — runs at 02:00 every night
+# Total runtime: ~5-15 minutes (plus LightRAG sync time for changed files)
+
+#!/bin/bash
+cd /path/to/tolstoy-project
+
+# Step 1: Mechanical analysis (30-60 seconds)
+python3 scripts/extract-graph.py --vault-dir website/src/ --output _generated/graph.json
+python3 scripts/extract-frontmatter.py --vault-dir website/src/ --output _generated/frontmatter-index.json
+python3 scripts/detect-changes.py --vault-dir website/src/ --state-file _generated/last-sync-state.json
+python3 scripts/lint-graph.py --graph _generated/graph.json --vault-dir website/src/
+python3 scripts/detect-contradictions.py --frontmatter _generated/frontmatter-index.json
+
+# Step 2: LightRAG sync (requires Ollama running, ~10 sec/changed file)
+python3 scripts/lightrag-sync.py --changes _generated/changes-since-last-sync.json
+
+# Step 3: Generate daily briefing for Claude
+python3 scripts/generate-briefing.py \
+  --changes _generated/changes-since-last-sync.json \
+  --lint _generated/lint-report.json \
+  --contradictions _generated/contradiction-candidates.json \
+  --output _generated/daily-briefing.md
+</code></pre>
+<p>The <strong>daily briefing</strong> is the key output — a single markdown file summarising what changed, what's broken, and what needs Claude's attention. Claude reads this at the start of each session instead of scanning the vault.</p>
+<hr />
+<h3>Phase B: Claude ingest session (interactive, costs tokens)</h3>
+<p>This is the part that requires Claude's reasoning. But it's now <em>much</em> cheaper because Claude reads pre-processed summaries instead of raw files.</p>
+<h4>B1. Read the daily briefing (~2K tokens)</h4>
+<p>Claude reads <code>_generated/daily-briefing.md</code> — a compact summary of:<br />
+- Files changed since last session<br />
+- New lint issues (orphans, dead links)<br />
+- Contradiction candidates (pairs of pages with conflicting facts)<br />
+- LightRAG sync status</p>
+<h4>B2. Source reading and fact extraction (~20-50K tokens per source)</h4>
+<p>Claude reads the new source (e.g., a chapter of Birukoff biography) and produces a structured <strong>update manifest</strong> — a JSON file listing every factual claim and which wiki pages it affects.</p>
+<pre><code class="language-json">{
+  &quot;source&quot;: &quot;Birukoff, Chapter 12: The Crisis of 1880-1882&quot;,
+  &quot;claims&quot;: [
+    {
+      &quot;fact&quot;: &quot;Tolstoy began writing Confession in autumn 1879&quot;,
+      &quot;affects_pages&quot;: [&quot;Confession&quot;, &quot;Leo Tolstoy&quot;],
+      &quot;action&quot;: &quot;verify_date&quot;,
+      &quot;current_value&quot;: &quot;1879 (no month specified)&quot;,
+      &quot;new_value&quot;: &quot;1879-09 (autumn 1879)&quot;,
+      &quot;confidence&quot;: &quot;high&quot;,
+      &quot;source_quote&quot;: &quot;В осень 1879 года Толстой начал писать «Исповедь»&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Sophia Tolstaya copied the manuscript of Confession three times&quot;,
+      &quot;affects_pages&quot;: [&quot;Sophia Tolstaya&quot;, &quot;Confession&quot;],
+      &quot;action&quot;: &quot;add_new_claim&quot;,
+      &quot;confidence&quot;: &quot;high&quot;,
+      &quot;source_quote&quot;: &quot;Софья Андреевна переписывала рукопись трижды&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>This is where Claude's intelligence is irreplaceable</strong> — understanding Russian text, evaluating reliability, identifying which pages are affected.</p>
+<p><strong>Token cost:</strong> Depends on source length. A Birukoff chapter (~5,000 words / ~7K tokens to read) typically yields 20-40 claims. Total with reasoning: ~20-50K tokens per source chapter.</p>
+<h4>B3. Per-page updates using RAG (~5-10K tokens per page)</h4>
+<p>For each affected page, Claude:</p>
+<ol>
+<li><strong>Queries LightRAG</strong> (not reads files): "What do we currently know about Confession's composition dates?" → gets relevant paragraphs, not full pages.</li>
+<li><strong>Reads only the specific page</strong> being updated (~2K tokens)</li>
+<li><strong>Writes the edit</strong> (~1K tokens)</li>
+<li><strong>Checks the contradiction candidate list</strong> from the nightly scripts — any flagged conflicts involving this page? (~500 tokens)</li>
+</ol>
+<p><strong>Token cost per page:</strong> ~5-10K tokens (down from ~9K in the brute-force approach, but more importantly, no longer limited by needing to read related pages sequentially).</p>
+<h4>B4. Commit update manifest and changes</h4>
+<p>Claude writes the update manifest to <code>_generated/update-manifests/YYYY-MM-DD-source-slug.json</code> and commits the changed wiki pages. The manifest is machine-readable — scripts can use it to verify completeness.</p>
+<h3>Token cost for a typical ingest session</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th style="text-align: right;">Tokens</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B1. Read daily briefing</td>
+<td style="text-align: right;">2,000</td>
+<td>Once per session</td>
+</tr>
+<tr>
+<td>B2. Read source + extract claims</td>
+<td style="text-align: right;">30,000</td>
+<td>One source chapter</td>
+</tr>
+<tr>
+<td>B3. Update 35 affected pages</td>
+<td style="text-align: right;">245,000</td>
+<td>35 pages × ~7K avg</td>
+</tr>
+<tr>
+<td>B4. Write manifest + commit</td>
+<td style="text-align: right;">3,000</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Total per ingest session</strong></td>
+<td style="text-align: right;"><strong>~280,000</strong></td>
+<td><strong>Fits in one context window</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Compare to the brute-force approach: <strong>~560,000 tokens</strong> (doesn't fit in context) with no scripted assistance.</p>
+<hr />
+<h3>Phase C: Scripted post-processing (cron or triggered, zero tokens)</h3>
+<p>After Claude's session, scripts clean up and verify.</p>
+<h4>C1. Verify update completeness</h4>
+<pre><code class="language-bash"># Reads the update manifest, checks that every &quot;affects_pages&quot; entry
+# was actually modified in the git diff.
+python3 scripts/verify-manifest.py --manifest _generated/update-manifests/latest.json
+</code></pre>
+<p><strong>What it catches:</strong> Claude claimed a page needed updating but didn't actually edit it (forgot, ran out of context, etc.). Flags these for the next session.</p>
+<p><strong>Cost:</strong> 0 tokens.</p>
+<h4>C2. Regenerate indexes</h4>
+<pre><code class="language-bash"># Re-runs A1-A4 to update graph, frontmatter index, and lint report
+# after Claude's changes.
+</code></pre>
+<p><strong>Cost:</strong> 0 tokens. ~60 seconds.</p>
+<h4>C3. LightRAG re-sync</h4>
+<pre><code class="language-bash"># Re-indexes the pages Claude just changed.
+python3 scripts/lightrag-sync.py --changes _generated/changes-since-last-sync.json
+</code></pre>
+<p><strong>Cost:</strong> 0 tokens (local Ollama). ~35 pages × 10 sec = ~6 minutes.</p>
+<hr />
+<h2>Token budget at different scales</h2>
+<h3>Assumptions</h3>
+<ul>
+<li>Claude API: Sonnet for routine updates, Opus for complex reasoning/ambiguity</li>
+<li>Sonnet: ~$3/M input, ~$15/M output tokens (April 2026 pricing)</li>
+<li>Opus: ~$15/M input, ~$75/M output tokens</li>
+<li>Average ingest session: 280K tokens (80% input, 20% output)</li>
+<li>Ratio: 90% Sonnet, 10% Opus (for contradiction resolution)</li>
+</ul>
+<h3>Monthly cost estimates</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align: center;">Sessions/month</th>
+<th style="text-align: center;">Tokens/session</th>
+<th style="text-align: center;">Monthly tokens</th>
+<th style="text-align: center;">Monthly cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase 2 (~1,000 files)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>Source ingestion</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">150K</td>
+<td style="text-align: center;">1.2M</td>
+<td style="text-align: center;">~$5</td>
+</tr>
+<tr>
+<td>Lint/maintenance</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">50K</td>
+<td style="text-align: center;">100K</td>
+<td style="text-align: center;">~$0.50</td>
+</tr>
+<tr>
+<td><strong>Phase 2 total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>1.3M</strong></td>
+<td style="text-align: center;"><strong>~$6</strong></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><strong>Phase 3 (~8,000 files)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>Source ingestion</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">250K</td>
+<td style="text-align: center;">3.0M</td>
+<td style="text-align: center;">~$13</td>
+</tr>
+<tr>
+<td>Lint/maintenance</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">100K</td>
+<td style="text-align: center;">400K</td>
+<td style="text-align: center;">~$2</td>
+</tr>
+<tr>
+<td>Query sessions</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">50K</td>
+<td style="text-align: center;">200K</td>
+<td style="text-align: center;">~$1</td>
+</tr>
+<tr>
+<td><strong>Phase 3 total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>3.6M</strong></td>
+<td style="text-align: center;"><strong>~$16</strong></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><strong>Phase 5 (~26,500 files)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>Source ingestion</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">280K</td>
+<td style="text-align: center;">4.5M</td>
+<td style="text-align: center;">~$20</td>
+</tr>
+<tr>
+<td>Lint/maintenance</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">150K</td>
+<td style="text-align: center;">1.2M</td>
+<td style="text-align: center;">~$5</td>
+</tr>
+<tr>
+<td>Query sessions</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">80K</td>
+<td style="text-align: center;">640K</td>
+<td style="text-align: center;">~$3</td>
+</tr>
+<tr>
+<td><strong>Phase 5 total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>6.3M</strong></td>
+<td style="text-align: center;"><strong>~$28</strong></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><strong>Maximum (~94,000 files)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>Source ingestion</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">300K</td>
+<td style="text-align: center;">6.0M</td>
+<td style="text-align: center;">~$26</td>
+</tr>
+<tr>
+<td>Lint/maintenance</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">200K</td>
+<td style="text-align: center;">2.4M</td>
+<td style="text-align: center;">~$10</td>
+</tr>
+<tr>
+<td>Query sessions</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">100K</td>
+<td style="text-align: center;">1.2M</td>
+<td style="text-align: center;">~$5</td>
+</tr>
+<tr>
+<td><strong>Maximum total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>9.6M</strong></td>
+<td style="text-align: center;"><strong>~$41</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>What the cron jobs save</h3>
+<p>Without the scripted pipeline, Claude would need to do all the mechanical work itself — graph extraction, frontmatter scanning, dead-link checking, change detection. That would roughly <strong>triple</strong> the token usage at every scale:</p>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th style="text-align: center;">With scripts</th>
+<th style="text-align: center;">Without scripts</th>
+<th style="text-align: center;">Savings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 2</td>
+<td style="text-align: center;">~$6/mo</td>
+<td style="text-align: center;">~$15/mo</td>
+<td style="text-align: center;">60%</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td style="text-align: center;">~$16/mo</td>
+<td style="text-align: center;">~$45/mo</td>
+<td style="text-align: center;">64%</td>
+</tr>
+<tr>
+<td>Phase 5</td>
+<td style="text-align: center;">~$28/mo</td>
+<td style="text-align: center;">~$80/mo</td>
+<td style="text-align: center;">65%</td>
+</tr>
+<tr>
+<td>Maximum</td>
+<td style="text-align: center;">~$41/mo</td>
+<td style="text-align: center;">~$120/mo</td>
+<td style="text-align: center;">66%</td>
+</tr>
+</tbody>
+</table>
+<p>The scripts pay for themselves in the first month, and the gap widens as the vault grows.</p>
+<hr />
+<h2>What Claude does vs. what scripts do</h2>
+<h3>Claude's irreplaceable jobs (require reasoning)</h3>
+<ol>
+<li><strong>Reading source texts</strong> and understanding what they claim</li>
+<li><strong>Evaluating reliability</strong> of new claims against existing claims</li>
+<li><strong>Resolving contradictions</strong> when two sources disagree</li>
+<li><strong>Writing prose</strong> — composing wiki article text</li>
+<li><strong>Deciding significance</strong> — is this fact worth adding to the wiki?</li>
+<li><strong>Wikilink placement</strong> in source texts — choosing which mentions to link</li>
+</ol>
+<h3>Scripts handle everything else (no reasoning needed)</h3>
+<ol>
+<li><strong>Graph extraction</strong> — parsing <code>[[wikilinks]]</code> from all files</li>
+<li><strong>Frontmatter indexing</strong> — extracting YAML metadata into searchable format</li>
+<li><strong>Change detection</strong> — what files changed since last sync</li>
+<li><strong>Dead link detection</strong> — wikilinks pointing to non-existent files</li>
+<li><strong>Orphan detection</strong> — pages with no inbound links</li>
+<li><strong>Mechanical contradiction flagging</strong> — same field, different value on two pages</li>
+<li><strong>LightRAG sync</strong> — re-indexing changed files (Ollama, local)</li>
+<li><strong>Update verification</strong> — checking that Claude's manifest matches actual changes</li>
+<li><strong>Statistics and reporting</strong> — page counts, link density, coverage gaps</li>
+</ol>
+<h3>LightRAG handles the middle ground (local Ollama, no API)</h3>
+<ol>
+<li><strong>Semantic search</strong> — "what do we know about X?" across the full vault</li>
+<li><strong>Entity extraction</strong> — identifying people, places, works in new text</li>
+<li><strong>Relationship mapping</strong> — connecting entities across documents</li>
+<li><strong>Similarity detection</strong> — finding pages that discuss related topics</li>
+</ol>
+<hr />
+<h2>Implementation priority</h2>
+<h3>Build first (Phase 2, now)</h3>
+<ol>
+<li><code>extract-graph.py</code> — wikilink adjacency list</li>
+<li><code>extract-frontmatter.py</code> — frontmatter index</li>
+<li><code>generate-briefing.py</code> — daily briefing for Claude</li>
+</ol>
+<p>These three scripts immediately improve Claude's efficiency, even before LightRAG exists. Claude reads a 2K-token briefing instead of scanning the vault.</p>
+<h3>Build for Phase 3</h3>
+<ol start="4">
+<li><code>detect-changes.py</code> — change detection</li>
+<li><code>lint-graph.py</code> — orphan/dead-link detection</li>
+<li><code>detect-contradictions.py</code> — mechanical contradiction flagging</li>
+<li>LightRAG setup + <code>lightrag-sync.py</code></li>
+<li><code>verify-manifest.py</code> — post-update verification</li>
+</ol>
+<h3>Build for Phase 5</h3>
+<ol start="9">
+<li>Update manifest format and tooling</li>
+<li>Agent swarm coordinator (if needed — may not be, given RAG)</li>
+</ol>
+<hr />
+<h2>Open question: could a local model replace Claude for routine updates?</h2>
+<p>Some wiki updates are formulaic:<br />
+- Adding a birth/death date to a person page (frontmatter update)<br />
+- Adding a wikilink to a page that mentions a newly-created entity<br />
+- Fixing a dead link by correcting a page name</p>
+<p>These don't require Claude's full reasoning capabilities. A local 14B model (Qwen2.5-14B via Ollama) could potentially handle them, reducing API costs further. The workflow would be:</p>
+<pre><code>Nightly cron:
+  1. Scripts identify routine updates (date corrections, dead links, missing wikilinks)
+  2. Local model applies them automatically
+  3. Non-routine updates (new prose, contradiction resolution) queued for Claude
+
+Morning session:
+  Claude reviews what the local model did overnight
+  Claude handles the complex updates
+</code></pre>
+<p>This is speculative — the quality threshold for "good enough for a scholarly resource" is high. But worth testing once the scripted pipeline is in place.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/architecture/wiki-rewrite-workflow-2026-04-15';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

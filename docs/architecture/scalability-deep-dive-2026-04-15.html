@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep Dive: True Scale of a Complete Tolstoy Resource — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          architecture
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">architecture</p>
+  <h1>Deep Dive: True Scale of a Complete Tolstoy Resource</h1>
+  <p class="meta">Last modified 16 April 2026 · <a href="/architecture/scalability-deep-dive-2026-04-15.md">view source</a></p>
+</header>
+<main>
+<p>Report: 2026-04-15<br />
+Context: Follows up on the initial scalability report of the same date. This analysis digs into the "connective tissue" — data categories that don't fall neatly into the basic wiki/ and works/ buckets but are essential for a complete scholarly resource.</p>
+<hr />
+<h2>Executive summary</h2>
+<p>The initial estimate of ~13,000 files was based on works (767 with chapters) plus basic wiki entities (people, places, events, concepts from the TEI reference data). That estimate captured the skeleton but missed the ligaments.</p>
+<p>A complete resource — one that tracks correspondence networks, publication histories, manuscript layers, translations, reception, institutions, chronology, archival references, visual materials, and intertextual connections — would be roughly <strong>~40,000 files totalling ~250 MB of markdown/YAML</strong>.</p>
+<p>The wikilink graph would grow from ~60,000 edges to <strong>~120,000+ edges</strong> — a 16x denser knowledge graph than the basic estimate.</p>
+<p>This changes the architectural calculus. Obsidian remains viable as an editing tool, but a complementary query layer (LightRAG or similar) shifts from "nice to have" to "practically necessary" for Claude to operate efficiently at this scale.</p>
+<h3>Revised numbers at a glance</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: center;">Initial estimate</th>
+<th style="text-align: center;">Revised estimate</th>
+<th style="text-align: center;">Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total files</td>
+<td style="text-align: center;">~13,000</td>
+<td style="text-align: center;">~40,000</td>
+<td style="text-align: center;">3×</td>
+</tr>
+<tr>
+<td>Total size (markdown/YAML)</td>
+<td style="text-align: center;">~46 MB</td>
+<td style="text-align: center;">~250 MB</td>
+<td style="text-align: center;">5×</td>
+</tr>
+<tr>
+<td>Wikilinks (graph edges)</td>
+<td style="text-align: center;">~60,000</td>
+<td style="text-align: center;">~120,000+</td>
+<td style="text-align: center;">2×</td>
+</tr>
+<tr>
+<td>Wiki entity types</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8–10</td>
+<td style="text-align: center;">2.5×</td>
+</tr>
+<tr>
+<td>Works tracked</td>
+<td style="text-align: center;">767</td>
+<td style="text-align: center;">767 + 10,000 letters</td>
+<td style="text-align: center;">14×</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>What we were missing: category by category</h2>
+<h3>1. Correspondence (~31,000 records, ~33 MB)</h3>
+<p>This is the single largest gap. Tolstoy exchanged an estimated <strong>10,000+ letters</strong> documented in Jubilee Edition volumes 60–90. Each letter is technically a work (genre: letter), but the correspondence network creates an entirely separate dimension of data.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~10,000 outgoing letters (as individual work files with text)</li>
+<li>~3,500 preserved incoming letters</li>
+<li>~850 unique correspondents (each needing a wiki page — many are already in the TEI personList, but their role as correspondents adds relationship data)</li>
+<li>Response chains: which letters reply to which</li>
+<li>Topic threads across correspondence (Tolstoy's evolving views on non-resistance, for example, can be traced through 200+ letters spanning 30 years)</li>
+</ul>
+<p><strong>Schema impact:</strong> The works schema already supports <code>genre: letter</code>. What's missing is a <code>replyTo</code> field linking letters into chains, and a way to surface correspondence networks (who wrote to whom, frequency, date ranges, primary topics).</p>
+<p><strong>Why it matters:</strong> Tolstoy's letters are the primary source for dating and contextualising his other works. A researcher asking "what was Tolstoy thinking about when he started Anna Karenina?" needs to cross-reference letters from 1873–1874. Without indexed correspondence, Claude would need to read hundreds of files to answer that question.</p>
+<h3>2. Publication history (~10,000 records, ~5 MB)</h3>
+<p>The current schema tracks a work's <em>first</em> publication date and venue. But each major work has a complex afterlife: multiple Russian editions (often with textual variants), foreign translations, censored and restored versions, journal serialisations, posthumous publications.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~7,700 distinct Russian edition records (767 works × ~10 editions average)</li>
+<li>~2,000 foreign-language edition records</li>
+<li>~30 censorship variant records (works with significant cuts or suppressions)</li>
+<li>~40 journal serialisation records</li>
+</ul>
+<p><strong>Schema impact:</strong> The sidecar <code>.data.yaml</code> is the right place for this — an <code>editions[]</code> array per work. No new file type needed, but the sidecars would grow significantly.</p>
+<p><strong>Why it matters:</strong> Textual scholarship depends on knowing <em>which</em> edition is being referenced. The Maude translation of War and Peace differs from the Garnett translation, which differs from the Briggs translation. A resource that doesn't track editions can't support serious comparative work.</p>
+<h3>3. Manuscript and draft layers (~6,500 records, ~3 MB)</h3>
+<p>The schema already has <code>manuscripts[]</code> and <code>transcriptions[]</code> arrays — they're just empty. War and Peace alone went through 7+ major drafts. The Jubilee Edition documents manuscript details for every major work.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~500 distinct manuscript records across all works</li>
+<li>~1,500 transcription records (Sophia Tolstaya alone copied thousands of pages)</li>
+<li>Archival locations for each manuscript (6 major repositories)</li>
+<li>Digitisation status (which manuscripts have been scanned and where)</li>
+</ul>
+<p><strong>Schema impact:</strong> Minimal — the fields exist. This is a population effort, not a design effort.</p>
+<p><strong>Why it matters:</strong> The manuscript layer is what separates a reading resource from a scholarly resource. Genetic criticism — studying how a text evolved through drafts — is a major branch of Tolstoy studies.</p>
+<h3>4. Translations and translators (~1,000 records, ~2 MB)</h3>
+<p>Tolstoy was the most translated Russian author of the 19th century. English translations alone span dozens of translators across 150 years.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~150 translator bio pages (Aylmer Maude, Constance Garnett, Louise and Aylmer Maude, Isabel Hapgood, Leo Wiener, Richard Pevear &amp; Larissa Volokhonsky, etc.)</li>
+<li>~800 translation edition records</li>
+<li>Translator–work relationships (who translated what, when, from which source text)</li>
+</ul>
+<p><strong>Schema impact:</strong> New wiki entity type: <code>translator</code>. New array in work frontmatter: <code>translationEditions[]</code>.</p>
+<p><strong>Why it matters:</strong> Translation choice is one of the most common questions readers have ("which translation of Anna Karenina should I read?"). A resource that can't answer this systematically is incomplete for its core audience.</p>
+<h3>5. Reception and criticism (~3,800 records, ~6 MB)</h3>
+<p>No current schema coverage. Contemporary reviews, later critical works, and adaptations (film, opera, theatre) are entirely untracked.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~1,200 contemporary Russian review records</li>
+<li>~2,000 English-language critical work records</li>
+<li>~150 adaptation records (film, opera, stage)</li>
+<li>~400 scholarly monograph records</li>
+</ul>
+<p><strong>Schema impact:</strong> New arrays: <code>reviews[]</code> and <code>adaptations[]</code> in work frontmatter. Expanded <code>relatedWorks[]</code> relationship types to include <code>adapted-to-film</code>, <code>reviewed-in</code>, etc.</p>
+<pre><code>**Why it matters:** Reception history contextualises works for readers. Knowing that Anna Karenina was initially received poorly by Russian critics, or that Tolstoy disliked the first film adaptation of his work, adds scholarly depth.
+</code></pre>
+<h3>6. Institutions (~140 records, ~500 KB)</h3>
+<p>Publishers, journals, literary circles, religious movements, schools, archives. Currently scattered across person and place pages with no dedicated entity type.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~35 publishing houses (Russian, Western European, American)</li>
+<li>~55 journals and newspapers</li>
+<li>~18 literary circles and salons</li>
+<li>~12 archival repositories</li>
+<li>~9 religious/philosophical movements (Tolstoyans, Doukhobors, etc.)</li>
+<li>~6 educational institutions</li>
+</ul>
+<p><strong>Schema impact:</strong> New wiki entity type: <code>institution</code>.</p>
+<h3>7. Chronology and events (~7,350 records, ~4 MB)</h3>
+<p>The current estimate of ~500 events is too conservative. A day-by-day chronology of Tolstoy's life (well-documented from diaries, letters, and Sophia's diary) yields ~3,000 documented events. Add biographical milestones, work milestones, and historical events, and the total approaches 7,000+.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~3,000 day-by-day chronology entries</li>
+<li>~2,000 biographical events (births of children, relocations, illnesses, meetings)</li>
+<li>~2,300 work milestone events (completion dates, publication announcements, censorship actions)</li>
+<li>~50 major historical events Tolstoy witnessed or responded to</li>
+</ul>
+<p><strong>Schema impact:</strong> The <code>event</code> wiki entity type exists but needs timeline-specific fields: <code>dateStart</code>, <code>dateEnd</code>, and relationship arrays to people, works, and places.</p>
+<h3>8. Visual materials (~2,360 metadata records, ~3 MB)</h3>
+<p>Photographs, portraits, manuscript facsimiles, maps. The binary files exist (or will be sourced), but there's no metadata layer connecting them to the knowledge graph.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~200 portraits and photographs of Tolstoy</li>
+<li>~300 family photographs</li>
+<li>~500 manuscript facsimile key pages</li>
+<li>~30 maps (estates, journeys, battle sites from War and Peace)</li>
+<li>~100 artworks and illustrations</li>
+</ul>
+<p><strong>Schema impact:</strong> New entity type or lightweight metadata stub. Each image needs: subject, date, creator, provenance, license, and wikilinks to the entities depicted.</p>
+<h3>9. Intertextual references (~1,500 records, ~3.5 MB)</h3>
+<p>What Tolstoy read, who influenced him, and who he influenced. This is the scholarly apparatus that connects Tolstoy to the broader literary and philosophical world.</p>
+<p><strong>What needs tracking:</strong></p>
+<ul>
+<li>~500 external works cited or referenced in Tolstoy's writing</li>
+<li>~800 titles from Tolstoy's documented reading lists (from diaries and letters)</li>
+<li>~100 people significantly influenced by Tolstoy (Gandhi, Rilke, Wittgenstein, Martin Luther King Jr., etc.)</li>
+<li>~15 ideological movements</li>
+</ul>
+<p><strong>Schema impact:</strong> New arrays: <code>citedWorks[]</code>, <code>readingList[]</code>, <code>influencedBy[]</code>, <code>influences[]</code>.</p>
+<hr />
+<h2>Revised total estimate</h2>
+<h3>File count by category</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align: right;">Files</th>
+<th style="text-align: right;">Size (MB)</th>
+<th>New entity types needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Works (overview + sidecar + text landing)</td>
+<td style="text-align: right;">2,300</td>
+<td style="text-align: right;">8</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Works (chapter/text files)</td>
+<td style="text-align: right;">6,100</td>
+<td style="text-align: right;">33</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Letters (as works with text)</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">20</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wiki: persons (TEI + correspondents + translators)</td>
+<td style="text-align: right;">4,100</td>
+<td style="text-align: right;">16</td>
+<td><code>translator</code></td>
+</tr>
+<tr>
+<td>Wiki: places (TEI)</td>
+<td style="text-align: right;">770</td>
+<td style="text-align: right;">2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wiki: events + chronology</td>
+<td style="text-align: right;">7,350</td>
+<td style="text-align: right;">4</td>
+<td>— (expand <code>event</code>)</td>
+</tr>
+<tr>
+<td>Wiki: concepts</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">1</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wiki: institutions</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">0.5</td>
+<td><code>institution</code></td>
+</tr>
+<tr>
+<td>Publication edition stubs</td>
+<td style="text-align: right;">2,000</td>
+<td style="text-align: right;">2</td>
+<td>— (sidecar data)</td>
+</tr>
+<tr>
+<td>Reception/criticism stubs</td>
+<td style="text-align: right;">3,800</td>
+<td style="text-align: right;">6</td>
+<td><code>adaptation</code>, <code>criticalWork</code></td>
+</tr>
+<tr>
+<td>Archival fond pages</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.2</td>
+<td><code>archivalFond</code></td>
+</tr>
+<tr>
+<td>Image metadata stubs</td>
+<td style="text-align: right;">2,360</td>
+<td style="text-align: right;">3</td>
+<td><code>image</code></td>
+</tr>
+<tr>
+<td>Intertextual reference stubs</td>
+<td style="text-align: right;">1,500</td>
+<td style="text-align: right;">3.5</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Index/derived files</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Source cards</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.5</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td style="text-align: right;"><strong>~40,800</strong></td>
+<td style="text-align: right;"><strong>~250 MB</strong></td>
+<td><strong>5 new types</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Wikilink graph density</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Edges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chapter files (10 links/chapter avg.)</td>
+<td style="text-align: right;">61,000</td>
+</tr>
+<tr>
+<td>Letter files (8 links/letter avg.)</td>
+<td style="text-align: right;">80,000</td>
+</tr>
+<tr>
+<td>Person pages (5 outbound links avg.)</td>
+<td style="text-align: right;">20,500</td>
+</tr>
+<tr>
+<td>Place pages (3 outbound links avg.)</td>
+<td style="text-align: right;">2,300</td>
+</tr>
+<tr>
+<td>Event pages (2 outbound links avg.)</td>
+<td style="text-align: right;">14,700</td>
+</tr>
+<tr>
+<td>Institution pages (4 outbound links avg.)</td>
+<td style="text-align: right;">560</td>
+</tr>
+<tr>
+<td>Edition/translation stubs (3 links avg.)</td>
+<td style="text-align: right;">6,000</td>
+</tr>
+<tr>
+<td>Image metadata (2 links avg.)</td>
+<td style="text-align: right;">4,700</td>
+</tr>
+<tr>
+<td>Intertextual stubs (3 links avg.)</td>
+<td style="text-align: right;">4,500</td>
+</tr>
+<tr>
+<td><strong>Total (with overlap)</strong></td>
+<td style="text-align: right;"><strong>~120,000</strong></td>
+</tr>
+<tr>
+<td><strong>Unique edges (estimated)</strong></td>
+<td style="text-align: right;"><strong>~45,000</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Implications for architecture</h2>
+<h3>Obsidian</h3>
+<p>40,000 files is within Obsidian's documented operational range on desktop (users report 50,000+ files working), but it's firmly in the "needs management" zone:</p>
+<ul>
+<li><strong>Link autocomplete</strong> will be slow (4+ second lag per keystroke is documented at this scale)</li>
+<li><strong>Graph view</strong> requires aggressive filtering — global graph with 40,000 nodes and 45,000 edges is unusable without folder/tag scoping</li>
+<li><strong>Search</strong> remains fast after initial indexing</li>
+<li><strong>Mobile</strong> is effectively unusable at this scale (3+ minute startup)</li>
+</ul>
+<p><strong>Verdict:</strong> Obsidian works as a <em>selective editing tool</em> — you open it to work on specific files, not to browse the full vault. For navigation and discovery, you need something else.</p>
+<h3>LightRAG (or equivalent query layer)</h3>
+<p>At 120,000 wikilinks and 40,000 files, a knowledge graph becomes essential for three operations:</p>
+<ol>
+<li>
+<p><strong>Cross-reference queries</strong>: "Which people appear in both War and Peace and the 1870s letters?" requires traversing the graph, not reading files sequentially.</p>
+</li>
+<li>
+<p><strong>Lint operations</strong>: Checking for contradictions, orphan pages, missing cross-references across 40,000 files is computationally expensive without an index.</p>
+</li>
+<li>
+<p><strong>Contextual writing</strong>: When Claude writes a new wiki article about a person, it needs to know every work, letter, event, and place associated with that person — information scattered across potentially hundreds of files.</p>
+</li>
+</ol>
+<p><strong>Verdict:</strong> LightRAG shifts from "Phase B nice-to-have" to "co-requisite with Phase 3 TEI ingestion." Without it, Claude's context window becomes the bottleneck.</p>
+<h3>Dual-system architecture (recommended)</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Obsidian vault (editing)                               │
+│  40,000 .md files · 250 MB · wiki/ + works/ + sources/  │
+└──────────────────────┬──────────────────────────────────┘
+                       │ git commit
+                       ▼
+              ┌────────────────┐
+              │  File watcher  │  (watchdog, 5-min debounce)
+              └────────┬───────┘
+                       ▼
+┌──────────────────────────────────────────────────────────┐
+│  LightRAG index (querying)                               │
+│  Ollama (Qwen2.5-14B) · NetworkX graph · NanoVectorDB    │
+│  120,000 edges · 40,000 nodes · ~2 GB index on disk      │
+└──────────────────────┬───────────────────────────────────┘
+                       │ query API
+                       ▼
+              ┌────────────────┐
+              │  Claude (ops)  │  ingest · query · lint
+              └────────────────┘
+</code></pre>
+<p><strong>Initial indexing cost:</strong> ~40,000 docs × 10 sec/doc = ~111 hours with Qwen2.5-14B locally. Can run as an overnight batch over 5 nights, or ~2 hours with API ($20–30 one-time cost).</p>
+<p><strong>Daily incremental sync:</strong> 50 changed files × 10 sec = ~8 minutes. Negligible.</p>
+<hr />
+<h2>Local model recommendation: Ollama on Mac Mini 24 GB</h2>
+<p>For the entity extraction and relationship mapping that LightRAG needs, the model must handle English and Russian text, extract named entities reliably, and run efficiently enough for batch processing.</p>
+<h3>Hardware constraints</h3>
+<p>Mac Mini with 24 GB unified memory. After OS and Ollama overhead (~4 GB), approximately 20 GB is available for model inference.</p>
+<h3>Recommended: Qwen2.5-14B (Q4_K_M quantisation)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VRAM usage</td>
+<td>9–11 GB</td>
+</tr>
+<tr>
+<td>Tokens/sec (Apple Silicon)</td>
+<td>~20–25</td>
+</tr>
+<tr>
+<td>Context window</td>
+<td>128k tokens</td>
+</tr>
+<tr>
+<td>Russian language support</td>
+<td>Trained on 29 languages including Russian</td>
+</tr>
+<tr>
+<td>Entity extraction quality</td>
+<td>9/10 (strong structured output)</td>
+</tr>
+<tr>
+<td>Batch time (40,000 docs)</td>
+<td>~110 hours (~5 overnight runs)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why Qwen2.5-14B:</strong></p>
+<ul>
+<li>Explicitly trained on multilingual data including Russian Cyrillic</li>
+<li>Strong performance on information extraction and structured output tasks</li>
+<li>128k context window handles full documents with room for prompt</li>
+<li>Fits comfortably in 24 GB with headroom for concurrent processes</li>
+<li>LightRAG developers benchmark against Qwen models</li>
+</ul>
+<p><strong>Installation:</strong></p>
+<pre><code class="language-bash">ollama pull qwen2.5:14b
+</code></pre>
+<h3>Alternative: Mistral-Nemo-12B (if speed is critical)</h3>
+<p>~40% faster throughput (28–32 tokens/sec) with a slight quality drop and less explicit Russian support. Good fallback if Qwen2.5-14B proves too slow.</p>
+<pre><code class="language-bash">ollama pull mistral-nemo:12b
+</code></pre>
+<h3>Not recommended at this time</h3>
+<ul>
+<li><strong>Qwen3-32B</strong>: Excellent quality but uses 21–24 GB — too tight on 24 GB hardware. Risk of OOM under sustained batch load.</li>
+<li><strong>Llama3.1-8B / Gemma2-9B</strong>: Fast but weaker on Russian and less reliable entity extraction. Would need more human review of results.</li>
+<li><strong>Any API-based model</strong>: Unnecessary cost for a batch job that can run locally overnight.</li>
+</ul>
+<hr />
+<h2>What the schema needs</h2>
+<p>The current <code>tolstoy-works-schema.md</code> v5 and <code>wiki-schema.md</code> cover ~80% of the full scope. The remaining 20% requires:</p>
+<h3>New wiki entity types (5)</h3>
+<ol>
+<li><strong><code>translator</code></strong> — name, dates, Wikidata QID, languages, notable translations, bio</li>
+<li><strong><code>institution</code></strong> — name, type (publisher/journal/archive/school/movement), founded, location, relationships</li>
+<li><strong><code>adaptation</code></strong> — title, type (film/opera/stage/radio), year, director/creator, source work</li>
+<li><strong><code>criticalWork</code></strong> — title, author, year, subject works, summary</li>
+<li><strong><code>archivalFond</code></strong> — repository, collection name, call number range, contents summary, digitisation status</li>
+</ol>
+<h3>New/expanded frontmatter arrays in works schema</h3>
+<ul>
+<li><code>editions[]</code> — edition ID, publisher, date, format, language, translator, textual notes</li>
+<li><code>translationEditions[]</code> — language, translator, publisher, date, source text edition</li>
+<li><code>reviews[]</code> — source, author, publication, date, excerpt</li>
+<li><code>citedWorks[]</code> — external work title, author, context of citation</li>
+<li><code>replyTo</code> — (for letters) link to the letter being replied to</li>
+</ul>
+<h3>Derived/index files (new)</h3>
+<ul>
+<li>Master timeline (chronological index of all events)</li>
+<li>Correspondence network index (who wrote to whom, frequency, date ranges)</li>
+<li>Translation matrix (which works translated into which languages by whom)</li>
+<li>Digitisation status matrix (which archives have digitised which manuscripts)</li>
+</ul>
+<hr />
+<h2>Phased approach: what to build when</h2>
+<h3>Now (Phase 2, current): ~1,500 files</h3>
+<p>Focus on proving the model with core works and inner-circle entities. No RAG needed yet.</p>
+<h3>Phase 3 (TEI ingestion): → ~5,000 files</h3>
+<p>Ingest 3,113 persons and 770 places from TEI reference data. This is where Obsidian starts feeling the strain on autocomplete, and where a query layer starts paying for itself.</p>
+<p><strong>Decision point: stand up LightRAG before or during Phase 3.</strong></p>
+<h3>Phase 4 (biographical sources): → ~8,000 files</h3>
+<p>Ingest Birukoff, Maude, and supplementary biographical sources. Events and chronology data grows rapidly. Correspondence tracking begins.</p>
+<h3>Phase 5 (source texts + wikilinks): → ~15,000 files</h3>
+<p>Convert TEI chapter files to markdown. Letters begin ingestion. Publication history and translation data starts populating.</p>
+<h3>Phase 6+ (full scope): → ~40,000 files</h3>
+<p>Manuscript layers, reception history, visual materials, intertextual references. The full scholarly apparatus.</p>
+<p><strong>The RAG layer should be operational by Phase 3. Everything after that assumes it exists.</strong></p>
+<hr />
+<h2>Design decisions (resolved 2026-04-15)</h2>
+<h3>1. Letters: separate <code>letters/</code> folder ✓</h3>
+<p>Letters get their own top-level folder <code>website/src/letters/</code> using the same works schema (<code>genre: letter</code>). This keeps <code>works/</code> focused on literary and philosophical output while giving the 10,000+ letters their own navigable home. Letters remain part of the unified wikilink namespace — they can <code>[[link]]</code> to anything in <code>wiki/</code>, <code>works/</code>, <code>images/</code>, or other letters.</p>
+<h3>2. Events: tiered approach ✓</h3>
+<p>Following the pattern used by the Darwin Correspondence Project, Van Gogh Letters, and the CIDOC-CRM cultural heritage standard:</p>
+<ul>
+<li><strong>Tier 1 (~50):</strong> Full wiki pages with prose — major life events (excommunication, flight from Yasnaya Polyana, birth of each child, etc.)</li>
+<li><strong>Tier 2 (~500):</strong> Lightweight <code>.md</code> stubs with frontmatter + 1-2 sentences + wikilinks</li>
+<li><strong>Tier 3 (~6,500):</strong> A single <code>chronology.yaml</code> in <code>_data/</code>, rendered into a public timeline view by Eleventy</li>
+</ul>
+<p>Rationale: Obsidian's graph is most useful when nodes represent <em>entities</em> (people, places, works), not <em>dates</em>. 7,000 tiny event stubs would create noise without proportional value.</p>
+<h3>3. Images: separate <code>images/</code> section, all individual files ✓</h3>
+<p>Every image gets its own <code>.md</code> metadata stub in <code>website/src/images/</code>. Each file has frontmatter (artist, date, subject, collection, license) and a one-line caption. All are fully wikilink-able.</p>
+<p>2,360 files at ~500 bytes each adds only ~1.2 MB to the vault — negligible performance impact compared to the 10,000 letter files. Consistency beats compactness: having some images as files and others as frontmatter arrays would be confusing to maintain.</p>
+<h3>4. Editions: always in sidecar <code>.data.yaml</code> ✓</h3>
+<p>Edition data (Russian editions, translations, censored variants) lives in the work's sidecar <code>.data.yaml</code> as <code>editions[]</code> arrays. No separate file needed — the sidecar is machine-readable YAML, not something browsed by hand, so length isn't a readability concern. Each work has one canonical text (the markdown chapter files) and the overview page is the metadata hub.</p>
+<h3>5. MVP scope: literary works first (~1,000 files) ✓</h3>
+<p>Focus on the 20-30 most-read works with full text + wikilinks + overview pages. Smaller wiki: ~100 people, ~20 places. Ship something readers can actually read before building the full scholarly apparatus.</p>
+<p>This is achievable without RAG and within Obsidian's comfortable operating range.</p>
+<hr />
+<h2>Revised vault structure (post-decisions)</h2>
+<pre><code>website/src/                 ← Obsidian vault root, one unified wikilink namespace
+├── wiki/                    ← people, places, events, concepts, institutions
+├── works/                   ← literary &amp; philosophical works (767)
+├── letters/                 ← correspondence (NEW — 10,000+)
+├── images/                  ← image metadata pages (NEW — 2,360)
+├── sources/                 ← source cards, index, log (excluded from Eleventy)
+├── _staging/                ← unverified material (not in git)
+├── _data/
+│   └── chronology.yaml      ← tier-3 events (6,500 daily entries)
+├── pages/                   ← static pages
+├── posts/                   ← blog/news
+└── common/                  ← feeds, sitemap, PWA
+</code></pre>
+<h3>Revised file counts (post-decisions)</h3>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th style="text-align: right;">Files</th>
+<th style="text-align: right;">Size (MB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>works/ (overview + sidecar + text landing + chapters)</td>
+<td style="text-align: right;">8,400</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr>
+<td>wiki/ (persons, places, tier-1/2 events, concepts, institutions)</td>
+<td style="text-align: right;">5,340</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>letters/</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td>images/</td>
+<td style="text-align: right;">2,360</td>
+<td style="text-align: right;">1.2</td>
+</tr>
+<tr>
+<td>sources, indexes, derived</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>_data/ (chronology.yaml, etc.)</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td><strong>Total vault files</strong></td>
+<td style="text-align: right;"><strong>~26,500</strong></td>
+<td style="text-align: right;"><strong>~72 MB</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Note: reduced from ~40,000 in the pre-decision estimate because tier-3 events (~6,500) moved to a data file and image stubs replaced heavier image+frontmatter alternatives.</p>
+<h3>Revised wikilink density</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Edges</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chapter files (10 links/chapter avg.)</td>
+<td style="text-align: right;">61,000</td>
+</tr>
+<tr>
+<td>Letter files (8 links/letter avg.)</td>
+<td style="text-align: right;">80,000</td>
+</tr>
+<tr>
+<td>Person pages (5 outbound links avg.)</td>
+<td style="text-align: right;">20,500</td>
+</tr>
+<tr>
+<td>Place pages (3 outbound links avg.)</td>
+<td style="text-align: right;">2,300</td>
+</tr>
+<tr>
+<td>Event pages, tier 1+2 (3 outbound links avg.)</td>
+<td style="text-align: right;">1,650</td>
+</tr>
+<tr>
+<td>Institution pages (4 outbound links avg.)</td>
+<td style="text-align: right;">560</td>
+</tr>
+<tr>
+<td>Image pages (3 links avg.)</td>
+<td style="text-align: right;">7,080</td>
+</tr>
+<tr>
+<td><strong>Total (with overlap)</strong></td>
+<td style="text-align: right;"><strong>~115,000</strong></td>
+</tr>
+<tr>
+<td><strong>Unique edges (estimated)</strong></td>
+<td style="text-align: right;"><strong>~42,000</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>MVP roadmap</h2>
+<h3>Phase 1 (current): Literary works first → ~1,000 files</h3>
+<ul>
+<li>20-30 most-read works with full text, wikilinks, and overview pages</li>
+<li>~100 inner-circle person pages</li>
+<li>~20 key place pages</li>
+<li>No RAG needed. Obsidian handles this easily.</li>
+</ul>
+<h3>Phase 2: Expand works + begin wiki backbone → ~3,000 files</h3>
+<ul>
+<li>100 core works with text</li>
+<li>300 inner-circle persons (from TEI tier-1)</li>
+<li>50 key places</li>
+<li>50 major events (tier 1)</li>
+<li><strong>Decision point: evaluate whether to stand up LightRAG.</strong></li>
+</ul>
+<h3>Phase 3: TEI ingestion → ~8,000 files</h3>
+<ul>
+<li>Full TEI person/place ingestion (3,113 + 770)</li>
+<li>500 notable events (tier 2)</li>
+<li>Chronology data file</li>
+<li><strong>LightRAG must be operational by this point.</strong></li>
+</ul>
+<h3>Phase 4: Biographical sources + correspondence → ~18,000 files</h3>
+<ul>
+<li>Birukoff, Maude, supplementary sources</li>
+<li>Letter ingestion begins</li>
+<li>Publication history and translation data starts populating</li>
+</ul>
+<h3>Phase 5: Full scope → ~26,500 files (text layer)</h3>
+<ul>
+<li>All images with metadata</li>
+<li>Manuscript layers</li>
+<li>Reception history</li>
+<li>Intertextual references</li>
+<li>Complete scholarly apparatus</li>
+</ul>
+<hr />
+<h2>Appendix: the scan pipeline — an unresolved scaling question</h2>
+<p>The estimates above cover the <strong>text and metadata layer</strong> — markdown files and YAML. But the project also aims to acquire scans of original source documents: letters, manuscripts, diary pages, first editions. This creates a second layer of data that dwarfs the text layer.</p>
+<h3>Source material scan inventory</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align: right;">Items</th>
+<th style="text-align: right;">Avg pages</th>
+<th style="text-align: right;">Total scans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Letters (outgoing)</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">30,000</td>
+</tr>
+<tr>
+<td>Letters (incoming)</td>
+<td style="text-align: right;">3,500</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7,000</td>
+</tr>
+<tr>
+<td>Manuscripts &amp; drafts</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">25,000</td>
+</tr>
+<tr>
+<td>Diary pages</td>
+<td style="text-align: right;">13 vols</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">3,900</td>
+</tr>
+<tr>
+<td>Sophia Tolstaya's diaries</td>
+<td style="text-align: right;">3 periods</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">1,200</td>
+</tr>
+<tr>
+<td>First editions (key pages)</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,500</td>
+</tr>
+<tr>
+<td>Photographs &amp; portraits</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr>
+<td>Maps &amp; estate plans</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td>Artworks</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr>
+<td>Censorship &amp; legal docs</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">350</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>~14,800</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>~69,600</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Storage</h3>
+<ul>
+<li>Raw scans (JPEG, 300dpi): ~136 GB</li>
+<li>Compressed scans (WebP): ~34 GB</li>
+<li>OCR text output: ~136 MB</li>
+<li>All binaries live in <code>primary-sources/</code>, not in the vault</li>
+</ul>
+<h3>The open question: scan metadata granularity</h3>
+<p>If every scanned page gets its own <code>.md</code> metadata stub in <code>images/</code>, the vault jumps to <strong>~94,000 files</strong> — past Obsidian's practical limit. Two alternatives:</p>
+<ol>
+<li><strong>Per-item stubs</strong> (1 stub per letter/manuscript/diary, pages as frontmatter arrays): vault stays at ~39,000 files. Loses per-page wikilinks.</li>
+<li><strong>Per-page stubs for everything</strong>: 94,000 files. Maximum granularity. Obsidian becomes a selective editor; all navigation goes through LightRAG.</li>
+<li><strong>Hybrid</strong>: Per-page for short items (letters: 1-3 pages), per-item for long items (manuscripts: 50+ pages). ~65,000 files.</li>
+</ol>
+<p><strong>Decision deferred.</strong> The scan pipeline is a Phase 5+ concern. The important numbers to remember: ~70,000 scanned pages, ~34–136 GB of binary storage, and a vault file count that could triple depending on the metadata granularity we choose.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/architecture/scalability-deep-dive-2026-04-15';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>

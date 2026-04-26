@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tolstoy e-reader: local-first PWA architecture — tolstoy.life docs</title>
+<style>
+:root {
+  --ink: #1e1a17;
+  --ink-soft: #4a4038;
+  --paper: #faf7f2;
+  --rule: #d9d1c5;
+  --accent: #6b4423;
+  --accent-soft: #8c6a4a;
+  --measure: 38rem;
+  --measure-wide: 52rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 150%; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+               "URW Palladio L", P052, Charter, Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.site-header {
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header a.home {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+.site-header a.home:hover { color: var(--accent); }
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); text-decoration: underline; }
+.breadcrumb span { color: var(--rule); margin: 0 0.3em; }
+
+header.doc-header {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.doc-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+}
+header.doc-header h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+header.doc-header .meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variant-numeric: oldstyle-nums;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+/* ── Typography ── */
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.012em; }
+h2 { font-size: 1.6rem; line-height: 1.25; margin: 3rem 0 0.4rem; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: 1.18rem; line-height: 1.3; margin: 2.4rem 0 0.6rem; font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1.1rem; hyphens: auto; -webkit-hyphens: auto; }
+ol, ul { padding-left: 1.4rem; margin: 0 0 1.3rem; }
+li { margin-bottom: 0.55rem; }
+li > ol, li > ul { margin-top: 0.4rem; margin-bottom: 0.2rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+blockquote {
+  margin: 1.4rem 0; padding: 0 0 0 1.2rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+code, kbd, samp {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: rgba(107,68,35,0.07);
+  padding: 0.08em 0.34em;
+  border-radius: 2px;
+}
+pre {
+  background: rgba(107,68,35,0.05);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 1.4rem 0 1.8rem; font-size: 0.94rem;
+}
+th, td {
+  text-align: left; padding: 0.6rem 0.8rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+th {
+  font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-soft); font-style: italic;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* ── Index page ── */
+.featured-section {
+  max-width: var(--measure-wide);
+  margin: 1rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+.featured-card {
+  display: block;
+  padding: 1.7rem 1.9rem;
+  background: rgba(107, 68, 35, 0.06);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  background: rgba(107, 68, 35, 0.10);
+  color: var(--ink);
+}
+.featured-card .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 0.7rem;
+}
+.featured-card .card-title {
+  font-size: 1.42rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.featured-card .card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+}
+.featured-card .card-lede {
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2.5rem;
+}
+.index-card {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(107,68,35,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+}
+.index-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(107,68,35,0.07);
+  color: var(--ink);
+}
+.index-card .card-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.index-card .card-meta {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.index-card .card-lede {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.45;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Annotations ── */
+mark.annotation {
+  background: rgba(107, 68, 35, 0.13);
+  border-bottom: 1.5px solid var(--accent-soft);
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0 1px;
+}
+mark.annotation:hover { background: rgba(107, 68, 35, 0.22); }
+
+#ann-popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--paper);
+  border: 1px solid var(--accent-soft);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(30,26,23,0.13);
+  padding: 0.9rem 1rem;
+  width: 22rem;
+  display: none;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+#ann-popover .ann-quote {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 0.6rem;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 0.6rem;
+  line-height: 1.4;
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+#ann-popover textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 4rem;
+  outline: none;
+}
+#ann-popover textarea:focus { border-color: var(--accent-soft); }
+#ann-popover .ann-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; justify-content: flex-end;
+}
+#ann-popover button {
+  font-family: inherit; font-size: 0.82rem; padding: 0.3rem 0.75rem;
+  border-radius: 2px; cursor: pointer; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink-soft);
+}
+#ann-popover button.primary {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+#ann-popover button.primary:hover { background: var(--ink); border-color: var(--ink); }
+#ann-popover button:not(.primary):hover { border-color: var(--accent-soft); color: var(--ink); }
+
+#ann-tooltip {
+  position: fixed; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.85rem; line-height: 1.5;
+  padding: 0.6rem 0.85rem; border-radius: 3px;
+  max-width: 22rem; box-shadow: 0 3px 12px rgba(30,26,23,0.18);
+  pointer-events: none; display: none; white-space: pre-wrap;
+}
+
+#ann-bar {
+  position: fixed; bottom: 1.2rem; right: 1.4rem;
+  display: none; gap: 0.5rem; z-index: 998;
+}
+#ann-bar button {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 2px;
+  cursor: pointer; border: 1px solid var(--accent-soft);
+  background: var(--paper); color: var(--ink-soft);
+  box-shadow: 0 2px 8px rgba(30,26,23,0.1);
+}
+#ann-bar button:hover { border-color: var(--accent); color: var(--ink); }
+#ann-bar button.danger { border-color: #c0392b55; color: #c0392b; }
+#ann-bar button.danger:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <a class="home" href="/INDEX.html">tolstoy.life / docs</a>
+  
+        <span class="breadcrumb">
+          <a href="/INDEX.html">Index</a>
+          <span>›</span>
+          pwa
+        </span>
+</div>
+<header class="doc-header">
+  <p class="eyebrow">pwa</p>
+  <h1>Tolstoy e-reader: local-first PWA architecture</h1>
+  <p class="meta">Last modified 20 April 2026 · <a href="/pwa/local-first-architecture.md">view source</a></p>
+</header>
+<main>
+<h1>Tolstoy e-reader: local-first PWA architecture</h1>
+<p>A working architectural sketch for turning tolstoy.life into a true local-first e-reader, with W3C-compliant annotations, bookmarks, and optional cross-device sync — all without leaving the open web.</p>
+<h2>1. Why this fits the project</h2>
+<p>Before the technical design, the alignment worth naming explicitly:</p>
+<ul>
+<li><strong>Public domain content.</strong> Every work in the Tolstoy project is in the public domain. There is no rights-holder to negotiate with about offline storage, no DRM to implement, no "borrowing window" to enforce. The user genuinely owns their copy.</li>
+<li><strong>Permanence as a value.</strong> A local-first architecture means a reader who downloads <em>War and Peace</em> today still has it in ten years, regardless of whether tolstoy.life is up, whether the user pays anyone, or whether any company decides to stop supporting the format. The copy is theirs, materially.</li>
+<li><strong>Independence from platform gatekeepers.</strong> No Apple App Store review, no Google Play policy changes, no platform tax. The reader reaches users directly via the web, which is the same medium Tolstoy himself would have recognised as the closest analogue to the pamphlet and the printed book: uncontrolled by any single gatekeeper.</li>
+<li><strong>Web standards.</strong> The W3C Web Annotation Data Model is a real standard with multiple implementations, not a proprietary format. Annotations exported from the Tolstoy reader should be readable by Hypothes.is, Readwise, or any tool built against the standard, now or in the future.</li>
+</ul>
+<p>These aren't decorative justifications. They directly shape which architectural tradeoffs are worth making.</p>
+<h2>2. The four data layers</h2>
+<p>The architecture rests on recognising that the app has four distinct kinds of data, each with different storage and sync requirements.</p>
+<p><strong>Layer 1a — Works (read-only, content-addressed).</strong> The XHTML output of the build pipeline. Immutable from the user's perspective. Versioned by content hash so a typo fix produces a new, distinct version rather than invalidating caches. Served from tolstoy.life, cached by the service worker, and stored in the Cache API.</p>
+<p><strong>Layer 1b — Wiki articles (read-only, content-addressed).</strong> The markdown files in <code>website/src/wiki/</code> that the works reference via <code>[[wikilinks]]</code>. Same lifecycle as works — content-addressed, immutable from the user's perspective — but smaller-grained: a single article is a few KB, not many MB. Downloaded selectively per work, with a shared cache that deduplicates across multiple downloaded works. Specified in detail in <code>wiki-integration.md</code>.</p>
+<p><strong>Layer 2 — Personal annotations (local-first, sync-capable).</strong> Bookmarks, highlights, notes, reading position, tags. User-owned and mutable. Stored locally in IndexedDB. Optionally synced across a user's devices via CRDTs, but sync is never required for the app to function.</p>
+<p><strong>Layer 3 — Session state (ephemeral, local-only).</strong> Scroll position, UI state, last-opened work. Never leaves the device.</p>
+<p>The clean separation between the read-only layers (1a, 1b) and the writable layer (2) is what makes this tractable. Most local-first apps struggle because every piece of data can be edited by any device; here, the large data (the works and wiki) is immutable and only needs to be distributed, and the small data (the annotations) is what actually needs sync logic.</p>
+<h2>3. The annotation layer, in detail</h2>
+<p>The annotation layer is the interesting architectural problem. It has to do three things well: survive changes to the underlying text, render without damaging the typographic integrity of the work, and sync cleanly across devices when the user wants that.</p>
+<h3>3.1 Anchoring: the W3C Web Annotation Data Model</h3>
+<p>An annotation stored as "character offset 15,420 in chapter 3" will break the moment anyone fixes a typo earlier in the chapter. This is a solved problem, and the solution is the W3C Web Annotation Data Model — specifically, its approach of attaching multiple selectors to the same annotation and falling back gracefully:</p>
+<ol>
+<li><strong>TextPositionSelector</strong> — a character offset range. Fastest to resolve when the text hasn't changed.</li>
+<li><strong>TextQuoteSelector</strong> — the exact quoted text with a snippet of context before and after. Survives most edits; re-anchors by searching for the quote.</li>
+<li><strong>CssSelector or XPathSelector</strong> — points to a specific element. Useful for fixing an annotation to a structural feature like a footnote or a specific paragraph.</li>
+</ol>
+<p>On load, the app tries the position selector first (fastest), falls back to the quote selector if position fails (most robust), and finally to the CSS selector. If all three fail, the annotation goes into an "orphaned" sidebar where the user can see it still exists, just no longer attached. Nothing is ever silently lost.</p>
+<p>Hypothes.is's <code>dom-anchor-text-quote</code> and <code>dom-anchor-text-position</code> libraries implement this correctly and are worth using rather than reinventing.</p>
+<h3>3.2 Rendering: CSS Custom Highlights API</h3>
+<p>Traditional web annotation systems wrap highlighted text in <code>&lt;mark&gt;</code> or <code>&lt;span&gt;</code> elements, mutating the DOM of the work. This has two problems: it breaks the typographic purity of the XHTML (which matters for a project that cares about manuscript-grade typography) and it's slow when there are many annotations.</p>
+<p>The CSS Custom Highlights API, now shipped in all three major browser engines, solves both. It lets you create a highlight purely as metadata — a set of Ranges associated with a named highlight — and style it via CSS without touching the DOM. The XHTML stays pristine. Highlight rendering becomes essentially free.</p>
+<pre><code class="language-css">::highlight(user-highlight) {
+  background-color: rgba(255, 220, 100, 0.35);
+}
+::highlight(user-note-anchor) {
+  text-decoration: underline wavy rgba(100, 100, 255, 0.5);
+}
+</code></pre>
+<h3>3.3 Unifying the data model</h3>
+<p>A bookmark is an annotation with no body. A reading-position marker is a bookmark that updates automatically. A note is an annotation with a body of type <code>TextualBody</code>. A tag is an annotation with a body of type <code>SpecificResource</code> pointing to a tag URI.</p>
+<p>Everything collapses into one data model:</p>
+<pre><code class="language-json">{
+  &quot;@context&quot;: &quot;http://www.w3.org/ns/anno.jsonld&quot;,
+  &quot;id&quot;: &quot;urn:uuid:9c5b2f...&quot;,
+  &quot;type&quot;: &quot;Annotation&quot;,
+  &quot;created&quot;: &quot;2026-04-20T10:30:00Z&quot;,
+  &quot;creator&quot;: { &quot;id&quot;: &quot;local:johan&quot; },
+  &quot;motivation&quot;: &quot;highlighting&quot;,
+  &quot;body&quot;: [
+    { &quot;type&quot;: &quot;TextualBody&quot;, &quot;value&quot;: &quot;The most Tolstoyan sentence in the book.&quot; }
+  ],
+  &quot;target&quot;: {
+    &quot;source&quot;: &quot;urn:tolstoy-life:war-and-peace:book-1-chapter-3#v2026-03-01-a3f5c8&quot;,
+    &quot;selector&quot;: [
+      { &quot;type&quot;: &quot;TextPositionSelector&quot;, &quot;start&quot;: 15420, &quot;end&quot;: 15467 },
+      { &quot;type&quot;: &quot;TextQuoteSelector&quot;, &quot;exact&quot;: &quot;...&quot;, &quot;prefix&quot;: &quot;...&quot;, &quot;suffix&quot;: &quot;...&quot; }
+    ]
+  }
+}
+</code></pre>
+<p>This makes sync and export trivial, because the annotation set is just an array of these documents, each one self-describing.</p>
+<h2>4. Storage and sync</h2>
+<h3>4.1 Local storage</h3>
+<p>IndexedDB is the right home for the annotation set. It's universally available, supports indexed queries, and handles the volume comfortably — tens of thousands of annotations per user is well within its capacity.</p>
+<p>Schema:</p>
+<ul>
+<li>One <code>annotations</code> object store, keyed by annotation UUID, holding the full JSON-LD annotation.</li>
+<li>An index on <code>target.source</code> for fast lookup when opening a work.</li>
+<li>An index on <code>created</code> for chronological views ("my recent notes").</li>
+<li>A separate <code>works</code> store for Layer 1 caching metadata (which works are downloaded, their hashes, sizes).</li>
+</ul>
+<p>For users who want queryability across their whole annotation set — full-text search over notes, for example — <code>sqlite-wasm</code> running against OPFS is a strong upgrade path. It's not needed for the MVP.</p>
+<h3>4.2 CRDT-based sync, when the user opts in</h3>
+<p>Yjs is the right choice here. It's mature, small, has good bindings (y-indexeddb for local persistence, y-websocket or y-webrtc for transport), and handles the conflict-free merge automatically.</p>
+<p>The model: each user has one Y.Doc for their annotation set. It's persisted locally via y-indexeddb. When the user opts into sync, it connects to a relay — either a tiny Cloudflare Worker running <code>y-websocket-server</code>, or peer-to-peer via y-webrtc.</p>
+<p>Crucially, the sync server stores opaque CRDT update blobs, not parsed annotations. The server never needs to understand the data model. It's a dumb pipe. This has two benefits: server code stays trivially simple (under 100 lines), and the server can't leak structured data about what users are reading because it doesn't know.</p>
+<h3>4.3 Export and portability</h3>
+<p>Any user should be able to, at any moment, export their entire annotation set as a W3C-compliant JSON-LD file. They should also be able to import from the same format. This is what makes the "the user owns their data" claim substantive rather than decorative.</p>
+<p>A button somewhere in settings: "Export all annotations." A matching import button. A "delete all server-side data" button that clears the sync-relay state. No dark patterns.</p>
+<h2>5. Likely problems and how to handle them</h2>
+<p>Architectures look clean on paper. Here are the specific places this one will get rough.</p>
+<h3>5.1 Storage quota</h3>
+<p>OPFS and the Cache API are subject to browser storage quotas, which vary by browser and available disk space. The Jubilee Edition is 90 volumes. If a user tries to cache the entire edition, they may hit quota limits, and the browser may evict caches without warning under pressure.</p>
+<p><strong>Mitigation:</strong><br />
+- Use the Storage API (<code>navigator.storage.estimate()</code>, <code>navigator.storage.persist()</code>) to request persistent storage, which makes the browser much less likely to evict.<br />
+- Never cache everything by default. Let the user explicitly choose which works to make available offline, with a storage-usage display next to each one.<br />
+- Show the user how much of their quota they've used and what would be freed by removing a work.</p>
+<h3>5.2 iOS background and sync limitations</h3>
+<p>iOS deliberately limits what a PWA can do in the background. Background Sync and Periodic Background Sync are not supported on Safari. Service worker wake-ups are aggressive about shutdown. Push notifications are available from iOS 16.4+ but only for installed PWAs, and only in limited form.</p>
+<p><strong>Mitigation:</strong><br />
+- Treat sync as "opportunistic on visibility." When the app opens, it syncs. When it goes to background, it flushes pending writes. Don't design any feature that requires background wake-ups on iOS.<br />
+- Accept that iOS users will see sync happen on open rather than silently in the background. This is fine for a reading app, where you're about to read anyway.</p>
+<h3>5.3 Annotation anchoring across editions</h3>
+<p>When a work gets a new edition (typo fix, new translation, restructured chapters), existing annotations anchored to the old version need to handle the transition. The content-addressed versioning means the annotation still points unambiguously to the <em>old</em> version, which still exists — but the user is now reading the new version.</p>
+<p><strong>Mitigation:</strong><br />
+- Annotation targets include the version hash: <code>urn:tolstoy-life:war-and-peace:book-1-chapter-3#v2026-03-01-a3f5c8</code>.<br />
+- When the user opens a work, the app checks whether they have annotations on earlier versions of the same work. If so, it offers to migrate them, using the TextQuoteSelector to re-anchor on the new version.<br />
+- Annotations that can't be re-anchored stay attached to the old version and are shown in the "orphaned" sidebar with a link to re-read the old version if the user wants.</p>
+<h3>5.4 Install friction on iOS</h3>
+<p>iOS doesn't show an install prompt. Users have to know to tap Share → Add to Home Screen, which is a multi-step ritual that most users won't discover on their own. This has real consequences: features like persistent storage, push notifications, and Share Target require the PWA to be installed.</p>
+<p><strong>Mitigation:</strong><br />
+- A short, non-pushy onboarding screen with an illustrated "Add to Home Screen" guide for iOS, shown once on a first mobile Safari visit. Dismissable.<br />
+- Detect when the app is running in browser-tab mode versus standalone mode and gently suggest installation when it would unlock a feature the user is trying to use (e.g., "To receive notifications about new editions, add this to your home screen first").<br />
+- Never block any feature behind installation. The in-browser experience should be fully functional; installation is an upgrade path.</p>
+<h3>5.5 Cross-device identity without accounts</h3>
+<p>The local-first promise is undermined if sync requires a heavyweight account system. But some form of user identity is needed to route sync updates to the right devices.</p>
+<p><strong>Mitigation, from least to most intrusive:</strong><br />
+- <strong>Pairing codes.</strong> Device A generates a QR code. Device B scans it. A shared sync key is exchanged. No email, no password, no account. This is the cleanest option philosophically.<br />
+- <strong>Email magic links.</strong> Slightly more friction, but allows recovery if the user loses all their devices.<br />
+- <strong>Passkeys (WebAuthn).</strong> Modern, passwordless, but still requires the user to have one device set up first.</p>
+<p>Pairing codes should be the default. Magic links as a recovery option for users who want it. Both can be implemented with the same sync relay.</p>
+<h3>5.6 Discoverability and the "is this really an app?" problem</h3>
+<p>Users trained by the App Store don't always trust that a website can be a real app. They may be surprised that a PWA works offline, or distrustful of it compared to a "proper" app.</p>
+<p><strong>Mitigation:</strong><br />
+- Be explicit in the onboarding: "This works without an internet connection. Your notes stay on your device. You own your copy of every book, forever."<br />
+- App Store distribution is not a current goal. A Tauri or Capacitor wrapper remains technically possible later as a footnote-grade option, but the project's reach strategy is the open web, not the app stores.</p>
+<h3>5.7 Service worker update cycles</h3>
+<p>Service worker updates are subtle and can cause confusion. A user with an old service worker may be serving stale code for a surprisingly long time, especially if they always have the app open.</p>
+<p><strong>Mitigation:</strong><br />
+- Use the well-known pattern: on new service worker activation, show a non-intrusive "Updated — reload to apply" banner. Never force-reload.<br />
+- Aggressively version everything. The service worker cache keys should include a version hash; old caches are cleaned up on activation.<br />
+- Consider a "force reload" escape hatch in settings for debugging.</p>
+<h3>5.8 Service worker correctness — adopt Workbox for routing and strategies</h3>
+<p>Service workers are one of the few places where bugs really hurt. A bug in a rendering component shows a broken UI; the user refreshes and moves on. A bug in a service worker can leave users serving stale content for weeks, can wedge the site into an unrecoverable state on specific devices, can silently fail to cache things users believe they downloaded. The blast radius is long because service workers persist between visits and most users don't know how to clear them.</p>
+<p><strong>Decision: adopt Workbox for the service worker's routing and caching-strategy layer. Hand-roll everything above it (the download coordinator, IndexedDB stores, UI surfaces).</strong></p>
+<p>Workbox is Google's service-worker library. The <code>workbox-routing</code> and <code>workbox-strategies</code> modules implement the per-URL-pattern logic the architecture needs (stale-while-revalidate for shell, cache-first for downloaded works, network-first for live pages, network-only with offline fallback for non-downloaded works). <code>workbox-precaching</code> handles the shell update cycle including the "skip waiting / reload" pattern in §5.7. <code>workbox-window</code> is the page-side helper for talking to the worker.</p>
+<p>Adopting Workbox costs ~20 KB gzipped of additional JavaScript in the service worker. It is not in conflict with lean-web principles: the service worker IS the platform, and Workbox is the maintained idiomatic wrapper around a platform API that is notoriously hard to use correctly. The lean-web rule "JS only when load-bearing" applies; correct caching behaviour is load-bearing.</p>
+<p><strong>Out of Workbox's scope (kept hand-rolled):</strong> the user-initiated bulk download with progress and integrity verification (the Stage 1 download coordinator), the IndexedDB stores for download metadata and annotations, all UI surfaces.</p>
+<p><strong>Bundle budget for the service worker layer: 30 KB gzipped</strong> (Workbox plus glue). The 10 KB figure in earlier drafts was aspirational and didn't survive contact with the actual edge cases.</p>
+<h2>6. A staged roadmap</h2>
+<p>The trap with architectures like this is trying to build the whole thing at once. The value of local-first is that each stage is genuinely useful on its own, and the next stage is purely additive.</p>
+<h3>Stage 0 — What exists today</h3>
+<p>You already have tolstoy.life as a PWA with a service worker. Confirm: the service worker caches the shell and static assets, and the site works offline at the page level. This is the foundation; nothing below breaks anything here.</p>
+<h3>Stage 1 — Offline works, deliberately chosen</h3>
+<p>The first real local-first step. Give the user a "Download for offline reading" button on each work. Cache the work's XHTML and images in the Cache API. Cache the wiki articles the work references in a shared wiki cache. Ship the bundled wiki previews file with the app shell. Show a storage-usage panel in settings.</p>
+<p>Deliverable: a user on a train with no signal can read any work they've downloaded, and tap any wikilink in that work to see a preview, and read the full referenced wiki articles. Nothing is synced yet; nothing is annotated yet.</p>
+<p>This is more than just "offline books" — it's the full reading experience offline, including the contextual wiki layer. Specified in detail in <code>wiki-integration.md</code>.</p>
+<h3>Stage 2 — Bookmarks and reading position</h3>
+<p>Introduce the annotation data model but only for two uses: bookmarks (the user's explicit "mark this spot") and reading position (automatically updated). Stored in IndexedDB using the W3C schema. No sync yet.</p>
+<p>Deliverable: reopening a work takes the user back to where they were. Bookmarks appear in a sidebar.</p>
+<p>This is the first use of the annotation layer and validates the data model in a low-stakes way. If anchoring breaks, only bookmarks break — not ten thousand user notes.</p>
+<h3>Stage 3 — Highlights and notes</h3>
+<p>Add highlighting (using the CSS Custom Highlights API) and note-attaching. Same data model as bookmarks, just more motivations. Still no sync.</p>
+<p>Deliverable: a user can highlight passages and attach notes. All local. Export/import as JSON-LD already works, because the data model supports it.</p>
+<p>At this point you have a fully functional single-device local-first e-reader. This is a real, shippable product, and it honours the project's values completely. Stage 4 is optional from here.</p>
+<h3>Stage 4 — Opt-in sync</h3>
+<p>Add Yjs on top of the existing IndexedDB store using y-indexeddb. Stand up a minimal Cloudflare Worker (using Durable Objects' WebSocket support to implement the y-websocket protocol) as the sync relay. Add a QR-code pairing flow in settings, with a six-word phrase fallback for browsers without <code>BarcodeDetector</code>.</p>
+<p>Deliverable: a user who wants to read on both phone and laptop gets their annotations synced between them, with no account, no email, no password.</p>
+<p>The architectural discipline here is critical: the app must keep working identically for users who never enable sync. Sync is an overlay, not a change to the core data flow. Specified in detail in <code>yjs-schema-and-sync.md</code>.</p>
+<h3>Stage 5 — Search and cross-work features</h3>
+<p>With the annotation set maturing and local-first infrastructure in place, more ambitious features become possible: full-text search across a user's notes, tags, cross-work citations (an annotation on <em>Anna Karenina</em> that references a passage in Tolstoy's letters), an export to a static "reading journal" site the user can publish.</p>
+<h3>Stage 6 — The open annotation layer</h3>
+<p>Optional and long-term: let users choose to publish annotations publicly, compatible with the W3C Web Annotation Protocol. This opens a social layer — readers leaving notes that other readers can see. It's a whole additional project, but it's architecturally a natural extension, not a rewrite.</p>
+<h2>7. What this doesn't become</h2>
+<p>Worth naming the things this architecture is not:</p>
+<ul>
+<li><strong>Not a collaborative editor.</strong> Two users editing the same work simultaneously is not a goal. The works are immutable. Annotations are personal.</li>
+<li><strong>Not a walled garden.</strong> No account required to read. No account required to annotate. Sync is opt-in and uses standards-based formats that are portable elsewhere.</li>
+<li><strong>Not a platform play.</strong> The goal is not to become the "default reading app" or to acquire users. It's to let readers of Tolstoy have a tool that honours the works, respects their ownership, and outlasts any company.</li>
+<li><strong>Not dependent on big data companies.</strong> No Google Analytics, no Facebook SDK, no Cloudflare beyond the tiny sync worker (and even that is replaceable). The app can be self-hosted, forked, or moved to another provider without user-visible change.</li>
+</ul>
+<h2>8. Decision log</h2>
+<p>Resolved decisions:</p>
+<ol>
+<li><strong>Storage backend for works:</strong> Cache API. Revisit if quotas become a problem in practice.</li>
+<li><strong>Service worker library:</strong> Workbox for routing and strategies; hand-rolled download coordinator and IndexedDB layer above it. Bundle budget 30 KB gzipped.</li>
+<li><strong>Wiki download model:</strong> Model B (per-work <code>relatedWiki</code> declarations, shared deduplicated cache). See <code>wiki-integration.md</code>.</li>
+<li><strong>Sync relay hosting:</strong> Cloudflare Workers + Durable Objects, implementing the y-websocket protocol. Free tier suffices at expected scale.</li>
+<li><strong>Sync relay implementation:</strong> <code>y-durableobjects</code>-style implementation, not the Node-only <code>y-websocket-server</code>.</li>
+<li><strong>Pairing model:</strong> QR codes by default, six-word BIP-39 phrase fallback for browsers without <code>BarcodeDetector</code>. No email, no password.</li>
+<li><strong>Recovery model:</strong> explicit sync-key export to file, plus optional encrypted-backup-to-user-URL (e.g., user's own Nextcloud or similar). No project-controlled recovery.</li>
+<li><strong>Export format default:</strong> JSON-LD (W3C Web Annotation standard), with a secondary Markdown export for readers who want to paste into their own notes.</li>
+<li><strong>Annotation versioning:</strong> edit history via Y.Doc — free when using CRDTs.</li>
+<li><strong>Version retention on the served site:</strong> current version plus the two prior versions per work. Older versions remain in git history (the canonical archive) but are not served. This bounds the served storage without losing anything materially. See <code>tl-pipeline-integration.md</code>.</li>
+</ol>
+<p>Remaining open questions:</p>
+<ul>
+<li>App-store distribution: not pursued. PWA only.</li>
+<li>Whether to ship a one-click "download everything" option for the wiki: yes, behind a deliberate explicit action in settings, not the default.</li>
+</ul>
+<h2>9. Closing thought</h2>
+<p>The most satisfying thing about this architecture is how well its technical properties align with the project's values. Public-domain texts call for an architecture where the user truly owns their copy. Standards-based annotations call for a data model that isn't trapped in any one app. Independence from gatekeepers calls for a PWA rather than a native app. The fact that all of these happen to also be the technically cleanest choices is not a coincidence — the values and the technology come from the same tradition of craft, independence, and respect for the reader.</p>
+<p>The goal isn't to build the most capable e-reader on the market. It's to build one that a reader of Tolstoy would look at and recognise as made in the right spirit.</p>
+</main>
+<footer>tolstoy.life · public documentation</footer>
+
+<!-- Annotation UI -->
+<div id="ann-popover">
+  <div class="ann-quote" id="ann-quote"></div>
+  <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
+  <div class="ann-actions">
+    <button id="ann-cancel">Cancel</button>
+    <button class="primary" id="ann-save">Save</button>
+  </div>
+</div>
+<div id="ann-tooltip"></div>
+<div id="ann-bar">
+  <button id="ann-export">Copy annotations</button>
+  <button class="danger" id="ann-clear">Clear all</button>
+</div>
+
+<script>
+(function() {
+  const DOC_KEY = 'docs/pwa/local-first-architecture';
+  const STORE_KEY = 'tolstoy_annotations';
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveAll(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function loadDoc() {
+    return loadAll()[DOC_KEY] || [];
+  }
+  function saveDoc(anns) {
+    const all = loadAll();
+    if (anns.length === 0) delete all[DOC_KEY];
+    else all[DOC_KEY] = anns;
+    saveAll(all);
+  }
+
+  // ── Fuzzy text anchor ────────────────────────────────────────────────────
+  function getContext(range) {
+    const selected = range.toString();
+    const container = range.commonAncestorContainer;
+    const full = (container.textContent || container.innerText || '');
+    const start = full.indexOf(selected);
+    if (start === -1) return null;
+    return {
+      text: selected,
+      before: full.slice(Math.max(0, start - 30), start),
+      after: full.slice(start + selected.length, start + selected.length + 30)
+    };
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────
+  function findAndWrap(ann, index) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      const idx = node.textContent.indexOf(ann.anchor.text);
+      if (idx === -1) continue;
+      const before10 = ann.anchor.before.slice(-10);
+      const after10 = ann.anchor.after.slice(0, 10);
+      const nodeText = node.textContent;
+      const contextOk = (!before10 || nodeText.slice(Math.max(0,idx-10), idx).includes(before10.slice(-4)))
+                     || (!after10  || nodeText.slice(idx + ann.anchor.text.length, idx + ann.anchor.text.length + 10).includes(after10.slice(0,4)));
+      if (!contextOk && ann.anchor.before && ann.anchor.after) continue;
+
+      const before = node.textContent.slice(0, idx);
+      const after = node.textContent.slice(idx + ann.anchor.text.length);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation';
+      mark.dataset.index = index;
+      mark.textContent = ann.anchor.text;
+      const afterNode = document.createTextNode(after);
+      node.textContent = before;
+      node.parentNode.insertBefore(mark, node.nextSibling);
+      node.parentNode.insertBefore(afterNode, mark.nextSibling);
+      attachTooltip(mark, ann, index);
+      break;
+    }
+  }
+
+  function renderAll() {
+    document.querySelectorAll('mark.annotation').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    const anns = loadDoc();
+    anns.forEach((ann, i) => findAndWrap(ann, i));
+    updateBar();
+  }
+
+  // ── Tooltip ──────────────────────────────────────────────────────────────
+  const tooltip = document.getElementById('ann-tooltip');
+
+  function attachTooltip(mark, ann, index) {
+    mark.addEventListener('mouseenter', e => {
+      tooltip.textContent = ann.comment;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    mark.addEventListener('mousemove', positionTooltip);
+    mark.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    mark.addEventListener('click', e => {
+      e.stopPropagation();
+      showDeleteConfirm(index, mark);
+    });
+  }
+
+  function positionTooltip(e) {
+    const pad = 12;
+    let x = e.clientX + pad;
+    let y = e.clientY - tooltip.offsetHeight - pad;
+    if (x + tooltip.offsetWidth > window.innerWidth - pad) x = e.clientX - tooltip.offsetWidth - pad;
+    if (y < pad) y = e.clientY + pad;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+
+  // ── Delete confirm ────────────────────────────────────────────────────────
+  function showDeleteConfirm(index, mark) {
+    const anns = loadDoc();
+    const comment = anns[index] ? anns[index].comment : '';
+    if (confirm('Delete this annotation?\n\n"' + comment + '"')) {
+      anns.splice(index, 1);
+      saveDoc(anns);
+      renderAll();
+    }
+  }
+
+  // ── Popover ───────────────────────────────────────────────────────────────
+  const popover = document.getElementById('ann-popover');
+  const annText = document.getElementById('ann-text');
+  const annQuote = document.getElementById('ann-quote');
+  let pendingAnchor = null;
+  let pendingRange = null;
+
+  document.getElementById('ann-save').addEventListener('click', () => {
+    const comment = annText.value.trim();
+    if (!comment || !pendingAnchor) { hidePopover(); return; }
+    const anns = loadDoc();
+    anns.push({ anchor: pendingAnchor, comment, created: new Date().toISOString() });
+    saveDoc(anns);
+    hidePopover();
+    renderAll();
+  });
+
+  document.getElementById('ann-cancel').addEventListener('click', hidePopover);
+
+  annText.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('ann-save').click();
+    if (e.key === 'Escape') hidePopover();
+  });
+
+  function hidePopover() {
+    popover.style.display = 'none';
+    annText.value = '';
+    pendingAnchor = null;
+    if (pendingRange) { window.getSelection().removeAllRanges(); pendingRange = null; }
+  }
+
+  function showPopover(x, y, anchor, range) {
+    pendingAnchor = anchor;
+    pendingRange = range;
+    annQuote.textContent = '"' + anchor.text.slice(0, 120) + (anchor.text.length > 120 ? '…' : '') + '"';
+    popover.style.display = 'block';
+    let px = x, py = y + 12;
+    if (px + popover.offsetWidth > window.innerWidth - 16) px = window.innerWidth - popover.offsetWidth - 16;
+    if (py + popover.offsetHeight > window.innerHeight - 16) py = y - popover.offsetHeight - 12;
+    popover.style.left = px + 'px';
+    popover.style.top = py + 'px';
+    setTimeout(() => annText.focus(), 50);
+  }
+
+  // ── Selection listener ────────────────────────────────────────────────────
+  document.addEventListener('mouseup', e => {
+    if (popover.contains(e.target)) return;
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (text.length < 3) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const range = sel.getRangeAt(0);
+    if (!main.contains(range.commonAncestorContainer)) return;
+    const anchor = getContext(range);
+    if (!anchor) return;
+    showPopover(e.clientX, e.clientY, anchor, range);
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (!popover.contains(e.target)) hidePopover();
+  });
+
+  // ── Export / clear bar ────────────────────────────────────────────────────
+  const bar = document.getElementById('ann-bar');
+
+  function updateBar() {
+    const anns = loadDoc();
+    bar.style.display = anns.length > 0 ? 'flex' : 'none';
+  }
+
+  document.getElementById('ann-export').addEventListener('click', () => {
+    const anns = loadDoc();
+    if (!anns.length) return;
+    const lines = ['# Annotations — ' + DOC_KEY, ''];
+    anns.forEach((a, i) => {
+      lines.push('## ' + (i+1) + '. ' + a.created.slice(0,10));
+      lines.push('> ' + a.anchor.text);
+      lines.push('');
+      lines.push(a.comment);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('ann-export');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1800);
+    });
+  });
+
+  document.getElementById('ann-clear').addEventListener('click', () => {
+    if (confirm('Delete all annotations on this page?')) {
+      saveDoc([]);
+      renderAll();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderAll();
+})();
+</script>
+</body>
+</html>
