@@ -36,3 +36,7 @@ __scrap
 *.skill
 ziYV7S8m
 /lightrag.log
+
+# docs html files
+docs/**/*.html
+docs/serve.py

@@ -6,9 +6,9 @@ Last updated: 2026-04-25
 
 ## Purpose
 
-To make Leo Tolstoy's texts, letters, manuscripts, and historical context freely available — in English, online and offline. To let Tolstoy speak for himself.
+To make Leo Tolstoy's texts, letters, manuscripts, and historical context freely available — in English, online and offline — and to let Tolstoy speak for himself.
 
-This is not an academic resource in the conventional sense. It is an access project. The distinction matters: we do not interpret Tolstoy for the reader, we remove the obstacles between the reader and the texts.
+This is not an academic resource in the conventional sense. The distinction matters: where academic resources interpret and contextualise, this one removes the obstacles between the reader and the texts.
 
 ---
 
