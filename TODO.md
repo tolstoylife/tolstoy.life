@@ -1,6 +1,6 @@
 # Tolstoy Research Platform — Backlog
 
-Last updated: 2026-04-25
+Last updated: 2026-04-26
 
 ---
 
@@ -102,6 +102,9 @@ EPUB Accessibility 1.1 is now a W3C Recommendation and mandatory for all EPUB 3.
 ---
 
 ## Open questions (from log)
+
+### Editorial — Tolstoy on property and copyright (2026-04-26)
+Hitta en direkt Tolstoy-källa som binder hans religiösa hållning till avstående av litterär egendom. Behövs för att stärka stycke 2 i `docs/editorial/editorial.md` (markerat med inline `<!-- JE: -->`). Kandidatkällor: *The Kingdom of God Is Within You*; brevet 1891 till *Russkie Vedomosti*; dagboksanteckningar från sent 1880-tal och framåt. När citatet hittas: lyft in det i editorial.md och ta bort hedge-formuleringen.
 
 ### Concept pages (2026-04-10)
 - "Tolstoyism"-avvisningsbrevet: vilken volym i Jubilee Edition? Mottagare? År?
