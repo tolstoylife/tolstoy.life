@@ -146,7 +146,7 @@ All in `website/src/sources/` (excluded from Eleventy — never generates pages 
 
 ## Schema
 
-All work metadata follows `website/schema/tolstoy-works-schema.md` (v6). Wiki article metadata follows `website/schema/wiki-schema.md` (v1.1). These are the single references for field names, types, controlled vocabulary values, and examples.
+All work metadata follows `website/schema/tolstoy-works-schema.md` (v6). Wiki article metadata for all nine wiki types — person, place, event, concept, translator, institution, adaptation, criticalWork, archivalFond — follows `website/schema/wiki-schema.md` (v1.2). These are the single references for field names, types, controlled vocabulary values, and examples. Earlier type-specific schemas (`tolstoy-person-schema.md`, `tolstoy-place-schema.md`) were superseded by v1.1 and are archived under `website/schema/_archive/`.
 
 ### Key rules
 
