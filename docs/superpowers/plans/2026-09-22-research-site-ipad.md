@@ -50,7 +50,7 @@ git switch -c research-site
 - [ ] **Step 3: Record the test baseline.** Run `python3 -m pytest docs/tests -q`.
   - Expected: `1 failed, 11 passed`.
   - The known failure is `test_overview_page_links_and_folder_index`. It still expects a "Read" button (`class="tb-read"`) that the 2026-08 nav rework removed.
-  - It is not part of this plan: leave it failing and don't count it against this work.
+  - It is not part of this plan: leave it failing and don't count it against this work. A separate session was started on 2026-09-22 to update that test; if its fix has been merged, expect `12 passed` here and one more pass in every later count.
 
 ---
 
@@ -124,7 +124,7 @@ DOCS = Path(__file__).parent.resolve()
 OUT = DOCS.parent / "_site"
 SKIP_SUFFIXES = {".py", ".sh", ".stderr"}
 SKIP_PARTS = {"tests", "_audition"}
-HEADERS = "/*\n  X-Robots-Tag: noindex\n"  # @until launch — keeps the unlisted site out of search results
+HEADERS = "/*\n  X-Robots-Tag: noindex\n"  # @until research-listed — keeps the site out of search results
 REDIRECTS = "/  /INDEX.html  200\n"  # the docs front page is INDEX.html, not index.html
 
 
