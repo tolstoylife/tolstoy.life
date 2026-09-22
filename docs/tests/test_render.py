@@ -21,3 +21,8 @@ def test_footnote_renders():
 def test_wikilink_renders_link():
     html = serve.render_body("the single tax that [[Henry George]] proposed")
     assert "Henry George" in html and "wikilink" in html
+
+
+def test_front_page_credits_tolstoydigital_licence():
+    html = serve.build_index(serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files()))
+    assert "tolstoydigital" in html and "CC BY-SA 4.0" in html
