@@ -58,3 +58,6 @@ docs/reader/**/build/
 *.skill
 ziYV7S8m
 /lightrag.log
+
+# Netlify CLI state (links this folder to the research.tolstoy.life site)
+.netlify
