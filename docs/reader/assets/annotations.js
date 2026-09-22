@@ -371,7 +371,7 @@
     pendingAnchor = null;
   }
 
-  function showPopover(x, y, anchor) {
+  function showPopover(x, y, anchor, focus = true) {
     pendingAnchor = anchor;
     annQuote.textContent = '"' + anchor.exact.slice(0, 120) + (anchor.exact.length > 120 ? '…' : '') + '"';
     popover.style.display = 'block';
@@ -380,22 +380,38 @@
     if (py + popover.offsetHeight > innerHeight - 16) py = y - popover.offsetHeight - 12;
     popover.style.left = px + 'px';
     popover.style.top = py + 'px';
-    setTimeout(() => annText.focus(), 50);
+    if (focus) setTimeout(() => annText.focus(), 50);
   }
 
-  document.addEventListener('mouseup', e => {
-    if (e.target.closest('#ann-popover,#notes-panel,#tools-overlay,#toc-drawer,#topbar,#transport')) return;
+  // The current selection as a note anchor, or null when it isn't a selection in the text.
+  function selectionAnchor() {
     const s = window.getSelection();
-    if (!s || s.isCollapsed) return;
-    const text = s.toString().trim();
-    if (text.length < 3) return;
+    if (!s || s.isCollapsed || s.toString().trim().length < 3) return null;
     const main = document.querySelector('main');
-    if (!main) return;
     const range = s.getRangeAt(0);
-    if (!main.contains(range.commonAncestorContainer)) return;
+    if (!main || !main.contains(range.commonAncestorContainer)) return null;
     const anchor = getContext(range);
-    if (!anchor) return;
-    showPopover(e.clientX, e.clientY, anchor);
+    return anchor ? { anchor, rect: range.getBoundingClientRect() } : null;
+  }
+
+  let lastPointer = 'mouse', settle;
+  document.addEventListener('pointerdown', e => { lastPointer = e.pointerType; }, true);
+
+  document.addEventListener('mouseup', e => {
+    if (lastPointer !== 'mouse') return;
+    if (e.target.closest('#ann-popover,#notes-panel,#tools-overlay,#toc-drawer,#topbar,#transport')) return;
+    const sel = selectionAnchor();
+    if (sel) showPopover(e.clientX, e.clientY, sel.anchor);
+  });
+
+  // ⚠ Touch and Pencil selection (iPad) never fire mouseup — open once the selection handles settle.
+  document.addEventListener('selectionchange', () => {
+    if (lastPointer === 'mouse' || popover.contains(document.activeElement)) return;
+    clearTimeout(settle);
+    settle = setTimeout(() => {
+      const sel = selectionAnchor();
+      if (sel) showPopover(sel.rect.left, sel.rect.bottom, sel.anchor, false);
+    }, 600);
   });
 
   document.addEventListener('mousedown', e => {
