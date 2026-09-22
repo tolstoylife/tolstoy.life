@@ -5,7 +5,7 @@ tags: [research, planning, design, website-launch, epub, audiobook]
 title: "Interactive reader's editions — all formats from one source (design)"
 ---
 
-> **Wrapped by the go-forward workflow (2026-06-30):** this spec defines the *machinery* (one source → three formats). The [`2026-06-30 reader-editions workflow design`](../superpowers/specs/2026-06-30-interactive-reader-editions-workflow-design.md) wraps it with the *workflow* — and supersedes a few specifics here: outputs live in a self-contained per-work bundle `docs/reader/<cat>/<subcat>/<id>/` (artifacts in its gitignored `build/`), the reader-default translation is marked by `translationEditions[].readerDefault` (works schema §8 v10), and Phase 3 (re-dive) is the front door of the wiki/works ingestion. Read that spec first for where files live and how the loop runs.
+> **Wrapped by the go-forward workflow (2026-06-30):** this spec defines the *machinery* (one source → three formats). The [`2026-06-30 reader-editions workflow design`](../../superpowers/specs/2026-06-30-interactive-reader-editions-workflow-design.md) wraps it with the *workflow* — and supersedes a few specifics here: outputs live in a self-contained per-work bundle `docs/reader/<cat>/<subcat>/<id>/` (artifacts in its gitignored `build/`), the reader-default translation is marked by `translationEditions[].readerDefault` (works schema §8 v10), and Phase 3 (re-dive) is the front door of the wiki/works ingestion. Read that spec first for where files live and how the loop runs.
 
 This is the design for producing **all the reader-facing formats of a work** — the interactive web
 edition, a read-along EPUB3, and the synced audiobook — from **one durable marked-up source file**.

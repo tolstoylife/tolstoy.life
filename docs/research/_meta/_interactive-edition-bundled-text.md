@@ -37,7 +37,7 @@ one file, not the e-reader.
 `tolstoy.life` becomes a **new interactive edition of Tolstoy's works**: a clean e-reader by default,
 with toggleable layers summoned from a side rail — wikilinks, the passages Tolstoy or his editors or
 the censor cut, edition and translation differences, modal info boxes on the entities. Spec 1 produces
-the content those layers render; spec 2 builds the reader (now specified as a `serve.py` prototype: [`2026-07-03-interactive-reader-prototype-design.md`](../superpowers/specs/2026-07-03-interactive-reader-prototype-design.md)).
+the content those layers render; spec 2 builds the reader (now specified as a `serve.py` prototype: [`2026-07-03-interactive-reader-prototype-design.md`](../../superpowers/specs/2026-07-03-interactive-reader-prototype-design.md)).
 
 ## Governing principle — Tolstoy's voice, not the mainstream filter
 
