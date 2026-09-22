@@ -203,7 +203,7 @@ def page_shell(*, title, eyebrow, heading, meta_line, body_html, config,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — tolstoy.life docs</title>
+<title>{title} — tolstoy.life research</title>
 <script>{HEAD_SNIPPET}</script>
 <link rel="stylesheet" href="/reader/assets/shell.css">
 </head>
@@ -517,7 +517,7 @@ def nav_for(md_path: Path) -> dict:
     """Top-bar identity + Contents hub for a page: Docs | Library | ☰ Work ›
     Subpage, with the drawer listing every page of the work. Plain docs get
     just the Docs link."""
-    nav = {"home_html": '<a class="tb-home" href="/INDEX.html">Docs</a>',
+    nav = {"home_html": '<a class="tb-home" href="/INDEX.html">Research</a>',
            "lib_html": "", "crumb_html": "", "hub_title": "", "hub_html": ""}
     ctx = work_context(md_path)
     if not ctx:
@@ -760,7 +760,7 @@ def _extract_title_md(md_path: Path) -> str:
 
 # Hand-authored HTML docs (no .md sibling) carry their own title/description.
 # Strip the site suffix so the index card title isn't repetitive.
-_HTML_TITLE_SUFFIXES = (" — tolstoy.life docs", " — tolstoy.life")
+_HTML_TITLE_SUFFIXES = (" — tolstoy.life research", " — tolstoy.life docs", " — tolstoy.life")
 
 
 def _extract_title_html(html_path: Path) -> str:
@@ -1009,7 +1009,7 @@ def build_index(docs: dict) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Docs — tolstoy.life</title>
+<title>Research — tolstoy.life</title>
 <style>
 :root {{
   --bg:#14161a; --panel:#1c1f25; --panel-2:#21252c; --ink:#e8e4da;
@@ -1074,19 +1074,19 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
 <body>
 <header class="topbar">
   <div class="tb-group">
-    <a class="tb-brand" href="/INDEX.html">tolstoy.life</a>
+    <a class="tb-brand" href="https://tolstoy.life/">tolstoy.life</a>
     <span class="sep">›</span>
-    <span class="tb-here">Docs</span>
+    <span class="tb-here">Research</span>
   </div>
   <div class="tb-group tb-links">
     <a href="/reader/index.html">Library</a>
-    <a href="/research/index.html">Research index</a>
+    <a href="/research/index.html">Corpus dives</a>
   </div>
 </header>
 <div class="wrap">
 <header class="top">
-  <p class="eyebrow">tolstoy.life · docs</p>
-  <h1>Docs</h1>
+  <p class="eyebrow">tolstoy.life · research</p>
+  <h1>Research</h1>
   <p class="lede">The project's public build log and engineering shelf — dated notes from research
   and design, and the reference docs behind the platform. Dated entries are mirrored to
   <a href="https://tolstoy.life/notes/">tolstoy.life/notes/</a>.</p>
