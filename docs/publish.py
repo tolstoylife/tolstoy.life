@@ -13,6 +13,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import serve
+
 DOCS = Path(__file__).parent.resolve()
 OUT = DOCS.parent / "_site"
 SKIP_SUFFIXES = {".py", ".sh", ".stderr"}
@@ -41,11 +43,17 @@ def main():
     subprocess.run([sys.executable, str(DOCS / "serve.py"), "--build-only"], check=True)
     shutil.rmtree(OUT, ignore_errors=True)
     total = 0
-    for rel in publishable():
+    pub = publishable()
+    for rel in pub:
         dest = OUT / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(DOCS / rel, dest)
         total += dest.stat().st_size
+    # ⚠ The local front page lists untracked and leftover pages too; the published one lists only what's published.
+    live = {DOCS / rel for rel in pub}
+    listed = serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files())
+    kept = {folder: [p for p in files if p.with_suffix(".html") in live] for folder, files in listed.items()}
+    (OUT / "INDEX.html").write_text(serve.build_index({f: ps for f, ps in kept.items() if ps}), encoding="utf-8")
     (OUT / "_headers").write_text(HEADERS)
     (OUT / "_redirects").write_text(REDIRECTS)
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")
