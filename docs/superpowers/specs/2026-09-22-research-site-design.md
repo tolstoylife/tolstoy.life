@@ -63,6 +63,8 @@ Left out: dive images, HTML without a tracked source, scripts and tests, The Gre
 
 ## Step 2 — the soft launch (decided 2026-09-22, after the trip)
 
+> Step-by-step plan: [2026-09-22-research-site-soft-launch.md](../plans/2026-09-22-research-site-soft-launch.md), written 2026-09-22. Writing it corrected two counts below: the images were never published at all (`docs/.gitignore` ignores `research/**/visuals/`), and of the 575 image files there, 396 are recorded in a dossier as public domain or CC0, 13 carry another licence, and 166 appear in no dossier at all. The held-back working papers come to 121 files, linked from 18 published pages.
+
 **Who it's for.** Readers and listeners: people who read or listen to an edition and say what's wrong or unclear. Russian readers, scholars and builders aren't invited yet.
 
 ### A. tolstoy.life — a short landing page
