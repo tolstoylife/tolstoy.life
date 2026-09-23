@@ -71,7 +71,13 @@ h.dataset['l'+k[0].toUpperCase()+k.slice(1)]=L[k]?'on':'off';});}catch(e){}})();
     <button id="notes-copytext">Copy as text</button>
     <button id="notes-export">Copy JSON-LD</button>
     <button id="notes-import">Import…</button>
+    <button id="notes-send">Send to the project</button>
     <button id="notes-clear" class="danger">Clear all</button>
+  </div>
+  <div id="notes-send-row" hidden>
+    <input type="email" id="notes-email" placeholder="Your email, if you'd like a reply" autocomplete="email">
+    <p class="notes-send-note">Sends the notes on this page and its address. Nothing else is collected, and the email is optional.</p>
+    <div class="notes-actions"><button id="notes-send-go">Send</button></div>
   </div>
 </aside>
 

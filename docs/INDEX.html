@@ -84,8 +84,25 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
   <p class="lede">Open research on the last thirty years of Leo Tolstoy's life — from <em>A Confession</em> (1879–82) to his death in 1910, the stretch this project calls the Prophet period. It is the part of his work that is least read and least translated: the religious and social writing he turned to after the novels, and whose copyright he renounced so that it would belong to everyone.</p>
   <p class="lede">The reading, the source work and the writing are done by Claude Code, an AI, under the supervision of Johan Edlund. The sources are the 90-volume Jubilee Edition, the tolstoydigital TEI corpus, and Tolstoy's own diaries and letters; every claim is tied to one by name, and what hasn't been checked says so.</p>
   <p class="lede">This page indexes everything: reader's editions with read-along audio, research dives through the corpus, and the build log. Nothing here is behind a login — the pages, the working notes and the code that builds them are all in <a href="https://github.com/tolstoylife/tolstoy.life">tolstoylife/tolstoy.life</a>. Corrections, sources and questions are welcome as issues there, and anyone who wants to work on it is welcome to join.</p>
-  <p class="meta">Generated 22 September 2026, 21:02</p>
+  <p class="meta">Generated 23 September 2026, 10:49</p>
 </header>
+<section class="reading">
+  <h2>Read and listen</h2>
+  <div class="nav-grid">
+    <a class="nav-card" href="/reader/non-fiction/personal-papers/confession/">
+      <div class="nc-title">A Confession</div>
+      <div class="nc-meta">1879–82 · the Russian, Wiener's 1904 English, a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/">
+      <div class="nc-title">The Great Sin</div>
+      <div class="nc-meta">1905 · the Russian, the 1905 English (<em>A Great Iniquity</em>), a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/index.html">
+      <div class="nc-title">The whole library</div>
+      <div class="nc-meta">every work, with what exists for each</div>
+    </a>
+  </div>
+</section>
 
   <section class="viz">
     <iframe class="viz-frame" src="/research/visualizations/prophet-essays.html#embed-timeline"
@@ -133,33 +150,6 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         <div class="nc-meta">14 docs</div>
       </a>
   </div>
-</section>
-<section>
-  <h2>Notes</h2>
-  
-    <h3 class="year-label">2026</h3>
-    <ul class="post-list">
-        <li class="post-entry">
-          <a href="/architecture/architecture-review.html">
-            <div class="post-row">
-              <time>9 May 2026</time>
-              <span class="post-title">Deep research report — Tolstoy PWA local-first architecture</span>
-              <span class='post-folder'>architecture</span>
-            </div>
-            <p class='post-lede'>The sync model has three independent pieces that people often conflate. Let me separate them.</p>
-          </a>
-        </li>
-        <li class="post-entry">
-          <a href="/design/period-colours-preview.html">
-            <div class="post-row">
-              <time>26 Apr 2026</time>
-              <span class="post-title">Tolstoy Period Colours — Preview</span>
-              <span class='post-folder'>design</span>
-            </div>
-            
-          </a>
-        </li>
-    </ul>
 </section>
 
     <h2 id="ref-general">General<span class="count">1</span></h2>
@@ -284,7 +274,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/reader/index.html">
         <div class="card-title">Reader-editions works tracker</div>
-        <div class="card-meta">updated 22 Sep 2026</div>
+        <div class="card-meta">updated 23 Sep 2026</div>
         <div class='card-lede'>Every work the dives have surfaced — the run-list for the reader editions and the progress board for where each sits in the loop (dived → bu…</div>
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/overview.html">
@@ -2454,6 +2444,33 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         <div class='card-lede'>`docs/research/` is currently **flat** — every dive is a sibling folder, mixed with infra folders and loose planning files. Three different …</div>
       </a>
     </div>
+<section>
+  <h2>Notes</h2>
+  
+    <h3 class="year-label">2026</h3>
+    <ul class="post-list">
+        <li class="post-entry">
+          <a href="/architecture/architecture-review.html">
+            <div class="post-row">
+              <time>9 May 2026</time>
+              <span class="post-title">Deep research report — Tolstoy PWA local-first architecture</span>
+              <span class='post-folder'>architecture</span>
+            </div>
+            <p class='post-lede'>The sync model has three independent pieces that people often conflate. Let me separate them.</p>
+          </a>
+        </li>
+        <li class="post-entry">
+          <a href="/design/period-colours-preview.html">
+            <div class="post-row">
+              <time>26 Apr 2026</time>
+              <span class="post-title">Tolstoy Period Colours — Preview</span>
+              <span class='post-folder'>design</span>
+            </div>
+            
+          </a>
+        </li>
+    </ul>
+</section>
 <footer>tolstoy.life · public build log · generated by <code>docs/serve.py</code><br>Extracts from the <a href="https://tolstoydigital.org/">tolstoydigital</a> TEI corpus are shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Tolstoy's own words are in the public domain, and everything else here is dedicated to it (<a href="https://github.com/tolstoylife/tolstoy.life/blob/main/LICENSE">licence</a>).</footer>
 </div>
 </body>
