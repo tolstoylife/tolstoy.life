@@ -268,4 +268,4 @@ A `--novel`-mode, work-subject corpus dive (interactive, in-session; commit, don
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-the-forged-coupon.md`](../../../website/src/posts/notes/2026-06-12-the-forged-coupon.md) (draft).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-the-forged-coupon.md`](../../../../../../website/src/posts/notes/2026-06-12-the-forged-coupon.md) (draft).*

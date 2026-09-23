@@ -87,7 +87,7 @@ The work then ran, by the editorial history, "from 13 May to 15 June 1908" (= 26
 
 ### The people around the work
 
-- **V. G. Chertkov** (central) — publisher and editorial confidant. He received the manuscript, marked it up in red ink, and published the complete text abroad through his Free Age Press / «Свободное слово». His edits, all approved by Tolstoy, are documented in the manuscript description (see *Redactions*). His page [exists in the vault](../../../website/src/wiki/Vladimir%20Chertkov.md).
+- **V. G. Chertkov** (central) — publisher and editorial confidant. He received the manuscript, marked it up in red ink, and published the complete text abroad through his Free Age Press / «Свободное слово». His edits, all approved by Tolstoy, are documented in the manuscript description (see *Redactions*). His page [exists in the vault](../../../../../../website/src/wiki/Vladimir%20Chertkov.md).
 - **N. N. Gusev** (central) — Tolstoy's secretary in 1908, copyist of the manuscripts, and the diary-witness to the phonograph attempt, the nun-scene, and Tolstoy's mood. His cover-notes date the drafts and carry the working title. He was arrested and exiled in 1909. No vault page yet.
 - **B. M. Eikhenbaum** (source) — the Formalist critic who wrote the PSS Tom 37 editorial history and manuscript description this section relies on. Cited as editorial history, attributed.
 
@@ -366,4 +366,4 @@ This was a `corpus-dive` work-dive run on 2026-06-13, in-session (accept-edits),
 
 ---
 
-*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the record this research should become — including a **new** works record for the essay, which has none yet. It also seeds the planned death-penalty theme-dive. See the [draft dev-blog note](../../../website/src/posts/notes/2026-06-13-i-cannot-be-silent.md).*
+*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the record this research should become — including a **new** works record for the essay, which has none yet. It also seeds the planned death-penalty theme-dive. See the [draft dev-blog note](../../../../../../website/src/posts/notes/2026-06-13-i-cannot-be-silent.md).*

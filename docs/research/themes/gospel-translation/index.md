@@ -24,7 +24,7 @@ The English source the reader supplied — *The Four Gospels Harmonised and Tran
 
 The platform already documents *what* Tolstoy did to the Gospel text (the fire-and-light rewrite) and *where* that text lives (the Jubilee Edition and TEI corpus). What this dive adds is the *story of the work as an event in a life*: the years 1879–1884 when the author of *Anna Karenina* stopped writing fiction, taught himself enough Greek to re-translate the New Testament, demolished Orthodox dogmatics, and in the same years pushed his marriage to the edge. It is the hinge between the two Tolstoys — and the primary record lets the project tell that story in its own words, and in his wife's, rather than through the received "domestic tragedy" narrative.
 
-For the wiki it opens a tight cluster of missing pages — the harmony and the *Gospel in Brief* as works, the *Critique of Dogmatic Theology*, Strakhov, the anonymous-then-Wiener English lineage, and the censored Geneva publication — and grounds an update to the existing [Sophia Tolstaya](../../../website/src/wiki/Sophia%20Tolstaya.md) page in her own diaries.
+For the wiki it opens a tight cluster of missing pages — the harmony and the *Gospel in Brief* as works, the *Critique of Dogmatic Theology*, Strakhov, the anonymous-then-Wiener English lineage, and the censored Geneva publication — and grounds an update to the existing [Sophia Tolstaya](../../../../website/src/wiki/Sophia%20Tolstaya.md) page in her own diaries.
 
 ## The shape of the question
 
@@ -296,4 +296,4 @@ Links: sibling dives — [the fire metaphor](../fire-metaphor/index.html) (the t
 
 ---
 
-*Companion dev-blog note: [`website/src/posts/notes/2026-06-05-gospel-translation.md`](../../../website/src/posts/notes/2026-06-05-gospel-translation.md) (draft). Machine-readable dossier: `dossier.yaml`.*
+*Companion dev-blog note: [`website/src/posts/notes/2026-06-05-gospel-translation.md`](../../../../website/src/posts/notes/2026-06-05-gospel-translation.md) (draft). Machine-readable dossier: `dossier.yaml`.*

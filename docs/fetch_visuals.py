@@ -54,13 +54,11 @@ DOCS = Path(__file__).parent.resolve()      # …/docs
 REPO_ROOT = DOCS.parent                      # repo root; dossier localPaths are repo-relative
 RESEARCH = DOCS / "research"
 
-# Wikimedia asks bots for a descriptive User-Agent with contact info; an empty
-# or generic UA is served 403.
+# ⚠ Wikimedia serves 403 to an empty or generic User-Agent; it wants one with contact info.
 USER_AGENT = ("tolstoy.life-fetch_visuals/1.0 "
               "(https://tolstoy.life; research image cache) python-requests")
 
-# A Commons "File:" page is an HTML page, not the image. Special:FilePath/<name>
-# 302-redirects to the original full-size file on upload.wikimedia.org.
+# A Commons "File:" page is HTML, not the image; Special:FilePath/<name> redirects to the full-size file.
 COMMONS_FILE_RE = re.compile(
     r"https?://commons\.wikimedia\.org/wiki/File:(.+)$", re.IGNORECASE)
 IMG_EXTENSIONS = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".tif", ".tiff", ".svg")

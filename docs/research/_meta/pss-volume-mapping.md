@@ -67,7 +67,7 @@ The local file numbering reflects publication-order, which loosely tracks Tom nu
 | Tom 30 | vol90 | Tom 61 | vol27 | | |
 | (Tom 31 — see TODO) | | Tom 62 | vol28 | | |
 
-The bolded row marks **Tom 53 → vol19**, the diaries 1895–1899 volume that contains the 27 March 1895 will-as-diary-entry referenced in [the copyright-renunciation research](copyright-renunciation/).
+The bolded row marks **Tom 53 → vol19**, the diaries 1895–1899 volume that contains the 27 March 1895 will-as-diary-entry referenced in [the copyright-renunciation research](../copyright-renunciation/).
 
 ---
 

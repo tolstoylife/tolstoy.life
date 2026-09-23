@@ -304,4 +304,4 @@ Links: parent dive — [the gospel-translation project](../gospel-translation/in
 
 ---
 
-*Companion dev-blog note: [`website/src/posts/notes/2026-06-06-lords-prayer.md`](../../../website/src/posts/notes/2026-06-06-lords-prayer.md) (draft). Machine-readable dossier: `dossier.yaml`.*
+*Companion dev-blog note: [`website/src/posts/notes/2026-06-06-lords-prayer.md`](../../../../website/src/posts/notes/2026-06-06-lords-prayer.md) (draft). Machine-readable dossier: `dossier.yaml`.*

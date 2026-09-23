@@ -159,4 +159,4 @@ Background (secondary, attributed): Bartlett, *Tolstoy: A Russian Life* (2010); 
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-08-the-kreutzer-sonata.md`](../../../website/src/posts/notes/2026-06-08-the-kreutzer-sonata.md) (draft).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-08-the-kreutzer-sonata.md`](../../../../../../website/src/posts/notes/2026-06-08-the-kreutzer-sonata.md) (draft).*

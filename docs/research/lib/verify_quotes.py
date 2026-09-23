@@ -37,13 +37,9 @@ except ImportError:
     print("verify_quotes.py: PyYAML is required (pip install pyyaml)", file=sys.stderr)
     sys.exit(2)
 
-# Internal author-inserted elision: ONLY bracketed ellipses count. A bare
-# "…"/"..." in the MIDDLE is left alone because it can be Tolstoy's own text.
+# ⚠ Only bracketed ellipses count as the quoter's elision; a bare "…" mid-quote can be Tolstoy's own text.
 ELLIPSIS_RE = re.compile(r"\[\s*(?:\.\.\.|…|\. \. \.)\s*\]")
-# Boundary ellipsis (leading/trailing, bare OR bracketed): a quote that starts
-# or ends mid-sentence. This is decoration, not removed-from-middle material, so
-# it is stripped before matching — removing it can only ever make containment
-# easier and never masks an error in the quote body.
+# Leading/trailing ellipses (bare or bracketed) are stripped before matching; that only makes containment easier and never hides an error in the quote body.
 LEAD_ELLIPSIS_RE = re.compile(r"^\s*(?:\[\s*(?:\.\.\.|…)\s*\]|\.\.\.|…)\s*")
 TRAIL_ELLIPSIS_RE = re.compile(r"\s*(?:\[\s*(?:\.\.\.|…)\s*\]|\.\.\.|…)\s*$")
 WORKING_EN = "(working English)"

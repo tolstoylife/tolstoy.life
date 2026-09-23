@@ -164,4 +164,4 @@ The dive proposes four `works/` records and a routing map of entities; it writes
 
 ---
 
-*Draft dev-blog note: [`2026-06-21-art-aesthetics-satellites`](../../../website/src/posts/notes/2026-06-21-art-aesthetics-satellites.md) (draft).*
+*Draft dev-blog note: [`2026-06-21-art-aesthetics-satellites`](../../../../website/src/posts/notes/2026-06-21-art-aesthetics-satellites.md) (draft).*

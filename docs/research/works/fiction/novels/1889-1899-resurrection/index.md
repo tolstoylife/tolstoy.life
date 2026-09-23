@@ -223,4 +223,4 @@ Links: sibling dives are cross-linked inline above. Re-balancing notes for a pos
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-08-resurrection.md`](../../../website/src/posts/notes/2026-06-08-resurrection.md) (draft).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-08-resurrection.md`](../../../../../../website/src/posts/notes/2026-06-08-resurrection.md) (draft).*

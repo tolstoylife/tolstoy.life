@@ -54,22 +54,17 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 ROOT = Path(__file__).parent.resolve()
 
 SKIP_DIRS  = {".git", ".claude", ".omc", ".pytest_cache", "__pycache__", "node_modules"}
-SKIP_FILES = {"serve.py"}
+SKIP_FILES = {"serve.py", "404.md"}  # 404.md is built by publish.py, not listed
 PASSTHROUGH_EXTENSIONS = {".html", ".pdf", ".pptx", ".mp3", ".jpg", ".png",
                            ".svg", ".yaml", ".yml", ".skill", ".json"}
 
-# Hand-authored HTML doesn't carry YAML frontmatter, so layer/date for
-# orphan HTML files is declared explicitly here. .md files use their own
-# frontmatter — see Phase 1 of the docs→dev-blog migration.
+# Hand-authored HTML has no frontmatter, so its layer/date is declared here; .md files use their own.
 HTML_META = {
     "architecture/architecture-review.html":  {"layer": "blog", "date": "2026-05-09"},
     "design/period-colours-preview.html":     {"layer": "blog", "date": "2026-04-26"},
 }
 
-# ── Page chrome (the reading shell) ────────────────────────────────────────────
-# Styling lives in reader/assets/shell.css; behaviour in shell.js /
-# annotations.js / readalong.js. These constants are plain strings (not
-# f-strings) so their braces need no doubling.
+# ── Page chrome (the reading shell) ── styles in reader/assets/shell.css, behaviour in shell.js / annotations.js / readalong.js; ⚠ plain strings, not f-strings, so braces need no doubling.
 
 # Applies saved theme/type settings before first paint (no flash).
 HEAD_SNIPPET = """
@@ -81,8 +76,7 @@ var L=s.layers||{};['wikilinks','cuts','footnotes'].forEach(function(k){
 h.dataset['l'+k[0].toUpperCase()+k.slice(1)]=L[k]?'on':'off';});}catch(e){}})();
 """.strip()
 
-# Inline icon symbols — copied from the UI drafts (Tabler-outline style):
-# _generated/design/session-reader-ui-drafts-2026-07-03/reader-ui-drafts.html
+# Inline icon symbols (Tabler-outline style), copied from _generated/design/session-reader-ui-drafts-2026-07-03/reader-ui-drafts.html
 ICONS = """
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-list" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></symbol>
@@ -112,7 +106,13 @@ NOTES_PANEL = """
     <button id="notes-copytext">Copy as text</button>
     <button id="notes-export">Copy JSON-LD</button>
     <button id="notes-import">Import…</button>
+    <button id="notes-send">Send to the project</button>
     <button id="notes-clear" class="danger">Clear all</button>
+  </div>
+  <div id="notes-send-row" hidden>
+    <input type="email" id="notes-email" placeholder="Your email, if you'd like a reply" autocomplete="email">
+    <p class="notes-send-note">Sends the notes on this page and its address. Nothing else is collected, and the email is optional.</p>
+    <div class="notes-actions"><button id="notes-send-go">Send</button></div>
   </div>
 </aside>
 """
@@ -203,7 +203,7 @@ def page_shell(*, title, eyebrow, heading, meta_line, body_html, config,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — tolstoy.life docs</title>
+<title>{title} — tolstoy.life research</title>
 <script>{HEAD_SNIPPET}</script>
 <link rel="stylesheet" href="/reader/assets/shell.css">
 </head>
@@ -257,8 +257,7 @@ def wiki_url(label: str, base: str, end: str) -> str:
 MD = markdown.Markdown(extensions=[
     TableExtension(),
     FencedCodeExtension(),
-    # ponytail: no nl2br — a single newline in wrapped source is a soft wrap, not a
-    # <br> (Markdown spec). Intended breaks still work via two trailing spaces.
+    # ponytail: no nl2br — a single newline in source is a soft wrap (Markdown spec); two trailing spaces still force a break.
     "sane_lists",
     "attr_list",
     "footnotes",            # the work's own authorial/translator notes ([^n])
@@ -267,8 +266,7 @@ MD = markdown.Markdown(extensions=[
                       html_class="wikilink", build_url=wiki_url),
 ])
 
-# serve.py lives in docs/, so the repo root isn't on sys.path by default — add it
-# so the shared reader/ helpers import (web + EPUB share the same ID rule).
+# The repo root isn't on sys.path when serve.py runs from docs/; add it so the shared reader/ helpers import.
 _REPO_ROOT = str(Path(__file__).resolve().parent.parent)
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
@@ -292,20 +290,28 @@ def mark_missing_wikilinks(html: str) -> str:
             'class="wikilink"', 'class="wikilink wikilink-missing" title="No page yet"')
     return _WIKILINK_A_RE.sub(repl, html)
 
+PSS_ABBR = '<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr>'
+
+def abbr_pss(html: str) -> str:
+    """A bare PSS in running text gets its <abbr>; one already in <abbr>, <code> or <pre>, or inside a tag, is left alone."""
+    out, inside = [], 0
+    for part in re.split(r"(<[^>]+>)", html):
+        if part.startswith("<"):
+            m = re.match(r"<(/?)(abbr|code|pre)\b", part)
+            if m:
+                inside += -1 if m.group(1) else 1
+        elif not inside:
+            part = re.sub(r"\bPSS\b", PSS_ABBR, part)
+        out.append(part)
+    return "".join(out)
+
 def render_body(text: str) -> str:
     """Convert a Markdown string (CriticMarkup, footnotes, [[wikilinks]]) to an HTML fragment."""
     MD.reset()
-    return add_paragraph_ids(mark_missing_wikilinks(MD.convert(text)))
+    return add_paragraph_ids(abbr_pss(mark_missing_wikilinks(MD.convert(text))))
 
 
-# ── Dive cross-link resolution (post-2026-07 folder move) ───────────────────────
-# The move relocated every dive from flat  research/<slug>/  into
-# research/{works/<genre>/<subcat>,themes,_meta}/<slug>/  (and renamed a few
-# slugs). Existing dives still link each other with the old flat  ../<slug>/… ,
-# which now misses on both ends. Rewrite those `../…` links at render time to the
-# real location — move-map.tsv gives old-path → new-path, and current folder names
-# cover dives written since. Links that don't resolve (website/ draft-note
-# pointers, not-yet-created siblings) are left untouched.
+# ── Dive cross-link resolution ── dives still link each other in the flat pre-2026-07 `../<slug>/…` form; rewrite those at render time via move-map.tsv and current folder names, leaving unresolved links as authored.
 _DIVE_ALIAS = None
 
 def _dive_alias() -> dict:
@@ -395,10 +401,7 @@ def bundle_editions(bundle: Path):
     return sorted(found, key=lambda wv: _read_order(wv[1]))
 
 
-# ── Per-work navigation: the Docs | Library | ☰ Work crumb + the Contents hub ────
-# The Contents drawer lists every page of a work (its editions + apparatus pages +
-# the research dive/annotations), auto-built from the bundle folder and its dive
-# folder so it stays in sync as pages come and go.
+# ── Per-work navigation ── the Contents drawer lists every page of a work, built from its bundle and dive folders so it stays in sync.
 
 _PAGE_LABELS = {
     "restored-text.md": "Restored text",
@@ -410,13 +413,32 @@ _PAGE_LABELS = {
 _HUB_APPARATUS = ["restored-text.md", "translation-diagnostic.md", "alignment-notes.md"]
 
 
-def _edition_label(version: str, readalong: bool = False, verbose: bool = False) -> str:
+def _edition_year(bundle: Path, version: str) -> str:
+    """4-digit year for an edition whose version tag isn't itself a year
+    (e.g. en-wiener → 1904, read from meta.<version>.json's date)."""
+    meta_path = bundle / f"meta.{version}.json"
+    if meta_path.exists():
+        m = re.search(r"\d{4}", str(_load_json(meta_path).get("date", "")))
+        if m:
+            return m.group()
+    return ""
+
+
+def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
+                   year: str = "") -> str:
     # verbose = the spelled-out drawer/body form; terse (default) = the crumb form.
     if version.startswith("en-machine"):
         base = "English (machine translation)" if verbose else "English (machine)"
     elif version.startswith("en"):
-        yr = version.split("-", 1)[1] if "-" in version else ""
-        base = f"English, {yr}" if yr[:4].isdigit() else "English"
+        suffix = version.split("-", 1)[1] if "-" in version else ""
+        if suffix[:4].isdigit():
+            base = f"English, {suffix}"
+        elif year:
+            # named-translator edition (e.g. en-wiener): year from meta.json, translator spelled out in the drawer and body only
+            name = suffix.replace("-", " ").title()
+            base = f"English, {year} ({name})" if verbose and name else f"English, {year}"
+        else:
+            base = "English"
     elif version.startswith("ru"):
         base = "Русский (Russian version)" if verbose else "Русский"
     else:
@@ -430,7 +452,7 @@ def _page_label(md_path: Path, work: str) -> str:
         return "Overview"
     wv = work_version_of(md_path)
     if wv:
-        return _edition_label(wv[1])
+        return _edition_label(wv[1], year=_edition_year(md_path.parent, wv[1]))
     return (_PAGE_LABELS.get(md_path.name) or _extract_title_md(md_path)
             or md_path.stem.replace("-", " ").title())
 
@@ -477,7 +499,8 @@ def work_hub_html(bundle: Path, work: str, dive_dir, current_url: str) -> str:
         items.append((u(ov), "Overview"))
     for w, v in bundle_editions(bundle):
         ra = (bundle / "build" / f"timing.{v}.json").exists() and v.startswith("en")
-        items.append((u(bundle / f"{w}.{v}.md"), _edition_label(v, ra, verbose=True)))
+        items.append((u(bundle / f"{w}.{v}.md"),
+                      _edition_label(v, ra, verbose=True, year=_edition_year(bundle, v))))
     for name in _HUB_APPARATUS:
         if (bundle / name).exists():
             items.append((u(bundle / name), _PAGE_LABELS[name]))
@@ -496,7 +519,7 @@ def nav_for(md_path: Path) -> dict:
     """Top-bar identity + Contents hub for a page: Docs | Library | ☰ Work ›
     Subpage, with the drawer listing every page of the work. Plain docs get
     just the Docs link."""
-    nav = {"home_html": '<a class="tb-home" href="/INDEX.html">Docs</a>',
+    nav = {"home_html": '<a class="tb-home" href="/INDEX.html">Research</a>',
            "lib_html": "", "crumb_html": "", "hub_title": "", "hub_html": ""}
     ctx = work_context(md_path)
     if not ctx:
@@ -639,11 +662,7 @@ def md_to_html(md_path: Path) -> str:
         if m:
             text = text[:m.start()] + text[m.end():]
     else:
-        # The body conventionally still opens with an H1 repeating the title.
-        # serve.py renders the title itself in the doc-header below, so a
-        # leading body H1 that duplicates it would render twice. Strip the
-        # duplicate — but only when it matches the title, so a genuinely
-        # different leading heading is left alone.
+        # Drop a leading body H1 only when it repeats the title, which the doc-header already shows.
         m = re.match(r"#\s+(.+?)\s*(?:\n|$)", text)
         if m and m.group(1).strip() == title.strip():
             text = text[m.end():].lstrip("\n")
@@ -663,9 +682,7 @@ def md_to_html(md_path: Path) -> str:
 
     doc_key = "docs/" + str(rel.with_suffix(""))
 
-    # Top bar + Contents hub. Docs | Library | ☰ Work › Subpage for any page
-    # that belongs to a work (bundle page OR its research dive/annotations);
-    # a plain doc keeps just the Docs link.
+    # Top bar + Contents hub: Docs | Library | ☰ Work › Subpage for any page of a work (bundle, dive or annotations); a plain doc keeps just the Docs link.
     nav = nav_for(md_path)
     eyebrow = folder or "docs"
     if nav["hub_html"] and (ROOT / "reader") in md_path.parents:
@@ -737,9 +754,8 @@ def _extract_title_md(md_path: Path) -> str:
     return md_path.stem.replace("-", " ").title()
 
 
-# Hand-authored HTML docs (no .md sibling) carry their own title/description.
-# Strip the site suffix so the index card title isn't repetitive.
-_HTML_TITLE_SUFFIXES = (" — tolstoy.life docs", " — tolstoy.life")
+# Hand-authored HTML carries its own title; strip the site suffix so index cards don't repeat it.
+_HTML_TITLE_SUFFIXES = (" — tolstoy.life research", " — tolstoy.life docs", " — tolstoy.life")
 
 
 def _extract_title_html(html_path: Path) -> str:
@@ -920,8 +936,7 @@ def build_index(docs: dict) -> str:
     <ul class="post-list">{posts}
     </ul>"""
 
-    # ── Embedded centerpiece: the corpus-in-time timeline (chart 1 of the
-    # prophet-essays visualizations, shown via its #embed-timeline mode) ──
+    # ── Embedded centerpiece: the corpus-in-time timeline (chart 1 of prophet-essays, via its #embed-timeline mode) ──
     viz = ROOT / "research" / "visualizations" / "prophet-essays.html"
     viz_html = ""
     if viz.exists():
@@ -988,7 +1003,7 @@ def build_index(docs: dict) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Docs — tolstoy.life</title>
+<title>Research — tolstoy.life</title>
 <style>
 :root {{
   --bg:#14161a; --panel:#1c1f25; --panel-2:#21252c; --ink:#e8e4da;
@@ -1018,7 +1033,7 @@ a:hover {{ text-decoration:underline; }}
 header.top {{ border-bottom:1px solid var(--line); padding-bottom:1.4rem; margin-bottom:1.8rem; }}
 .eyebrow {{ font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 .5rem; }}
 h1 {{ font-size:2rem; font-weight:650; letter-spacing:.01em; margin:0 0 .5rem; }}
-p.lede {{ color:var(--ink-dim); max-width:74ch; margin:.2rem 0 0; }}
+p.lede {{ color:var(--ink-dim); max-width:74ch; margin:.2rem 0 .7rem; }}
 p.meta {{ font-size:.78rem; color:var(--ink-faint); margin-top:1rem; }}
 h2 {{ font-size:1.2rem; font-weight:600; color:var(--accent); margin:2.8rem 0 .3rem; }}
 h2 .count {{ color:var(--ink-faint); font-weight:500; font-size:.9rem; margin-left:.4em; }}
@@ -1053,36 +1068,53 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
 <body>
 <header class="topbar">
   <div class="tb-group">
-    <a class="tb-brand" href="/INDEX.html">tolstoy.life</a>
+    <a class="tb-brand" href="https://tolstoy.life/">tolstoy.life</a>
     <span class="sep">›</span>
-    <span class="tb-here">Docs</span>
+    <span class="tb-here">Research</span>
   </div>
   <div class="tb-group tb-links">
     <a href="/reader/index.html">Library</a>
-    <a href="/research/index.html">Research index</a>
+    <a href="/research/index.html">Corpus dives</a>
   </div>
 </header>
 <div class="wrap">
 <header class="top">
-  <p class="eyebrow">tolstoy.life · docs</p>
-  <h1>Docs</h1>
-  <p class="lede">The project's public build log and engineering shelf — dated notes from research
-  and design, and the reference docs behind the platform. Dated entries are mirrored to
-  <a href="https://tolstoy.life/notes/">tolstoy.life/notes/</a>.</p>
+  <p class="eyebrow">tolstoy.life · research</p>
+  <h1>Research</h1>
+  <p class="lede">Open research on the last thirty years of Leo Tolstoy's life — from <em>A Confession</em> (1879–82) to his death in 1910, the stretch this project calls the Prophet period. It is the part of his work that is least read and least translated: the religious and social writing he turned to after the novels, and whose copyright he renounced so that it would belong to everyone.</p>
+  <p class="lede">The reading, the source work and the writing are done by Claude Code, an AI, under the supervision of Johan Edlund. The sources are the 90-volume Jubilee Edition, the tolstoydigital TEI corpus, and Tolstoy's own diaries and letters; every claim is tied to one by name, and what hasn't been checked says so.</p>
+  <p class="lede">This page indexes everything: reader's editions with read-along audio, research dives through the corpus, and the build log. Nothing here is behind a login — the pages, the working notes and the code that builds them are all in <a href="https://github.com/tolstoylife/tolstoy.life">tolstoylife/tolstoy.life</a>. Corrections, sources and questions are welcome as issues there, and anyone who wants to work on it is welcome to join.</p>
   <p class="meta">Generated {now}</p>
 </header>
+<section class="reading">
+  <h2>Read and listen</h2>
+  <div class="nav-grid">
+    <a class="nav-card" href="/reader/non-fiction/personal-papers/confession/">
+      <div class="nc-title">A Confession</div>
+      <div class="nc-meta">1879–82 · the Russian, Wiener's 1904 English, a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/">
+      <div class="nc-title">The Great Sin</div>
+      <div class="nc-meta">1905 · the Russian, the 1905 English (<em>A Great Iniquity</em>), a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/index.html">
+      <div class="nc-title">The whole library</div>
+      <div class="nc-meta">every work, with what exists for each</div>
+    </a>
+  </div>
+</section>
 {viz_html}
 <section>
   <h2>Browse</h2>
   <div class="nav-grid">{nav_cards}
   </div>
 </section>
+{ref_html}
 <section>
   <h2>Notes</h2>
   {blog_html}
 </section>
-{ref_html}
-<footer>tolstoy.life · public build log · generated by <code>docs/serve.py</code></footer>
+<footer>tolstoy.life · public build log · generated by <code>docs/serve.py</code><br>Extracts from the <a href="https://tolstoydigital.org/">tolstoydigital</a> TEI corpus are shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Tolstoy's own words are in the public domain, and everything else here is dedicated to it (<a href="https://github.com/tolstoylife/tolstoy.life/blob/main/LICENSE">licence</a>).</footer>
 </div>
 </body>
 </html>"""
@@ -1115,9 +1147,7 @@ def collect_orphan_html_files() -> dict:
             continue
         if path.name == "INDEX.html":
             continue
-        # Generated-and-committed pages (not hand-authored orphans): the research
-        # landing page and its promoted visualizations are built by
-        # build_research_index.py, not part of the chronological notes feed.
+        # The research landing page and its visualizations are built by build_research_index.py, not part of the notes feed.
         rel = path.relative_to(ROOT).as_posix()
         if rel == "research/index.html" or rel.startswith("research/visualizations/"):
             continue
@@ -1218,9 +1248,7 @@ def build_all(verbose=True):
 # ── HTTP server ────────────────────────────────────────────────────────────────
 
 class Handler(http.server.SimpleHTTPRequestHandler):
-    # Default .txt to text/plain with no charset, which browsers then guess as
-    # Latin-1 / cp1252 and render UTF-8 prose (Cyrillic, French diacritics) as
-    # mojibake. Force UTF-8 for text/* responses.
+    # ⚠ Force UTF-8 for text/*: without a charset browsers guess Latin-1 and garble Cyrillic and diacritics.
     extensions_map = {
         **http.server.SimpleHTTPRequestHandler.extensions_map,
         ".txt": "text/plain; charset=utf-8",

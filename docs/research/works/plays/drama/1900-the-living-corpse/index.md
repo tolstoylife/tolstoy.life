@@ -226,4 +226,4 @@ A `--novel` work-subject dive (drama flex): the full six-act play read act by ac
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-the-living-corpse.md`](../../../website/src/posts/notes/2026-06-12-the-living-corpse.md) (draft).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-the-living-corpse.md`](../../../../../../website/src/posts/notes/2026-06-12-the-living-corpse.md) (draft).*

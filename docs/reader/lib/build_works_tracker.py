@@ -54,8 +54,7 @@ def dive_dossiers():
     yield from sorted(RESEARCH.glob("works/*/*/*/dossier.yaml"))
     yield from sorted(RESEARCH.glob("themes/*/dossier.yaml"))
 
-# The loop the editions move through, in order. The first two are derived from
-# artifacts on disk; the rest are human-judgment stages set in status.yaml.
+# The loop the editions move through; the first two stages come from files on disk, the rest are set by hand in status.yaml.
 LOOP_STAGES = ["dived", "built", "read", "re-dived", "ingested"]
 DERIVABLE = {"dived", "built"}
 
@@ -281,7 +280,7 @@ def assemble():
     for dossier in dive_dossiers():
         slug = dossier.parent.name
         data = load_yaml(dossier)
-        dive_href = f"research/{dossier.parent.relative_to(RESEARCH).as_posix()}/index.html"
+        dive_href = f"/research/{dossier.parent.relative_to(RESEARCH).as_posix()}/index.html"
         for seed in work_rows_from_dossier(slug, data, dive_href):
             rows.append(_finish_row(seed, records, status, dived=True))
             seen.add(seed["workId"])
@@ -465,8 +464,7 @@ COLUMNS = [
 def render_cell(row, key):
     if key == "title":
         inner = esc(row["title"])
-        # overview page (the work's own front page) beats the dive; the
-        # overview links onward to the dive itself
+        # the overview page beats the dive; the overview links on to the dive
         href = row.get("overviewHref") or row["diveHref"]
         if href:
             inner = f'<a href="{esc(href)}">{inner}</a>'
@@ -532,7 +530,7 @@ def render(rows, meta):
   </div>
   <div class="tb-group tb-links">
     <a href="/INDEX.html">Docs</a>
-    <a href="research/index.html">Research index</a>
+    <a href="/research/index.html">Research index</a>
   </div>
 </header>
 <div class="wrap">

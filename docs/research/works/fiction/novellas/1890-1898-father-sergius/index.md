@@ -255,4 +255,4 @@ This is the fourth novel-dive and the first run after the `--novel` mode was cod
 - Tolstoy, Leo (1911). *Father Sergius*, trans. Louise and Aylmer Maude (Project Gutenberg #985).
 - "Decree of Excommunication of Leo Tolstoy" (Holy Synod, 20–24 Feb 1901), Wikisource.
 
-See the draft dev-blog note: [2026-06-09-father-sergius](../../../website/src/posts/notes/2026-06-09-father-sergius.md).
+See the draft dev-blog note: [2026-06-09-father-sergius](../../../../../../website/src/posts/notes/2026-06-09-father-sergius.md).

@@ -144,11 +144,11 @@ def test_plain_doc_gets_shell_and_annotation_only():
 
 def test_overview_page_links_and_folder_index():
     html = serve.md_to_html(BUNDLE / "overview.md")
-    # top bar: Library + a Read button opening the best edition
-    assert 'href="/reader/index.html"' in html
-    assert 'class="tb-read" href="the-great-sin.en-1905.html"' in html
+    # top bar: Library; the Contents drawer lists the edition to read
+    assert 'class="tb-lib" href="/reader/index.html"' in html
+    assert 'href="/reader/non-fiction/essays-and-criticism/the-great-sin/the-great-sin.en-1905.html">English, 1905' in html
     assert 'id="transport"' not in html        # overview is a plain doc
 
     # the reading page points back at the overview, not the dive
     work_html = serve.md_to_html(BUNDLE / "the-great-sin.en-1905.md")
-    assert 'href="overview.html"' in work_html
+    assert 'href="/reader/non-fiction/essays-and-criticism/the-great-sin/overview.html"' in work_html

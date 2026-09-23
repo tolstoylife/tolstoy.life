@@ -129,4 +129,4 @@ A work-subject dive (interactive, not `--auto`, not `--novel`). Scope: the lette
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-13-a-letter-to-a-hindu.md`](../../../website/src/posts/notes/2026-06-13-a-letter-to-a-hindu.md) (draft). Machine-readable dossier: [`dossier.yaml`](dossier.yaml).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-13-a-letter-to-a-hindu.md`](../../../../../../website/src/posts/notes/2026-06-13-a-letter-to-a-hindu.md) (draft). Machine-readable dossier: [`dossier.yaml`](dossier.yaml).*

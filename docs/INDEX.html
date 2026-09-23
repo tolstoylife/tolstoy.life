@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Docs — tolstoy.life</title>
+<title>Research — tolstoy.life</title>
 <style>
 :root {
   --bg:#14161a; --panel:#1c1f25; --panel-2:#21252c; --ink:#e8e4da;
@@ -33,7 +33,7 @@ a:hover { text-decoration:underline; }
 header.top { border-bottom:1px solid var(--line); padding-bottom:1.4rem; margin-bottom:1.8rem; }
 .eyebrow { font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 .5rem; }
 h1 { font-size:2rem; font-weight:650; letter-spacing:.01em; margin:0 0 .5rem; }
-p.lede { color:var(--ink-dim); max-width:74ch; margin:.2rem 0 0; }
+p.lede { color:var(--ink-dim); max-width:74ch; margin:.2rem 0 .7rem; }
 p.meta { font-size:.78rem; color:var(--ink-faint); margin-top:1rem; }
 h2 { font-size:1.2rem; font-weight:600; color:var(--accent); margin:2.8rem 0 .3rem; }
 h2 .count { color:var(--ink-faint); font-weight:500; font-size:.9rem; margin-left:.4em; }
@@ -68,24 +68,41 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
 <body>
 <header class="topbar">
   <div class="tb-group">
-    <a class="tb-brand" href="/INDEX.html">tolstoy.life</a>
+    <a class="tb-brand" href="https://tolstoy.life/">tolstoy.life</a>
     <span class="sep">›</span>
-    <span class="tb-here">Docs</span>
+    <span class="tb-here">Research</span>
   </div>
   <div class="tb-group tb-links">
     <a href="/reader/index.html">Library</a>
-    <a href="/research/index.html">Research index</a>
+    <a href="/research/index.html">Corpus dives</a>
   </div>
 </header>
 <div class="wrap">
 <header class="top">
-  <p class="eyebrow">tolstoy.life · docs</p>
-  <h1>Docs</h1>
-  <p class="lede">The project's public build log and engineering shelf — dated notes from research
-  and design, and the reference docs behind the platform. Dated entries are mirrored to
-  <a href="https://tolstoy.life/notes/">tolstoy.life/notes/</a>.</p>
-  <p class="meta">Generated 10 August 2026, 11:17</p>
+  <p class="eyebrow">tolstoy.life · research</p>
+  <h1>Research</h1>
+  <p class="lede">Open research on the last thirty years of Leo Tolstoy's life — from <em>A Confession</em> (1879–82) to his death in 1910, the stretch this project calls the Prophet period. It is the part of his work that is least read and least translated: the religious and social writing he turned to after the novels, and whose copyright he renounced so that it would belong to everyone.</p>
+  <p class="lede">The reading, the source work and the writing are done by Claude Code, an AI, under the supervision of Johan Edlund. The sources are the 90-volume Jubilee Edition, the tolstoydigital TEI corpus, and Tolstoy's own diaries and letters; every claim is tied to one by name, and what hasn't been checked says so.</p>
+  <p class="lede">This page indexes everything: reader's editions with read-along audio, research dives through the corpus, and the build log. Nothing here is behind a login — the pages, the working notes and the code that builds them are all in <a href="https://github.com/tolstoylife/tolstoy.life">tolstoylife/tolstoy.life</a>. Corrections, sources and questions are welcome as issues there, and anyone who wants to work on it is welcome to join.</p>
+  <p class="meta">Generated 23 September 2026, 10:49</p>
 </header>
+<section class="reading">
+  <h2>Read and listen</h2>
+  <div class="nav-grid">
+    <a class="nav-card" href="/reader/non-fiction/personal-papers/confession/">
+      <div class="nc-title">A Confession</div>
+      <div class="nc-meta">1879–82 · the Russian, Wiener's 1904 English, a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/">
+      <div class="nc-title">The Great Sin</div>
+      <div class="nc-meta">1905 · the Russian, the 1905 English (<em>A Great Iniquity</em>), a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/index.html">
+      <div class="nc-title">The whole library</div>
+      <div class="nc-meta">every work, with what exists for each</div>
+    </a>
+  </div>
+</section>
 
   <section class="viz">
     <iframe class="viz-frame" src="/research/visualizations/prophet-essays.html#embed-timeline"
@@ -98,11 +115,11 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
   <div class="nav-grid">
       <a class="nav-card" href="/research/index.html">
         <div class="nc-title">Research</div>
-        <div class="nc-meta">405 docs · corpus-dive landing page</div>
+        <div class="nc-meta">413 docs · corpus-dive landing page</div>
       </a>
       <a class="nav-card" href="/reader/index.html">
         <div class="nc-title">Library</div>
-        <div class="nc-meta">12 docs · reader editions &amp; works tracker</div>
+        <div class="nc-meta">14 docs · reader editions &amp; works tracker</div>
       </a>
       <a class="nav-card" href="#ref-general">
         <div class="nc-title">General</div>
@@ -130,43 +147,16 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="nav-card" href="#ref-superpowers">
         <div class="nc-title">Superpowers</div>
-        <div class="nc-meta">10 docs</div>
+        <div class="nc-meta">14 docs</div>
       </a>
   </div>
-</section>
-<section>
-  <h2>Notes</h2>
-  
-    <h3 class="year-label">2026</h3>
-    <ul class="post-list">
-        <li class="post-entry">
-          <a href="/architecture/architecture-review.html">
-            <div class="post-row">
-              <time>9 May 2026</time>
-              <span class="post-title">Deep research report — Tolstoy PWA local-first architecture</span>
-              <span class='post-folder'>architecture</span>
-            </div>
-            <p class='post-lede'>The sync model has three independent pieces that people often conflate. Let me separate them.</p>
-          </a>
-        </li>
-        <li class="post-entry">
-          <a href="/design/period-colours-preview.html">
-            <div class="post-row">
-              <time>26 Apr 2026</time>
-              <span class="post-title">Tolstoy Period Colours — Preview</span>
-              <span class='post-folder'>design</span>
-            </div>
-            
-          </a>
-        </li>
-    </ul>
 </section>
 
     <h2 id="ref-general">General<span class="count">1</span></h2>
     <div class="index-grid">
       <a class="index-card" href="/audiobook-pipeline.html">
         <div class="card-title">Audiobook pipeline — reference & findings</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Agent-facing reference for the local TTS audiobook pipeline. The working code,</div>
       </a>
     </div>
@@ -250,8 +240,13 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         <div class='card-lede'>This document specifies the concrete CRDT shape, the IndexedDB layout, and the sync-relay contract. It assumes the overall architecture from…</div>
       </a>
     </div>
-    <h2 id="ref-reader">Reader<span class="count">12</span></h2>
+    <h2 id="ref-reader">Reader<span class="count">14</span></h2>
     <div class="index-grid">
+      <a class="index-card" href="/reader/non-fiction/personal-papers/confession/overview.html">
+        <div class="card-title">A Confession</div>
+        <div class="card-meta">updated 14 Aug 2026</div>
+        <div class='card-lede'>An autobiographical narrative written between about 1879 and 1882. Its Russian title</div>
+      </a>
       <a class="index-card" href="/reader/non-fiction/personal-papers/confession/confession.en-machine.html">
         <div class="card-title">A Confession (MT reader edition)</div>
         <div class="card-meta">updated 10 Aug 2026</div>
@@ -264,7 +259,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/the-great-sin.en-1905.html">
         <div class="card-title">A Great Iniquity (EN reader edition)</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/build/_audition/audition.html">
@@ -274,17 +269,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/reader/non-fiction/personal-papers/confession/confession.en-wiener.html">
         <div class="card-title">My Confession (EN reader edition)</div>
-        <div class="card-meta">updated 9 Aug 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         
       </a>
       <a class="index-card" href="/reader/index.html">
         <div class="card-title">Reader-editions works tracker</div>
-        <div class="card-meta">updated 10 Aug 2026</div>
+        <div class="card-meta">updated 23 Sep 2026</div>
         <div class='card-lede'>Every work the dives have surfaced — the run-list for the reader editions and the progress board for where each sits in the loop (dived → bu…</div>
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/overview.html">
         <div class="card-title">The Great Sin</div>
-        <div class="card-meta">updated 13 Jul 2026</div>
+        <div class="card-meta">updated 14 Aug 2026</div>
         <div class='card-lede'>An essay of 1905. Its Russian title is «Великий грех» (the great sin); the English</div>
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/the-great-sin.en-machine.html">
@@ -296,6 +291,11 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         <div class="card-title">The Great Sin — Russian spine alignment notes</div>
         <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>How `the-great-sin.ru.md` (PSS «Великий грех», t. 36, pp. 206–230) was made</div>
+      </a>
+      <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/restored-text.html">
+        <div class="card-title">The Great Sin — the restored text</div>
+        <div class="card-meta">updated 14 Aug 2026</div>
+        <div class='card-lede'>**What this is.** The passages cut from «Великий грех» before it went to print in 1905, each set back into the published text at the seam it…</div>
       </a>
       <a class="index-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/translation-diagnostic.html">
         <div class="card-title">The Great Sin — where the 1905 English departs from the Russian</div>
@@ -309,11 +309,11 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/reader/non-fiction/personal-papers/confession/confession.ru.html">
         <div class="card-title">Исповедь (RU reader edition)</div>
-        <div class="card-meta">updated 17 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         
       </a>
     </div>
-    <h2 id="ref-research">Research<span class="count">403</span></h2>
+    <h2 id="ref-research">Research<span class="count">411</span></h2>
     <div class="index-grid">
       <a class="index-card" href="/research/themes/crisis/index.html">
         <div class="card-title">"Crisis": how Tolstoy named — and did not name — his transformation of 1879–1882</div>
@@ -322,17 +322,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/tolstoyanism/_body-voice-finalists.html">
         <div class="card-title">_Body Voice Finalists</div>
-        <div class="card-meta">updated 31 May 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>_bibl_: Толстой Л. Н. [Дневник 1897 г.] // Толстой Л. Н. Полное собрание сочинений: в 90 тт. Т. 53. М.: Гос. изд. «Художественная литература…</div>
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/extracts/_scholarship.html">
         <div class="card-title">_scholarship.md — Scholarship & Reception sweep</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>The mainstream scholarly account runs roughly as follows. By the late 1870s–early 1880s Tolstoy had already broken decisively with Orthodox …</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/extracts/_scholarship.html">
         <div class="card-title">_scholarship.md — Secondary layer: *What Is Art?* (1897–1898)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scholarly context and reception for the corpus-dive on Tolstoy's *Что такое искусство?*</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/extracts/_sweep_diaries.html">
@@ -342,7 +342,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_visuals.html">
         <div class="card-title">_Visuals</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>- id: posrednik-covers-chelovek</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/extracts/_visuals_commons_tolstoy.html">
@@ -387,8 +387,13 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/aldanov-1921-review-berlin-ladyzhnikov.html">
         <div class="card-title">Aldanov on the 1921 Berlin Ladyzhnikov edition (Vols I–III)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source:** Mark Aldanov, review article on *Бирюков П.И. Л. Н. Толстой. Биография. Томы I–III. Издательство Ладыжникова. Берлин, 1921*, fir…</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Alexander Buturlin.html">
+        <div class="card-title">Alexander Buturlin</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: this page has no biography beyond the single 1905 episode. His dates, career, and the nature of the acquaintance …</div>
       </a>
       <a class="index-card" href="/research/_meta/_research-index-plan.html">
         <div class="card-title">An interactive index for docs/research — the handoff plan</div>
@@ -407,12 +412,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/az-lib-vol1-roman-chapter-probe.html">
         <div class="card-title">az.lib.ru Vol I — "Глава 10. Роман" probe (and Vol I OCR provenance)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source URL:** http://az.lib.ru/b/birjukow_p_i/text_1905_tolstoy02.shtml (Vol I, 2-я часть)</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/az-lib-vol3-front-matter.html">
         <div class="card-title">az.lib.ru — Vol III front-matter and two-layer preface</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source URL:** http://az.lib.ru/b/birjukow_p_i/text_1905_tolstoy05.shtml</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/index.html">
@@ -437,12 +442,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1909-the-devil/extracts/_sweep_diaries_letters.html">
         <div class="card-title">Byte-verification sweep — The Devil (Дьявол), 1889–1909</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- Generated 2026-06-10 via extract_tei.py --choice=reg --notes=auto --></div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_sweep_letters_chertkov.html">
         <div class="card-title">Chertkov Letters Triage — Posrednik / Folk Tales Theme</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep of 152 TEI letter files from `_wl_L2.txt` (PSS vols. 85–87, letters to V. G. Chertkov</div>
       </a>
       <a class="index-card" href="/research/themes/christian/index.html">
@@ -457,37 +462,37 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_commentary.html">
         <div class="card-title">Commentary digest — Tolstoy's 1905–06 tales for the weekly-reading slot of «Круг чтения»</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: PSS «История писания и печатания» apparatus, byte-faithful TEI extracts. Six tales + the general anthology history.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/extracts/_sweep_composition.html">
         <div class="card-title">Composition-window sweep — *Одумайтесь!* (1904)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep of diaries (Tom 55) and letters (Tom 75) for the window January–June 1904.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/extracts/_witness_sweep.html">
         <div class="card-title">Composition-window witness sweep — «Смерть Ивана Ильича» (The Death of Ivan Ilyich)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Window swept:** 1881 (death of the prototype) through Mar 1886 (повесть finished), focused on the 1884–1886 writing window.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/extracts/_sweep_genesis_witness.html">
         <div class="card-title">Composition-years witness sweep — *Father Sergius* (Отец Сергий, 1890–1898)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Verbatim diary entries and letters Tolstoy wrote *while composing the novella*, capturing (a) his work-mood / self-understanding and (b) the…</div>
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/extracts/_genesis-sweep.html">
         <div class="card-title">Composition-years witness sweep — the break with the Church (1901–1902)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope: PSS Tom 54 diary (all 1901 + 1902 entries, 85 files) + PSS Tom 73 letters</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/extracts/_sweep_composition.html">
         <div class="card-title">Composition-years witness sweep — «Закон насилия и закон любви» (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Primary diaries, notebooks (Tom 56) and letters (Toms 78, 89) from the composition</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/extracts/_concept_map.html">
         <div class="card-title">Concept / philosopher juxtaposition map — *What Is Art?* (Что такое искусство?, 1897–1898)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>How Tolstoy reads and judges Western aesthetics. Source: `v30_027_203_Chto_takoe_iskusstvo.txt` (verbatim modern-orthography Russian, extrac…</div>
       </a>
       <a class="index-card" href="/research/themes/christian-anarchism/session-log.html">
@@ -507,47 +512,47 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_deepread_long.html">
         <div class="card-title">Deep read — three 1905–06 Круг чтения tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Close literary digest of the three byte-faithful TEI extracts (modern orthography, `--choice=reg`).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1903-1906-on-shakespeare-and-the-drama/extracts/_deepread.html">
         <div class="card-title">Deep-read & keystone map — On Shakespeare and the Drama</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract: `v35_216_272_O_Shekspire_i_o_drame.txt` (PSS Tom 35, pp. 216–272; 18,208 words; 8 chapters I–VIII).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_deepread_novella.html">
         <div class="card-title">Deep-read — The Kreutzer Sonata (Крейцерова соната), PSS Tom 27 pp. 7–78</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract (modern orthography, `--choice=reg`):</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_deepread_afterword.html">
         <div class="card-title">Deep-read: Afterword to *The Kreutzer Sonata* («Послесловие к «Крейцеровой сонате»»)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract: `extracts/v27_079_092_Posleslovie_k_Krejtserovoj_sonate.txt`</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/extracts/_sweep_diaries.html">
         <div class="card-title">Diary sweep — *What I Believe* composition window</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Scope:** 191 XML files scanned (190 × 1883 + 1 × Dec-1882 entry).</div>
       </a>
       <a class="index-card" href="/research/themes/folk-tales/extracts/_sweep_diaries-1903.html">
         <div class="card-title">Diary sweep — 1903 folk tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- source: PSS Tom 54; extract method: extract_tei.py --choice=reg --notes=auto --></div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_sweep_diary.html">
         <div class="card-title">Diary sweep — 1905–06 Krug Chteniya tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>PSS Tom 55 (v55_* TEI files). Composition window: October 1904 – December 1906.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_sweep_diaries.html">
         <div class="card-title">Diary sweep — The Kreutzer Sonata composition window</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope: genesis, strain, urgency, and self-understanding during composition of the novella and its Afterword (Послесловие); people named in p…</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_sweep_diaries-55-58.html">
         <div class="card-title">Diary sweep — Toms 55–58 (1904–1910)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Encryption candidates found:** 23</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/extracts/_sweep_diaries.html">
@@ -557,27 +562,27 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/extracts/_sweep_diaries.html">
         <div class="card-title">Diary sweep — «Что такое религия и в чём сущность её?»</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Extracted and verified 2026-06-07. All --choice=reg (pre-reform orthography regularised).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_sweep_diaries.html">
         <div class="card-title">Diary sweep: Tolstoy PSS Tom 53, 1898–1899</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Entries are ranked by density of genesis signal (novel work-mood, Doukhobor-funding motive,</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_excommunication.html">
         <div class="card-title">Did *Resurrection* cause the 1901 excommunication? — the primary record</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Hypothesis under test.** The popular line is that the communion / church-service</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/digital-surrogate-hunt-2026-05-29.html">
         <div class="card-title">Digital-surrogate hunt — catalogue probe, 2026-05-29</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Session goal:** batch the Phase 7 Swedish digital-surrogate hunt with the §1.6 Aldanov-reconciliation Berlin 1921 Russian-scan hunt, per t…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_visuals_archive.html">
         <div class="card-title">Digitised print artefacts — Воскресение / Resurrection (1899)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- _visuals_archive.md — Digitised period print artefacts for Resurrection --></div>
       </a>
       <a class="index-card" href="/research/lib/README.html">
@@ -587,8 +592,13 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/doukhobors/session-log.html">
         <div class="card-title">Doukhobors dive — session log</div>
-        <div class="card-meta">updated 31 May 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Append-only record of what each session covered. The resume queue is the dossier's `notCovered`</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Dushan Makovitsky.html">
+        <div class="card-title">Dushan Makovitsky</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: this page has no biography beyond his role at Yasnaya Polyana. His dates, birthplace, how he came to Tolstoy, and…</div>
       </a>
       <a class="index-card" href="/research/themes/doukhobors/biryukov-vol3/en/README.html">
         <div class="card-title">English translation — complete</div>
@@ -599,6 +609,11 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         <div class="card-title">English translation — complete</div>
         <div class="card-meta">updated 29 May 2026</div>
         
+      </a>
+      <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/entity-steer.html">
+        <div class="card-title">Entity steer — The Great Sin (1905)</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'>Which people and ideas this dive fed into the shared entity layer (`docs/research/wiki/`), and the one-line gist of what each got. The subst…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1879-1880-examination-of-dogmatic-theology/index.html">
         <div class="card-title">Examination of Dogmatic Theology (Исследование догматического богословия) — a corpus dive</div>
@@ -617,12 +632,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/extracts/_deepread.html">
         <div class="card-title">Father Sergius (Отец Сергий) — close-read (NOVEL MODE)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: `docs/research/1890-1898-father-sergius/extracts/v31_005_046_main-text.txt` (PSS Tom 31, pp. 5–46; modern orthography, `--choice=reg…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/extracts/_redactions.html">
         <div class="card-title">Father Sergius — redactions & textual history</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source layer for the novel-dive. NOVEL MODE: this is a SAMPLE of the redaction history with ONE keystone variant extracted first-class, not …</div>
       </a>
       <a class="index-card" href="/research/themes/fire-metaphor/index.html">
@@ -632,33 +647,38 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_commentary_mine.html">
         <div class="card-title">GENESIS & COMPOSITION — commentary mine</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>The Kreutzer Sonata (Крейцерова соната) + the Afterword (Послесловие)</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_genesis_commentary.html">
         <div class="card-title">Genesis & Composition — PSS editorial commentary on *Resurrection*</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: N. V. Gorbachev (Н. В. Горбачев), «История писания и печатания "Воскресения"» (History of</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/extracts/_diaries.html">
         <div class="card-title">Genesis diaries — *Hadji Murat* (Tom 53–55, 1895–1904)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Diaries swept: `primary-sources/tolstoydigital-TEI/texts/diaries/v5[345]_*.xml`.</div>
       </a>
       <a class="index-card" href="/research/themes/against-the-death-penalty/extracts/_genesis-diary-sweep.html">
         <div class="card-title">Genesis diary sweep — against capital punishment 1900–1910</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Byte-fidelity extracts from tolstoydigital TEI diary files.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/extracts/_letters.html">
         <div class="card-title">Genesis Letters — Hadji Murat source-research sweep</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>| v69_199_V_V_Stasovu | V. V. Stasov | First request: history/geography/ethnography of the Avar Khanate |</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1894-1896-the-christian-teaching/extracts/_genesis-sweep.html">
         <div class="card-title">Genesis sweep — *The Christian Teaching* (Христианское учение, March 1894 – Oct 1896)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Composition-years witness sweep of Tolstoy's diaries (PSS Toms 52–53) and letters (Toms 67, 84, 87) for (1) the genesis, strain and self-und…</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Giuseppe Mazzini.html">
+        <div class="card-title">Giuseppe Mazzini</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: life dates (routed as 1805–1872), birthplace, and the Wikidata QID are unfilled and not attested in this corpus —…</div>
       </a>
       <a class="index-card" href="/research/_meta/_grounding-1905-1906-krug-chtenija.html">
         <div class="card-title">Grounding digest — 1905–06 Круг чтения tales</div>
@@ -672,12 +692,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/extracts/_genesis_commentary.html">
         <div class="card-title">Hadji Murat (Хаджи-Мурат, 1896–1904) — genesis, sources, publication: commentary brief</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Mined from the PSS Tom 35 editorial apparatus (Jubilee Edition, GIHL 1950). This is the documentary record as the Soviet editors (Mishin, Go…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/extracts/_deepread.html">
         <div class="card-title">Hadji Murat — deep-read (textual close-read)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract: `v35_005_118_Hadzhi_Murat.txt` (PSS vol. 35, pp. 5–118; written 1896–1904).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/visuals/_sweep.html">
@@ -692,12 +712,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/_meta/_handoff-held-quote-corrections-2026-06-07.html">
         <div class="card-title">Handoff — draft the 3 held-back evidence-quote corrections</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Date:** 2026-06-07 · **Branch:** `feat/corpus-dive-skill`</div>
       </a>
       <a class="index-card" href="/research/wiki/Henry George.html">
         <div class="card-title">Henry George</div>
-        <div class="card-meta">updated 27 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: Birth and death dates, birthplace, deathplace, and the Wikidata QID are all unfilled. Nothing in the corpus attes…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-i-cannot-be-silent/index.html">
@@ -707,12 +727,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1886-1887-on-life/_verifier-report.html">
         <div class="card-title">Independent verifier report — On Life («О жизни») corpus-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Verifier: independent pass, fresh context. Date: 2026-06-06.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/_verifier-report.html">
         <div class="card-title">Independent verifier report — «Смерть Ивана Ильича» work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**VERDICT: CLEAN-WITH-NOTES** — substantively sound; 0 must-fix, 4 nice-to-fix (internal-consistency / vocab-precision items only). The publ…</div>
       </a>
       <a class="index-card" href="/research/_meta/_interactive-edition-all-formats-spec.html">
@@ -727,17 +747,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/_meta/_interactive-edition-plan.html">
         <div class="card-title">Interactive Reader's Editions — Spec 1 Implementation Plan</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Goal:** Make a finished corpus-dive renderable as an interactive reader's edition in the local `serve.py` preview, and prove it end-to-end…</div>
       </a>
       <a class="index-card" href="/research/wiki/Isabella Fyvie Mayo.html">
         <div class="card-title">Isabella Fyvie Mayo</div>
-        <div class="card-meta">updated 27 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: this page has no biography. Nothing in the corpus attests her dates, nationality, or career — she enters it solel…</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_sweep_letters-73-77.html">
         <div class="card-title">Keyword sweep — letters v73–v77 (PSS Toms 73–77, ~1901–1907)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Candidate files:** 157 (encryption/channel pattern) + 120 (compression pattern) = 277 raw; many overlap.</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/translations.html">
@@ -752,12 +772,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/_translations-draft.html">
         <div class="card-title">Late-voice dive — finished English translations (working draft)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Canonical English for 37 late-Tolstoy passages (letters, diaries, anthology prose)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/extracts/_sweep_letters.html">
         <div class="card-title">Letter sweep — *В чём моя вера?* composition window (1882–1884)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Volumes checked: **Tom 63** (v63_*.xml, 281 files) and **Tom 64** (v64_*.xml, 312 files).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/extracts/_sweep_letters.html">
@@ -767,28 +787,33 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_sweep_letters_v63-64.html">
         <div class="card-title">Letter triage sweep — PSS Toms 63–64 (letters 1880–1889)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- generated 2026-06-11 by corpus-dive subagent; source list: _wl_L1.txt (137 files) --></div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_sweep_letters.html">
         <div class="card-title">Letters sweep — 1905–06 Krug Chteniya tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Coverage:** 653 letters scanned in Toms 75+76; 199 in Tom 89 (all years).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/extracts/_sweep_letters_t73.html">
         <div class="card-title">Letters sweep — PSS Tom 73</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Generated from TEI extracts (`--choice=reg`). Verbatim quotes are byte-exact from the extract files.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_sweep_letters.html">
         <div class="card-title">Letters sweep — Resurrection genesis and publication</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Toms covered: v71 (1898), v72 (1899–1900), v88 (Chertkov, all years), v89 (Chertkov, all years).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_sweep_letters.html">
         <div class="card-title">Letters sweep — The Kreutzer Sonata</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep of Tom 64 (PSS, letters ~1887–1889) and Tom 65 (letters ~1890–1891) for correspondence bearing on the novella, the Afterword, publicat…</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Maria Tolstaya.html">
+        <div class="card-title">Maria Tolstaya</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- ENRICHES-LIVE: additions only, to be merged into the existing live page website/src/wiki/Maria Tolstaya.md. NOT a duplicate — the live …</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1894-1895-master-and-man/index.html">
         <div class="card-title">Master and Man (Хозяин и работник) — a novella-dive</div>
@@ -797,7 +822,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/extracts/_piece_gogol.html">
         <div class="card-title">On Gogol (О Гоголе) — close-read</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Theme dive: *Art & aesthetics satellites* (Tolstoy applying the *What Is Art?* religious-art test to specific cases).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1886-1887-on-life/index.html">
@@ -827,68 +852,73 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/doukhobors/extracts/biryukov-biography-doukhobors-EN.html">
         <div class="card-title">P. I. Biryukov, *Biography of L. N. Tolstoy*, Vol. III — the Doukhobor sections (English translation)</div>
-        <div class="card-meta">updated 27 May 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: tolstoy-lit.ru reproduction of Biryukov's «Биография Л. Н. Толстого», Vol. III, chapters 18, 19, 21.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_visuals_pasternak.html">
         <div class="card-title">Pasternak illustrations for Воскресение / Resurrection</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- _visuals_pasternak.md — Leonid Pasternak illustrations for Resurrection --></div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-a-letter-to-a-hindu/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — "A Letter to a Hindu" (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Reviewer:** fresh-context Phase-5 verifier (separate pass; did not author the dive)</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/_verifier-report.html">
         <div class="card-title">Phase-5 verifier report — "The late voice: encryption & compression (1900–1910)"</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** fresh-context adversarial pass (author did not self-approve).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — *What I Believe* (В чём моя вера?) corpus-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: PASS-WITH-NITS (2 nits)**</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — *What Is Art?* (Что такое искусство?) corpus work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** Phase-5 judgement-level review (skeptical, fresh pass)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — `1901-1902-what-is-religion`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**VERDICT: NEEDS-FIXES** (1 factual FAIL, 3 schema FAILs; 3 CONCERNs). All are surgical fixes; the dive's scholarship, byte-fidelity, claim-…</div>
       </a>
       <a class="index-card" href="/research/works/plays/comedy/1886-1890-the-fruits-of-enlightenment/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — The Fruits of Enlightenment (Плоды просвещения, 1886–1890)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** fresh, independent adversarial pass (author did not self-approve).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1890-1893-the-kingdom-of-god-is-within-you/_verifier-report.html">
         <div class="card-title">Phase-5 verifier report — The Kingdom of God Is Within You (work dive)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>- **Dive:** `docs/research/1890-1893-the-kingdom-of-god-is-within-you/`</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/_verifier-report.html">
         <div class="card-title">Phase-5 Verifier Report — «Так что же нам делать?» (What Then Must We Do?)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Fresh-context adversarial judgement review of the completed work-dive. The mechanical</div>
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/extracts/_piece_carpenter.html">
         <div class="card-title">Preface to Edward Carpenter's article «Modern Science»</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Предисловие к статье Эдуарда Карпентера «Современная наука» — Tolstoy, 1897–98, PSS Tom 31, pp. 87–95.</div>
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/extracts/_piece_english_wia_preface.html">
         <div class="card-title">Preface to the English edition of *What Is Art?*</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Предисловие к английскому изданию трактата «Что такое искусство?» — Tolstoy, 1898, PSS Tom 30, pp. 204–206.</div>
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/extracts/_piece_maupassant.html">
         <div class="card-title">Preface to the Works of Maupassant — close read</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Предисловие к сочинениям Гюи де Мопассана (Tolstoy)</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Private property in land.html">
+        <div class="card-title">Private property in land</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'>Private property in land is the subject of [[The Great Sin]] (1905), and the thing the</div>
       </a>
       <a class="index-card" href="/research/_meta/_prophet-period-remaining-dives.html">
         <div class="card-title">Prophet period — the four remaining corpus-dives (paste-ready prompts)</div>
@@ -907,12 +937,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/extracts/_apparatus.html">
         <div class="card-title">PSS apparatus extracts — "The break with the Church" dive (7 works)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: PSS (Jubilee Edition) editorial commentary («История писания и печатания…»),</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_commentary_mine.html">
         <div class="card-title">PSS Tom 25 Apparatus Commentary — Structured Digest</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**apparatus file:** v25_665_674_Chem_ljudi_zhivy</div>
       </a>
       <a class="index-card" href="/research/_meta/pss-volume-mapping.html">
@@ -947,22 +977,22 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_reception.html">
         <div class="card-title">Reception — *Resurrection* (Воскресение, 1899)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Scope:** contemporary Russian critical and public reception 1899–1901; church and state reaction;</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_redactions.html">
         <div class="card-title">Redactions and variants — The Kreutzer Sonata</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: PSS vol. 27. Files extracted with `extract_tei.py --choice=reg --notes=auto`.</div>
       </a>
       <a class="index-card" href="/research/wiki/README.html">
         <div class="card-title">research/wiki/</div>
-        <div class="card-meta">updated 13 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Shared, accreting entity pages (one per person/concept). Populated during the ingestion workflow, not the move. See the design spec.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_thematic_map.html">
         <div class="card-title">Resurrection (Воскресение) — Thematic Map and Close Reads</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract (modern orthography, do not re-extract):</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/index.html">
@@ -972,27 +1002,27 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_censorship_variants.html">
         <div class="card-title">Resurrection — Censorship Variants Analysis</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: `v32_471_505_Tsenzurnye_varianty.txt` — "Воскресение. Цензурные варианты" (PSS vol. 32, pp. 471–505, 1936 Jubilee Edition).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_communion_centrepiece.html">
         <div class="card-title">Resurrection — the communion / liturgy centrepiece (Part I, ch. XXXIX–XLI)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Close-read of the defamiliarised ("Brechtian"/flat) description of the Orthodox liturgy in the prison church. Source: `extracts/v32_003_445_…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-a-letter-to-a-hindu/run-report.html">
         <div class="card-title">Run report — 1908-a-letter-to-a-hindu</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Dive:** A Letter to a Hindu (Письмо к индусу), Tolstoy's 1908 open letter to Tarak Nath Das. Work-subject dive, interactive (not `--auto`)…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-i-cannot-be-silent/run-report.html">
         <div class="card-title">Run report — 1908-i-cannot-be-silent</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Dive:** *Не могу молчать* / *I Cannot Be Silent* (1908), Tolstoy's essay against capital punishment.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/run-report.html">
         <div class="card-title">Run report — A Confession (Исповедь) work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Mode:** autonomous (`--auto`), run **deep / multi-pass** with a **heavy** visual fan-out.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/run-report.html">
@@ -1002,77 +1032,77 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/run-report.html">
         <div class="card-title">Run report — The Law of Violence and the Law of Love (Закон насилия и закон любви, 1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Dive:** `docs/research/1908-the-law-of-violence-and-the-law-of-love/`</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/run-report.html">
         <div class="card-title">Run report — The Living Corpse (Живой труп) dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Slug:** `1900-the-living-corpse` · **Mode:** interactive, `--novel` (drama flex) · **Date:** 2026-06-12</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1879-1880-examination-of-dogmatic-theology/run-report.html">
         <div class="card-title">Run-report — `1879-1880-examination-of-dogmatic-theology`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *Examination of Dogmatic Theology* («Исследование догматического богословия», 1879–80) — the demolishing second panel…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/run-report.html">
         <div class="card-title">Run-report — `1882-1884-what-i-believe`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *What I Believe* (В чём моя вера?), the doctrinal sequel to *A Confession*</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/run-report.html">
         <div class="card-title">Run-report — `1882-1886-what-then-must-we-do`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *What Then Must We Do?* (Так что же нам делать?), the fourth Prophet-period</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1886-1887-on-life/run-report.html">
         <div class="card-title">Run-report — `1886-1887-on-life`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *On Life* (О жизни), the philosophical capstone of the Prophet period and the metaphysic beneath the social ethic of …</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1890-1893-the-kingdom-of-god-is-within-you/run-report.html">
         <div class="card-title">Run-report — `1890-1893-the-kingdom-of-god-is-within-you`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *The Kingdom of God Is Within You* (Царство Божие внутри вас, 1890–93) — the great non-resistance / anti-state synthe…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/run-report.html">
         <div class="card-title">Run-report — The Great Sin (Великий грех, 1905) corpus-dive</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Mode:** interactive (in-session, accept-edits). **Date:** 2026-06-21. **Kind:** work-subject dive (single work → one proposed `workRecord`…</div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_scholarship.html">
         <div class="card-title">Scholarly context — 1905–06 Krug chtenija tales (Phase-3 sweep)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope: the six недельное-чтение tales — Алёша Горшок, Корней Васильев, Молитва, Ягоды, За что?, Божеское и человеческое — plus Gorbunov-Posa…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/extracts/_scholarship.html">
         <div class="card-title">Scholarly Context: Father Sergius (Отец Сергий, 1890–1898)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>This document maps the **received scholarly view** against the dive's primary findings (the `_deepread.md`, `_sweep_genesis_witness.md`, and…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/extracts/_scholarship.html">
         <div class="card-title">Scholarly context: Hadji Murat (Хаджи-Мурат, 1896–1904)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>_Phase-3 scholarly-context gather for the novel-dive. Purpose: map the received/mainstream view so the dive can attribute it and read it cri…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_scholarship.html">
         <div class="card-title">Scholarly Context: The Kreutzer Sonata + Afterword</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>This document maps the **received scholarly view** against the dive's primary findings. It is a divergence map, not corroboration. Claims ar…</div>
       </a>
       <a class="index-card" href="/research/themes/folk-tales/extracts/_scholarship.html">
         <div class="card-title">Scholarly sweep — 1903 folk tales (Phase 3)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>*Scope: secondary/English-first web sweep, 2026-06-11. Not an adversarial harness —</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/extracts/_scholarship.html">
         <div class="card-title">Scholarship & Context: *Bethink Yourselves!* (Одумайтесь!, 1904)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Secondary-layer research file. Primary evidence (PSS text, diaries, letters) is handled in separate extracts.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/extracts/_scholarship.html">
         <div class="card-title">Scholarship & Context: «Закон насилия и закон любви» / *The Law of Violence and the Law of Love* (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Secondary-layer research file. The dive's spine is the primary record — Tolstoy's own text (PSS vol. 37), his 1908 diaries and notebooks (PS…</div>
       </a>
       <a class="index-card" href="/research/themes/against-the-death-penalty/extracts/_scholarship.html">
@@ -1082,12 +1112,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/_scholarship-sweep.html">
         <div class="card-title">Scholarship & Reception Layer — «Живой труп» / The Living Corpse (1900)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Secondary layer for the corpus dive. Primary-source genesis layer is locked from PSS commentary. This file covers the reception/staging stor…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1894-1896-the-christian-teaching/extracts/_scholarship.html">
         <div class="card-title">Scholarship & reception pass — *The Christian Teaching* (Христианское учение, 1894–96, PSS Tom 39)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scholarly-context, triangulation, and reception material for the dive. Method: **ground first in the project's own primary findings** (`_gen…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/extracts/_scholarship.html">
@@ -1097,83 +1127,88 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1904-the-forged-coupon/_scholarship-sweep.html">
         <div class="card-title">Scholarship & Reception Sweep — «Фальшивый купон» (The Forged Coupon)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Phase 3 of the primary-source dive. Written 2026-06-12.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1903-1906-on-shakespeare-and-the-drama/extracts/_scholarship.html">
         <div class="card-title">Scholarship & Reception — On Shakespeare and the Drama</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- layer: secondary | generated: 2026-06-13 --></div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-i-cannot-be-silent/extracts/_scholarship_reception.html">
         <div class="card-title">Scholarship & Reception — «Не могу молчать» / "I Cannot Be Silent" (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>English-language scholarship treats "I Cannot Be Silent" primarily as a *late-life political protest* rather than as a philosophical treatis…</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_scholarship_facts.html">
         <div class="card-title">Scholarship Facts — народные рассказы & Posrednik</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Stage 1 — the Moscow meetings, 1883–early 1884.**</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-a-letter-to-a-hindu/extracts/_scholarship.html">
         <div class="card-title">Scholarship layer — "A Letter to a Hindu" (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Secondary sources compiled 2026-06-13 for the corpus-dive on Tolstoy's letter to Tarak Nath Das.</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_scholarship.html">
         <div class="card-title">Scholarship layer — Late voice: encryption & compression (1900–1910)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Triangulation of conventional scholarly views against the dive's five main findings.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1894-1895-master-and-man/_scholarship.html">
         <div class="card-title">Scholarship sweep — Master and Man (Хозяин и работник, 1894–95)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Layer: secondary / scholarship + reception</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_scholarship_view.html">
         <div class="card-title">Scholarship view — народные рассказы and the Posrednik project</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>*Generated 2026-06-11 by research subagent from web search + primary-source cross-check.*</div>
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/extracts/_scholarship.html">
         <div class="card-title">Scholarship — Art & aesthetics satellites (received view)</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Phase-3 deliverable for the corpus-dive *Art & aesthetics satellites* (four short Tolstoy pieces that apply the *What Is Art?* (1897–98) rel…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_scholarship.html">
         <div class="card-title">Scholarship — the received view on *Resurrection* (Воскресение, 1899), triangulated</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Status: SECONDARY / web-sourced.** This file adds the conventional scholarly view as a</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/extracts/_scholarship.html">
         <div class="card-title">Secondary layer — scholarly context</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>The conventional English-language view of the novella runs roughly as follows. It is treated as one of the masterpieces of Tolstoy's late fi…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/extracts/_scholarship.html">
         <div class="card-title">Secondary scholarship & reception — *What I Believe* (В чём моя вера?, 1882–84)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Phase-3 layer. All secondary claims are attributed to named sources and are not asserted in the dive's voice. Where a claim comes from the P…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1909-the-devil/_scholarship.html">
         <div class="card-title">Secondary Scholarship Layer — The Devil (Дьявол, 1889/1909/1911)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Research prototype. Attribute, don't assert. Sources verified by web search/fetch unless marked `[unverified]`. Mainstream scholarship is co…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1900-the-slavery-of-our-times/extracts/_scholarship.html">
         <div class="card-title">Secondary scholarship — «Рабство нашего времени» / The Slavery of Our Times (1900)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Phase-3 scholarship layer. Triangulates against the primary-corpus dive findings.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/extracts/_scholarship.html">
         <div class="card-title">Secondary scholarship — «Христианство и патриотизм» (1894)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>*Research-prototype layer. Every secondary claim is attributed to a named source. Confidence notes mark items not web-verified. Web searches…</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/_verifier-report.html">
         <div class="card-title">Separate-pass verifier report — The Living Corpse (Живой труп) dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Independent adversarial review (I did not author any of this). The mechanical gate re-ran here: `verify_quotes.py` → **40/40 verbatim, 0 fac…</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Sergei Nikolaev.html">
+        <div class="card-title">Sergei Nikolaev</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- NEEDS PRIMARY SOURCE: Birth and death dates (routed as 1861–1920), birthplace, deathplace, and the Wikidata QID are unfilled. Nothing i…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/session-log.html">
         <div class="card-title">Session log — 1884-1886-the-death-of-ivan-ilyich</div>
@@ -1182,72 +1217,72 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/session-log.html">
         <div class="card-title">Session log — 1897-1898-what-is-art</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>A single-session `corpus-dive` work-dive on *What Is Art?* (Что такое искусство?), run from the scope handoff at `_generated/sessions/2026-0…</div>
       </a>
       <a class="index-card" href="/research/themes/against-the-death-penalty/session-log.html">
         <div class="card-title">Session log — 1900-1910-against-the-death-penalty</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**What this dive is.** A multi-work corpus theme-dive on Tolstoy's 1900–1910 writings against capital punishment, carrying six record-creati…</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/session-log.html">
         <div class="card-title">Session log — 1900-the-living-corpse</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Scope:** Tolstoy's unfinished 1900 drama «Живой труп» / The Living Corpse (PSS Tom 34). `--novel` work-subject dive, drama flex (full play…</div>
       </a>
       <a class="index-card" href="/research/themes/folk-tales/session-log.html">
         <div class="card-title">Session log — 1903-folk-tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>A multi-workRecord theme-dive on Tolstoy's народные рассказы of 1903 (Tom 34). Sequel to</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/session-log.html">
         <div class="card-title">Session log — 1904-bethink-yourselves</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Ran the full `corpus-dive` work-dive on Tolstoy's *Одумайтесь!* (Bethink Yourselves!, 1904) from the</div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/session-log.html">
         <div class="card-title">Session log — 1905-1906-krug-chtenija-tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Built the whole dive in one in-session pass (interactive, not `--auto`). The third movement of the народный рассказ project after `stories-f…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/session-log.html">
         <div class="card-title">Session log — 1905-the-great-sin</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>P8 from `docs/research/_prophet-period-nonfiction-dives.md`. Built the dive end-to-end:</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-a-letter-to-a-hindu/session-log.html">
         <div class="card-title">Session log — 1908-a-letter-to-a-hindu</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Subject: Tolstoy's open letter «Письмо к индусу» / "A Letter to a Hindu" (1908), reply to Tarak Nath Das, editor of *Free Hindustan*. Recept…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-i-cannot-be-silent/session-log.html">
         <div class="card-title">Session log — 1908-i-cannot-be-silent</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Full work-dive on *Не могу молчать* (I Cannot Be Silent, 1908), PSS Tom 37, pp. 83–96. Record-creating (no `works/` record existed). Complet…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/session-log.html">
         <div class="card-title">Session log — 1908-the-law-of-violence-and-the-law-of-love</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Ran the complete corpus work-dive from the scope handoff</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1879-1880-examination-of-dogmatic-theology/session-log.html">
         <div class="card-title">Session log — `1879-1880-examination-of-dogmatic-theology`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Complete work-dive on *Examination of Dogmatic Theology* (PSS Tom 23 pp. 60–303), the missing panel of the four-part religious quartet. Phas…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/session-log.html">
         <div class="card-title">Session log — `1882-1884-what-i-believe`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on *What I Believe* (В чём моя вера?), the doctrinal sequel to *A Confession*</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/session-log.html">
         <div class="card-title">Session log — `1882-1886-what-then-must-we-do`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on Tolstoy's *What Then Must We Do?* (Так что же нам делать?), the fourth Prophet-period</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1886-1887-on-life/session-log.html">
         <div class="card-title">Session log — `1886-1887-on-life`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Work-dive on *On Life* (О жизни), PSS Tom 26, run in-session on the A-Confession-pilot model. Covered the whole work in one session:</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/session-log.html">
@@ -1257,17 +1292,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1890-1893-the-kingdom-of-god-is-within-you/session-log.html">
         <div class="card-title">Session log — `1890-1893-the-kingdom-of-god-is-within-you`</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Created the dive from the *On Life* handoff. Scoped as the **work** companion to the existing `christian-anarchism` doctrine dive (read end-…</div>
       </a>
       <a class="index-card" href="/research/themes/christian/session-log.html">
         <div class="card-title">Session log — `christian` dive</div>
-        <div class="card-meta">updated 31 May 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Scope (Phase 0).** Trilogy-closer after `tolstoyanism` (#1) and `christian-anarchism` (#2). The bare stem is unusable as a sweep target (`…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/session-log.html">
         <div class="card-title">Session log — A Confession (Исповедь) work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Append-only record of what each session covered. Resume reads this + `dossier.yaml` `coverage:` + `notCovered`.</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/session-log.html">
@@ -1277,7 +1312,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/session-log.html">
         <div class="card-title">Session log — Christianity and Patriotism work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Resumed from `_generated/sessions/2026-06-07-christianity-and-patriotism-dive-session-handoff.md`. The folder existed as a Phase-0 scaffold …</div>
       </a>
       <a class="index-card" href="/research/themes/fire-metaphor/session-log.html">
@@ -1287,22 +1322,22 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/session-log.html">
         <div class="card-title">Session log — Hadji Murat novel-dive (`1896-1904-hadji-murat`)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Append-only. Resume reads this + `dossier.yaml` `coverage:` + `notCovered:`.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1903-1906-on-shakespeare-and-the-drama/session-log.html">
         <div class="card-title">Session log — On Shakespeare and the Drama dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Question.** A work-subject dive on Tolstoy's essay *О Шекспире и о драме* (On Shakespeare and the Drama). Marquee tension: does the essay …</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/session-log.html">
         <div class="card-title">Session log — stories-for-the-people</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>- Question: Tolstoy's народные рассказы (1881–1887) as a project — genesis, the Posrednik machinery (Chertkov, Sytin), the shared moral core…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1904-the-forged-coupon/session-log.html">
         <div class="card-title">Session log — The Forged Coupon (Фальшивый купон)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Slug: `1889-1904-the-forged-coupon` · novel-mode work-subject dive · record-creating workRecord.</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/session-log.html">
@@ -1312,22 +1347,22 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/_meta/tolstoy-in-photographs/session-log.html">
         <div class="card-title">Session log — tolstoy-in-photographs</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Full single-session dive, the photographic companion to `tolstoy-in-art` (which deferred photography).</div>
       </a>
       <a class="index-card" href="/research/_meta/tolstoy-in-art/session-log.html">
         <div class="card-title">session-log — tolstoy-in-art</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope confirmed interactively: fine art **+ sculpture** (paintings, drawings, prints, sculpture of Tolstoy / circle / Yasnaya Polyana), **18…</div>
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/extracts/_sibling-grounding.html">
         <div class="card-title">Sibling grounding — 1901–1902 The Break with the Church</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Seven prior dives cover territory the church-break dive must extend rather than repeat. Each section gives: the slug and cross-link path, wh…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1894-1896-the-christian-teaching/extracts/_sibling-dives.html">
         <div class="card-title">Sibling-dive cross-link material for *The Christian Teaching* (Христианское учение, 1894–96)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Working notes for the new dive. Captures the four prior dives most relevant to *The Christian Teaching* — central claims, any explicit menti…</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/index.html">
@@ -1337,52 +1372,52 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/extracts/_deepread.html">
         <div class="card-title">Structural deep read — «Закон насилия и закон любви» (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract: `v37_149_221_Zakon_nasilija_i_zakon_ljubvi.txt` (PSS vol. 37, pp. 149–221; modern orthography). Signed "2-го июля 1908 года.…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/extracts/_deepread.html">
         <div class="card-title">Structural deep-read — *Что такое искусство?* (What Is Art?), 1897–1898</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: `v30_027_203_Chto_takoe_iskusstvo.txt` (PSS, Tom 30, pp. 27–203; verbatim modern-orthography Russian).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/extracts/_deepread.html">
         <div class="card-title">Structural deep-read — «Смерть Ивана Ильича» (The Death of Ivan Ilyich)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source extract: `v26_061_113_Smert_Ivana_Ilicha.txt` (PSS Tom 26, pp. 61–113, modern orthography). Dated at close: 25 марта 1886 г. 12 chapt…</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/swedish-edition-photos-2026-05-28.html">
         <div class="card-title">Swedish edition — 51-photo batch supplied by Johan, 2026-05-28</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source:** photographs of Johan's three physical Swedish books (Första delen 1, Första delen 2, Andra delen), Norstedt edition, supplied at…</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/swedish-andra-delen-slutord-p453.html">
         <div class="card-title">Swedish edition — Andra delen, Slutord, p. 453 (transcription)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source:** photograph supplied by Johan, 2026-05-28. Physical book in Johan's possession.</div>
       </a>
       <a class="index-card" href="/research/_meta/biryukov-biography-editions/extracts/swedish-andra-delen-titlepage.html">
         <div class="card-title">Swedish edition — Andra delen, title page (transcription)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Source:** photograph supplied by Johan, 2026-05-28. Physical book in Johan's possession.</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_sweep_anthologies.html">
         <div class="card-title">Sweep — the four late wisdom-anthologies (the compression endpoint)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Structural read of Tolstoy's late anthology series, 1903 → 1910: the climax of Thread 2</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/extracts/_sweep_letters_t88.html">
         <div class="card-title">Sweep: Four 1901 Letters to Chertkov (PSS Tom 88)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source: Толстой Л. Н. Полное собрание сочинений: в 90 тт. Т. 88 (letters to V. G. Chertkov, 1897–1904).</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_sweep_late_and_diaries.html">
         <div class="card-title">Sweep: Late Letters, Diaries, Notebooks — народные рассказы theme</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source list: `docs/research/stories-for-the-people/extracts/_wl_L3.txt` (75 files)</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_sweep_letters-78-82.html">
         <div class="card-title">Sweep: Letters PSS Toms 78–82 (vols 78–82, ~1907–1910)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Candidate count:** Thread 1 (encryption/channel): ~110 files; Thread 2 (compression): ~200 files</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/extracts/_sweep_letters62.html">
@@ -1397,7 +1432,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_sweep_chertkov-88-89.html">
         <div class="card-title">Sweep: Tolstoy → Chertkov, PSS Toms 88–89 (v88/v89 letters)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Candidate files:** 184 (combined Thread 1 + Thread 2 grep, merged unique)</div>
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/index.html">
@@ -1437,7 +1472,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/extracts/_scholarship.html">
         <div class="card-title">The Great Sin (Великий грех, 1905) — Secondary-source / scholarship layer</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Research-prototype rigor. Everything here is **attributed**, not asserted as fact.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/index.html">
@@ -1482,17 +1517,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/plays/drama/1886-the-power-of-darkness/extracts/_scholarship.html">
         <div class="card-title">The Power of Darkness (Власть тьмы, 1886) — Scholarship + Reception Layer</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>*(Biryukov vol. III ch. 6 + ch. 19; Sofya Andreyevna's reminiscences as quoted by</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1886-the-power-of-darkness/extracts/_sweep_diaries.html">
         <div class="card-title">The Power of Darkness — composition-years witness sweep: DIARIES</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Method.** Swept the local tolstoydigital TEI diary files for the composition window</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1886-the-power-of-darkness/extracts/_sweep_letters.html">
         <div class="card-title">The Power of Darkness — composition-years witness sweep: LETTERS</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Method.** Swept the local tolstoydigital TEI letters in Tom 63 (1886) and Tom 64 (1887)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1900-the-slavery-of-our-times/index.html">
@@ -1512,7 +1547,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_threadmap-direct.html">
         <div class="card-title">Thread-map — the "direct statement, published abroad" pole + channel mechanics</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Mined from eight finished sibling dossiers for the theme-dive **"The late voice — encryption & compression (1900–1910)"**. These are the div…</div>
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_threadmap-encoded.html">
@@ -1582,57 +1617,57 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/_translations-verify.html">
         <div class="card-title">Translation verification audit</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope: all 37 finished English translations in `_translations-draft.md`, checked against</div>
       </a>
       <a class="index-card" href="/research/themes/against-the-death-penalty/_verifier-report.html">
         <div class="card-title">Verifier report — "Against the death penalty" (1900–1910) corpus theme-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** independent adversarial pass (did not write the dive)</div>
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/_verifier-report.html">
         <div class="card-title">Verifier report — "The break with the Church — Tolstoy, the Holy Synod, and the 1901 excommunication"</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Role:** separate-pass, adversarial verifier (did not author the dive).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/_verifier-report.html">
         <div class="card-title">Verifier report — *Bethink Yourselves!* (Одумайтесь!, 1904) corpus work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>- **Dive:** `docs/research/1904-bethink-yourselves/`</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/_verifier-report.html">
         <div class="card-title">Verifier report — *Christianity and Patriotism* (Христианство и патриотизм) work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**VERDICT: CLEAN-WITH-MINOR-NOTES** — one stale number in `index.md` (the only required fix); everything substantive is source-anchored, att…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1909-the-devil/_verifier-report.html">
         <div class="card-title">Verifier report — *The Devil (Дьявол)* novella-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** independent (adversarial) pass. Did not author the dive.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1905-the-great-sin/_verifier-report.html">
         <div class="card-title">Verifier report — *The Great Sin* (Великий грех, 1905) corpus-dive</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: NEEDS-FIXES → RESOLVED 2026-06-21** (all three fixes applied: findings 1 & 2 — the genesis paragraph re-ordered so the 17 April l…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/_verifier-report.html">
         <div class="card-title">Verifier report — *The Law of Violence and the Law of Love* (Закон насилия и закон любви, 1908) work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: CLEAN** — 0 must-fix, 3 minor notes.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-i-cannot-be-silent/_verifier-report.html">
         <div class="card-title">Verifier report — *Не могу молчать* (I Cannot Be Silent, 1908) corpus work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: CLEAN-WITH-MINORS** — 0 CRITICAL · 0 MAJOR · 3 MINOR · several confirmations.</div>
       </a>
       <a class="index-card" href="/research/themes/folk-tales/_verifier-report.html">
         <div class="card-title">Verifier report — 1903 folk tales dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**VERDICT: CLEAN-WITH-MINORS** — 0 must-fix, 4 should-fix, 3 notes. The dive is byte-faithful (29/29 + my own 5-quote re-derivation), source…</div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/_verifier-report.html">
         <div class="card-title">Verifier report — 1905–1906 Круг чтения weekly-reading tales dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** independent, fresh context. **Date:** 2026-06-12.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/short-stories/1903-after-the-ball/_verifier-report.html">
@@ -1642,52 +1677,52 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/_verifier-report.html">
         <div class="card-title">Verifier report — Art & aesthetics satellites</div>
-        <div class="card-meta">updated 4 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier pass (separate lane).** Adversarial verification of the completed "Art & aesthetics</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1879-1880-examination-of-dogmatic-theology/_verifier-report.html">
         <div class="card-title">Verifier report — Examination of Dogmatic Theology («Исследование догматического богословия») work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>- Verified independently in a fresh context on 2026-06-07. The dive is sound, source-anchored, honestly scoped, and schema-compliant. The th…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/_verifier-report.html">
         <div class="card-title">Verifier report — Father Sergius (Отец Сергий) novel-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Overall verdict: PASS-WITH-NITS**</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1896-1904-hadji-murat/_verifier-report.html">
         <div class="card-title">Verifier report — Hadji Murat (Хаджи-Мурат) novel-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** independent (did not author the dive).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1894-1895-master-and-man/_verifier-report.html">
         <div class="card-title">Verifier report — Master and Man (Хозяин и работник) novella-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Role:** independent adversarial verifier (fresh context). Did not produce the dive.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1903-1906-on-shakespeare-and-the-drama/_verifier-report.html">
         <div class="card-title">Verifier report — On Shakespeare and the Drama (work-dive)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: CLEAN-WITH-MINORS** — 0 blockers, 0 major, 4 minor.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/_verifier-report.html">
         <div class="card-title">Verifier report — Resurrection (Воскресение) novel-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verifier:** independent pass (fresh eyes), 2026-06-08</div>
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/_verifier-report.html">
         <div class="card-title">Verifier report — Stories for the People (народные рассказы)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Adversarial verification pass, fresh context, 2026-06-11. Subject:</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1894-1896-the-christian-teaching/_verifier-report.html">
         <div class="card-title">Verifier report — The Christian Teaching (Христианское учение, 1894–96)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Independent judgement-level verification (the author of this report did NOT write the dive).</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1904-the-forged-coupon/_verifier-report.html">
         <div class="card-title">Verifier report — The Forged Coupon (Фальшивый купон) dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: CLEAN-WITH-MINORS** (separate-pass, adversarial; verifier did not author the dive)</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/_verifier-report.html">
@@ -1697,12 +1732,12 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/plays/drama/1886-the-power-of-darkness/_verifier-report.html">
         <div class="card-title">Verifier report — The Power of Darkness (Власть тьмы, 1886) novel-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Role:** independent adversarial verifier (did not author the dive).</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1900-the-slavery-of-our-times/_verifier-report.html">
         <div class="card-title">Verifier report — The Slavery of Our Times (Рабство нашего времени) work-dive</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Verdict: CLEAN-WITH-MINOR-CONCERNS**</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1890-1898-father-sergius/visuals/_visuals_sweep.html">
@@ -1712,22 +1747,22 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_visuals_consolidated.html">
         <div class="card-title">Visual & manuscript record — Воскресение / Resurrection (1889–1899)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'><!-- _visuals_consolidated.md — Resurrection dive: consolidated visuals dossier --></div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1884-what-i-believe/extracts/_visuals.html">
         <div class="card-title">Visual Materials Catalogue — В чём моя вера? (What I Believe, 1882–1884)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Channels consulted: Wikimedia Commons API (gsrsearch), Commons category pages, archive.org IIIF, Google Books thumbnail API, imwerden.de (no…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1908-the-law-of-violence-and-the-law-of-love/extracts/_visuals.html">
         <div class="card-title">Visual Materials Sweep — «Закон насилия и закон любви» (1908)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Channels consulted:** local primary-sources/images/, Wikimedia Commons API (categorymembers + search + imageinfo), tolstoy.ru, tolstoy-lit…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/extracts/_sweep_visuals.html">
         <div class="card-title">Visual materials sweep — «Христианство и патриотизм» (1893–1894)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Channel: Wikimedia Commons API (single-channel light sweep)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1908-a-letter-to-a-hindu/visuals/_visuals.html">
@@ -1737,7 +1772,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/extracts/_visuals.html">
         <div class="card-title">Visual materials — *Одумайтесь!* / *Bethink Yourselves!* (1904)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Generated: 2026-06-08. Five images cached in `visuals/`. Web tools were available.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/visuals/_visuals.html">
@@ -1747,37 +1782,37 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/late-voice-encryption-compression/extracts/_visuals.html">
         <div class="card-title">Visual materials — Late voice: encryption & compression (1900–1910)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep date: 2026-06-12. Method: Wikimedia Commons API (`generator=search`, `prop=imageinfo&iiprop=url|extmetadata`), individual file pages v…</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1887-1889-the-kreutzer-sonata/extracts/_visuals.html">
         <div class="card-title">Visual materials — The Kreutzer Sonata (1887–1890)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep date: 2026-06-08. Channels searched: local primary-sources mirror, Wikimedia Commons API (generator=search + imageinfo), tolstoy.ru mi…</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1886-the-power-of-darkness/extracts/_visuals.html">
         <div class="card-title">Visual materials — The Power of Darkness (Власть тьмы, 1886)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep date: 2026-06-10. Intensity: HEAVY four-channel visual-materials sweep for a canonical work.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1900-the-slavery-of-our-times/extracts/_visuals.html">
         <div class="card-title">Visual materials — The Slavery of Our Times (1900)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Sweep:** light, single-channel (Wikimedia Commons API)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/extracts/_visuals.html">
         <div class="card-title">Visual materials — What Is Art? (1897–1898)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>| subject | Leo Tolstoy, aged 69 |</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1884-1886-the-death-of-ivan-ilyich/extracts/_visuals.html">
         <div class="card-title">Visual Materials — «Смерть Ивана Ильича» (The Death of Ivan Ilyich)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Intensity:** light (~4–6 items)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1894-1896-the-christian-teaching/extracts/_visuals.html">
         <div class="card-title">Visual Materials — «Христианское учение» (The Christian Teaching)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Work:** The Christian Teaching (Христианское учение), written 1894–96; first published by V. G. Chertkov abroad, 1898.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/treatises/1882-1886-what-then-must-we-do/visuals/_sweep_visuals.html">
@@ -1787,7 +1822,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/_visuals-sweep.html">
         <div class="card-title">Visuals catalogue — «Живой труп» / The Living Corpse (1900)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Downloaded:** 6 files confirmed on disk at time of writing. 7 additional files queued in a background retry job (Wikimedia 429 rate-limit …</div>
       </a>
       <a class="index-card" href="/research/works/plays/drama/1900-the-living-corpse/visuals/_visuals_catalogue.html">
@@ -1812,17 +1847,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/against-the-death-penalty/extracts/_visuals-sweep.html">
         <div class="card-title">Visuals sweep — "Against the death penalty" / Tolstoy 1900–1910</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Channel: Wikimedia Commons (single-channel, light-to-medium intensity)</div>
       </a>
       <a class="index-card" href="/research/themes/folk-tales/extracts/_visuals-sweep.html">
         <div class="card-title">Visuals sweep — 1903 folk tales (Народные рассказы, 1903)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Scope: five tales — «Ассирийский царь Асархадон», «Труд, смерть и болезнь», «Три вопроса», «Это ты», «Разрушение ада и восстановление его»</div>
       </a>
       <a class="index-card" href="/research/themes/krug-chtenija-tales/extracts/_visuals-sweep.html">
         <div class="card-title">Visuals sweep — 1905–06 Krug Chteniya tales</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Method: Wikimedia Commons API (generator=search + prop=imageinfo&iiprop=url|extmetadata);</div>
       </a>
       <a class="index-card" href="/research/themes/art-aesthetics-satellites/visuals/_visuals-sweep.html">
@@ -1837,7 +1872,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/break-with-the-church/extracts/_visuals-sweep.html">
         <div class="card-title">Visuals sweep — The break with the Church (1901–02)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Dive: `1901-1902-the-break-with-the-church`</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1909-the-devil/visuals/_visuals_sweep.html">
@@ -1852,7 +1887,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novellas/1889-1904-the-forged-coupon/_visuals-sweep.html">
         <div class="card-title">Visuals sweep — «Фальшивый купон» (The Forged Coupon), 1889–1904</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Intensity:** heavy, four-channel.</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1901-1902-what-is-religion/visuals/_visuals_sweep.html">
@@ -1867,13 +1902,18 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_visuals_photos.html">
         <div class="card-title">Visuals — Photographs & Portraits (Wikimedia Commons)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Source lane: photographs, painted portraits, and drawings from Wikimedia Commons.</div>
       </a>
       <a class="index-card" href="/research/works/fiction/novels/1889-1899-resurrection/extracts/_visuals_russia.html">
         <div class="card-title">Visuals — Russian State Museum Holdings</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sources surveyed: State Tolstoy Museum KAMIS portal (tolstoy-iss.kamiscloud.ru),</div>
+      </a>
+      <a class="index-card" href="/research/wiki/Vladimir Chertkov.html">
+        <div class="card-title">Vladimir Chertkov</div>
+        <div class="card-meta">updated 12 Aug 2026</div>
+        <div class='card-lede'><!-- ENRICHES-LIVE: additions only, to be merged into the existing live page website/src/wiki/Vladimir Chertkov.md. NOT a duplicate — the li…</div>
       </a>
       <a class="index-card" href="/research/themes/doukhobors/biryukov-vol3/en/chapter-01.html">
         <div class="card-title">Volume III, Chapter 1. The Events of 1884. Popular Literature</div>
@@ -2102,17 +2142,17 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/extracts/_sweep_witness.html">
         <div class="card-title">Witness Sweep — «Христианство и патриотизм» (Christianity and Patriotism)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Composition window: 8 Oct 1893 – 17 Mar 1894 (draft sent to translators Apr 1894)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1897-1898-what-is-art/extracts/_witness_sweep.html">
         <div class="card-title">Witness Sweep: What Is Art? — Composition Window 1896–1898</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Sweep of Tolstoy's diaries (Tom 53), notebooks (Tom 53), and letters (Toms 69–70–71–88)</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/essays-and-criticism/1893-1894-christianity-and-patriotism/extracts/_worktext_keystones.html">
         <div class="card-title">Work-text keystones (deep-read notes) — Christianity and Patriotism (v39_027_080)</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Deep-read notes. Russian copied byte-faithful from `extracts/v39_027_080_Hristianstvo_i_patriotizm.txt`; English is working translation (lab…</div>
       </a>
       <a class="index-card" href="/research/works/non-fiction/personal-papers/1879-1882-a-confession/extracts/_commentary.html">
@@ -2122,7 +2162,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/research/themes/stories-for-the-people/extracts/_deepread.html">
         <div class="card-title">Народные рассказы — close-read layer</div>
-        <div class="card-meta">updated 13 Jun 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>Deep-read of Tolstoy's *Stories for the People* (народные рассказы, 1881–1887), keystone-first.</div>
       </a>
       <a class="index-card" href="/research/themes/doukhobors/biryukov-vol3/ru/chapter-01.html">
@@ -2331,7 +2371,7 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
         
       </a>
     </div>
-    <h2 id="ref-superpowers">Superpowers<span class="count">10</span></h2>
+    <h2 id="ref-superpowers">Superpowers<span class="count">14</span></h2>
     <div class="index-grid">
       <a class="index-card" href="/superpowers/plans/2026-05-29-corpus-dive.html">
         <div class="card-title">corpus-dive Skill Implementation Plan</div>
@@ -2375,16 +2415,63 @@ footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; co
       </a>
       <a class="index-card" href="/superpowers/plans/2026-07-13-research-forstudie-move.html">
         <div class="card-title">Research förstudie folder-move Implementation Plan</div>
-        <div class="card-meta">updated 13 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>**Goal:** Reorganise `docs/research/` into `works/` + `themes/` + `wiki/` (+ `_meta/`) so it mirrors the live site, without breaking any lin…</div>
+      </a>
+      <a class="index-card" href="/superpowers/specs/2026-09-22-research-site-design.html">
+        <div class="card-title">research.tolstoy.life — the docs folder as open research</div>
+        <div class="card-meta">updated 22 Sep 2026</div>
+        <div class='card-lede'>Two steps, in this order. **Step 1** puts the `docs/` site online so Johan can read, listen to and annotate *A Confession* on his iPad while…</div>
+      </a>
+      <a class="index-card" href="/superpowers/plans/2026-09-22-research-site-ipad.html">
+        <div class="card-title">research.tolstoy.life, Step 1 — A Confession on the iPad</div>
+        <div class="card-meta">updated 22 Sep 2026</div>
+        <div class='card-lede'>**Goal:** Put the `docs/` site online at research.tolstoy.life, unlisted, so Johan can read, listen to and annotate *A Confession* on his iP…</div>
+      </a>
+      <a class="index-card" href="/superpowers/plans/2026-09-22-research-site-soft-launch.html">
+        <div class="card-title">research.tolstoy.life, Step 2 — the soft launch</div>
+        <div class="card-meta">updated 22 Sep 2026</div>
+        <div class='card-lede'>**Goal:** Open the work to readers and listeners: a short landing page at tolstoy.life that points at the two finished editions, a research …</div>
+      </a>
+      <a class="index-card" href="/superpowers/specs/2026-08-10-great-sin-restored-text-design.html">
+        <div class="card-title">The Great Sin — a restored text, and telling the reader what was done to it</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
+        <div class='card-lede'>**What this is.** The design for two pieces of work on the existing Great Sin reader bundle: a new standalone page carrying the passages Che…</div>
       </a>
       <a class="index-card" href="/superpowers/specs/2026-07-13-research-forstudie-architecture-design.html">
         <div class="card-title">The research folder (förstudie) architecture — one entity, one page (design)</div>
-        <div class="card-meta">updated 13 Jul 2026</div>
+        <div class="card-meta">updated 10 Aug 2026</div>
         <div class='card-lede'>`docs/research/` is currently **flat** — every dive is a sibling folder, mixed with infra folders and loose planning files. Three different …</div>
       </a>
     </div>
-<footer>tolstoy.life · public build log · generated by <code>docs/serve.py</code></footer>
+<section>
+  <h2>Notes</h2>
+  
+    <h3 class="year-label">2026</h3>
+    <ul class="post-list">
+        <li class="post-entry">
+          <a href="/architecture/architecture-review.html">
+            <div class="post-row">
+              <time>9 May 2026</time>
+              <span class="post-title">Deep research report — Tolstoy PWA local-first architecture</span>
+              <span class='post-folder'>architecture</span>
+            </div>
+            <p class='post-lede'>The sync model has three independent pieces that people often conflate. Let me separate them.</p>
+          </a>
+        </li>
+        <li class="post-entry">
+          <a href="/design/period-colours-preview.html">
+            <div class="post-row">
+              <time>26 Apr 2026</time>
+              <span class="post-title">Tolstoy Period Colours — Preview</span>
+              <span class='post-folder'>design</span>
+            </div>
+            
+          </a>
+        </li>
+    </ul>
+</section>
+<footer>tolstoy.life · public build log · generated by <code>docs/serve.py</code><br>Extracts from the <a href="https://tolstoydigital.org/">tolstoydigital</a> TEI corpus are shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Tolstoy's own words are in the public domain, and everything else here is dedicated to it (<a href="https://github.com/tolstoylife/tolstoy.life/blob/main/LICENSE">licence</a>).</footer>
 </div>
 </body>
 </html>

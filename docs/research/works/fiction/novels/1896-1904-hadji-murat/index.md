@@ -276,4 +276,4 @@ Corpus surface: PSS Tom 35 (the novella + the full apparatus); diaries Tom 53–
 
 ---
 
-*Dev-blog note: [`website/src/posts/notes/2026-06-09-hadji-murat.md`](../../../website/src/posts/notes/2026-06-09-hadji-murat.md) (draft).*
+*Dev-blog note: [`website/src/posts/notes/2026-06-09-hadji-murat.md`](../../../../../../website/src/posts/notes/2026-06-09-hadji-murat.md) (draft).*

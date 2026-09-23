@@ -249,6 +249,7 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
 }
 
 figure { margin: 1.8rem 0; }
+.img-withheld { display: block; padding: 1rem; margin: 1.8rem 0 .5rem; border: 1px dashed var(--rule-soft); color: var(--ink-soft); font-size: .85rem; text-align: center; }
 main img {
   max-width: 100%; height: auto; display: block;
   margin: 1.8rem auto 0.5rem;
@@ -580,6 +581,9 @@ button.dot[aria-pressed="true"] { border: 1.5px solid var(--accent); }
 }
 .notes-actions button:hover { border-color: var(--accent); }
 .notes-actions button.danger:hover { background: #a03b2e; border-color: #a03b2e; color: #fff; }
+#notes-send-row:not([hidden]) { margin-top: .6rem; display: grid; gap: .4rem; }
+#notes-send-row input { width: 100%; font: inherit; padding: .4rem; }
+.notes-send-note { color: var(--ink-soft); font-family: var(--sans); font-size: 12px; margin: 0; }
 
 /* ── Annotations in the text: underline + margin marker (the wash channel is
       read-along's — the two must coexist on the same sentence). ── */
@@ -678,6 +682,14 @@ main :is(li, blockquote, h2, h3):has(mark.annotation) { position: relative; }
 }
 #transport #rl-play .ic { width: 14px; height: 14px; }
 #transport #rl-play:hover { border-color: var(--accent); }
+/* ⚠ A fingertip missing the 28px button hits the seek slider and jumps the audio — 44px hit area, same look. */
+@media (pointer: coarse) {
+  #transport #rl-play, #transport #rl-speed { position: relative; }
+  #transport #rl-play::after, #transport #rl-speed::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: max(100%, 44px); height: 44px;
+  }
+}
 #transport input[type="range"].track {
   flex: 1; min-width: 4rem; height: 3px; margin: 0;
 }

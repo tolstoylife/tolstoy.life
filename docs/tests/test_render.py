@@ -21,3 +21,21 @@ def test_footnote_renders():
 def test_wikilink_renders_link():
     html = serve.render_body("the single tax that [[Henry George]] proposed")
     assert "Henry George" in html and "wikilink" in html
+
+
+def test_front_page_credits_tolstoydigital_licence():
+    html = serve.build_index(serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files()))
+    assert "tolstoydigital" in html and "CC BY-SA 4.0" in html
+
+
+def test_front_page_leads_with_reading():
+    html = serve.build_index(serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files()))
+    read_at = html.index("Read and listen")
+    assert read_at < html.index('<iframe class="viz-frame"'), "the reading section comes before the timeline chart"
+    assert read_at < html.index('<h2>Notes</h2>'), "the reading section comes before the dated notes"
+    assert "/reader/non-fiction/personal-papers/confession/" in html
+
+def test_bare_pss_gets_its_abbr_once():
+    html = serve.render_body('PSS Tom 36, <abbr title="x">PSS</abbr>, `PSS` and [PSS](https://example.org/PSS)')
+    assert html.count("<abbr") == 3  # the bare one, the link text, and the one already marked
+    assert "<code>PSS</code>" in html and 'href="https://example.org/PSS"' in html

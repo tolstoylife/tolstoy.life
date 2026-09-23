@@ -72,7 +72,7 @@ The war pressed on him physically. A public cable he sent on 9 February — nine
 
 - **V. G. Chertkov** (central) — translator, editor, and abroad-publisher; the entire publication ran through him. The 1904 letters in Tom 75 do not include the Tolstoy–Chertkov correspondence (it is held in separate volumes), but Chertkov's presence is everywhere in the window: Tolstoy routes foreign press enquiries to "Christchurch, Hants" before the essay even exists in draft, sends each instalment there, and gives Chertkov carte blanche to cut (see *Redactions*). The published venue is Chertkov's Free Age Press / «Свободное слово».
 - **Yu. I. Igumnova** (supporting) — Tolstoy's secretary; dispatched the corrections and the final chapters to Chertkov, with the cover letters that survive in the archive.
-- **Alexandra (Sasha) Tolstaya** (supporting) — Tolstoy's youngest daughter and a copyist of the drafts; the cover sheet "Черновики. 30 января 1904 г." is in her hand. Her page already [exists in the vault](../../../website/src/wiki/Alexandra%20Tolstaya.md).
+- **Alexandra (Sasha) Tolstaya** (supporting) — Tolstoy's youngest daughter and a copyist of the drafts; the cover sheet "Черновики. 30 января 1904 г." is in her hand. Her page already [exists in the vault](../../../../../../website/src/wiki/Alexandra%20Tolstaya.md).
 - **D. V. Nikitin, E. I. Popov, M. A. Schmidt, Kh. N. Abrikosov** (supporting) — the copyists named in the editorial history who typed and re-typed the chapters and the epigraphs.
 - **M. P. Novikov** (supporting) — a Tula peasant and friend whose two letters (27–28 April 1904) on being called up are quoted at length in chapter XII; he is the unnamed "peasant I know" of the text.
 - **Efim Savelievich Ivus** (peripheral) — a seaman of the cruiser *Pallada* at Port Arthur, whose 8 May 1904 letter — reproduced in the essay verbatim, with its original spelling — supplies the closing "spark." The diary records its arrival:
@@ -380,4 +380,4 @@ This was a `corpus-dive` work-dive run on 2026-06-08. Scope (Phase 0, from the s
 
 ---
 
-*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the works-record fills this research should become. See the [draft dev-blog note](../../../website/src/posts/notes/2026-06-08-bethink-yourselves.md).*
+*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the works-record fills this research should become. See the [draft dev-blog note](../../../../../../website/src/posts/notes/2026-06-08-bethink-yourselves.md).*

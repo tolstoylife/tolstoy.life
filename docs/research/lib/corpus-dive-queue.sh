@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
-# corpus-dive overnight queue runner.
-# Spawns a FRESH `claude -p` session per theme (clean context per dive), continues on failure,
-# writes a combined batch summary. See .claude/skills/corpus-dive/SKILL.md and design spec §13.
+# corpus-dive overnight queue runner: a fresh `claude -p` session per theme, continues on failure, writes a combined summary. See .claude/skills/corpus-dive/SKILL.md.
 #
 # Usage:
 #   corpus-dive-queue.sh --themes <file> [--model <tier>] [--skip-permissions] [--dry-run]
 #
-# themes file: one theme per line; blank lines and lines starting with # are ignored.
-#
-# --skip-permissions appends Claude's `--allow-dangerously-skip-permissions` to each invocation so the
-#   run does not stall on write-permission prompts. REQUIRED for true unattended/overnight use
-#   (or configure a .claude/settings.json allow-list instead). It disables ALL permission prompts
-#   for that headless process — use deliberately.
+# themes file: one theme per line; blank lines and # lines are ignored.
+# ⚠ --skip-permissions passes `--allow-dangerously-skip-permissions`, which turns off ALL permission prompts for that process; needed for unattended runs unless .claude/settings.json allows the writes.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"

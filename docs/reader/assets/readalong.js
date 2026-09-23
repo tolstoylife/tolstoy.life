@@ -37,10 +37,7 @@
     let activeEl = null;
     let lastUserScroll = 0;
     let seeking = false;
-    // ponytail: sections are fetched whole as blob URLs — serve.py speaks no
-    // HTTP Range, so a plain src is only seekable once fully buffered. Blobs
-    // are always seekable; cache is per-section, a few MB each. Swap back to
-    // plain src when the reader lives on a Range-capable host.
+    // ponytail: sections load whole as blob URLs because serve.py can't answer HTTP Range requests; swap back to a plain src on a Range-capable host.
     const blobs = {};
 
     let speed = (settings && settings.load().speed) || 1;
@@ -62,9 +59,7 @@
       audio.src = blobs[sec];
       audio.playbackRate = speed;
       if (seekTo != null) {
-        // src was just swapped: readyState still reflects the OLD file until
-        // the load algorithm runs, so a synchronous seek gets discarded.
-        // Always wait for the new metadata.
+        // ⚠ right after a src swap readyState still describes the old file, so a synchronous seek is dropped — always wait for the new metadata.
         audio.addEventListener('loadedmetadata',
           () => { audio.currentTime = seekTo; }, { once: true });
       }
@@ -155,8 +150,7 @@
       applySpeed(SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length]);
     });
 
-    // Spacebar toggles play — except while typing or on a focused control
-    // (a focused button already toggles via its own click on Space).
+    // Space toggles play, except while typing or on a focused control (a focused button already toggles itself).
     addEventListener('keydown', e => {
       if (e.code !== 'Space' || e.target.closest('input, textarea, select, button, a, [contenteditable]')) return;
       e.preventDefault();                    // keep the page from scrolling

@@ -49,15 +49,9 @@ def normalise_paragraph(p, choice_mode="legacy"):
     for node in p.iter():
         tag = etree.QName(node).localname
 
-        # Editorial: <choice> contains <sic> (original) and <corr> (corrected/expanded).
-        # When we hit <choice> we'll process its children explicitly and skip recursion.
-        # Easier approach: only collect text from <corr>, skip <sic>; skip <note> bodies entirely.
+        # Editorial <choice>: keep <corr>, skip <sic>; skip <note> bodies entirely.
         if tag == "note":
-            # Skip note text — these are footnote bodies, not Tolstoy's prose —
-            # but PRESERVE the note's .tail: the prose that follows a footnote
-            # anchor is Tolstoy's own, and lxml's .clear() would wipe it (the
-            # cause of silently-dropped sentences after inline notes in letters,
-            # diaries, and the works themselves).
+            # ⚠ Skip the footnote body but keep its .tail — the prose after a note anchor is Tolstoy's, and lxml's .clear() would wipe it.
             tail = node.tail
             node.clear()  # destructive but we don't reuse the tree
             node.tail = tail
@@ -76,8 +70,7 @@ def normalise_paragraph(p, choice_mode="legacy"):
             if corr is not None:
                 walk(corr)
                 return
-            # Orthographic orig/reg: pre-reform spelling pairs. Legacy mode drops
-            # them (the historical gap); reg/orig/both resolve them per --choice.
+            # Pre-reform orig/reg spelling pairs: legacy mode drops them; reg/orig/both resolve them per --choice.
             reg = node.find("t:reg", NS)
             orig = node.find("t:orig", NS)
             if reg is not None or orig is not None:
@@ -100,11 +93,9 @@ def normalise_paragraph(p, choice_mode="legacy"):
             return
         if tag == "sic":
             return  # sibling of <corr>, already handled above
-        # Footnote anchors. Print PSS renders these as superscript digits bound
-        # to the preceding word. The TEI corpus uses two markups inconsistently:
+        # Footnote anchors: both digit-only markups the corpus uses get PSS-style superscript —
         #   <hi>1</hi>                     (Eltzbacher, Sacy letters)
         #   <ref target="#note1">1</ref>   (Schmitt, Stakhovich, Germogen, …)
-        # Both, when digit-only, get the same superscript treatment.
         is_hi_anchor = (
             tag == "hi" and not node.get("style") and (node.text or "").strip().isdigit()
         )
@@ -115,8 +106,7 @@ def normalise_paragraph(p, choice_mode="legacy"):
         )
         if is_hi_anchor or is_ref_anchor:
             t = node.text.strip()
-            # eat any trailing whitespace already in the buffer so the
-            # superscript binds to the preceding word
+            # eat trailing whitespace so the superscript binds to the preceding word
             while text and text[-1] and text[-1][-1:].isspace():
                 text[-1] = text[-1].rstrip()
                 if not text[-1]:
@@ -135,8 +125,7 @@ def normalise_paragraph(p, choice_mode="legacy"):
     # Collapse space-before-punctuation produced by inline <title>/<emph> tails.
     out = re.sub(r"\s+([.,;:!?»])", r"\1", out)
     out = re.sub(r"([«])\s+", r"\1", out)
-    # Repair structural collisions where TEI markup eats a boundary character:
-    #   <name>(Paul Eltzbacher)</name>.1900 г.   →   "). 1900 г."
+    # Repair boundaries TEI markup eats, e.g.  <name>(Paul Eltzbacher)</name>.1900 г.  →  "). 1900 г."
     out = re.sub(r"\)\.(\d)", r"). \1", out)
     #   ".1901г. Июля 28"   →   ". 1901 г. Июля 28"   (rare TEI source quirk)
     out = re.sub(r"(\d{4})г\.", r"\1 г.", out)
@@ -156,8 +145,7 @@ def recover_note_body(body, choice_mode="legacy"):
     drops any <note> it walks into. Returns [(\"note\", text), ...] in document order.
     """
     recovered = []
-    # Snapshot the noteGrps first: normalise_paragraph() below mutates note subtrees
-    # (it clears nested <note>s), so we must not be lazily iterating the tree as we go.
+    # ⚠ Snapshot the noteGrps first: normalise_paragraph() below mutates note subtrees.
     notegrps = list(body.iter("{http://www.tei-c.org/ns/1.0}noteGrp"))
     for notegrp in notegrps:
         if notegrp.get("type") != "comments":
@@ -213,9 +201,7 @@ def extract(path, notes_mode="auto", choice_mode="legacy"):
             if txt:
                 paragraphs.append((tag, txt))
 
-    # Note-encoded-body recovery. In "auto" we only reach into the comments
-    # apparatus when the body carries no real prose, so a normal extraction can
-    # never be polluted with its footnotes; "force" always appends it.
+    # Note-encoded bodies: "auto" reads the comments apparatus only when the body has no real prose, so normal extractions never pick up footnotes; "force" always appends it.
     has_real_body = any(tag in ("p", "closer") for tag, _ in paragraphs)
     recovered = 0
     if notes_mode == "force" or (notes_mode == "auto" and not has_real_body):

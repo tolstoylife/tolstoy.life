@@ -103,8 +103,7 @@
     };
   }
 
-  // ── Re-anchor + render: wrap the quote in <mark>, preferring the match
-  //    nearest the stored TextPosition. Single-text-node quotes only (v1). ──
+  // ── Re-anchor + render: wrap the quote in <mark>, preferring the match nearest the stored TextPosition (single-text-node quotes only). ──
   function findAndWrap(ann, exactOverride) {
     const q = quoteSel(ann);
     if (!q || !q.exact) return;
@@ -129,8 +128,7 @@
       offset += node.textContent.length;
     }
     if (!best) {
-      // a quote with edge whitespace can start in the gap BETWEEN sentence
-      // spans (its own text node) — retry with the trimmed quote
+      // a quote with edge whitespace can start in the gap between sentence spans — retry with the trimmed quote
       if (!exactOverride && exact !== exact.trim()) findAndWrap(ann, exact.trim());
       return;
     }
@@ -336,6 +334,29 @@
     if (confirm('Delete all notes on this page?')) { saveDoc([]); renderAll(); }
   });
 
+  // ⚠ Send only works on the published site (Netlify handles the form); locally it would 404, so the button is hidden.
+  const sendRow = document.getElementById('notes-send-row');
+  const sendBtn = document.getElementById('notes-send');
+  if (sendBtn && !/(^|\.)(tolstoy\.life|netlify\.app)$/.test(location.hostname)) sendBtn.hidden = true;
+  bindClick('notes-send', () => { sendRow.hidden = !sendRow.hidden; });
+  bindClick('notes-send-go', btn => {
+    if (!loadDoc().length) { alert('There are no notes on this page yet.'); return; }
+    const body = new URLSearchParams({
+      'form-name': 'reader-notes',
+      page: location.pathname,
+      email: document.getElementById('notes-email').value,
+      text: exportText(),
+      jsonld: JSON.stringify(exportCollection()),
+      'bot-field': '',
+    });
+    btn.disabled = true;
+    // ⚠ Posts to the page's own address, not "/" — the site rewrites "/" to INDEX.html, which can swallow the submission.
+    fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+      .then(r => { btn.textContent = r.ok ? 'Sent, thank you' : 'Sending failed — try again later'; })
+      .catch(() => { btn.textContent = 'Sending failed — try again later'; })
+      .finally(() => { setTimeout(() => { btn.disabled = false; btn.textContent = 'Send'; sendRow.hidden = true; }, 4000); });
+  });
+
   function bindClick(id, fn) {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', () => fn(el));
@@ -371,7 +392,7 @@
     pendingAnchor = null;
   }
 
-  function showPopover(x, y, anchor) {
+  function showPopover(x, y, anchor, focus = true) {
     pendingAnchor = anchor;
     annQuote.textContent = '"' + anchor.exact.slice(0, 120) + (anchor.exact.length > 120 ? '…' : '') + '"';
     popover.style.display = 'block';
@@ -380,22 +401,38 @@
     if (py + popover.offsetHeight > innerHeight - 16) py = y - popover.offsetHeight - 12;
     popover.style.left = px + 'px';
     popover.style.top = py + 'px';
-    setTimeout(() => annText.focus(), 50);
+    if (focus) setTimeout(() => annText.focus(), 50);
   }
 
-  document.addEventListener('mouseup', e => {
-    if (e.target.closest('#ann-popover,#notes-panel,#tools-overlay,#toc-drawer,#topbar,#transport')) return;
+  // The current selection as a note anchor, or null when it isn't a selection in the text.
+  function selectionAnchor() {
     const s = window.getSelection();
-    if (!s || s.isCollapsed) return;
-    const text = s.toString().trim();
-    if (text.length < 3) return;
+    if (!s || s.isCollapsed || s.toString().trim().length < 3) return null;
     const main = document.querySelector('main');
-    if (!main) return;
     const range = s.getRangeAt(0);
-    if (!main.contains(range.commonAncestorContainer)) return;
+    if (!main || !main.contains(range.commonAncestorContainer)) return null;
     const anchor = getContext(range);
-    if (!anchor) return;
-    showPopover(e.clientX, e.clientY, anchor);
+    return anchor ? { anchor, rect: range.getBoundingClientRect() } : null;
+  }
+
+  let lastPointer = 'mouse', settle;
+  document.addEventListener('pointerdown', e => { lastPointer = e.pointerType; }, true);
+
+  document.addEventListener('mouseup', e => {
+    if (lastPointer !== 'mouse') return;
+    if (e.target.closest('#ann-popover,#notes-panel,#tools-overlay,#toc-drawer,#topbar,#transport')) return;
+    const sel = selectionAnchor();
+    if (sel) showPopover(e.clientX, e.clientY, sel.anchor);
+  });
+
+  // ⚠ Touch and Pencil selection (iPad) never fire mouseup — open once the selection handles settle.
+  document.addEventListener('selectionchange', () => {
+    if (lastPointer === 'mouse' || popover.contains(document.activeElement)) return;
+    clearTimeout(settle);
+    settle = setTimeout(() => {
+      const sel = selectionAnchor();
+      if (sel) showPopover(sel.rect.left, sel.rect.bottom, sel.anchor, false);
+    }, 600);
   });
 
   document.addEventListener('mousedown', e => {

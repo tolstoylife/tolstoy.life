@@ -34,8 +34,7 @@ No `works/` record exists for this essay yet, so the dive's `workRecord` **propo
 
 The essay states its own stakes plainly: the fame is not a harmless overvaluation but an *untruth*, and untruth does damage.
 
-Date: Chapter I, written 1903.
-Context: the opening declaration, after he describes fifty years of failing to share the world's admiration.
+Date: Chapter I, written 1903. Context: the opening declaration, after he describes fifty years of failing to share the world's admiration.
 
 > та непререкаемая слава великого, гениального писателя… **есть великое зло, как и всякая неправда**
 >
@@ -249,7 +248,7 @@ A work-subject dive (not `--novel`), run interactively. The reader's framing nam
 - **Links.** Sibling dives: [What Is Art?](../1897-1898-what-is-art/index.html) · [crisis](../crisis/index.html) · [fire-metaphor](../fire-metaphor/index.html) · [tolstoyanism](../tolstoyanism/index.html).
 - **Open items** are in the dossier's `needsReview` (publication priority; the daughter-in-law translator; Knight's pamphlet; Shaw's letter text; the 1906–07 press).
 
-Draft dev-blog note: [`website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md`](../../../website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md) (`draft: true`).
+Draft dev-blog note: [`website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md`](../../../../../../website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md) (`draft: true`).
 
 ## References
 

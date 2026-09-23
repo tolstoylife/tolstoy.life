@@ -255,4 +255,4 @@ This dive followed the `corpus-dive` skill. **Scope:** a single-work dive on *Ch
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-07-christianity-and-patriotism.md`](../../../website/src/posts/notes/2026-06-07-christianity-and-patriotism.md) (`draft: true`).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-07-christianity-and-patriotism.md`](../../../../../../website/src/posts/notes/2026-06-07-christianity-and-patriotism.md) (`draft: true`).*

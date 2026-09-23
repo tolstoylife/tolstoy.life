@@ -24,7 +24,7 @@ It is the non-fiction successor to [`_prophet-period-remaining-dives.md`](_proph
 
 **A note on dates.** The TEI file headers carry the *PSS publication* year (1936–58), **not** composition — so every prompt tells the dive to pin the composition window itself in Phase 0 (from the work's own commentary), and the dated slugs below are best-estimates to confirm, not facts. This is the same `tei-diary-filename-year` caution the project already knows.
 
-**A note on translation status.** Most of the short polemical articles already have a published English translation (the Free Age Press / Maude machine kept pace — see the [translation-gap ledger](late-voice-encryption-compression/translation-gaps.md)). The dives are therefore mostly about *primary-source grounding, genesis, and vault records*, not about filling a translation gap — except where flagged.
+**A note on translation status.** Most of the short polemical articles already have a published English translation (the Free Age Press / Maude machine kept pace — see the [translation-gap ledger](../late-voice-encryption-compression/translation-gaps.md)). The dives are therefore mostly about *primary-source grounding, genesis, and vault records*, not about filling a translation gap — except where flagged.
 
 ---
 
@@ -121,7 +121,7 @@ Every undived Prophet-period non-fiction piece in the corpus, grouped by the div
 | | Letter to a Chinese | Письмо к китайцу | `v36_290_299_Pismo_k_kitajtsu.xml` | 36 | 1906 | ? |
 | | An Address to the Chinese People | Обращение к китайскому народу | `v34_339_342_Obraschenie_k_kitajskomu_narodu.xml` | 34 | 1900 | ? |
 
-This dive carries the **Gandhi correspondence thread** (PSS letter Toms 80/81/82 — three letters, 25 Sep 1909 / 25 Apr 1910 / 7 Sep 1910) and is the natural follow-on to the [Prophet-period essay visualisations](../../_generated/research/session-prophet-essays-viz-2026-06-12/) made on 2026-06-12.
+This dive carries the **Gandhi correspondence thread** (PSS letter Toms 80/81/82 — three letters, 25 Sep 1909 / 25 Apr 1910 / 7 Sep 1910) and is the natural follow-on to the [Prophet-period essay visualisations](../../../_generated/research/session-prophet-essays-viz-2026-06-12/) made on 2026-06-12.
 
 ### H · Autobiography & memoir → 1 standalone
 
@@ -155,7 +155,7 @@ Cross-link `copyright-renunciation` (the same 1891 moment) and `doukhobors` ("He
 | | For Every Day | На каждый день | `v43_…`, `v44_…` | 43–44 | 1909 | uncertain |
 | | The Path of Life | Путь жизни | `v45_013_496_Put_zhizni.xml` | 45 | 1910 | ✓ |
 
-**Caveat:** the [late-voice dive](late-voice-encryption-compression/) already mapped these heavily (translation status, the compression argument, the weekly-tale layer is its own dive `1905-1906-krug-chtenija-tales`). This cluster may be better run as a **Phase-3 enrichment of the late-voice dive** (add the `workRecord` proposals + a compiler-focused genesis section) than as a fresh dive. Decide at run time.
+**Caveat:** the [late-voice dive](../late-voice-encryption-compression/) already mapped these heavily (translation status, the compression argument, the weekly-tale layer is its own dive `1905-1906-krug-chtenija-tales`). This cluster may be better run as a **Phase-3 enrichment of the late-voice dive** (add the `workRecord` proposals + a compiler-focused genesis section) than as a fresh dive. Decide at run time.
 
 ### K · Science, education & culture — the catch-all → 1 cluster (lowest priority)
 

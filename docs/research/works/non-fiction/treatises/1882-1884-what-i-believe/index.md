@@ -195,4 +195,4 @@ Background: Aylmer Maude, *The Life of Tolstoy* (1908–10) and the Maude transl
 
 ---
 
-*Companion dev-blog note: [`2026-06-06-what-i-believe`](../../../website/src/posts/notes/2026-06-06-what-i-believe.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*
+*Companion dev-blog note: [`2026-06-06-what-i-believe`](../../../../../../website/src/posts/notes/2026-06-06-what-i-believe.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*

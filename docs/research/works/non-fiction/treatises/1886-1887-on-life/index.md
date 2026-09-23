@@ -218,4 +218,4 @@ Background: Inessa Medzhibovskaya (ed.) & Michael A. Denner (trans.), *On Life: 
 
 ---
 
-*Companion dev-blog note: [`2026-06-06-on-life`](../../../website/src/posts/notes/2026-06-06-on-life.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*
+*Companion dev-blog note: [`2026-06-06-on-life`](../../../../../../website/src/posts/notes/2026-06-06-on-life.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*

@@ -10,7 +10,7 @@ Interpretive guidance left by Johan on [`index.md`](index.md) (2026-06-05). **No
 factual dive** — the dive's prose stays bare by design. These are preserved as the kind of reader's
 steer meant to feed the eventual **wiki ingestion** of this dive (the harmony, *The Gospel in
 Brief*, the *Critique of Dogmatic Theology*, the English lineage, and the
-[Sophia Tolstaya](../../../website/src/wiki/Sophia%20Tolstaya.md) update, all flagged in
+[Sophia Tolstaya](../../../../website/src/wiki/Sophia%20Tolstaya.md) update, all flagged in
 `dossier.yaml`). Ingestion is a separate, human-in-the-loop step; this file is *guidance for it*,
 not content for the vault. Two of the four notes were direct copy-edits and were applied to the dive
 (see **Dive edits applied**); the other two are framing steer.

@@ -207,4 +207,4 @@ Background: Aylmer Maude & Louise Maude (trans.), *What Then Must We Do?* (Oxfor
 
 ---
 
-*Companion dev-blog note: [`2026-06-06-what-then-must-we-do`](../../../website/src/posts/notes/2026-06-06-what-then-must-we-do.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*
+*Companion dev-blog note: [`2026-06-06-what-then-must-we-do`](../../../../../../website/src/posts/notes/2026-06-06-what-then-must-we-do.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*

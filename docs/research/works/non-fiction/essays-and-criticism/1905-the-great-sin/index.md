@@ -235,4 +235,4 @@ A work-subject corpus-dive (single work → one proposed `workRecord`), not `--n
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-21-the-great-sin.md`](../../../website/src/posts/notes/2026-06-21-the-great-sin.md) (draft).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-21-the-great-sin.md`](../../../../../../website/src/posts/notes/2026-06-21-the-great-sin.md) (draft).*

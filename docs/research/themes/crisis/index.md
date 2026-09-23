@@ -261,4 +261,4 @@ Full provenance and rights for every item are in `dossier.yaml` (`visuals:`).
 
 ---
 
-A short, plain-language recap of this dive is drafted for the dev-blog at [`website/src/posts/notes/2026-05-29-crisis.md`](../../../website/src/posts/notes/2026-05-29-crisis.md) (held as `draft: true`).
+A short, plain-language recap of this dive is drafted for the dev-blog at [`website/src/posts/notes/2026-05-29-crisis.md`](../../../../website/src/posts/notes/2026-05-29-crisis.md) (held as `draft: true`).

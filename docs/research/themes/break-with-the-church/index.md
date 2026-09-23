@@ -189,4 +189,4 @@ Background — Kolstø, P. (2022), *Heretical Orthodoxy: Lev Tolstoi and the Rus
 
 ---
 
-*Companion dev-blog note: [2026-06-13-the-break-with-the-church](../../../website/src/posts/notes/2026-06-13-the-break-with-the-church.md) (draft).*
+*Companion dev-blog note: [2026-06-13-the-break-with-the-church](../../../../website/src/posts/notes/2026-06-13-the-break-with-the-church.md) (draft).*

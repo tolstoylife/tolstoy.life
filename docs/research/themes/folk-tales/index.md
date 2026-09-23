@@ -148,4 +148,4 @@ Background — Maude, A. (1906), preface to *Twenty-Three Tales*; Popoff, A. (20
 
 ---
 
-*Companion dev-blog note: [2026-06-11-1903-folk-tales](../../../website/src/posts/notes/2026-06-11-1903-folk-tales.md) (draft).*
+*Companion dev-blog note: [2026-06-11-1903-folk-tales](../../../../website/src/posts/notes/2026-06-11-1903-folk-tales.md) (draft).*

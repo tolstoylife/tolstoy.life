@@ -61,25 +61,19 @@ OUT_NAME = "index.html"                       # docs/research/index.html
 # Folders that are NOT dives but live in the research tree; never list them.
 NON_DIVE_DIRS = {"lib", "visualizations"}
 
-# The "reference & method" bucket — dives about the corpus apparatus itself,
-# not a Tolstoy work or theme. The first four are named in the index plan; the
-# editions reference joins them (layer: reference). Everything else classifies
-# from its dossier (workRecord → single-work; else → theme).
+# The "reference & method" bucket: dives about the corpus apparatus itself; everything else classifies from its dossier (workRecord → single-work, else theme).
 REFERENCE_SLUGS = {
     "evidence-index",
     "jubilee-edition-tei-corpus",
     "tolstoydigital-tei-reference",
     "pss-volume-mapping",
     "biryukov-biography-editions",
-    # Visual-resource surveys: catalogues of where Tolstoy appears in art and
-    # photographs — reference material, not a work or theme dive.
+    # Visual-resource surveys (where Tolstoy appears in art and photographs): reference material.
     "tolstoy-in-art",
     "tolstoy-in-photographs",
 }
 
-# A handful of dives carry a workRecord but read as theme dives (the index plan
-# names the late-voice dive a theme dive). Override the workRecord → single-work
-# rule for these named slugs.
+# Dives that carry a workRecord but read as theme dives; overrides the workRecord → single-work rule.
 THEME_SLUGS = {
     "late-voice-encryption-compression",
 }
@@ -88,7 +82,7 @@ THEME_SLUGS = {
 COVERAGE_VIZ = "visualizations/coverage-map.html"
 PROPHET_VIZ = "visualizations/prophet-essays.html"
 # The queued-dive backlog plan (rendered to .html by serve.py).
-BACKLOG_DOC = "_prophet-period-nonfiction-dives.html"
+BACKLOG_DOC = "_meta/_prophet-period-nonfiction-dives.html"
 
 GROUP_LABELS = {
     "work": "Single-work dives",
@@ -170,9 +164,7 @@ def discover(research_dir):
     dives = []
     seen_dirs = set()
 
-    # Folder dives: prefer dossier.yaml's topic block; fall back to index.md.
-    # Dives live nested under works/<genre>/<subcat>/ and themes/<slug>/;
-    # _meta/, lib/, visualizations/, evidence-index/ are excluded by construction.
+    # Prefer dossier.yaml's topic block, fall back to index.md; _meta/, lib/, visualizations/ and evidence-index/ are excluded by construction.
     folder_by_slug = {}
     for pat in ("works/*/*/*/dossier.yaml", "themes/*/dossier.yaml",
                 "works/*/*/*/index.md", "themes/*/index.md"):
@@ -246,9 +238,7 @@ def sort_dives(dives):
     grouped = {g: [] for g in GROUP_ORDER}
     for d in dives:
         grouped[d["group"]].append(d)
-    # Work dives carry a reliable composition-year prefix → chronological.
-    # Theme & reference dives mix composition-year and concept slugs, so the
-    # year is unreliable → sort by title for a predictable, stable order.
+    # Work dives sort by their composition-year prefix; theme and reference slugs mix years and concepts, so they sort by title.
     grouped["work"].sort(key=lambda d: (d["year"], d["title"].lower()))
     grouped["theme"].sort(key=lambda d: d["title"].lower())
     grouped["reference"].sort(key=lambda d: d["title"].lower())

@@ -166,7 +166,7 @@ The cluster's occasions are documented and dated. Each work answers a specific e
 
 ### The people around the cluster
 
-- **V. G. Chertkov** — publisher and editorial confidant; printed the whole cluster abroad through *Свободное слово* / Free Age Press; proposed (mostly minor) edits. [Vault page exists.](../../../website/src/wiki/Vladimir%20Chertkov.md)
+- **V. G. Chertkov** — publisher and editorial confidant; printed the whole cluster abroad through *Свободное слово* / Free Age Press; proposed (mostly minor) edits. [Vault page exists.](../../../../website/src/wiki/Vladimir%20Chertkov.md)
 - **N. N. Gusev** — secretary 1907–09; diary-witness who read Stolypin's article aloud and dated the drafts.
 - **N. E. Felten** — editor of «Обновление»; his 1907 arrest is the trigger of *Не убий никого*.
 - **A. A. Stolypin** — *Novoe Vremya* journalist, brother of the Prime Minister; the interlocutor of *Capital Punishment and Christianity*.
@@ -287,4 +287,4 @@ This was a `corpus-dive` multi-work theme-dive run on 2026-06-13, in-session (ac
 
 ---
 
-*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` block plans the wiki pages and the six `workRecord` blocks plan the new works records this research should become. See the [draft dev-blog note](../../../website/src/posts/notes/2026-06-13-against-the-death-penalty.md).*
+*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` block plans the wiki pages and the six `workRecord` blocks plan the new works records this research should become. See the [draft dev-blog note](../../../../website/src/posts/notes/2026-06-13-against-the-death-penalty.md).*

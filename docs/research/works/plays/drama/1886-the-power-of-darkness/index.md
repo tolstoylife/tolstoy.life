@@ -8,7 +8,7 @@ tags: [research, corpus-dive, novel-dive, work-dive, drama, fiction, the-power-o
 
 A single-work corpus dive on Tolstoy's five-act peasant tragedy *The Power of Darkness* (*Власть тьмы, или «Коготок увяз, всей птичке пропасть»*), written in autumn 1886. It is run in the `--novel` mode (drama flex): the whole short play is read in full, act by act, while the heaviest effort goes to genesis, redaction history, and reception — the layers where the work's depth lives. It reads the play from its own text in the tolstoydigital TEI corpus (PSS Tom 26), reconstructs its genesis from the Jubilee-Edition editorial history (Gudzy's commentary, Tom 26 pp. 705–736) and the 1886–87 letters, traces the keystone variant fourth act, and follows the censorship and staging history from the 1887 ban to the 1895 Russian première.
 
-The dive prepares ingestion-ready material (this `index.md`, a machine-readable `dossier.yaml`, byte-faithful `extracts/`, a heavy visual record, and a draft dev-blog note). It does not create vault pages; it plans them. The works record [The Power of Darkness](../../../website/src/works/plays/drama/the-power-of-darkness/) already exists as a draft stub — the dive proposes a `workRecord` fill (with two corrections), not a new record.
+The dive prepares ingestion-ready material (this `index.md`, a machine-readable `dossier.yaml`, byte-faithful `extracts/`, a heavy visual record, and a draft dev-blog note). It does not create vault pages; it plans them. The works record [The Power of Darkness](../../../../../../website/src/works/plays/drama/the-power-of-darkness/) already exists as a draft stub — the dive proposes a `workRecord` fill (with two corrections), not a new record.
 
 ---
 
@@ -43,8 +43,7 @@ The dive prepares ingestion-ready material (this `index.md`, a machine-readable 
 
 **Confirmed — the doctrine and where the play puts redemption.** The chain of sin is the play's spine, named from inside the work and from inside Tolstoy's circle, not read into it. The proverb is the subtitle, and it is the last lesson the play draws:
 
-Date: Act 5 (PSS Tom 26).
-Context: Nikita, having confessed the infanticide publicly, kneels to his father Akim.
+Date: Act 5 (PSS Tom 26). Context: Nikita, having confessed the infanticide publicly, kneels to his father Akim.
 
 > ...говорил ты мне: «коготок увяз и всей птичке пропасть», не послушал я, пес, твоего слова, и вышло по-твоему.
 
@@ -359,4 +358,4 @@ A `--novel` work-subject dive (drama flex): the full play read act by act (a sho
 
 ---
 
-*Draft dev-blog note: [`2026-06-10-the-power-of-darkness.md`](../../../website/src/posts/notes/2026-06-10-the-power-of-darkness.md) (draft).*
+*Draft dev-blog note: [`2026-06-10-the-power-of-darkness.md`](../../../../../../website/src/posts/notes/2026-06-10-the-power-of-darkness.md) (draft).*
