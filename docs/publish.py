@@ -23,7 +23,6 @@ DOCS = Path(__file__).parent.resolve()
 OUT = DOCS.parent / "_site"
 SKIP_SUFFIXES = {".py", ".sh", ".stderr"}
 SKIP_PARTS = {"tests", "_audition"}
-HEADERS = "/*\n  X-Robots-Tag: noindex\n"  # @until research-listed — keeps the site out of search results
 FORM_PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Form registration</title><meta name="robots" content="noindex"></head>
 <body>
@@ -143,7 +142,6 @@ def main():
     (OUT / "INDEX.html").write_text(serve.build_index({f: ps for f, ps in kept.items() if ps}), encoding="utf-8")
     (OUT / "404.html").write_text(serve.md_to_html(DOCS / "404.md"), encoding="utf-8")  # Netlify serves it for any missing address
     (OUT / "__forms.html").write_text(FORM_PAGE, encoding="utf-8")
-    (OUT / "_headers").write_text(HEADERS)
     (OUT / "_redirects").write_text(REDIRECTS)
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")
 
