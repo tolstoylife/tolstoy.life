@@ -298,10 +298,25 @@ def mark_missing_wikilinks(html: str) -> str:
             'class="wikilink"', 'class="wikilink wikilink-missing" title="No page yet"')
     return _WIKILINK_A_RE.sub(repl, html)
 
+PSS_ABBR = '<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr>'
+
+def abbr_pss(html: str) -> str:
+    """A bare PSS in running text gets its <abbr>; one already in <abbr>, <code> or <pre>, or inside a tag, is left alone."""
+    out, inside = [], 0
+    for part in re.split(r"(<[^>]+>)", html):
+        if part.startswith("<"):
+            m = re.match(r"<(/?)(abbr|code|pre)\b", part)
+            if m:
+                inside += -1 if m.group(1) else 1
+        elif not inside:
+            part = re.sub(r"\bPSS\b", PSS_ABBR, part)
+        out.append(part)
+    return "".join(out)
+
 def render_body(text: str) -> str:
     """Convert a Markdown string (CriticMarkup, footnotes, [[wikilinks]]) to an HTML fragment."""
     MD.reset()
-    return add_paragraph_ids(mark_missing_wikilinks(MD.convert(text)))
+    return add_paragraph_ids(abbr_pss(mark_missing_wikilinks(MD.convert(text))))
 
 
 # ── Dive cross-link resolution (post-2026-07 folder move) ───────────────────────

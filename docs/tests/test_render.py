@@ -34,3 +34,8 @@ def test_front_page_leads_with_reading():
     assert read_at < html.index('<iframe class="viz-frame"'), "the reading section comes before the timeline chart"
     assert read_at < html.index('<h2>Notes</h2>'), "the reading section comes before the dated notes"
     assert "/reader/non-fiction/personal-papers/confession/" in html
+
+def test_bare_pss_gets_its_abbr_once():
+    html = serve.render_body('PSS Tom 36, <abbr title="x">PSS</abbr>, `PSS` and [PSS](https://example.org/PSS)')
+    assert html.count("<abbr") == 3  # the bare one, the link text, and the one already marked
+    assert "<code>PSS</code>" in html and 'href="https://example.org/PSS"' in html
