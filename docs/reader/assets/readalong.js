@@ -37,7 +37,8 @@
     let activeEl = null;
     let lastUserScroll = 0;
     let seeking = false;
-    // ponytail: sections load whole as blob URLs because serve.py can't answer HTTP Range requests; swap back to a plain src on a Range-capable host.
+    // ⚠ the local serve.py can't answer HTTP Range requests, so on localhost sections load whole as blob URLs; the site (Netlify) streams.
+    const wholeFiles = ['localhost', '127.0.0.1'].includes(location.hostname);
     const blobs = {};
 
     let speed = (settings && settings.load().speed) || 1;
@@ -51,12 +52,16 @@
     async function loadSection(sec, seekTo, autoplay) {
       curSec = sec;
       secOut.textContent = (sections.indexOf(sec) + 1) + '/' + sections.length;
-      if (!blobs[sec]) {
-        const r = await fetch(base(timing.audio[sec]));
-        blobs[sec] = URL.createObjectURL(await r.blob());
-        if (curSec !== sec) return;   // superseded by a later click mid-fetch
+      if (!wholeFiles) {
+        audio.src = base(timing.audio[sec]);
+      } else {
+        if (!blobs[sec]) {
+          const r = await fetch(base(timing.audio[sec]));
+          blobs[sec] = URL.createObjectURL(await r.blob());
+          if (curSec !== sec) return;   // superseded by a later click mid-fetch
+        }
+        audio.src = blobs[sec];
       }
-      audio.src = blobs[sec];
       audio.playbackRate = speed;
       if (seekTo != null) {
         // ⚠ right after a src swap readyState still describes the old file, so a synchronous seek is dropped — always wait for the new metadata.
