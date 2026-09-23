@@ -313,4 +313,4 @@ What happened: (1) local structural inspection of the TEI clone (directory inven
 
 ---
 
-*Draft dev-blog note: [2026-05-30-jubilee-edition-tei-corpus.md](../../../website/src/posts/notes/2026-05-30-jubilee-edition-tei-corpus.md). Wiki ingestion of the entities mapped in `dossier.yaml` is a separate, human-in-the-loop step.*
+*Draft dev-blog note: [2026-05-30-jubilee-edition-tei-corpus.md](../../../../website/src/posts/notes/2026-05-30-jubilee-edition-tei-corpus.md). Wiki ingestion of the entities mapped in `dossier.yaml` is a separate, human-in-the-loop step.*

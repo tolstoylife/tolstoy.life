@@ -196,4 +196,4 @@ Background — Mirsky, D. S. (1926), *A History of Russian Literature* (on «Aly
 
 ---
 
-*Companion dev-blog note: [2026-06-12-1905-1906-krug-chtenija-tales](../../../website/src/posts/notes/2026-06-12-1905-1906-krug-chtenija-tales.md) (draft).*
+*Companion dev-blog note: [2026-06-12-1905-1906-krug-chtenija-tales](../../../../website/src/posts/notes/2026-06-12-1905-1906-krug-chtenija-tales.md) (draft).*

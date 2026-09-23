@@ -309,4 +309,4 @@ Links: sibling dives — [the Doukhobors](../doukhobors/index.html), [the crisis
 
 ---
 
-*Companion dev-blog note: [`website/src/posts/notes/2026-06-03-fire-metaphor.md`](../../../website/src/posts/notes/2026-06-03-fire-metaphor.md) (draft). Machine-readable dossier: `dossier.yaml`.*
+*Companion dev-blog note: [`website/src/posts/notes/2026-06-03-fire-metaphor.md`](../../../../website/src/posts/notes/2026-06-03-fire-metaphor.md) (draft). Machine-readable dossier: `dossier.yaml`.*

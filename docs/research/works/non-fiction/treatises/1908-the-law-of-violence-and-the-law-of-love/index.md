@@ -85,9 +85,9 @@ Then, on 21 March, it cleared:
 
 ### The people around the work
 
-- **V. G. Chertkov** (central) — publisher abroad and editorial confidant. The article went to him, came back corrected and improved ("it is all not as [I feared] but better than I expected," 9 June), and was published through his Free Age Press / «Свободное слово». His page [exists in the vault](../../../website/src/wiki/Vladimir%20Chertkov.md).
+- **V. G. Chertkov** (central) — publisher abroad and editorial confidant. The article went to him, came back corrected and improved ("it is all not as [I feared] but better than I expected," 9 June), and was published through his Free Age Press / «Свободное слово». His page [exists in the vault](../../../../../../website/src/wiki/Vladimir%20Chertkov.md).
 - **N. N. Gusev** (central) — Tolstoy's secretary in 1908, copyist, and the first-class diary-witness to the composition; almost everything we know about Tolstoy's day-to-day mood toward the work comes through Gusev's diary (the «чепуха» remark, the cover datings, the demotion of chapter III). No vault page yet.
-- **P. I. Biryukov / "Posha"** (supporting) — Tolstoy's friend and biographer; he read the draft in spring 1908 for whether it said anything new, and Tolstoy used his remarks ("He made me many good remarks, and I made use of them," to Chertkov, 2 April). His page exists in the vault, under the transliteration [Pavel Birukoff](../../../website/src/wiki/Pavel%20Birukoff.md).
+- **P. I. Biryukov / "Posha"** (supporting) — Tolstoy's friend and biographer; he read the draft in spring 1908 for whether it said anything new, and Tolstoy used his remarks ("He made me many good remarks, and I made use of them," to Chertkov, 2 April). His page exists in the vault, under the transliteration [Pavel Birukoff](../../../../../../website/src/wiki/Pavel%20Birukoff.md).
 - **A. I. Ikonnikov** (supporting) — a conscientious objector who refused military service; Tolstoy folded passages from his letters into the contemporary-refusers material and named him in the work: "In this article I speak of refusals of military service and of you, and I cite passages from your letters" (10 May 1908, `v78_138`).
 
 ---
@@ -348,4 +348,4 @@ This was a `corpus-dive` work-dive run on 2026-06-08, in-session (accept-edits),
 
 ---
 
-*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the record this research should become — including a **new** works record for the treatise, which has none yet. See the [draft dev-blog note](../../../website/src/posts/notes/2026-06-08-the-law-of-violence-and-the-law-of-love.md).*
+*This dive feeds the LLM wiki-ingestion step (a separate, human-in-the-loop pass): the `dossier.yaml` `entities` and `workRecord` blocks plan the wiki pages and the record this research should become — including a **new** works record for the treatise, which has none yet. See the [draft dev-blog note](../../../../../../website/src/posts/notes/2026-06-08-the-law-of-violence-and-the-law-of-love.md).*

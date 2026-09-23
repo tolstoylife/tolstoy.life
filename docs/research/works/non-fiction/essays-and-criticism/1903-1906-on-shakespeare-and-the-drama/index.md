@@ -249,7 +249,7 @@ A work-subject dive (not `--novel`), run interactively. The reader's framing nam
 - **Links.** Sibling dives: [What Is Art?](../1897-1898-what-is-art/index.html) · [crisis](../crisis/index.html) · [fire-metaphor](../fire-metaphor/index.html) · [tolstoyanism](../tolstoyanism/index.html).
 - **Open items** are in the dossier's `needsReview` (publication priority; the daughter-in-law translator; Knight's pamphlet; Shaw's letter text; the 1906–07 press).
 
-Draft dev-blog note: [`website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md`](../../../website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md) (`draft: true`).
+Draft dev-blog note: [`website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md`](../../../../../../website/src/posts/notes/2026-06-13-on-shakespeare-and-the-drama.md) (`draft: true`).
 
 ## References
 

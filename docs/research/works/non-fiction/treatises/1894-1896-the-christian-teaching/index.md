@@ -230,4 +230,4 @@ This is an interactive work-subject dive (not `--auto`, not `--novel`). The subj
 
 ---
 
-*Draft dev-blog note: [website/src/posts/notes/2026-06-13-the-christian-teaching.md](../../../website/src/posts/notes/2026-06-13-the-christian-teaching.md) (draft).*
+*Draft dev-blog note: [website/src/posts/notes/2026-06-13-the-christian-teaching.md](../../../../../../website/src/posts/notes/2026-06-13-the-christian-teaching.md) (draft).*

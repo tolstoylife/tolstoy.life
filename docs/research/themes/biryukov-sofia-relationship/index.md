@@ -262,4 +262,4 @@ Scope (confirmed interactively, thorough + heavy-visuals): the four-part questio
 
 ---
 
-A short dev-blog recap of this dive is at [website/src/posts/notes/2026-05-31-biryukov-sofia-relationship.md](../../../website/src/posts/notes/2026-05-31-biryukov-sofia-relationship.md) (draft).
+A short dev-blog recap of this dive is at [website/src/posts/notes/2026-05-31-biryukov-sofia-relationship.md](../../../../website/src/posts/notes/2026-05-31-biryukov-sofia-relationship.md) (draft).

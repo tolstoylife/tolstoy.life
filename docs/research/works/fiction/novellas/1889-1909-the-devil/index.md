@@ -106,7 +106,7 @@ The detail of an interruption that arrives like a reprieve from outside is the s
 
 ### The people around the work
 
-The genesis network is small and tightly held. **V. G. Chertkov** carried the autograph from Yasnaya Polyana to Petersburg in late January 1890, copied it with **I. I. Gorbunov**, and returned the copy on 20 February 1890; he twice urged Tolstoy to publish (Feb and Oct 1890), reporting that translators in Berlin and Sweden had got wind of a Tolstoy «Roman du mariage». The autograph was deliberately kept at Chertkov's mother **E. I. Chertkova**'s house in Petersburg, away from Yasnaya Polyana. **P. I. Birukoff** received the secret in January 1890 and, decades later, the author's own statement of the work's autobiography. **N. L. Obolensky** — who married Tolstoy's daughter [Maria Lvovna](../../../website/src/wiki/Maria%20Tolstaya.md) in 1897 — copied the variant ending into the manuscript around 1909. **Sofia Andreevna Tolstaya** is the figure the secrecy was built around (below). Each is carried into the entity routing.
+The genesis network is small and tightly held. **V. G. Chertkov** carried the autograph from Yasnaya Polyana to Petersburg in late January 1890, copied it with **I. I. Gorbunov**, and returned the copy on 20 February 1890; he twice urged Tolstoy to publish (Feb and Oct 1890), reporting that translators in Berlin and Sweden had got wind of a Tolstoy «Roman du mariage». The autograph was deliberately kept at Chertkov's mother **E. I. Chertkova**'s house in Petersburg, away from Yasnaya Polyana. **P. I. Birukoff** received the secret in January 1890 and, decades later, the author's own statement of the work's autobiography. **N. L. Obolensky** — who married Tolstoy's daughter [Maria Lvovna](../../../../../../website/src/wiki/Maria%20Tolstaya.md) in 1897 — copied the variant ending into the manuscript around 1909. **Sofia Andreevna Tolstaya** is the figure the secrecy was built around (below). Each is carried into the entity routing.
 
 ### The 1909 return — the second ending and the title
 
@@ -327,4 +327,4 @@ Photographs and portraits of the composition period are public domain and held l
 
 ---
 
-*A dev-blog note accompanies this dive: [2026-06-10-the-devil](../../../website/src/posts/notes/2026-06-10-the-devil.md) (draft).*
+*A dev-blog note accompanies this dive: [2026-06-10-the-devil](../../../../../../website/src/posts/notes/2026-06-10-the-devil.md) (draft).*

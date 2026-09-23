@@ -281,7 +281,7 @@ def assemble():
     for dossier in dive_dossiers():
         slug = dossier.parent.name
         data = load_yaml(dossier)
-        dive_href = f"research/{dossier.parent.relative_to(RESEARCH).as_posix()}/index.html"
+        dive_href = f"/research/{dossier.parent.relative_to(RESEARCH).as_posix()}/index.html"
         for seed in work_rows_from_dossier(slug, data, dive_href):
             rows.append(_finish_row(seed, records, status, dived=True))
             seen.add(seed["workId"])
@@ -532,7 +532,7 @@ def render(rows, meta):
   </div>
   <div class="tb-group tb-links">
     <a href="/INDEX.html">Docs</a>
-    <a href="research/index.html">Research index</a>
+    <a href="/research/index.html">Research index</a>
   </div>
 </header>
 <div class="wrap">

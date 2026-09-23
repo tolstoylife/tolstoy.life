@@ -174,4 +174,4 @@ The Phase-0 contract (settled with the reader, handed off from the `1903-folk-ta
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-late-voice-encryption-compression.md`](../../../website/src/posts/notes/2026-06-12-late-voice-encryption-compression.md) (held `draft: true`).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-12-late-voice-encryption-compression.md`](../../../../website/src/posts/notes/2026-06-12-late-voice-encryption-compression.md) (held `draft: true`).*

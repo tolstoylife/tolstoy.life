@@ -8,7 +8,7 @@ tags: [research, corpus-dive, novel-dive, work-dive, drama, comedy, fiction, the
 
 A single-work corpus dive on Tolstoy's four-act comedy *The Fruits of Enlightenment* (*Плоды просвещения*), written across 1886–1890 and first staged in the Yasnaya Polyana family theatricals on 30 December 1889. It is run in the `--novel` mode (drama flex): the whole comedy is read in full, while the heaviest effort goes to genesis, redaction history, and reception — the layers where the work's depth lives. It reads the play from its own text in the tolstoydigital TEI corpus (PSS Tom 27), reconstructs its genesis from the two plans, the first redaction *Исхитрилась!*, the Jubilee-Edition editorial history, and the 1884–1890 diaries and letters, and follows the work from a spiritualist séance Tolstoy attended to its uncensored 1891 publication, its stage-only ban, and the Stanislavski production that sits in the prehistory of the Moscow Art Theatre.
 
-The dive prepares ingestion-ready material (this `index.md`, a machine-readable `dossier.yaml`, byte-faithful `extracts/`, a medium visual record, and a draft dev-blog note). It does not create vault pages; it plans them. The works record [The Fruits of Enlightenment](../../../website/src/works/plays/comedy/the-fruits-of-enlightenment/) already exists as a draft stub — the dive proposes a `workRecord` fill (with two corrections) and adds a sixth `bans[].scope` value to the works schema.
+The dive prepares ingestion-ready material (this `index.md`, a machine-readable `dossier.yaml`, byte-faithful `extracts/`, a medium visual record, and a draft dev-blog note). It does not create vault pages; it plans them. The works record [The Fruits of Enlightenment](../../../../../../website/src/works/plays/comedy/the-fruits-of-enlightenment/) already exists as a draft stub — the dive proposes a `workRecord` fill (with two corrections) and adds a sixth `bans[].scope` value to the works schema.
 
 ---
 
@@ -333,4 +333,4 @@ A `--novel` work-subject dive (drama flex): the full comedy read act by act, wit
 
 ---
 
-*Draft dev-blog note: [`2026-06-11-the-fruits-of-enlightenment.md`](../../../website/src/posts/notes/2026-06-11-the-fruits-of-enlightenment.md) (draft).*
+*Draft dev-blog note: [`2026-06-11-the-fruits-of-enlightenment.md`](../../../../../../website/src/posts/notes/2026-06-11-the-fruits-of-enlightenment.md) (draft).*

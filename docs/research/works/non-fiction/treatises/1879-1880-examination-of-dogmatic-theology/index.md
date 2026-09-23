@@ -230,4 +230,4 @@ Background: Pål Kolstø, *Heretical Orthodoxy: Lev Tolstoi and the Russian Orth
 
 ---
 
-*Companion dev-blog note: [`2026-06-07-examination-of-dogmatic-theology`](../../../website/src/posts/notes/2026-06-07-examination-of-dogmatic-theology.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*
+*Companion dev-blog note: [`2026-06-07-examination-of-dogmatic-theology`](../../../../../../website/src/posts/notes/2026-06-07-examination-of-dogmatic-theology.md) (draft). Structured evidence, entity routing, the work-record proposal and the coverage ledger are in [`dossier.yaml`](dossier.yaml).*

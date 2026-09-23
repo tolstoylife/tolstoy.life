@@ -270,4 +270,4 @@ Background — Tolstoy State Museum (2024), prototype exhibition note (tolstoymu
 
 ---
 
-*Companion dev-blog note: [2026-06-12-after-the-ball](../../../website/src/posts/notes/2026-06-12-after-the-ball.md) (draft).*
+*Companion dev-blog note: [2026-06-12-after-the-ball](../../../../../../website/src/posts/notes/2026-06-12-after-the-ball.md) (draft).*

@@ -355,4 +355,4 @@ A 1909 photograph of Tolstoy and Élie Metchnikoff together (`visuals/commons-to
 
 ---
 
-*A short dev-blog note accompanies this dive: [2026-06-07-the-death-of-ivan-ilyich](../../../website/src/posts/notes/2026-06-07-the-death-of-ivan-ilyich.md) (draft).*
+*A short dev-blog note accompanies this dive: [2026-06-07-the-death-of-ivan-ilyich](../../../../../../website/src/posts/notes/2026-06-07-the-death-of-ivan-ilyich.md) (draft).*

@@ -250,4 +250,4 @@ This dive followed the `corpus-dive` skill. **Scope:** a single-work dive on *Th
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-07-the-slavery-of-our-times.md`](../../../website/src/posts/notes/2026-06-07-the-slavery-of-our-times.md) (`draft: true`).*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-07-the-slavery-of-our-times.md`](../../../../../../website/src/posts/notes/2026-06-07-the-slavery-of-our-times.md) (`draft: true`).*

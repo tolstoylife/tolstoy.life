@@ -88,7 +88,7 @@ THEME_SLUGS = {
 COVERAGE_VIZ = "visualizations/coverage-map.html"
 PROPHET_VIZ = "visualizations/prophet-essays.html"
 # The queued-dive backlog plan (rendered to .html by serve.py).
-BACKLOG_DOC = "_prophet-period-nonfiction-dives.html"
+BACKLOG_DOC = "_meta/_prophet-period-nonfiction-dives.html"
 
 GROUP_LABELS = {
     "work": "Single-work dives",

@@ -257,4 +257,4 @@ Background: Jahn, "Tolstoy as a Writer of Popular Literature" (Cambridge Compani
 
 ---
 
-Dev-blog note: [website/src/posts/notes/2026-06-11-stories-for-the-people.md](../../../website/src/posts/notes/2026-06-11-stories-for-the-people.md) (draft).
+Dev-blog note: [website/src/posts/notes/2026-06-11-stories-for-the-people.md](../../../../website/src/posts/notes/2026-06-11-stories-for-the-people.md) (draft).

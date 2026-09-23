@@ -264,4 +264,4 @@ This dive followed the corpus-dive `--novel` overlay. **Scope (interactive):** t
 
 ---
 
-*Draft dev-blog note: [`website/src/posts/notes/2026-06-10-master-and-man.md`](../../../website/src/posts/notes/2026-06-10-master-and-man.md) (draft). This dive prepares ingestion-ready material; turning the dossier into vault pages is a separate, human-in-the-loop step.*
+*Draft dev-blog note: [`website/src/posts/notes/2026-06-10-master-and-man.md`](../../../../../../website/src/posts/notes/2026-06-10-master-and-man.md) (draft). This dive prepares ingestion-ready material; turning the dossier into vault pages is a separate, human-in-the-loop step.*
