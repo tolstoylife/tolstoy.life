@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path, PurePosixPath
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
 import yaml
 
@@ -36,6 +36,8 @@ FORM_PAGE = """<!doctype html>
 </body></html>
 """  # Netlify registers a form by finding it in the uploaded HTML; the reader's Send button posts to it
 REDIRECTS = "/  /INDEX.html  200\n"  # the docs front page is INDEX.html, not index.html
+SITE = "https://research.tolstoy.life/"
+ROBOTS = f"User-agent: *\nDisallow: /__forms.html\n\nSitemap: {SITE}sitemap.xml\n"
 
 
 def held_back(rel: PurePosixPath) -> bool:
@@ -120,18 +122,69 @@ def hide_withheld_images(html: str, page_dir: Path, cleared: set[Path]) -> str:
     return IMG_TAG.sub(replace, html)
 
 
+MISSING_WIKILINK = re.compile(r'<a class="wikilink wikilink-missing"[^>]*>(.*?)</a>', re.S)
+
+
+def unlink_missing_wikilinks(html: str) -> str:
+    """In the uploaded copy only: a [[link]] to a wiki page not written yet is plain text; it becomes a link again once the page exists."""
+    return MISSING_WIKILINK.sub(r"\1", html)
+
+
+GITHUB = {"": "https://github.com/tolstoylife/tolstoy.life/blob/main/", "website": "https://github.com/tolstoylife/website/blob/main/"}
+HREF = re.compile(r'href="([^"#?]+)"')
+
+
+def tracked_files() -> set[Path]:
+    """Every file git tracks, in this repository and in the website submodule."""
+    root, files = DOCS.parent, set()
+    for sub in GITHUB:
+        out = subprocess.run(["git", "-C", str(root / sub), "ls-files", "-z"], capture_output=True, text=True, check=True).stdout
+        files |= {(root / sub / f).resolve() for f in out.split("\0") if f}
+    return files
+
+
+def link_sources_to_github(html: str, page_dir: Path, published: set[Path], tracked: set[Path]) -> str:
+    """In the uploaded copy only: a link to a file that isn't on the site but is in git (a script, a vault note) goes to it on GitHub."""
+    def replace(m):
+        href = unquote(m.group(1))
+        if href.startswith(("http:", "https:", "mailto:", "data:", "//")):
+            return m.group(0)
+        target = (DOCS / href.lstrip("/") if href.startswith("/") else page_dir / href).resolve()
+        folder = target.is_dir() and target / "index.html" not in published
+        if folder and any(t.is_relative_to(target) for t in tracked):
+            pass  # a folder with no page of its own: GitHub lists what's in it
+        elif target in published or target not in tracked or target.suffix.lower() in IMAGE_SUFFIXES:
+            return m.group(0)
+        rel = PurePosixPath(target.relative_to(DOCS.parent).as_posix())
+        if rel.parts[0] == "docs" and held_back(PurePosixPath(*rel.parts[1:])):
+            return m.group(0)  # working papers stay off the site's links; the 404 page explains them
+        sub = "website" if rel.parts[0] == "website" else ""
+        path = rel.relative_to(sub) if sub else rel
+        base = GITHUB[sub].replace("/blob/", "/tree/") if folder else GITHUB[sub]
+        return f'href="{base}{quote(path.as_posix())}"'
+    return HREF.sub(replace, html)
+
+
+def sitemap(pages: list[PurePosixPath]) -> str:
+    """Every published HTML page as a full address, for search engines."""
+    urls = "".join(f"  <url><loc>{SITE}{quote(p.as_posix())}</loc></url>\n" for p in pages if p.suffix == ".html")
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
+
+
 def main():
     subprocess.run([sys.executable, str(DOCS / "serve.py"), "--build-only"], check=True)
     shutil.rmtree(OUT, ignore_errors=True)
     total = 0
     pub = publishable()
     cleared = cleared_images() | {DOCS / rel for rel in pub if rel.suffix.lower() in IMAGE_SUFFIXES}
+    published, tracked = {DOCS / rel for rel in pub}, tracked_files()
     for rel in pub:
         dest = OUT / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         if rel.suffix == ".html":
             html = hide_withheld_images((DOCS / rel).read_text(encoding="utf-8"), (DOCS / rel).parent, cleared)
-            dest.write_text(drop_held_links(html, (DOCS / rel).parent), encoding="utf-8")
+            html = unlink_missing_wikilinks(drop_held_links(html, (DOCS / rel).parent))
+            dest.write_text(link_sources_to_github(html, (DOCS / rel).parent, published, tracked), encoding="utf-8")
         else:
             shutil.copy2(DOCS / rel, dest)
         total += dest.stat().st_size
@@ -143,6 +196,8 @@ def main():
     (OUT / "404.html").write_text(serve.md_to_html(DOCS / "404.md"), encoding="utf-8")  # Netlify serves it for any missing address
     (OUT / "__forms.html").write_text(FORM_PAGE, encoding="utf-8")
     (OUT / "_redirects").write_text(REDIRECTS)
+    (OUT / "robots.txt").write_text(ROBOTS)
+    (OUT / "sitemap.xml").write_text(sitemap([PurePosixPath(r.as_posix()) for r in pub]), encoding="utf-8")
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")
 
 

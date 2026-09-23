@@ -115,3 +115,41 @@ def test_links_to_held_back_pages_are_dropped(tmp_path):
 
     assert "The corpus dive" in out
     assert "annotations.html" not in out
+
+
+def test_missing_wikilinks_become_plain_text():
+    html = ('<a class="wikilink" href="/research/wiki/Henry%20George.html">Henry George</a> and '
+            '<a class="wikilink wikilink-missing" title="No page yet" href="/research/wiki/1905%20Revolution.html">1905 Revolution</a>')
+
+    out = publish.unlink_missing_wikilinks(html)
+
+    assert "Henry%20George.html" in out
+    assert out.endswith(" and 1905 Revolution")
+
+
+def test_unpublished_sources_link_to_github():
+    docs = publish.DOCS
+    page_dir = docs / "research" / "themes" / "d"
+    script, note = docs / "research" / "lib" / "extract_tei.py", docs.parent / "website" / "src" / "wiki" / "A B.md"
+    held = page_dir / "annotations.md"
+    html = ('<a href="/research/lib/extract_tei.py">x</a> <a href="../../../../website/src/wiki/A%20B.md">y</a> '
+            '<a href="annotations.md">z</a> <a href="/research/index.html">w</a>')
+
+    out = publish.link_sources_to_github(html, page_dir, {docs / "research" / "index.html"}, {script, note, held})
+
+    assert 'href="https://github.com/tolstoylife/tolstoy.life/blob/main/docs/research/lib/extract_tei.py"' in out
+    assert 'href="https://github.com/tolstoylife/website/blob/main/src/wiki/A%20B.md"' in out
+    assert 'href="annotations.md"' in out  # a held-back working paper keeps its dead link
+    assert 'href="/research/index.html"' in out
+    assert 'href="https://github.com/tolstoylife/tolstoy.life/tree/main/docs/research/lib"' in publish.link_sources_to_github(
+        '<a href="/research/lib/">f</a>', page_dir, set(), {script})
+
+
+def test_sitemap_lists_only_pages_as_full_addresses():
+    import pathlib
+    out = publish.sitemap([pathlib.PurePosixPath(p) for p in ["INDEX.html", "research/wiki/Henry George.html", "a.md", "x.css"]])
+
+    assert "<loc>https://research.tolstoy.life/INDEX.html</loc>" in out
+    assert "<loc>https://research.tolstoy.life/research/wiki/Henry%20George.html</loc>" in out
+    assert ".md<" not in out and ".css<" not in out
+    assert "Sitemap: https://research.tolstoy.life/sitemap.xml" in publish.ROBOTS
