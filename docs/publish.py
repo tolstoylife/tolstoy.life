@@ -24,6 +24,18 @@ OUT = DOCS.parent / "_site"
 SKIP_SUFFIXES = {".py", ".sh", ".stderr"}
 SKIP_PARTS = {"tests", "_audition"}
 HEADERS = "/*\n  X-Robots-Tag: noindex\n"  # @until research-listed — keeps the site out of search results
+FORM_PAGE = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Form registration</title><meta name="robots" content="noindex"></head>
+<body>
+<form name="reader-notes" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="page">
+  <input type="email" name="email">
+  <input type="text" name="bot-field">
+  <textarea name="text"></textarea>
+  <textarea name="jsonld"></textarea>
+</form>
+</body></html>
+"""  # Netlify registers a form by finding it in the uploaded HTML; the reader's Send button posts to it
 REDIRECTS = "/  /INDEX.html  200\n"  # the docs front page is INDEX.html, not index.html
 
 
@@ -111,6 +123,7 @@ def main():
     kept = {folder: [p for p in files if p.with_suffix(".html") in live] for folder, files in listed.items()}
     (OUT / "INDEX.html").write_text(serve.build_index({f: ps for f, ps in kept.items() if ps}), encoding="utf-8")
     (OUT / "404.html").write_text(serve.md_to_html(DOCS / "404.md"), encoding="utf-8")  # Netlify serves it for any missing address
+    (OUT / "__forms.html").write_text(FORM_PAGE, encoding="utf-8")
     (OUT / "_headers").write_text(HEADERS)
     (OUT / "_redirects").write_text(REDIRECTS)
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")

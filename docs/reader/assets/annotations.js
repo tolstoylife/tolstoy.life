@@ -336,6 +336,29 @@
     if (confirm('Delete all notes on this page?')) { saveDoc([]); renderAll(); }
   });
 
+  // ⚠ Send only works on the published site (Netlify handles the form); locally it would 404, so the button is hidden.
+  const sendRow = document.getElementById('notes-send-row');
+  const sendBtn = document.getElementById('notes-send');
+  if (sendBtn && !/(^|\.)(tolstoy\.life|netlify\.app)$/.test(location.hostname)) sendBtn.hidden = true;
+  bindClick('notes-send', () => { sendRow.hidden = !sendRow.hidden; });
+  bindClick('notes-send-go', btn => {
+    if (!loadDoc().length) { alert('There are no notes on this page yet.'); return; }
+    const body = new URLSearchParams({
+      'form-name': 'reader-notes',
+      page: location.pathname,
+      email: document.getElementById('notes-email').value,
+      text: exportText(),
+      jsonld: JSON.stringify(exportCollection()),
+      'bot-field': '',
+    });
+    btn.disabled = true;
+    // ⚠ Posts to the page's own address, not "/" — the site rewrites "/" to INDEX.html, which can swallow the submission.
+    fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+      .then(r => { btn.textContent = r.ok ? 'Sent, thank you' : 'Sending failed — try again later'; })
+      .catch(() => { btn.textContent = 'Sending failed — try again later'; })
+      .finally(() => { setTimeout(() => { btn.disabled = false; btn.textContent = 'Send'; sendRow.hidden = true; }, 4000); });
+  });
+
   function bindClick(id, fn) {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', () => fn(el));

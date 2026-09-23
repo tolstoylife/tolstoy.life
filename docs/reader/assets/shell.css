@@ -581,6 +581,9 @@ button.dot[aria-pressed="true"] { border: 1.5px solid var(--accent); }
 }
 .notes-actions button:hover { border-color: var(--accent); }
 .notes-actions button.danger:hover { background: #a03b2e; border-color: #a03b2e; color: #fff; }
+#notes-send-row:not([hidden]) { margin-top: .6rem; display: grid; gap: .4rem; }
+#notes-send-row input { width: 100%; font: inherit; padding: .4rem; }
+.notes-send-note { color: var(--ink-soft); font-family: var(--sans); font-size: 12px; margin: 0; }
 
 /* ── Annotations in the text: underline + margin marker (the wash channel is
       read-along's — the two must coexist on the same sentence). ── */
