@@ -34,12 +34,15 @@ def split_sentences(text):
 
 # ── Heading spoken form (ported from build_audiobook.spoken_header) ────────────
 _ROMAN = {"I":"One","II":"Two","III":"Three","IV":"Four","V":"Five",
-          "VI":"Six","VII":"Seven","VIII":"Eight","IX":"Nine"}
+          "VI":"Six","VII":"Seven","VIII":"Eight","IX":"Nine","X":"Ten",
+          "XI":"Eleven","XII":"Twelve","XIII":"Thirteen","XIV":"Fourteen","XV":"Fifteen",
+          "XVI":"Sixteen","XVII":"Seventeen","XVIII":"Eighteen","XIX":"Nineteen","XX":"Twenty"}
 
 def heading_speech(heading):
-    m = re.match(r"Part ([IVX]+)\s*$", heading.strip())
-    if m and m.group(1) in _ROMAN:
-        return f"Part {_ROMAN[m.group(1)]}."
+    m = re.match(r"(Part )?([IVX]+)\.?\s*$", heading.strip())
+    if m and m.group(2) in _ROMAN:
+        # ⚠ a bare numeral is spoken "Chapter …" — Kokoro reads "I" as "eye" and "II" as "Roman two".
+        return f"{(m.group(1) or 'Chapter ').strip()} {_ROMAN[m.group(2)]}."
     return heading.strip().rstrip(".") + "."
 
 # ── Structure parse ────────────────────────────────────────────────────────────

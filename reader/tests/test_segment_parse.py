@@ -6,6 +6,8 @@ def test_heading_speech():
     assert heading_speech("Part I") == "Part One."
     assert heading_speech("Part IV") == "Part Four."
     assert heading_speech("Introduction") == "Introduction."
+    assert heading_speech("I") == "Chapter One."
+    assert heading_speech("XVI") == "Chapter Sixteen."
 
 def test_parse_structure():
     doc = parse(MD)
