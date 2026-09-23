@@ -34,8 +34,7 @@ No `works/` record exists for this essay yet, so the dive's `workRecord` **propo
 
 The essay states its own stakes plainly: the fame is not a harmless overvaluation but an *untruth*, and untruth does damage.
 
-Date: Chapter I, written 1903.
-Context: the opening declaration, after he describes fifty years of failing to share the world's admiration.
+Date: Chapter I, written 1903. Context: the opening declaration, after he describes fifty years of failing to share the world's admiration.
 
 > та непререкаемая слава великого, гениального писателя… **есть великое зло, как и всякая неправда**
 >

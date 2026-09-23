@@ -214,8 +214,7 @@ Six openly-licensed portraits were cached locally (in the git-ignored `visuals/`
 - **Henry George, c.1865** — **PD**. Endorsed in chapter IX. *(embedded above)*
 - **Aylmer Maude, 1919** (Lafayette; V&A) — **CC BY-SA 4.0**, attribution required. The translator and book-supplier.
 
-**Identified, not held.** A Commons engraving of **Montaigne and La Boétie** (CC BY-SA) was rate-limited during the sweep (fetch via `docs/fetch_visuals.py` if wanted).
-**Not openly available.** No PD photograph of Russian railway/freight loaders (the scene of chapters I–II) was found on Commons; and the **Free Word 1900 first edition** and Maude's **Free Age Press 1900** title pages are not on Commons — a targeted search of archive.org / imwerden.de / vtoraya-literatura.com is recommended (`needsReview`).
+**Identified, not held.** A Commons engraving of **Montaigne and La Boétie** (CC BY-SA) was rate-limited during the sweep (fetch via `docs/fetch_visuals.py` if wanted). **Not openly available.** No PD photograph of Russian railway/freight loaders (the scene of chapters I–II) was found on Commons; and the **Free Word 1900 first edition** and Maude's **Free Age Press 1900** title pages are not on Commons — a targeted search of archive.org / imwerden.de / vtoraya-literatura.com is recommended (`needsReview`).
 
 **Manuscript record.** The 1,889 leaves of the redactions are held in the Tolstoy manuscript collections (GMT / RGB); no facsimile was rendered for this dive.
 

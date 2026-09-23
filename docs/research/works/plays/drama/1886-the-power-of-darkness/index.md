@@ -43,8 +43,7 @@ The dive prepares ingestion-ready material (this `index.md`, a machine-readable 
 
 **Confirmed — the doctrine and where the play puts redemption.** The chain of sin is the play's spine, named from inside the work and from inside Tolstoy's circle, not read into it. The proverb is the subtitle, and it is the last lesson the play draws:
 
-Date: Act 5 (PSS Tom 26).
-Context: Nikita, having confessed the infanticide publicly, kneels to his father Akim.
+Date: Act 5 (PSS Tom 26). Context: Nikita, having confessed the infanticide publicly, kneels to his father Akim.
 
 > ...говорил ты мне: «коготок увяз и всей птичке пропасть», не послушал я, пес, твоего слова, и вышло по-твоему.
 

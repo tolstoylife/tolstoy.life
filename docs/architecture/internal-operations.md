@@ -96,5 +96,4 @@ If running full batch indexing after all files are created:
 
 ## Scalability report reference
 
-Full analysis: `./scalability-deep-dive-2026-04-15.md`
-Wiki rewrite workflow: `./wiki-rewrite-workflow-2026-04-15.md`
+Full analysis: `./scalability-deep-dive-2026-04-15.md` Wiki rewrite workflow: `./wiki-rewrite-workflow-2026-04-15.md`
