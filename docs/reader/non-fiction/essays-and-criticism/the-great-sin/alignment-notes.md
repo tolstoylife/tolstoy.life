@@ -92,6 +92,14 @@ These need adjudicating against the page image rather than assuming, because the
 - **`с телегами` for `с телятами` (I ¶1)** — «Народ обозами едет на базар, с телегами, курами, лошадьми, коровами». «Обозами» already means *in trains of carts*, so «с телегами» ("with carts") is redundant, and every other item in the list is livestock. Read as «телятами» ("calves") — which is also what the 1905 English has. This one is a reading, not a certainty, and is the most worth checking against the page.
 - **Stray comma in `торгуя, землями` (IX ¶5).**
 
+### Checked against the page image (2026-09-23)
+
+Each passage was read on the rendered page image of Tom 36 (`vol05.pdf`, PDF page = printed page + 14), not on the scan's text layer, which repeats most of these errors itself — so a check against that layer would pass them.
+
+- **Repaired in the spine (five — our extract's errors, the book is right):** `слитком` → «слишком» (p. 211), `мог о бы` → «мог бы» (p. 211), `я придумывают` → «и придумывают» (p. 218), `е сть` → «есть» (p. 223), `торгуя, землями,` → «торгуя землями,» (p. 227). No change in paragraph or sentence count; both Englishes still align.
+- **Kept as printed (two — the book itself reads this way):** «придумывают» after «не будут» (p. 224) is in the printed PSS, so the grammatical slip is the edition's or Tolstoy's, not ours. «с телегами» (p. 206) is also what the PSS prints — the «телятами» reading is not on the page. But the 1905 English, translated from the text of the time, has "calves", so an earlier witness may have read «телятами». The spine follows the PSS and keeps «телегами»; the machine English keeps "calves" for now, per the rule above of translating the intended sense — flagged to Johan as a choice, since the evidence is one translation against the printed edition.
+- A Confession's matching `слитком` (ch. I ¶4) was not checked in this pass.
+
 ## Quotation marks in the machine English (2026-08-10)
 
 `the-great-sin.en-machine.md` uses curly double quotes; `the-great-sin.en-1905.md` uses straight ones. The Great Sin plan asked the machine layer to mirror the 1905 file's convention and described that convention as curly, which is not what the file actually contains. Rather than follow the description or the file, the machine layer follows **A Confession's machine leg**, which settled on curly quotes: the machine Englishes are the set that needs to read consistently with each other, and the difference also makes it visible at a glance which English column a reader is in. Dialogue that the Russian marks with an opening dash is rendered with quotation marks, as English convention and the Confession precedent both do.
