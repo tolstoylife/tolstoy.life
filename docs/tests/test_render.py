@@ -26,3 +26,11 @@ def test_wikilink_renders_link():
 def test_front_page_credits_tolstoydigital_licence():
     html = serve.build_index(serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files()))
     assert "tolstoydigital" in html and "CC BY-SA 4.0" in html
+
+
+def test_front_page_leads_with_reading():
+    html = serve.build_index(serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files()))
+    read_at = html.index("Read and listen")
+    assert read_at < html.index('<iframe class="viz-frame"'), "the reading section comes before the timeline chart"
+    assert read_at < html.index('<h2>Notes</h2>'), "the reading section comes before the dated notes"
+    assert "/reader/non-fiction/personal-papers/confession/" in html
