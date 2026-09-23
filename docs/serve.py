@@ -54,7 +54,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 ROOT = Path(__file__).parent.resolve()
 
 SKIP_DIRS  = {".git", ".claude", ".omc", ".pytest_cache", "__pycache__", "node_modules"}
-SKIP_FILES = {"serve.py"}
+SKIP_FILES = {"serve.py", "404.md"}  # 404.md is built by publish.py, not listed
 PASSTHROUGH_EXTENSIONS = {".html", ".pdf", ".pptx", ".mp3", ".jpg", ".png",
                            ".svg", ".yaml", ".yml", ".skill", ".json"}
 

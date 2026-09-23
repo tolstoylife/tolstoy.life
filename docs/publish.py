@@ -63,6 +63,7 @@ def main():
     listed = serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files())
     kept = {folder: [p for p in files if p.with_suffix(".html") in live] for folder, files in listed.items()}
     (OUT / "INDEX.html").write_text(serve.build_index({f: ps for f, ps in kept.items() if ps}), encoding="utf-8")
+    (OUT / "404.html").write_text(serve.md_to_html(DOCS / "404.md"), encoding="utf-8")  # Netlify serves it for any missing address
     (OUT / "_headers").write_text(HEADERS)
     (OUT / "_redirects").write_text(REDIRECTS)
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")

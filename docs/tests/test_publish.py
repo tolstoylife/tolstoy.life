@@ -59,3 +59,10 @@ def test_held_back_covers_the_working_papers():
         assert publish.held_back(pathlib.PurePosixPath(rel)), rel
     for rel in kept:
         assert not publish.held_back(pathlib.PurePosixPath(rel)), rel
+
+
+def test_site_carries_a_not_found_page():
+    import pathlib, inspect
+    docs = pathlib.Path(__file__).resolve().parents[1]
+    assert (docs / "404.md").exists(), "404.md is the page Netlify serves for a link that leads nowhere"
+    assert '"404.html"' in inspect.getsource(publish.main), "publish.py builds 404.html into _site/"
