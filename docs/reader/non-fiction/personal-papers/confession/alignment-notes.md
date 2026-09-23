@@ -44,7 +44,9 @@ Three small transmission faults in `confession.ru.md` surfaced during the machin
 - **`слитком` (ch. I, para 4)** is a typo for `слишком`: "one should not take all this *too* seriously". A single letter substitution, so the homoglyph sweep would not have caught it.
   *Checked against the page image 2026-09-23 and repaired:* PSS Tom 23 (local `vol83/vol83.pdf`, PDF page 40, printed p. 2) reads «слишком». The scan's own text layer also says `слитком`, which is how the error got into the extract. The Great Sin had the same slip — see its alignment notes.
 - **Unclosed `«` (ch. III, para 14)** — the paragraph opens `«Случилось то, что случается…` with no closing quote anywhere. The English renders the paragraph without the stray mark.
+  *Checked against the page image 2026-09-23 and repaired:* the printed paragraph (Tom 23, PDF page 49, printed p. 11) has no opening quotation mark at all — the `«` was our extract's, so it is removed rather than closed.
 - **Stray semicolon (ch. V, para 11)** — inside the sciences' reply, `мы не имеем; ответов и этим не занимаемся` splits "have no answers" across the punctuation. Read as `мы не имеем ответов`.
+  *Checked against the page image 2026-09-23 and repaired:* the page (PDF page 56, printed p. 18) reads «мы не имеем ответов» with no punctuation — a small ink speck on the foot of the «м» is what the scan's text layer read as `;`.
 
 ## Open item from the translation
 
