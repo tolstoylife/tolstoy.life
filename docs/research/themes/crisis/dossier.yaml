@@ -273,7 +273,7 @@ visuals:
     licence: PD
     usable: true
     url: null
-    localPath: docs/research/crisis/extracts/pss-tom23-page-040-perevorot.png
+    localPath: extracts/pss-tom23-page-040-perevorot.png
     note: "Rendered at 200 dpi with pdftoppm; used to verify the keystone TEI extract byte-for-byte."
 
   - id: kramskoy-tolstoy-1873
@@ -288,7 +288,7 @@ visuals:
     licence: PD
     usable: true
     url: "https://commons.wikimedia.org/wiki/File:Ivan_Nikolayevich_Kramskoi_-_Portrait_of_Leo_Tolstoy,_1873.jpg"
-    localPath: docs/research/crisis/visuals/kramskoy-tolstoy-1873.jpg
+    localPath: visuals/kramskoy-tolstoy-1873.jpg
     note: "Pre-crisis baseline likeness (Anna Karenina years). Fetched (800px) into the git-ignored visuals/ cache and embedded in index.md §2. PD — publishable to website/src if wanted."
 
   - id: tolstoy-photographs-1878-1885
@@ -333,7 +333,7 @@ visuals:
     licence: PD
     usable: true
     url: "https://commons.wikimedia.org/wiki/File:Nikolay_Strakhov.jpg"
-    localPath: docs/research/crisis/visuals/strakhov-1885.jpg
+    localPath: visuals/strakhov-1885.jpg
     note: "1885 likeness of the 'medical кризис' correspondent. Fetched (600px) into the git-ignored visuals/ cache and embedded in index.md §2.5. PD."
 
   - id: ispoved-manuscript-facsimile

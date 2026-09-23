@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """Build docs/ and gather what research.tolstoy.life publishes into _site/ at the repository root.
 
-Publishes what git tracks, the HTML generated from tracked .md, and the reader audio + timing; dive images, stale HTML, scripts and tests stay home.
+Publishes what git tracks, the HTML generated from tracked .md, the reader audio + timing, and the dive images a dossier records as free; working papers, other images, stale HTML, scripts and tests stay home.
 
 Usage (from the repository root; Johan runs the netlify lines):
     python3 docs/publish.py
     netlify deploy --no-build --dir _site --site tolstoy-research          # draft address, check it first
     netlify deploy --no-build --prod --dir _site --site tolstoy-research   # live
 """
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path, PurePosixPath
+from urllib.parse import unquote
+
+import yaml
 
 import serve
 
@@ -39,6 +43,7 @@ def publishable(docs: Path = DOCS) -> list[Path]:
         if md.name == "overview.md":
             files.add(md.parent / "index.html")
     files |= set(docs.glob("reader/**/build/**/*"))  # audio + timing: gitignored, but ours to publish
+    files |= {f for f in cleared_images(docs) if f.is_file()}  # dive images a dossier records as free; the rest stay home
     keep = []
     for f in files:
         rel = f.relative_to(docs)
@@ -48,15 +53,57 @@ def publishable(docs: Path = DOCS) -> list[Path]:
     return sorted(keep)
 
 
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"}
+IMG_TAG = re.compile(r'<img\s[^>]*?src="([^"]+)"[^>]*>')
+WITHHELD_NOTE = '<span class="img-withheld">Image not shown — rights unclear</span>'
+
+
+def cleared_images(docs: Path = DOCS) -> set[Path]:
+    """Dive images a dossier records as public domain or CC0. Everything else stays home, including images no dossier lists."""
+    cleared = set()
+    for dossier in docs.glob("research/**/dossier.yaml"):
+        try:
+            data = yaml.safe_load(dossier.read_text(encoding="utf-8")) or {}
+        except yaml.YAMLError as exc:  # a malformed dossier withholds its images rather than breaking the build
+            print(f"  ! {dossier.relative_to(docs)}: {exc}", file=sys.stderr)
+            continue
+        for v in data.get("visuals") or []:
+            if not isinstance(v, dict) or not v.get("localPath"):
+                continue
+            licence = str(v.get("licence") or v.get("license") or "").strip().upper()
+            free = licence.startswith("PD") or licence == "CC0" or "PUBLIC DOMAIN" in licence
+            if free and "RIGHTS-RESERVED" not in licence:  # ⚠ "PD text; museum copy rights-reserved" stays home
+                path = re.sub(r"\s*\(.*\)$", "", str(v["localPath"]))  # "visuals/death-met-*.jpg (6 files)" is a wildcard
+                cleared |= {f.resolve() for f in dossier.parent.glob(path)} if "*" in path else {(dossier.parent / path).resolve()}
+    return cleared
+
+
+def hide_withheld_images(html: str, page_dir: Path, cleared: set[Path]) -> str:
+    """In the uploaded copy only: an image that isn't cleared becomes a short note in its place."""
+    def replace(m):
+        src = m.group(1)
+        if src.startswith(("http:", "https:", "data:", "//")):
+            return m.group(0)
+        target = (page_dir / unquote(src.split("?")[0])).resolve()
+        if target.suffix.lower() not in IMAGE_SUFFIXES or target in cleared:
+            return m.group(0)
+        return WITHHELD_NOTE
+    return IMG_TAG.sub(replace, html)
+
+
 def main():
     subprocess.run([sys.executable, str(DOCS / "serve.py"), "--build-only"], check=True)
     shutil.rmtree(OUT, ignore_errors=True)
     total = 0
     pub = publishable()
+    cleared = cleared_images() | {DOCS / rel for rel in pub if rel.suffix.lower() in IMAGE_SUFFIXES}
     for rel in pub:
         dest = OUT / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(DOCS / rel, dest)
+        if rel.suffix == ".html":
+            dest.write_text(hide_withheld_images((DOCS / rel).read_text(encoding="utf-8"), (DOCS / rel).parent, cleared), encoding="utf-8")
+        else:
+            shutil.copy2(DOCS / rel, dest)
         total += dest.stat().st_size
     # ⚠ The local front page lists untracked and leftover pages too; the published one lists only what's published.
     live = {DOCS / rel for rel in pub}

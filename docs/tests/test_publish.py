@@ -66,3 +66,40 @@ def test_site_carries_a_not_found_page():
     docs = pathlib.Path(__file__).resolve().parents[1]
     assert (docs / "404.md").exists(), "404.md is the page Netlify serves for a link that leads nowhere"
     assert '"404.html"' in inspect.getsource(publish.main), "publish.py builds 404.html into _site/"
+
+
+def test_only_recorded_free_images_are_cleared(tmp_path):
+    dive = tmp_path / "research" / "themes" / "d"
+    (dive / "visuals").mkdir(parents=True)
+    for name in ["free.jpg", "restricted.jpg", "unrecorded.jpg", "museum.jpg", "met-a.jpg", "met-b.jpg"]:
+        (dive / "visuals" / name).write_bytes(b"x")
+    (dive / "dossier.yaml").write_text(
+        "visuals:\n"
+        "  - id: V01\n    licence: PD\n    localPath: visuals/free.jpg\n"
+        "  - id: V02\n    licence: CC-BY-SA\n    localPath: visuals/restricted.jpg\n"
+        "  - id: V03\n    licence: PD for 1899 text; museum copy rights-reserved\n    localPath: visuals/museum.jpg\n"
+        "  - id: V04\n    licence: CC0\n    localPath: visuals/met-*.jpg (2 files)\n")
+
+    cleared = publish.cleared_images(tmp_path)
+
+    assert (dive / "visuals" / "free.jpg").resolve() in cleared
+    assert (dive / "visuals" / "restricted.jpg").resolve() not in cleared
+    assert (dive / "visuals" / "unrecorded.jpg").resolve() not in cleared
+    assert (dive / "visuals" / "museum.jpg").resolve() not in cleared
+    assert (dive / "visuals" / "met-b.jpg").resolve() in cleared
+
+
+def test_withheld_images_become_a_note(tmp_path):
+    dive = tmp_path / "research" / "themes" / "d"
+    (dive / "visuals").mkdir(parents=True)
+    free = dive / "visuals" / "free.jpg"
+    free.write_bytes(b"x")
+    html = ('<figure><img src="visuals/free.jpg" alt="kept"><img src="visuals/restricted.jpg" alt="gone">'
+            '<img src="https://example.org/remote.jpg" alt="remote"></figure>')
+
+    out = publish.hide_withheld_images(html, dive, {free.resolve()})
+
+    assert '<img src="visuals/free.jpg" alt="kept">' in out
+    assert 'visuals/restricted.jpg' not in out
+    assert "Image not shown — rights unclear" in out
+    assert 'https://example.org/remote.jpg' in out

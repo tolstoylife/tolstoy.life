@@ -249,6 +249,7 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
 }
 
 figure { margin: 1.8rem 0; }
+.img-withheld { display: block; padding: 1rem; margin: 1.8rem 0 .5rem; border: 1px dashed var(--rule-soft); color: var(--ink-soft); font-size: .85rem; text-align: center; }
 main img {
   max-width: 100%; height: auto; display: block;
   margin: 1.8rem auto 0.5rem;
