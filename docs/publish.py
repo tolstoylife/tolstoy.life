@@ -90,6 +90,24 @@ def cleared_images(docs: Path = DOCS) -> set[Path]:
     return cleared
 
 
+LINKED_ITEM = re.compile(r'<li><a href="([^"#?]+)"[^>]*>[^<]*</a></li>')
+
+
+def drop_held_links(html: str, page_dir: Path) -> str:
+    """In the uploaded copy only: a list item that links to a held-back page (e.g. "Reading annotations") is dropped."""
+    def replace(m):
+        href = unquote(m.group(1))
+        if href.startswith(("http:", "https:", "mailto:")):
+            return m.group(0)
+        target = DOCS / href.lstrip("/") if href.startswith("/") else (page_dir / href).resolve()
+        try:
+            rel = PurePosixPath(target.relative_to(DOCS).as_posix())
+        except ValueError:
+            return m.group(0)
+        return "" if held_back(rel.with_suffix(".md")) or held_back(rel) else m.group(0)
+    return LINKED_ITEM.sub(replace, html)
+
+
 def hide_withheld_images(html: str, page_dir: Path, cleared: set[Path]) -> str:
     """In the uploaded copy only: an image that isn't cleared becomes a short note in its place."""
     def replace(m):
@@ -113,7 +131,8 @@ def main():
         dest = OUT / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         if rel.suffix == ".html":
-            dest.write_text(hide_withheld_images((DOCS / rel).read_text(encoding="utf-8"), (DOCS / rel).parent, cleared), encoding="utf-8")
+            html = hide_withheld_images((DOCS / rel).read_text(encoding="utf-8"), (DOCS / rel).parent, cleared)
+            dest.write_text(drop_held_links(html, (DOCS / rel).parent), encoding="utf-8")
         else:
             shutil.copy2(DOCS / rel, dest)
         total += dest.stat().st_size

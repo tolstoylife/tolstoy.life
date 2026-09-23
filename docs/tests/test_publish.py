@@ -103,3 +103,15 @@ def test_withheld_images_become_a_note(tmp_path):
     assert 'visuals/restricted.jpg' not in out
     assert "Image not shown — rights unclear" in out
     assert 'https://example.org/remote.jpg' in out
+
+
+def test_links_to_held_back_pages_are_dropped(tmp_path):
+    html = ('<ul><li><a href="/research/x/index.html">The corpus dive</a></li>'
+            '<li><a href="/research/x/annotations.html">Reading annotations</a></li>'
+            '<li><a href="../../research/y/annotations.html">Reading annotations</a></li></ul>')
+    page_dir = publish.DOCS / "reader" / "w"
+
+    out = publish.drop_held_links(html, page_dir)
+
+    assert "The corpus dive" in out
+    assert "annotations.html" not in out
