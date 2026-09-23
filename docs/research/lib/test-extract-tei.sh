@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-# Test extract_tei.py note-encoded-body recovery + no-pollution guarantee.
-#
-# Regression target: v82_305 (1910 Explanatory Note to Tolstoy's will, PSS Tom 82
-# pp.227-231). Its body is encoded entirely inside <note type="comments"> apparatus
-# rather than <p> body elements, so the extractor used to return only the opener.
-# The fix must recover that note-encoded primary text WITHOUT pulling genuine
-# footnotes into normal extractions.
+# Tests note-encoded-body recovery (v82_305, the 1910 note to the will, PSS Tom 82 pp. 227–231, body inside <note type="comments">) without pulling footnotes into normal extractions.
 set -euo pipefail
 export PYTHONUTF8=1   # force UTF-8 I/O; a C locale silently drops Cyrillic (see README)
 

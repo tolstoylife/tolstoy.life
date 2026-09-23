@@ -58,18 +58,13 @@ SKIP_FILES = {"serve.py", "404.md"}  # 404.md is built by publish.py, not listed
 PASSTHROUGH_EXTENSIONS = {".html", ".pdf", ".pptx", ".mp3", ".jpg", ".png",
                            ".svg", ".yaml", ".yml", ".skill", ".json"}
 
-# Hand-authored HTML doesn't carry YAML frontmatter, so layer/date for
-# orphan HTML files is declared explicitly here. .md files use their own
-# frontmatter — see Phase 1 of the docs→dev-blog migration.
+# Hand-authored HTML has no frontmatter, so its layer/date is declared here; .md files use their own.
 HTML_META = {
     "architecture/architecture-review.html":  {"layer": "blog", "date": "2026-05-09"},
     "design/period-colours-preview.html":     {"layer": "blog", "date": "2026-04-26"},
 }
 
-# ── Page chrome (the reading shell) ────────────────────────────────────────────
-# Styling lives in reader/assets/shell.css; behaviour in shell.js /
-# annotations.js / readalong.js. These constants are plain strings (not
-# f-strings) so their braces need no doubling.
+# ── Page chrome (the reading shell) ── styles in reader/assets/shell.css, behaviour in shell.js / annotations.js / readalong.js; ⚠ plain strings, not f-strings, so braces need no doubling.
 
 # Applies saved theme/type settings before first paint (no flash).
 HEAD_SNIPPET = """
@@ -81,8 +76,7 @@ var L=s.layers||{};['wikilinks','cuts','footnotes'].forEach(function(k){
 h.dataset['l'+k[0].toUpperCase()+k.slice(1)]=L[k]?'on':'off';});}catch(e){}})();
 """.strip()
 
-# Inline icon symbols — copied from the UI drafts (Tabler-outline style):
-# _generated/design/session-reader-ui-drafts-2026-07-03/reader-ui-drafts.html
+# Inline icon symbols (Tabler-outline style), copied from _generated/design/session-reader-ui-drafts-2026-07-03/reader-ui-drafts.html
 ICONS = """
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-list" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></symbol>
@@ -263,8 +257,7 @@ def wiki_url(label: str, base: str, end: str) -> str:
 MD = markdown.Markdown(extensions=[
     TableExtension(),
     FencedCodeExtension(),
-    # ponytail: no nl2br — a single newline in wrapped source is a soft wrap, not a
-    # <br> (Markdown spec). Intended breaks still work via two trailing spaces.
+    # ponytail: no nl2br — a single newline in source is a soft wrap (Markdown spec); two trailing spaces still force a break.
     "sane_lists",
     "attr_list",
     "footnotes",            # the work's own authorial/translator notes ([^n])
@@ -273,8 +266,7 @@ MD = markdown.Markdown(extensions=[
                       html_class="wikilink", build_url=wiki_url),
 ])
 
-# serve.py lives in docs/, so the repo root isn't on sys.path by default — add it
-# so the shared reader/ helpers import (web + EPUB share the same ID rule).
+# The repo root isn't on sys.path when serve.py runs from docs/; add it so the shared reader/ helpers import.
 _REPO_ROOT = str(Path(__file__).resolve().parent.parent)
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
@@ -319,14 +311,7 @@ def render_body(text: str) -> str:
     return add_paragraph_ids(abbr_pss(mark_missing_wikilinks(MD.convert(text))))
 
 
-# ── Dive cross-link resolution (post-2026-07 folder move) ───────────────────────
-# The move relocated every dive from flat  research/<slug>/  into
-# research/{works/<genre>/<subcat>,themes,_meta}/<slug>/  (and renamed a few
-# slugs). Existing dives still link each other with the old flat  ../<slug>/… ,
-# which now misses on both ends. Rewrite those `../…` links at render time to the
-# real location — move-map.tsv gives old-path → new-path, and current folder names
-# cover dives written since. Links that don't resolve (website/ draft-note
-# pointers, not-yet-created siblings) are left untouched.
+# ── Dive cross-link resolution ── dives still link each other in the flat pre-2026-07 `../<slug>/…` form; rewrite those at render time via move-map.tsv and current folder names, leaving unresolved links as authored.
 _DIVE_ALIAS = None
 
 def _dive_alias() -> dict:
@@ -416,10 +401,7 @@ def bundle_editions(bundle: Path):
     return sorted(found, key=lambda wv: _read_order(wv[1]))
 
 
-# ── Per-work navigation: the Docs | Library | ☰ Work crumb + the Contents hub ────
-# The Contents drawer lists every page of a work (its editions + apparatus pages +
-# the research dive/annotations), auto-built from the bundle folder and its dive
-# folder so it stays in sync as pages come and go.
+# ── Per-work navigation ── the Contents drawer lists every page of a work, built from its bundle and dive folders so it stays in sync.
 
 _PAGE_LABELS = {
     "restored-text.md": "Restored text",
@@ -452,8 +434,7 @@ def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
         if suffix[:4].isdigit():
             base = f"English, {suffix}"
         elif year:
-            # named-translator edition (e.g. en-wiener): year from meta.json,
-            # translator spelled out in the drawer/body form only.
+            # named-translator edition (e.g. en-wiener): year from meta.json, translator spelled out in the drawer and body only
             name = suffix.replace("-", " ").title()
             base = f"English, {year} ({name})" if verbose and name else f"English, {year}"
         else:
@@ -681,11 +662,7 @@ def md_to_html(md_path: Path) -> str:
         if m:
             text = text[:m.start()] + text[m.end():]
     else:
-        # The body conventionally still opens with an H1 repeating the title.
-        # serve.py renders the title itself in the doc-header below, so a
-        # leading body H1 that duplicates it would render twice. Strip the
-        # duplicate — but only when it matches the title, so a genuinely
-        # different leading heading is left alone.
+        # Drop a leading body H1 only when it repeats the title, which the doc-header already shows.
         m = re.match(r"#\s+(.+?)\s*(?:\n|$)", text)
         if m and m.group(1).strip() == title.strip():
             text = text[m.end():].lstrip("\n")
@@ -705,9 +682,7 @@ def md_to_html(md_path: Path) -> str:
 
     doc_key = "docs/" + str(rel.with_suffix(""))
 
-    # Top bar + Contents hub. Docs | Library | ☰ Work › Subpage for any page
-    # that belongs to a work (bundle page OR its research dive/annotations);
-    # a plain doc keeps just the Docs link.
+    # Top bar + Contents hub: Docs | Library | ☰ Work › Subpage for any page of a work (bundle, dive or annotations); a plain doc keeps just the Docs link.
     nav = nav_for(md_path)
     eyebrow = folder or "docs"
     if nav["hub_html"] and (ROOT / "reader") in md_path.parents:
@@ -779,8 +754,7 @@ def _extract_title_md(md_path: Path) -> str:
     return md_path.stem.replace("-", " ").title()
 
 
-# Hand-authored HTML docs (no .md sibling) carry their own title/description.
-# Strip the site suffix so the index card title isn't repetitive.
+# Hand-authored HTML carries its own title; strip the site suffix so index cards don't repeat it.
 _HTML_TITLE_SUFFIXES = (" — tolstoy.life research", " — tolstoy.life docs", " — tolstoy.life")
 
 
@@ -962,8 +936,7 @@ def build_index(docs: dict) -> str:
     <ul class="post-list">{posts}
     </ul>"""
 
-    # ── Embedded centerpiece: the corpus-in-time timeline (chart 1 of the
-    # prophet-essays visualizations, shown via its #embed-timeline mode) ──
+    # ── Embedded centerpiece: the corpus-in-time timeline (chart 1 of prophet-essays, via its #embed-timeline mode) ──
     viz = ROOT / "research" / "visualizations" / "prophet-essays.html"
     viz_html = ""
     if viz.exists():
@@ -1174,9 +1147,7 @@ def collect_orphan_html_files() -> dict:
             continue
         if path.name == "INDEX.html":
             continue
-        # Generated-and-committed pages (not hand-authored orphans): the research
-        # landing page and its promoted visualizations are built by
-        # build_research_index.py, not part of the chronological notes feed.
+        # The research landing page and its visualizations are built by build_research_index.py, not part of the notes feed.
         rel = path.relative_to(ROOT).as_posix()
         if rel == "research/index.html" or rel.startswith("research/visualizations/"):
             continue
@@ -1277,9 +1248,7 @@ def build_all(verbose=True):
 # ── HTTP server ────────────────────────────────────────────────────────────────
 
 class Handler(http.server.SimpleHTTPRequestHandler):
-    # Default .txt to text/plain with no charset, which browsers then guess as
-    # Latin-1 / cp1252 and render UTF-8 prose (Cyrillic, French diacritics) as
-    # mojibake. Force UTF-8 for text/* responses.
+    # ⚠ Force UTF-8 for text/*: without a charset browsers guess Latin-1 and garble Cyrillic and diacritics.
     extensions_map = {
         **http.server.SimpleHTTPRequestHandler.extensions_map,
         ".txt": "text/plain; charset=utf-8",

@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# Regression check for verify_quotes.py.
-# Asserts: (1) a clean dossier passes (exit 0); (2) a tampered quoteRu fails
-# (exit 1); (3) a leading/trailing ellipsis quote passes (boundary stripping);
-# (4) an internal corruption is NOT masked by ellipsis handling.
-# Run: bash docs/research/lib/test-verify-quotes.sh   (prints PASS / FAIL)
+# Regression check for verify_quotes.py — run: bash docs/research/lib/test-verify-quotes.sh (prints PASS / FAIL)
+# Asserts: (1) a clean dossier passes; (2) a tampered quoteRu fails; (3) a leading/trailing ellipsis quote passes; (4) an internal corruption is not masked by ellipsis handling.
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
 TOOL="$HERE/verify_quotes.py"

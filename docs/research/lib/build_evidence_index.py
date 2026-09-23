@@ -54,19 +54,14 @@ WIKI_DIR = REPO_ROOT / "website" / "src" / "wiki"
 WORKS_DIR = REPO_ROOT / "website" / "src" / "works"
 OUT_DIRNAME = "evidence-index"               # docs/research/evidence-index/
 
-# The twelve wiki article types (website/schema/wiki-schema.md v1.4; `edition`
-# added v1.3, `character` + `group` v1.4). Anything else (notably `work`) is a
-# Tolstoy work, routed to website/src/works/, and flagged.
+# The twelve wiki article types (website/schema/wiki-schema.md v1.4); anything else, notably `work`, is a Tolstoy work routed to website/src/works/ and flagged.
 WIKI_TYPES = {
     "person", "place", "event", "concept", "translator",
     "institution", "adaptation", "criticalWork", "archivalFond",
     "edition", "character", "group",
 }
 
-# Reproduces website/src/_config/filters/slugify.js (npm `slugify`,
-# replacement '-', lower, remove the char class below). Best-effort: for pages
-# that exist the live frontmatter `id` is authoritative and any disagreement is
-# reported under lint.slugMismatch.
+# Mirrors website/src/_config/filters/slugify.js; a live page's frontmatter `id` wins, and disagreements show under lint.slugMismatch.
 SLUG_REMOVE_RE = re.compile(r"""[#,&+()$~%.'":*¿?¡!<>{}]""")
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
@@ -281,9 +276,7 @@ def aggregate(dossiers, live_by_id, live_by_stem):
                     "significance": collapse_ws(row.get("significance")) or None,
                 })
 
-        # Attach visuals by relatedEntity (name match within this dive).
-        # relatedEntity may be one name or a list of names (a shared source, e.g.
-        # a book scan tied to both its author and its publisher); file under each.
+        # Attach visuals by relatedEntity (one name or a list); a visual tied to several entities is filed under each.
         for vis in visuals:
             related = vis.get("relatedEntity")
             names = related if isinstance(related, list) else [related]
@@ -295,8 +288,7 @@ def aggregate(dossiers, live_by_id, live_by_stem):
                 acc = entities.get(key)
                 if acc is None:
                     continue  # visual references an entity with no entity row; skip
-                # Dedup across dives on the stable identity: url first (same image
-                # cached under different per-dive localPaths), then localPath, then id.
+                # Dedup across dives by url, then localPath, then id (the same image can be cached under different per-dive paths).
                 ident = vis.get("url") or vis.get("localPath") or vis.get("id")
                 existing = acc["_visual_by_ident"].get(ident)
                 if existing is not None:

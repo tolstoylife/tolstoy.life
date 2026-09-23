@@ -54,8 +54,7 @@ def dive_dossiers():
     yield from sorted(RESEARCH.glob("works/*/*/*/dossier.yaml"))
     yield from sorted(RESEARCH.glob("themes/*/dossier.yaml"))
 
-# The loop the editions move through, in order. The first two are derived from
-# artifacts on disk; the rest are human-judgment stages set in status.yaml.
+# The loop the editions move through; the first two stages come from files on disk, the rest are set by hand in status.yaml.
 LOOP_STAGES = ["dived", "built", "read", "re-dived", "ingested"]
 DERIVABLE = {"dived", "built"}
 
@@ -465,8 +464,7 @@ COLUMNS = [
 def render_cell(row, key):
     if key == "title":
         inner = esc(row["title"])
-        # overview page (the work's own front page) beats the dive; the
-        # overview links onward to the dive itself
+        # the overview page beats the dive; the overview links on to the dive
         href = row.get("overviewHref") or row["diveHref"]
         if href:
             inner = f'<a href="{esc(href)}">{inner}</a>'

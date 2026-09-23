@@ -10,9 +10,7 @@ import serve
 def check():
     alias = serve._dive_alias()
 
-    # A flat `../<slug>/` link to a nested work dive resolves to its real path,
-    # computed from the same alias — so the check follows real repo layout, not a
-    # hard-coded slug.
+    # A flat `../<slug>/` link to a nested work dive resolves to its real path, computed from the same alias rather than a hard-coded slug.
     slug, real = next((s, p) for s, p in alias.items() if p.startswith("research/works/"))
     out = serve.resolve_dive_links(f'<a href="../{slug}/index.html">x</a>')
     assert f'href="/{real}/index.html"' in out, f"{slug} should resolve to /{real}/"
@@ -21,8 +19,7 @@ def check():
     frag = serve.resolve_dive_links(f'<a href="../{slug}/index.html#s5">x</a>')
     assert f'/{real}/index.html#s5"' in frag, "fragment should be preserved"
 
-    # An out-of-docs website/ pointer is left exactly as authored (the server can't
-    # serve it either way; rewriting it would only invent a wrong path).
+    # An out-of-docs website/ pointer is left exactly as authored; rewriting it would only invent a wrong path.
     src = '<a href="../../../website/src/posts/notes/x.md">x</a>'
     assert serve.resolve_dive_links(src) == src, "website link must be left as-is"
 

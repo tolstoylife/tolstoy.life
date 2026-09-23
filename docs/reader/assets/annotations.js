@@ -103,8 +103,7 @@
     };
   }
 
-  // ── Re-anchor + render: wrap the quote in <mark>, preferring the match
-  //    nearest the stored TextPosition. Single-text-node quotes only (v1). ──
+  // ── Re-anchor + render: wrap the quote in <mark>, preferring the match nearest the stored TextPosition (single-text-node quotes only). ──
   function findAndWrap(ann, exactOverride) {
     const q = quoteSel(ann);
     if (!q || !q.exact) return;
@@ -129,8 +128,7 @@
       offset += node.textContent.length;
     }
     if (!best) {
-      // a quote with edge whitespace can start in the gap BETWEEN sentence
-      // spans (its own text node) — retry with the trimmed quote
+      // a quote with edge whitespace can start in the gap between sentence spans — retry with the trimmed quote
       if (!exactOverride && exact !== exact.trim()) findAndWrap(ann, exact.trim());
       return;
     }
