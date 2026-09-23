@@ -42,6 +42,7 @@ The "XI." heading is absent from the e-text; chapters X and XI run together ther
 Three small transmission faults in `confession.ru.md` surfaced during the machine-translation pass. None is repaired in the spine — repairing the source text is a separate decision — and each is translated as intended rather than mirrored, so the English does not carry a digitization artefact forward as if it were Tolstoy's.
 
 - **`слитком` (ch. I, para 4)** is a typo for `слишком`: "one should not take all this *too* seriously". A single letter substitution, so the homoglyph sweep would not have caught it.
+  *Checked against the page image 2026-09-23 and repaired:* PSS Tom 23 (local `vol83/vol83.pdf`, PDF page 40, printed p. 2) reads «слишком». The scan's own text layer also says `слитком`, which is how the error got into the extract. The Great Sin had the same slip — see its alignment notes.
 - **Unclosed `«` (ch. III, para 14)** — the paragraph opens `«Случилось то, что случается…` with no closing quote anywhere. The English renders the paragraph without the stray mark.
 - **Stray semicolon (ch. V, para 11)** — inside the sciences' reply, `мы не имеем; ответов и этим не занимаемся` splits "have no answers" across the punctuation. Read as `мы не имеем ответов`.
 
