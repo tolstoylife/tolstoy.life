@@ -29,3 +29,33 @@ def test_publishable_keeps_tracked_generated_and_audio_only(tmp_path):
         "reader/w/overview.md", "reader/w/overview.html", "reader/w/index.html",
         "reader/w/build/audio/s.m4a", "reader/w/build/timing.json",
     }
+
+
+def test_held_back_covers_the_working_papers():
+    import pathlib
+    held = [
+        "research/themes/crisis/annotations.md",
+        "research/themes/crisis/annotations.html",
+        "research/works/x/annotations.thorium-export.json",
+        "superpowers/plans/2026-09-22-research-site-soft-launch.md",
+        "research/works/x/_verifier-report.md",
+        "research/works/x/extracts/_sweep_diaries.md",
+        "research/themes/y/visuals/_visuals-sweep.md",
+        "research/themes/y/_witness_sweep.md",
+        "research/_meta/z/session-log.md",
+        "research/_meta/z/handoff-2026-05-28.md",
+        "research/_meta/_handoff-held-quote-corrections-2026-06-07.md",
+        "research/works/x/_scholarship-sweep.html",
+    ]
+    kept = [
+        "research/themes/crisis/index.md",
+        "reader/non-fiction/personal-papers/confession/overview.md",
+        "research/works/x/dossier.yaml",
+        "editorial/editorial.md",
+        "reader/assets/annotations.js",
+        "research/works/x/extracts/_scholarship.md",
+    ]
+    for rel in held:
+        assert publish.held_back(pathlib.PurePosixPath(rel)), rel
+    for rel in kept:
+        assert not publish.held_back(pathlib.PurePosixPath(rel)), rel

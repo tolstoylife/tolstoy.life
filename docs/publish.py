@@ -11,7 +11,7 @@ Usage (from the repository root; Johan runs the netlify lines):
 import shutil
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import serve
 
@@ -21,6 +21,14 @@ SKIP_SUFFIXES = {".py", ".sh", ".stderr"}
 SKIP_PARTS = {"tests", "_audition"}
 HEADERS = "/*\n  X-Robots-Tag: noindex\n"  # @until research-listed — keeps the site out of search results
 REDIRECTS = "/  /INDEX.html  200\n"  # the docs front page is INDEX.html, not index.html
+
+
+def held_back(rel: PurePosixPath) -> bool:
+    """Working papers: on GitHub, not on the site — reading annotations, planning docs, verifier output, search logs, session logs."""
+    name = rel.name
+    return ((name.startswith("annotations.") and rel.parts[0] == "research") or rel.parts[0] == "superpowers"
+            or name.startswith("session-log") or "handoff" in name or "_verifier-report" in name
+            or (name.startswith("_") and "sweep" in name))  # any _…sweep file is a corpus search log
 
 
 def publishable(docs: Path = DOCS) -> list[Path]:
@@ -34,7 +42,8 @@ def publishable(docs: Path = DOCS) -> list[Path]:
     keep = []
     for f in files:
         rel = f.relative_to(docs)
-        if f.is_file() and f.suffix not in SKIP_SUFFIXES and not rel.name.startswith(".") and not SKIP_PARTS & set(rel.parts):
+        if (f.is_file() and f.suffix not in SKIP_SUFFIXES and not rel.name.startswith(".")
+                and not SKIP_PARTS & set(rel.parts) and not held_back(PurePosixPath(rel.as_posix()))):
             keep.append(rel)
     return sorted(keep)
 
