@@ -464,9 +464,9 @@ I could not even make out whether I saw anything there below, in that bottomless
 
 [^5]: A fermented drink prepared from mare’s milk.
 
-[^6]: The *desyatina* is about 2¾ acres.
+[^6]: The <em>desyatina</em> is about 2¾ acres.
 
-[^7]: Tolstoy’s version differs slightly in a few places from our own Authorized or Revised version. I have followed his text, for in a letter to Fet, quoted on p. 11, vol. II, of my *Life of Tolstoy*, he says that “The Authorized English version [of Ecclesiastes] is bad.”
+[^7]: Tolstoy’s version differs slightly in a few places from our own Authorized or Revised version. I have followed his text, for in a letter to Fet, quoted on p. 11, vol. II, of my <em>Life of Tolstoy</em>, he says that “The Authorized English version [of Ecclesiastes] is bad.”
 
 [^8]: This passage is noteworthy as being one of the few references made by Tolstoy at this period to the revolutionary or “Back-to-the-People” movement, in which many young men and women were risking and sacrificing home, property, and life itself from motives which had much in common with his own perception that the upper layers of Society are parasitic and prey on the vitals of the people who support them.
 
