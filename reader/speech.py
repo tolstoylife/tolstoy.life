@@ -65,7 +65,7 @@ _SUBS = [
     (r"\bSchopenhauer\b", "Shopenhower"),
     (r"\bWille zum Leben\b", "Villa tsoom Layben"),
     (r"\bkumys\b", "koomiss"),
-    (r"\*(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)\*", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
+    (r"(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
 ]
 
 _TENS = "_ ten twenty thirty forty fifty sixty seventy eighty ninety".split()
@@ -96,6 +96,7 @@ def _respell(t):
 
 def to_speech(text):
     text = re.sub(r"\[\^\w+\]", "", text)                # drop footnote markers (skippable in audio)
+    text = re.sub(r"\*([^*]+)\*", r"\1", text)             # ⚠ drop italic asterisks, or the voice reads them aloud
     text = _fix_ellipsis(text)
     text = _fix_semicolons(text)
     text = _fix_dashes(text)

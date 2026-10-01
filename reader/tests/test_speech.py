@@ -56,3 +56,6 @@ def test_years_spoken_as_years():
 
 def test_french_quote_marked_for_french_voice():
     assert to_speech("woman: “*Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut.*” Another") == "woman: “‹fr›Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut.‹/fr›” Another"
+
+def test_italic_asterisks_not_spoken():
+    assert to_speech("And *he* was amused.") == "And he was amused."
