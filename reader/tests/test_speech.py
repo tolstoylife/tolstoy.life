@@ -53,3 +53,6 @@ def test_parasites_ending_gets_emdash():
 
 def test_years_spoken_as_years():
     assert to_speech("in 1838, 1900 and 1905.") == "in eighteen thirty-eight, nineteen hundred and nineteen oh five."
+
+def test_french_quote_marked_for_french_voice():
+    assert to_speech("woman: “*Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut.*” Another") == "woman: “‹fr›Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut.‹/fr›” Another"

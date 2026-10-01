@@ -65,6 +65,7 @@ _SUBS = [
     (r"\bSchopenhauer\b", "Shopenhower"),
     (r"\bWille zum Leben\b", "Villa tsoom Layben"),
     (r"\bkumys\b", "koomiss"),
+    (r"\*(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)\*", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
 ]
 
 _TENS = "_ ten twenty thirty forty fifty sixty seventy eighty ninety".split()
