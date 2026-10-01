@@ -50,3 +50,6 @@ def test_parasites_ending_gets_emdash():
     # comma -> em-dash in speech only, so the closing "their parasites" tag falls
     out = to_speech("in order to support us, their parasites.")
     assert "support us — their parasites." in out
+
+def test_years_spoken_as_years():
+    assert to_speech("in 1838, 1900 and 1905.") == "in eighteen thirty-eight, nineteen hundred and nineteen oh five."

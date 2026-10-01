@@ -8,7 +8,8 @@ An autobiographical narrative written between about 1879 and 1882. Its Russian t
 
 It tells the story of the «переворот» (overturning) — his own word — that he passed through around the age of fifty: how, at the height of everything counted as good fortune, every question of why to live went unanswered; how the thought that death would erase any meaning his life could hold brought him close to suicide; and how he found the will to live again in the faith of the labouring people — ending in a break with the Church he had returned to.
 
-- [English, 1904 (Wiener) · read-along](confession.en-wiener.html)
+- [English, 1921 (Maude) · read-along](confession.en-maude.html)
+- [English, 1904 (Wiener)](confession.en-wiener.html)
 - [Русский](confession.ru.html) (Russian version)
 - [English (machine translation)](confession.en-machine.html)
 - [Alignment notes](alignment-notes.html)

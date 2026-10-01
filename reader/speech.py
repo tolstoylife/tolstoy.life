@@ -62,7 +62,19 @@ _SUBS = [
     # a beat but drops "their parasites" ~38 Hz so it falls. Page keeps the comma.
     # Picked by pitch measurement (parselmouth). Voice note 2026-07-04.
     (r"support us, their parasites\.", "support us — their parasites."),
+    (r"\bSchopenhauer\b", "Shopenhower"),
+    (r"\bWille zum Leben\b", "Villa tsoom Layben"),
+    (r"\bkumys\b", "koomiss"),
 ]
+
+_TENS = "_ ten twenty thirty forty fifty sixty seventy eighty ninety".split()
+_ONES = "_ one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
+
+def _year_words(m):
+    # ⚠ Kokoro reads a bare year as "one thousand eight hundred…"; speak 18xx/19xx the way a year is said.
+    n = int(m.group(2))
+    tail = "hundred" if n == 0 else f"oh {_ONES[n]}" if n < 10 else _ONES[n] if n < 20 else _TENS[n // 10] + ("" if n % 10 == 0 else "-" + _ONES[n % 10])
+    return f"{'eighteen' if m.group(1) == '18' else 'nineteen'} {tail}"
 
 def _fix_ellipsis(t):
     t = t.replace("...", "…")
@@ -87,4 +99,5 @@ def to_speech(text):
     text = _fix_semicolons(text)
     text = _fix_dashes(text)
     text = _respell(text)
+    text = re.sub(r"\b(18|19)(\d\d)\b", _year_words, text)
     return text.strip()

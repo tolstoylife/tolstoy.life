@@ -4,6 +4,16 @@ How `confession.ru.md` (PSS «Исповедь», t. 23, pp. 1–59) and `confes
 
 Both versions segment to **16 sections / 212 paragraphs** and pass `reader.segment --spine-json` (the per-section paragraph-count check).
 
+## Maude 1921 — the reading text since 2026-10-01
+
+`confession.en-maude.md` is Aylmer Maude's translation as proofread by Standard Ebooks (local copy `primary-sources/standard-ebooks/leo-tolstoy_a-confession_aylmer-maude.epub`). It replaced Wiener as the English reading text and read-along after Johan's reading notes on Wiener (see the dive's `annotations.md`). It segments to 16 sections / 212 paragraphs / 954 sentences and passes the spine check.
+
+Same rule as for Wiener: Maude's wording is untouched, and only paragraph breaks were moved, at sentence boundaries. Maude has 215 paragraphs in sixteen chapters plus an "Afterword" (the 1882 dream); the Afterword is folded into chapter XVI, where the Russian has it, without its heading. Fourteen Maude paragraphs were split and twenty-four joins were made. Every paragraph's opening and close was then read against the Russian, not just counted — a count check alone would have passed two boundary slips. Maude's eleven footnotes are kept as `[^n]` notes (the reader shows them; the audio skips them), and the dates "1879." and "1882." stay at the ends of XVI.5 and XVI.8 as Maude prints them.
+
+- **Chapter III — a closing paragraph the Russian spine does not have.** Maude (and Wiener) end the chapter with "I felt that what I had been standing on had collapsed…". The PSS text ends at «И я ничего и ничего не мог ответить.» in all three local Russian sources (the TEI file, the Jubilee fb2, and tolstoy.ru's fb2), so this is the translators' source text, not a gap in ours. The extra paragraph is joined to III.16 ("But there was no answer. I felt…"), the paragraph it follows.
+- **Chapter XI — a half-sentence offset.** The Russian starts XI.3 with «И я понял, что мы действительно такие сумасшедшие», which Maude runs into the end of his previous sentence ("…such madmen? and I understood that we really are such madmen."). Splitting there would open a paragraph mid-sentence, so the clause stays at the end of XI.2.
+- **Wiener's chapter VI boundaries are slightly off** (found while doing this). The counts match, but Wiener's paragraphs drift by one around the Socrates and Solomon quotations (VI.11–VI.17) and in IV.1–IV.3 against the Russian. Left as it is, since Wiener is no longer the reading text.
+
 ## Which version defines the coordinate
 
 The Russian is the spine. Unlike The Great Sin — where the English was the incumbent because its read-along audio was already aligned to it — nothing had been built here yet when the alignment was done, so the English was fitted to Tolstoy's paragraphing rather than the other way round. Wiener's wording is untouched throughout; only paragraph **breaks** were moved to match the Russian, and only at real sentence boundaries.

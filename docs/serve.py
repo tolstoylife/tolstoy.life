@@ -1091,7 +1091,7 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
   <div class="nav-grid">
     <a class="nav-card" href="/reader/non-fiction/personal-papers/confession/">
       <div class="nc-title">A Confession</div>
-      <div class="nc-meta">1879–82 · the Russian, Wiener's 1904 English, a first machine draft · read-along audio</div>
+      <div class="nc-meta">1879–82 · the Russian, Maude's 1921 English, Wiener's 1904 English, a first machine draft · read-along audio</div>
     </a>
     <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/">
       <div class="nc-title">The Great Sin</div>
