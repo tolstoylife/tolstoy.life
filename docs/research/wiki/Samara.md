@@ -49,7 +49,7 @@ identifiers:
 fieldSources: {}
 ---
 
-Samara Governorate (<span lang="ru">Самарская губерния</span>) appears in [[Confession]] (1879–82) twice: as the steppe of the 1862 kumys stay, and as the estate behind the question "and what then?". A draft adds the Molokans of Samara.
+Samara Governorate (<span lang="ru">Самарская губерния</span>) appears in [[A Confession]] (1879–82) twice: as the steppe of the 1862 kumys stay, and as the estate behind the question "and what then?". A draft adds the Molokans of Samara.
 
 ## The 1862 kumys stay
 

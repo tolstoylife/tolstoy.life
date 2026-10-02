@@ -1227,7 +1227,7 @@ entities:
 
   - name: "Confession (Исповедь)"
     wikiType: work
-    wikilinkTarget: "Confession"
+    wikilinkTarget: "A Confession"
     vaultStatus: exists
     role: "The light of reason in autobiographical form; the crisis source"
     sources: []

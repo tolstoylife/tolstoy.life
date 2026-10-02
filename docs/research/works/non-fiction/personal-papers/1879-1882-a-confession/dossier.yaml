@@ -541,7 +541,7 @@ scholarship:
 
 # ── Work-record proposal (READ-ONLY to works/; human ingestion applies) ─────
 workRecord:
-  recordPath: website/src/works/non-fiction/personal-papers/confession/Confession.md
+  recordPath: website/src/works/non-fiction/personal-papers/confession/A Confession.md
   workId: confession
   fields:
     - field: titleAlternatives

@@ -28,7 +28,7 @@ fieldSources: {}
 
 <!-- NEEDS PRIMARY SOURCE: the condemned man's name and crime; the PSS commentary says only that a murderer was executed — do not fill the name from general reference. -->
 
-On 6 April 1857 (OS: 25 March), during his first journey abroad, Tolstoy watched a man put to death by guillotine in Paris. The PSS commentary to [[Confession]] dates it and says only that the man executed was a murderer.[^1] The name of the condemned man is NEEDS PRIMARY SOURCE.
+On 6 April 1857 (OS: 25 March), during his first journey abroad, Tolstoy watched a man put to death by guillotine in Paris. The PSS commentary to [[A Confession]] dates it and says only that the man executed was a murderer.[^1] The name of the condemned man is NEEDS PRIMARY SOURCE.
 
 ## What A Confession says
 

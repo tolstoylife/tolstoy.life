@@ -240,12 +240,12 @@ entities:
   # not one of the 9 wiki types (so wikiType is given as "work" and flagged, not a wiki type).
   - name: "A Confession (Исповедь)"
     wikiType: work
-    wikilinkTarget: "Confession.md"
+    wikilinkTarget: "A Confession"
     vaultStatus: exists
     role: "the keystone text; the dive's central vocabulary (переворот, остановка жизни) lives here"
     sources: [jubilee-edition]
     evidenceRefs: [ispoved_p40_perevorot, ispoved_p46_undatable, ispoved_p10_ostanovka]
-    note: "work page (website/src/works/non-fiction/personal-papers/confession/Confession.md, id: confession); uses tolstoy-works-schema.md, not the wiki-schema 9 types"
+    note: "work page (website/src/works/non-fiction/personal-papers/confession/A Confession.md, id: confession); uses tolstoy-works-schema.md, not the wiki-schema 9 types"
 
   - name: "What I Believe (В чём моя вера?)"
     wikiType: work

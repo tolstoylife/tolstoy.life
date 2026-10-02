@@ -21,7 +21,7 @@ identifiers:
 fieldSources: {}
 ---
 
-In chapter V of [[Confession]] (Исповедь, 1879–82) knowledge is divided into two rows, measured against one question: "Why should I live, why wish for anything, or do anything?"[^1] The rows are experimental knowledge and speculative knowledge (<span lang="ru">знания опытные</span> and <span lang="ru">знания умозрительные</span>). Neither answers the question. Beside them stand the half-sciences (<span lang="ru">полунауки</span>).
+In chapter V of [[A Confession]] (Исповедь, 1879–82) knowledge is divided into two rows, measured against one question: "Why should I live, why wish for anything, or do anything?"[^1] The rows are experimental knowledge and speculative knowledge (<span lang="ru">знания опытные</span> and <span lang="ru">знания умозрительные</span>). Neither answers the question. Beside them stand the half-sciences (<span lang="ru">полунауки</span>).
 
 ## The two rows
 
