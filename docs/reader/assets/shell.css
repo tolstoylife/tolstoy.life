@@ -795,3 +795,12 @@ main :is(li, blockquote, h2, h3):has(mark.annotation) { position: relative; }
   .post-entry time { flex-basis: 100%; }
   .post-lede { margin-left: 0; }
 }
+
+/* ── Wiki index (/research/wiki/) ── */
+.wiki-index section { margin-block-start: 2.5rem; }
+.wiki-index h2 { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); border-block-end: 1px solid var(--rule); padding-block-end: 0.4rem; }
+.wiki-index ul { list-style: none; padding: 0; margin: 0; }
+.wiki-index li { padding-block: 0.75rem; border-block-end: 1px solid var(--rule-soft); }
+.wiki-index li > a { font-size: 1.15em; text-decoration: none; }
+.wiki-index li > a:hover { text-decoration: underline 1px; text-underline-offset: 2px; }
+.wiki-index li p { margin: 0.2rem 0 0; color: var(--ink-soft); font-size: 0.92em; line-height: 1.45; }

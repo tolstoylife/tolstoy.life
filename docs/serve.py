@@ -256,6 +256,24 @@ def wiki_ids() -> dict:
     return {p.stem: _parse_frontmatter_md(p).get("id") or slugify(p.stem)
             for p in WIKI_DIR.glob("*.md") if p.name != "README.md"}
 
+WIKI_TYPES = [("person", "People"), ("place", "Places"), ("event", "Events"), ("concept", "Concepts")]
+
+def wiki_index_html() -> str:
+    """The wiki front page's list: every page, grouped by type, with its one-line description."""
+    pages = {}
+    for p in sorted(WIKI_DIR.glob("*.md")):
+        if p.name != "README.md":
+            fm = _parse_frontmatter_md(p)
+            pages.setdefault(fm.get("type", ""), []).append((p.stem, fm.get("description", "")))
+    known = [t for t, _ in WIKI_TYPES]
+    groups = WIKI_TYPES + [(t, t.title() or "Other") for t in pages if t not in known]
+    out = []
+    for t, heading in groups:
+        if t in pages:
+            items = "".join(f'<li><a href="{wiki_url(name)}">{esc(name)}</a><p>{esc(desc)}</p></li>' for name, desc in pages[t])
+            out.append(f'<section><h2>{heading}</h2><ul>{items}</ul></section>')
+    return f'<div class="wiki-index">{"".join(out)}</div>'
+
 def work_url(label: str):
     """`[[A Confession]]` → the work's page here: its reader edition, else its dive; None if the title isn't a work or has neither. ⚠ Works never get a wiki page."""
     ids = {}
@@ -281,8 +299,8 @@ def wiki_url(label: str, base: str = "/research/wiki/", end: str = "/") -> str:
 
 def html_out(md_path: Path) -> Path:
     """Where a page's HTML is written: wiki pages at research/wiki/<id>/index.html, everything else beside its .md."""
-    if md_path.parent == WIKI_DIR and md_path.suffix == ".md" and md_path.name != "README.md":
-        return WIKI_DIR / wiki_ids()[md_path.stem] / "index.html"
+    if md_path.parent == WIKI_DIR and md_path.suffix == ".md":
+        return WIKI_DIR / ("" if md_path.name == "README.md" else wiki_ids()[md_path.stem]) / "index.html"
     return md_path.with_suffix(".html")
 
 MD = markdown.Markdown(extensions=[
@@ -552,6 +570,10 @@ def nav_for(md_path: Path) -> dict:
     just the Docs link."""
     nav = {"home_html": '<a class="tb-home" href="/INDEX.html">Research</a>',
            "lib_html": "", "crumb_html": "", "hub_title": "", "hub_html": ""}
+    if md_path.parent == WIKI_DIR:
+        nav["crumb_html"] = ('<span class="here">Wiki</span>' if md_path.name == "README.md" else
+                             f'<a class="here" href="/research/wiki/">Wiki</a><span class="sep">›</span><span class="sub">{esc(md_path.stem)}</span>')
+        return nav
     ctx = work_context(md_path)
     if not ctx:
         return nav
@@ -707,6 +729,8 @@ def md_to_html(md_path: Path) -> str:
 
     # Convert markdown
     body_html = render_body(text)
+    if md_path == WIKI_DIR / "README.md":
+        body_html += wiki_index_html()
     # Dives authored `../<slug>/…` against the old flat layout; fix those links.
     if (ROOT / "research") in md_path.parents:
         body_html = resolve_dive_links(body_html)
@@ -1189,7 +1213,7 @@ def collect_orphan_html_files() -> dict:
         rel = path.relative_to(ROOT).as_posix()
         if rel == "research/index.html" or rel.startswith("research/visualizations/"):
             continue
-        if path.with_suffix(".md").exists() or (path.name == "index.html" and path.parent.parent == WIKI_DIR):
+        if path.with_suffix(".md").exists() or (path.name == "index.html" and WIKI_DIR in (path.parent, path.parent.parent)):
             continue   # a generated twin: beside its .md, or a wiki page's <id>/index.html
         # A bundle's index.html is the generated twin of its overview.md
         if path.name == "index.html" and (path.parent / "overview.md").exists():
@@ -1312,6 +1336,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif (ROOT / path).is_dir() and (ROOT / path / "overview.md").exists():
             html = md_to_html(ROOT / path / "overview.md")
             (ROOT / path / "index.html").write_text(html, encoding="utf-8")
+        elif path in ("research/wiki/", "research/wiki/index.html"):
+            html_out(WIKI_DIR / "README.md").write_text(md_to_html(WIKI_DIR / "README.md"), encoding="utf-8")
         elif m := re.fullmatch(r"research/wiki/([a-z0-9-]+)/(?:index\.html)?", path):
             for title, wid in wiki_ids().items():
                 if wid == m.group(1):

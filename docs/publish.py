@@ -171,7 +171,7 @@ def wiki_redirects() -> str:
     for title, wid in sorted(serve.wiki_ids().items()):
         old = f"/research/wiki/{quote(title)}.html"
         lines += [f"{o}  /research/wiki/{wid}/  301\n" for o in dict.fromkeys([old, old.lower()])]
-    return "".join(lines)
+    return "".join(lines) + "/research/wiki/README.html  /research/wiki/  301\n"
 
 
 def sitemap(pages: list[PurePosixPath]) -> str:
