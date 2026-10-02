@@ -39,3 +39,10 @@ def test_bare_pss_gets_its_abbr_once():
     html = serve.render_body('PSS Tom 36, <abbr title="x">PSS</abbr>, `PSS` and [PSS](https://example.org/PSS)')
     assert html.count("<abbr") == 3  # the bare one, the link text, and the one already marked
     assert "<code>PSS</code>" in html and 'href="https://example.org/PSS"' in html
+
+
+def test_work_links_go_to_the_work_not_a_wiki_page():
+    import serve
+    assert serve.wiki_url("A Confession") == "/reader/non-fiction/personal-papers/confession/"
+    assert serve.wiki_url("Confession") == serve.wiki_url("A Confession")   # an alternative title
+    assert serve.wiki_url("Henry George") == "/research/wiki/henry-george/"

@@ -27,6 +27,7 @@ import os
 import re
 import socketserver
 import sys
+import yaml
 from datetime import datetime
 from html import escape as esc
 from pathlib import Path
@@ -255,9 +256,28 @@ def wiki_ids() -> dict:
     return {p.stem: _parse_frontmatter_md(p).get("id") or slugify(p.stem)
             for p in WIKI_DIR.glob("*.md") if p.name != "README.md"}
 
+def work_url(label: str):
+    """`[[A Confession]]` → the work's page here: its reader edition, else its dive; None if the title isn't a work or has neither. ⚠ Works never get a wiki page."""
+    ids = {}
+    for rec in (ROOT.parent / "website" / "src" / "works").glob("**/*.md"):
+        fm = yaml.safe_load(rec.read_text(encoding="utf-8").split("---")[1]) or {}
+        alts = [a.get("title", "") if isinstance(a, dict) else str(a) for a in fm.get("titleAlternatives") or []]
+        for t in {rec.stem, fm.get("title") or "", *alts} - {""}:
+            ids[t] = fm.get("id") or slugify(rec.stem)
+    for bundle, work, title, _ in _work_index():
+        ids.setdefault(title, work)
+    wid = ids.get(label)
+    if not wid:
+        return None
+    for bundle, work, _, _ in _work_index():
+        if work == wid:
+            return "/" + bundle.relative_to(ROOT).as_posix() + "/"
+    dive = next((ROOT / "research" / "works").glob(f"**/*-{wid}/index.md"), None)
+    return "/" + dive.parent.relative_to(ROOT).as_posix() + "/" if dive else None
+
 def wiki_url(label: str, base: str = "/research/wiki/", end: str = "/") -> str:
-    """`[[Henry George]]` → `/research/wiki/henry-george/` — the page's `id`, like /wiki/<id>/ on tolstoy.life."""
-    return f"{base}{wiki_ids().get(label) or slugify(label)}/"
+    """`[[Henry George]]` → `/research/wiki/henry-george/` — the page's `id`, like /wiki/<id>/ on tolstoy.life; a work goes to its own page instead."""
+    return work_url(label) or f"{base}{wiki_ids().get(label) or slugify(label)}/"
 
 def html_out(md_path: Path) -> Path:
     """Where a page's HTML is written: wiki pages at research/wiki/<id>/index.html, everything else beside its .md."""
