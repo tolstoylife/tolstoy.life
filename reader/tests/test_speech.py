@@ -59,3 +59,6 @@ def test_french_quote_marked_for_french_voice():
 
 def test_italic_asterisks_not_spoken():
     assert to_speech("And *he* was amused.") == "And he was amused."
+
+def test_german_marked_for_german_pronunciation():
+    assert "‹de›Wille zum Leben‹/de›" in to_speech("that same wish to live—*Wille zum Leben*—which")
