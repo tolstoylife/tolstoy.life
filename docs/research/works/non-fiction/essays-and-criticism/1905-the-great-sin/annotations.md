@@ -450,4 +450,4 @@ Johan's notes on `docs/research/wiki/Giuseppe Mazzini.md`, kept as steer for thi
 - Pull quote: decided as at most one per page, only where the quotation is the subject's tie to Tolstoy; the Russian opens under it (`<details>`). Mazzini is the first.
 - "Religious movement": answered from the essay itself — ch. VIII's next paragraphs say what the movement is and what it is not (reforms, socialism, revolution, philanthropy, government). No interpretation added.
 - The PSS commentary calls the epigraph a "paraphrased and shortened" quotation (anthology p. 5, thought 4).
-- Not on this page: Tolstoy's definition of religion vs the Church, and "Christian anarchist" — each wants its own page from his definitions. The quoting-political-figures question is a dive, logged as an open question on the page.
+- Moved on Johan's word (2026-10-02): the religion-vs-Church and "Christian anarchist" thoughts are steer for the re-dive of A Confession (its `annotations.md`, "Re-dive steer"); the Wiener wording point went to The Kingdom of God's `annotations.md`. The quoting-political-figures question stays an open question on the Mazzini page.

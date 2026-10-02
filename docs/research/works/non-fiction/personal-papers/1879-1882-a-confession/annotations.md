@@ -55,3 +55,12 @@ The notes ended with the decision to replace Wiener with **Aylmer Maude's 1921 t
 ## Wiener e-text defects reported (not repaired)
 
 Wiener stays in the bundle as a witness but is no longer the reading text, so these were not repaired: double comma "unbelievers,, for" (I.10); stray ‘ in "to ‘these" (II.1); "get as. much" (II.14); "we every one of us" (II.14); "w.\s so" (III.7); "life»" (III.8); the dash after "him —" (IV.8); the stray opening quote "times. “" (V.1); "” all" (VI.5); "lif^" (VI.5); "and^" (VI.12); "five" for *live* (VI.12); "milky ways, is" (VI.12); "I the Treacher" for *Preacher* (VI.13); "Wille zuni Leberi" (VI.12).
+
+## Re-dive steer — religion, the Church, and "Christian anarchist" (2026-10-02)
+
+Johan's thoughts, first written as notes on the Mazzini wiki page and moved here because they belong to the re-dive of *A Confession*, the work in which his definition of faith is worked out. Interpretive steer for the re-dive, not text for a page.
+
+- **"Religion" is not the Church.** For Tolstoy a religious movement means people's own convictions, not the established church, which serves the legal and economic system. Most readers take "religion" to mean organised religion, so calling him "religious" can pull his stand toward the mainstream. The re-dive should set out his own definition of religion and faith from the text and its drafts, and keep it apart from the Church.
+- **Against the "Christian anarchist" label.** For Tolstoy, as for Jesus, change comes from inside (*The Kingdom of God Is Within You*), from faith, not from political action, least of all the violent methods associated with anarchists. Wordings that make him political instead of religious need weighing with caution. See also [[feedback_mainstream_framing]] in memory: the Christian Anarchism page exists to refute the label.
+- **Watch the wording.** The smallest change of wording can change how the message is perceived; check the translations (Maude, Wiener) where they turn faith into doctrine or an inner change into a political one.
+- **Open question for a later dive:** did he quote political figures (Mazzini and others) more often in the years of *The Great Sin* and *A Circle of Reading* than before, and how are their words handled?
