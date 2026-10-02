@@ -245,14 +245,25 @@ def page_shell(*, title, eyebrow, heading, meta_line, body_html, config,
 
 from markdown.extensions.wikilinks import WikiLinkExtension
 
-def wiki_url(label: str, base: str, end: str) -> str:
-    """`[[Henry George]]` → `/research/wiki/Henry%20George.html`.
+WIKI_DIR = ROOT / "research" / "wiki"
 
-    The extension's default builder substitutes underscores for spaces, but the
-    filename here IS the title (the Obsidian convention that keeps wikilinks
-    working in the vault), so the space is preserved and percent-encoded instead.
-    """
-    return f"{base}{quote(label)}{end}"
+def slugify(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+def wiki_ids() -> dict:
+    """Wiki title (= filename, for Obsidian wikilinks) → its `id`, the page's address. Read fresh each time so a new page links at once."""
+    return {p.stem: _parse_frontmatter_md(p).get("id") or slugify(p.stem)
+            for p in WIKI_DIR.glob("*.md") if p.name != "README.md"}
+
+def wiki_url(label: str, base: str = "/research/wiki/", end: str = "/") -> str:
+    """`[[Henry George]]` → `/research/wiki/henry-george/` — the page's `id`, like /wiki/<id>/ on tolstoy.life."""
+    return f"{base}{wiki_ids().get(label) or slugify(label)}/"
+
+def html_out(md_path: Path) -> Path:
+    """Where a page's HTML is written: wiki pages at research/wiki/<id>/index.html, everything else beside its .md."""
+    if md_path.parent == WIKI_DIR and md_path.suffix == ".md" and md_path.name != "README.md":
+        return WIKI_DIR / wiki_ids()[md_path.stem] / "index.html"
+    return md_path.with_suffix(".html")
 
 MD = markdown.Markdown(extensions=[
     TableExtension(),
@@ -262,7 +273,7 @@ MD = markdown.Markdown(extensions=[
     "attr_list",
     "footnotes",            # the work's own authorial/translator notes ([^n])
     "pymdownx.critic",      # editorial marks: {--cut--} {++add++} {~~a~>b~~} {>>note<<} {==hi==}
-    WikiLinkExtension(base_url="/research/wiki/", end_url=".html",
+    WikiLinkExtension(base_url="/research/wiki/", end_url="/",
                       html_class="wikilink", build_url=wiki_url),
 ])
 
@@ -273,7 +284,7 @@ if _REPO_ROOT not in sys.path:
 from reader.paragraph_ids import add_paragraph_ids
 from reader import ids as reader_ids
 
-_WIKILINK_A_RE = re.compile(r'<a class="wikilink" href="/research/wiki/([^"]+)\.html"')
+_WIKILINK_A_RE = re.compile(r'<a class="wikilink" href="/research/wiki/([^"/]+)/"')
 
 def mark_missing_wikilinks(html: str) -> str:
     """Flag `[[links]]` whose page isn't written yet, so a dead end is visible.
@@ -283,8 +294,7 @@ def mark_missing_wikilinks(html: str) -> str:
     just stop looking like a promise the preview can keep.
     """
     def repl(mo):
-        name = unquote(mo.group(1))
-        if (ROOT / "research" / "wiki" / f"{name}.md").exists():
+        if mo.group(1) in wiki_ids().values():
             return mo.group(0)
         return mo.group(0).replace(
             'class="wikilink"', 'class="wikilink wikilink-missing" title="No page yet"')
@@ -546,7 +556,7 @@ def _render_sentence_web(text: str) -> str:
         w = re.fullmatch(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", part)   # [[Page]] or [[Page|words shown]]
         m = re.fullmatch(r"\[\^(\w+)\]", part)
         if w:
-            out.append(f'<a class="wikilink" href="{wiki_url(w.group(1), "/research/wiki/", ".html")}">{esc(w.group(2) or w.group(1))}</a>')
+            out.append(f'<a class="wikilink" href="{wiki_url(w.group(1))}">{esc(w.group(2) or w.group(1))}</a>')
         elif m:
             label = m.group(1)
             nid = reader_ids.note_id(int(label)) if label.isdigit() else f"note-{label}"
@@ -884,7 +894,7 @@ def build_index(docs: dict) -> str:
                 "layer": meta["layer"],
                 "date": meta["date"],
                 "folder": "" if folder == "_root" else folder,
-                "href": "/" + str(rel.with_suffix(".html")),
+                "href": "/" + html_out(path).relative_to(ROOT).as_posix().removesuffix("index.html"),
                 "mtime": mtime,
             })
 
@@ -1158,8 +1168,8 @@ def collect_orphan_html_files() -> dict:
         rel = path.relative_to(ROOT).as_posix()
         if rel == "research/index.html" or rel.startswith("research/visualizations/"):
             continue
-        if path.with_suffix(".md").exists():
-            continue
+        if path.with_suffix(".md").exists() or (path.name == "index.html" and path.parent.parent == WIKI_DIR):
+            continue   # a generated twin: beside its .md, or a wiki page's <id>/index.html
         # A bundle's index.html is the generated twin of its overview.md
         if path.name == "index.html" and (path.parent / "overview.md").exists():
             continue
@@ -1229,8 +1239,9 @@ def build_all(verbose=True):
     count = 0
     for folder, files in md_docs.items():
         for md_path in files:
-            html_path = md_path.with_suffix(".html")
+            html_path = html_out(md_path)
             html = md_to_html(md_path)
+            html_path.parent.mkdir(exist_ok=True)
             html_path.write_text(html, encoding="utf-8")
             if md_path.name == "overview.md":
                 # the bundle's front page: the bare folder URL serves it too
@@ -1280,6 +1291,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif (ROOT / path).is_dir() and (ROOT / path / "overview.md").exists():
             html = md_to_html(ROOT / path / "overview.md")
             (ROOT / path / "index.html").write_text(html, encoding="utf-8")
+        elif m := re.fullmatch(r"research/wiki/([a-z0-9-]+)/(?:index\.html)?", path):
+            for title, wid in wiki_ids().items():
+                if wid == m.group(1):
+                    out = html_out(WIKI_DIR / f"{title}.md")
+                    out.parent.mkdir(exist_ok=True)
+                    out.write_text(md_to_html(WIKI_DIR / f"{title}.md"), encoding="utf-8")
         else:
             md_equiv = ROOT / Path(path).with_suffix(".md")
             if md_equiv.exists():

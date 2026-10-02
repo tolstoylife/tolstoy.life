@@ -52,7 +52,7 @@ def publishable(docs: Path = DOCS) -> list[Path]:
     tracked = subprocess.run(["git", "ls-files", "-z"], cwd=docs, capture_output=True, text=True, check=True).stdout
     files = {docs / f for f in tracked.split("\0") if f}
     for md in [f for f in files if f.suffix == ".md"]:
-        files.add(md.with_suffix(".html"))
+        files.add(serve.html_out(md))
         if md.name == "overview.md":
             files.add(md.parent / "index.html")
     files |= set(docs.glob("reader/**/build/**/*"))  # audio + timing: gitignored, but ours to publish
@@ -165,9 +165,18 @@ def link_sources_to_github(html: str, page_dir: Path, published: set[Path], trac
     return HREF.sub(replace, html)
 
 
+def wiki_redirects() -> str:
+    """Wiki pages were at /research/wiki/<Title>.html until 2026-10-02; send those addresses (and Netlify's lower-cased form) to /research/wiki/<id>/."""
+    lines = []
+    for title, wid in sorted(serve.wiki_ids().items()):
+        old = f"/research/wiki/{quote(title)}.html"
+        lines += [f"{o}  /research/wiki/{wid}/  301\n" for o in dict.fromkeys([old, old.lower()])]
+    return "".join(lines)
+
+
 def sitemap(pages: list[PurePosixPath]) -> str:
     """Every published HTML page as a full address, for search engines."""
-    urls = "".join(f"  <url><loc>{SITE}{quote(p.as_posix())}</loc></url>\n" for p in pages if p.suffix == ".html")
+    urls = "".join(f"  <url><loc>{SITE}{quote(p.as_posix().removesuffix("index.html"))}</loc></url>\n" for p in pages if p.suffix == ".html")
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
 
@@ -191,11 +200,11 @@ def main():
     # ⚠ The local front page lists untracked and leftover pages too; the published one lists only what's published.
     live = {DOCS / rel for rel in pub}
     listed = serve.merge_doc_files(serve.collect_md_files(), serve.collect_orphan_html_files())
-    kept = {folder: [p for p in files if p.with_suffix(".html") in live] for folder, files in listed.items()}
+    kept = {folder: [p for p in files if serve.html_out(p) in live] for folder, files in listed.items()}
     (OUT / "INDEX.html").write_text(serve.build_index({f: ps for f, ps in kept.items() if ps}), encoding="utf-8")
     (OUT / "404.html").write_text(serve.md_to_html(DOCS / "404.md"), encoding="utf-8")  # Netlify serves it for any missing address
     (OUT / "__forms.html").write_text(FORM_PAGE, encoding="utf-8")
-    (OUT / "_redirects").write_text(REDIRECTS)
+    (OUT / "_redirects").write_text(REDIRECTS + wiki_redirects())
     (OUT / "robots.txt").write_text(ROBOTS)
     (OUT / "sitemap.xml").write_text(sitemap([PurePosixPath(r.as_posix()) for r in pub]), encoding="utf-8")
     print(f"{OUT}: {total / 1e6:.0f} MB. Upload with: netlify deploy --no-build --dir _site --site tolstoy-research")

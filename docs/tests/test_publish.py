@@ -118,12 +118,12 @@ def test_links_to_held_back_pages_are_dropped(tmp_path):
 
 
 def test_missing_wikilinks_become_plain_text():
-    html = ('<a class="wikilink" href="/research/wiki/Henry%20George.html">Henry George</a> and '
-            '<a class="wikilink wikilink-missing" title="No page yet" href="/research/wiki/1905%20Revolution.html">1905 Revolution</a>')
+    html = ('<a class="wikilink" href="/research/wiki/henry-george/">Henry George</a> and '
+            '<a class="wikilink wikilink-missing" title="No page yet" href="/research/wiki/1905-revolution/">1905 Revolution</a>')
 
     out = publish.unlink_missing_wikilinks(html)
 
-    assert "Henry%20George.html" in out
+    assert "/research/wiki/henry-george/" in out
     assert out.endswith(" and 1905 Revolution")
 
 
@@ -147,9 +147,15 @@ def test_unpublished_sources_link_to_github():
 
 def test_sitemap_lists_only_pages_as_full_addresses():
     import pathlib
-    out = publish.sitemap([pathlib.PurePosixPath(p) for p in ["INDEX.html", "research/wiki/Henry George.html", "a.md", "x.css"]])
+    out = publish.sitemap([pathlib.PurePosixPath(p) for p in ["INDEX.html", "research/wiki/henry-george/index.html", "a.md", "x.css"]])
 
     assert "<loc>https://research.tolstoy.life/INDEX.html</loc>" in out
-    assert "<loc>https://research.tolstoy.life/research/wiki/Henry%20George.html</loc>" in out
+    assert "<loc>https://research.tolstoy.life/research/wiki/henry-george/</loc>" in out
     assert ".md<" not in out and ".css<" not in out
     assert "Sitemap: https://research.tolstoy.life/sitemap.xml" in publish.ROBOTS
+
+
+def test_old_wiki_addresses_forward_to_the_id():
+    out = publish.wiki_redirects()
+    assert "/research/wiki/Henry%20George.html  /research/wiki/henry-george/  301" in out
+    assert "/research/wiki/henry%20george.html  /research/wiki/henry-george/  301" in out
