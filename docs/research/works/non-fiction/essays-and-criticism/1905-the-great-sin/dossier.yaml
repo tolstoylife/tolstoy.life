@@ -161,7 +161,7 @@ evidence:
     extract: extracts/v36_464_475_Velikij_greh_Varianty.txt
     quoteRu: "жизнь народа слагается не вследствие внешних форм, которые могут быть наложены на него внешними влияниями, а внутренней деятельностью отдельных личностей"
     quoteEn: "the life of the people is formed not as a result of external forms which may be imposed on it by external influences, but by the inner activity of individual persons (working English)"
-    significance: "Variant № 15 — the withdrawn first introduction (proof-set for Chertkov's «Свободное слово»). The key sentence of the one paragraph Chertkov set apart and had printed separately as «Необходимый переворот»: the people's life is formed by the inner moral activity of individuals, not by external forms imposed from outside. Chertkov's recorded reason (8 July 1905 letter, per the PSS commentary — see E28) was that it stood against the rest of the essay, which insists the external forms of land-use must change. The primary fact, in his circle's own terms; the academic 'anarchism' label is not the dive's. (Pre-reform orthography as in the TEI.)"
+    significance: "Variant № 15 — the withdrawn first introduction (proof-set for Chertkov's «Свободное слово»). The key sentence of the one paragraph Chertkov took out of this introduction (the introduction was printed in «Свободное слово» No. 17–18 as «Необходимый переворот»; the paragraph printed after it with an editor's note): the people's life is formed by the inner moral activity of individuals, not by external forms imposed from outside. Chertkov's recorded reason (8 July 1905 letter, per the PSS commentary — see E28) was that it stood against the rest of the essay, which insists the external forms of land-use must change. The primary fact, in his circle's own terms; the academic 'anarchism' label is not the dive's. (Pre-reform orthography as in the TEI.)"
   - id: E16
     genre: works
     pssTom: 36
@@ -210,7 +210,7 @@ evidence:
     extract: extracts/v36_656_665_Velikij_greh_commentary.txt
     quoteRu: "абзац этот, утверждающий независимость жизни народа от внешних форм, стоит в противоречии со всем предыдущим, где утверждается необходимость внешнего изменения форм пользования землей"
     quoteEn: "this paragraph, asserting the independence of the people's life from external forms, stands in contradiction with all the preceding, where the necessity of an external change in the forms of land use is asserted — PSS commentary, paraphrasing Chertkov's letter of 8 July 1905 (n.s.) (working English)"
-    significance: "Chertkov's RECORDED REASON for setting the one paragraph of the withdrawn first introduction (E15) apart and printing it separately as «Необходимый переворот». The primary editorial fact at the heart of the dive: Tolstoy's closest friend and editor judged the inward-only statement to stand against the essay's insistence that the outward forms of land-use must change, and — with Tolstoy's assent — parted the two. Reported in the PSS commentary (Gorbachev); the letter is in АТБ. (In the same letter Chertkov also softened «происходят от» to «связаны с», reasoning that land-property's evil itself springs from a deeper evil, human egoism.)"
+    significance: "Chertkov's RECORDED REASON for setting the one paragraph of the withdrawn first introduction (E15) apart (the introduction was printed in «Свободное слово» No. 17–18 as «Необходимый переворот»; the paragraph printed after it with an editor's note). The primary editorial fact at the heart of the dive: Tolstoy's closest friend and editor judged the inward-only statement to stand against the essay's insistence that the outward forms of land-use must change, and — with Tolstoy's assent — parted the two. Reported in the PSS commentary (Gorbachev); the letter is in АТБ. (In the same letter Chertkov also softened «происходят от» to «связаны с», reasoning that land-property's evil itself springs from a deeper evil, human egoism.)"
   # --- genesis: 1905 diaries (Tom 55) and letters (Tom 89) ---
   - id: E21
     genre: diary
@@ -292,7 +292,7 @@ entities:
     wikiType: person
     wikilinkTarget: "Vladimir Chertkov"
     vaultStatus: exists
-    role: "Disciple, editor, publisher. Came to Yasnaya Polyana 24 May–3 June 1905 and proposed the cuts that produced the variants; set apart and separately published the one paragraph (E15) he judged to stand against the essay's argument (his reason in his 8 July 1905 letter, per the PSS commentary — E28); published the essay (and that paragraph, as «Необходимый переворот») via «Свободное слово»."
+    role: "Disciple, editor, publisher. Came to Yasnaya Polyana 24 May–3 June 1905 and proposed the cuts that produced the variants; set apart and separately published the one paragraph (E15) he judged to stand against the essay's argument (his reason in his 8 July 1905 letter, per the PSS commentary — E28); published the essay via «Свободное слово», and the first introduction as «Необходимый переворот» (No. 17–18), with that paragraph printed after it."
     sources: [jubilee-edition]
     evidenceRefs: [E19, E24, E26]
     ingestionPriority: 1
@@ -652,7 +652,7 @@ coverage:
 # ── Contradictions (intra-corpus: primary vs primary) ────────────────────
 contradictions:
   - claim: "In the withdrawn paragraph (variant № 15), Tolstoy writes that the people's life is formed by the inner moral activity of individuals, not by external forms imposed from outside."
-    correction: "The published essay insists the EXTERNAL form of land-use must change, and endorses George's single tax as the remedy 'under the existing state structure and obligatory taxes' (E12). Chertkov judged the two to stand in contradiction (8 July 1905 letter, per the commentary — E28) and set the inward-only paragraph apart, printed separately as «Необходимый переворот» — the two emphases parted editorially, with Tolstoy's assent, not reconciled in argument."
+    correction: "The published essay insists the EXTERNAL form of land-use must change, and endorses George's single tax as the remedy 'under the existing state structure and obligatory taxes' (E12). Chertkov judged the two to stand in contradiction (8 July 1905 letter, per the commentary — E28) and set the inward-only paragraph apart, printed after the first introduction («Необходимый переворот», «Свободное слово» No. 17–18) with an editor's note — the two emphases parted editorially, with Tolstoy's assent, not reconciled in argument."
     evidenceRef: E15
 
 # ── Not covered (with pointers) ──────────────────────────────────────────

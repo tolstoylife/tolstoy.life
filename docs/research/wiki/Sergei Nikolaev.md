@@ -13,7 +13,7 @@ nameAlternatives:
   - name: "S. D. Nikolaev"
     type: variant
     language: en
-description: "Henry George's principal Russian translator (Posrednik). The route through which Tolstoy read George and drew the George quotations in The Great Sin (1905)."
+description: "Russian translator of Henry George, whose 1904 edition supplied the George quotations in The Great Sin (1905)."
 birthDate: ""
 birthDateOldStyle: ""
 birthDateApproximate: false
@@ -31,7 +31,7 @@ roles:
 occupation:
   - translator
 relationToTolstoy: ""
-relationshipDescription: "In Tolstoy's Posrednik circle as Henry George's Russian translator. Tolstoy read George «по Николаеву», drew The Great Sin's George quotations from Nikolaev's 1904 edition, and wrote prefaces to two of his George translations in 1906."
+relationshipDescription: "Henry George's Russian translator for Posrednik. Tolstoy read George in his translation in 1905 and took the George quotations in The Great Sin from his 1904 edition; scholarship records a 1906 preface to his translation of George's Social Problems."
 periodOfContact:
   from: ""
   to: ""
@@ -63,35 +63,44 @@ fieldSources:
       sourceId: ""
       volume: ""
       page: ""
-      notes: "The 1861–1920 span in the description is carried from the dive's entity routing, not yet verified against an authority file (VIAF/LCCN)."
+      notes: "The 1861–1920 span is carried from the dive's entity routing, not yet verified against an authority file (VIAF/LCCN)."
 ---
 
-<!-- NEEDS PRIMARY SOURCE: Birth and death dates (routed as 1861–1920), birthplace, deathplace, and the Wikidata QID are unfilled. Nothing in the corpus attests them — they need an authority file, not a dive. -->
+<!-- NEEDS PRIMARY SOURCE: birth and death dates (routed as 1861–1920), birthplace, deathplace and the Wikidata QID; nothing in the corpus attests them, they need an authority file, not a dive. -->
 
-Sergei Dmitrievich Nikolaev (С. Д. Николаев, 1861–1920) was the principal Russian translator of [[Henry George]], working through Tolstoy's [[Posrednik]] press. He is the route by which George reaches [[The Great Sin]]: the essay's George quotations are not Tolstoy's own renderings from the English but Nikolaev's Russian, which is why the 1905 English translation had to restore George's original wording rather than translate the Russian back.
+Sergei Dmitrievich Nikolaev (<span lang="ru">Сергей Дмитриевич Николаев</span>, 1861–1920) translated [[Henry George]] into Russian for the Posrednik press. The George quotations in [[The Great Sin]] (1905) are taken from his translation, not translated from George's English.
 
-## Read «по Николаеву»
+## Read in Nikolaev's translation
 
-The essay's George strand has a datable first trace. On 16 April 1905 Tolstoy recorded that he wanted to write «о Генри Джорже, которого прочел по Николаеву и вновь восхищен» — about Henry George, whom he had read in Nikolaev's translation and by whom he was again delighted (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 55:134). The «вновь» — again — marks a commitment running back to the mid-1880s, but the 1905 reading that set the essay going was Nikolaev's.
+On 16 April 1905 the diary records wanting to write "about Henry George, whom I read in Nikolaev's [translation] and am again delighted by".[^1] It is the first 1905 trace of the essay's George strand.
 
 ## The source of the quotations
 
-The <abbr title="Полное собрание сочинений">PSS</abbr> commentary traces the George quotations to a single book: «Избранные речи и статьи Генри Джорджа», in Nikolaev's translation, Posrednik, Moscow 1904. The passages quoted across the essay come from its pages 146–151, 64 and 43; and the biographical quotation in Chapter III — about the extraordinary man George was — comes from the *biography of George that Nikolaev himself compiled* for that same volume, page 12 (PSS 36 commentary, pp. 665–666). So Nikolaev supplied Tolstoy both George's words and George's life.
+The <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> commentary traces the George quotations to one book: *Selected Speeches and Articles of Henry George*, translated by Nikolaev (Posrednik, Moscow, 1904), pages 146–151, 64 and 43.[^2] A quotation in chapter III comes from the biography of George that Nikolaev compiled for the same volume, page 12.[^3]
+
+The 1905 English translation, *A Great Iniquity*, does not translate these passages from the Russian; it prints George's original English instead.[^4]
 
 ## The 1906 prefaces
 
-The engagement continued past this essay. Tolstoy wrote prefaces in 1906 to Nikolaev's Russian translations of George — including *Social Problems* — part of the same effort to carry George into Russian that makes Nikolaev a central node of the Russian Georgist network rather than only a translator of one book.
-
-## Standing
-
-He is the cluster's spine on the Russian side: the George quotations in [[The Great Sin]], the George biography Tolstoy drew on, and the prefaces all pass through him. The planned land-question theme-dive will carry the wider network — [[To the Working People]] (1902) and the 1906 George prefaces among them — where Nikolaev recurs.
+Scholarship records a 1906 preface to Nikolaev's Russian translation of George's *Social Problems*.[^5] The dive lists two 1906 George prefaces in PSS 36 but did not read them.
 
 ## Open questions
 
 - Life dates, birthplace, and a Wikidata/VIAF identifier need an authority file.
-- A clean copy or scan of the 1904 «Избранные речи и статьи Генри Джорджа» — the edition Tolstoy actually used — was not found in the dive's image sweep; worth a targeted look.
-- The exact bibliographic details of the 1906 prefaces (which George titles, which Nikolaev editions) want confirming page-side.
+- A copy or scan of the 1904 *Selected Speeches and Articles* was not found in the dive's image sweep.
+- The details of the 1906 prefaces (which George titles, which Nikolaev editions) need checking against PSS 36; the dive has them only from scholarship.
+- Which passage of chapter III (PSS 36:216, lines 31–34) comes from Nikolaev's biography of George.
 
 ## Dive provenance
 
-- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — Nikolaev as the translation route for George (E21, E3); the 1904 Posrednik edition as the source of the quotations and of the compiled George biography (PSS 36 commentary). Routed to a page of its own in the entity steer, 2026-08-12.
+- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — Nikolaev as the translation route for George (E21, E3); the 1904 Posrednik edition as the source of the quotations and of the compiled George biography (PSS 36 commentary). Routed to a page of its own in the entity steer, 2026-08-12; converted to the footnote style 2026-10-02.
+
+[^1]: <span lang="ru">«о Генри Джорже, которого прочел по Николаеву и вновь восхищен»</span> (PSS 55:134). English: ours.
+
+[^2]: <span lang="ru">«Избранные речи и статьи» в переводе С. Д. Николаева, издание «Посредника», М. 1904, стр. 146, 147, 148, 149, 150, 151, 64, 43</span> (PSS 36, commentary).
+
+[^3]: <span lang="ru">Цитата из биографии Генри Джорджа, составленной С. Д. Николаевым и напечатанной в книге «Избранные речи и статьи Генри Джорджа», стр. 12</span> (PSS 36, commentary, note to p. 216, lines 31–34).
+
+[^4]: See the reader edition's translation diagnostic, on chapters II and IX.
+
+[^5]: K. Wenzer, "Tolstoy's Georgist Spiritual Political Economy (1897–1910)", *American Journal of Economics and Sociology* (1997), as summarised in the dive's `extracts/_scholarship.md`.

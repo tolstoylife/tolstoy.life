@@ -5,30 +5,61 @@ liveStatus: enriches-live
 type: person
 title: Vladimir Chertkov
 titleEn: Vladimir Chertkov
+description: "Editor and publisher who proposed the 1905 cuts to The Great Sin and co-translated it into English."
 ---
 
-<!-- ENRICHES-LIVE: additions only, to be merged into the existing live page website/src/wiki/Vladimir Chertkov.md. NOT a duplicate — the live page's biography and frontmatter stand; this file carries only what The Great Sin (1905) dive adds. Frontmatter deltas to fold in at merge: add `the-great-sin` to relatedWorks (role: editor) and to worksTranslated; add `isabella-fyvie-mayo` to relatedArticles. -->
+<!-- ENRICHES-LIVE: additions only, to be merged into the live page website/src/wiki/Vladimir Chertkov.md — not a duplicate; the live page's biography and frontmatter stand. Frontmatter deltas at merge: add `the-great-sin` to relatedWorks (role: editor) and to worksTranslated; add `isabella-fyvie-mayo` to relatedArticles. -->
 
-## The Great Sin (1905) — the editor's hand
+## The Great Sin (1905)
 
-Chertkov shaped [[The Great Sin]] more visibly than he shaped most of what he published, and the record of it survives in the <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> apparatus.
+The <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> apparatus records his part in [[The Great Sin]]: the cuts, a separately printed introduction, the Free Word (<span lang="ru">Свободное слово</span>) edition, and the English translation.
 
 ### The cuts
 
-He arrived at Yasnaya Polyana from England on 24 May 1905 and proposed that Tolstoy make a series of cuts — two whole chapters and parts of others. Tolstoy accepted them, and regretted it: «Сократил Великий грех, выбросил многое. Мне жалко» — I shortened *The Great Sin*, threw out much. I regret it (diary, 6 June 1905). The excised material is what the PSS prints as the variants; the regret is what makes those variants the essay Tolstoy would rather have printed, not discarded drafts.
+He came to Yasnaya Polyana from England on 24 May 1905 and proposed a series of cuts in the essay.[^1] They were accepted; two whole chapters came out.[^2] The diary, 6 June: "I shortened The Great Sin, threw out much. I regret it."[^3] The cut material is printed in the PSS as variants.
 
-### «Необходимый переворот»
+### A Necessary Revolution
 
-One paragraph he did not merely cut but set apart. It held that the life of a people is formed by the inner moral activity of individuals, not by external forms imposed on it — and Chertkov judged that this stood against the rest of the essay, which insists the outward forms of land-use must change. His reason is on record, in a letter of 8 July 1905 (n.s.) paraphrased in the PSS commentary. He had the paragraph printed on its own, in «Свободное слово» No. 17–18, under the title «Необходимый переворот» («A Necessary Revolution»). In the same letter he also softened one of the essay's own claims — «происходят от» to «связаны с» — reasoning that land-property's evil itself springs from a deeper evil, human egoism.
+The first version of the introduction, set in proof for the Free Word press and then replaced, was printed in the paper *Svobodnoe slovo*, No. 17–18, under the title *A Necessary Revolution*.[^4] One paragraph of it was moved out of the introduction and printed after it with an editorial note.[^5] The paragraph says that the life of a people is formed "not as a result of external forms which may be imposed on it by external influences, but by the inner activity of individual persons".[^6]
+
+His reason, given in a letter of 8 July 1905 (new style) and reported in the PSS commentary: the paragraph stands in contradiction with everything before it, where the need for an outward change in the forms of land use is asserted.[^7] In the same printing he changed "all these phenomena arise from the fundamental, chief evil" to "are connected with" it, because the evil of landed property itself arises from a still more basic evil, human egoism.[^8]
 
 ### Publication
 
-He published the essay abroad through his own «Свободное слово» press (No. 98), under the title «Великий грех» with the subtitle «О земельной собственности» — one of several 1905 printings alongside the Moscow *Русская мысль* journal text and the Posrednik brochure.
+The Free Word press printed the essay abroad as No. 98, as *The Great Sin* with the subtitle *On Landed Property*.[^9] The other 1905 printings were the July issue of [[Russkaya Mysl]] and a Posrednik brochure.[^10]
 
 ### The English translation
 
-With [[Isabella Fyvie Mayo]] he made the 1905 English translation, published as *A Great Iniquity* — in *The Times* (London) on 1 August 1905 and as a Free Age Press pamphlet. The title's softening of «великий грех» to *A Great Iniquity*, and the translator's footnote flagging the conditionality of the Chapter IX endorsement, belong to that edition; who chose the English title is still open (see the Mayo page).
+With [[Isabella Fyvie Mayo]] he made the 1905 English translation, *A Great Iniquity*, printed in *The Times* (London) and as a Free Age Press pamphlet.[^11] The title, with "a" for "the" and "iniquity" for "sin", and a translator's footnote on the conditional endorsement in chapter IX belong to that edition. Who chose the English title is open (see [[Isabella Fyvie Mayo]]).
+
+## Open questions
+
+- Who chose the English title *A Great Iniquity*.
+- *The Times* date: the dive's work record gives 1 August 1905; the PSS commentary says July.
+- His own words on the cuts: the dive has his 8 July letter only as the PSS commentary reports it (archive АТБ), not the letter itself.
 
 ## Dive provenance
 
-- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — the cuts and Tolstoy's regret (E19, E26); «Необходимый переворот» and Chertkov's recorded reason (E15, E28); the «Свободное слово» publication (E20); the *A Great Iniquity* co-translation. Written as an enriches-live addition in the entity steer, 2026-08-12 — the cut story is the heart of this work and is absent from the live stub page.
+- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — the cuts and the diary's regret (E19, E26); the separated paragraph and the recorded reason (E15, E28); the Free Word publication (E20); the *A Great Iniquity* co-translation. Written as an enriches-live addition in the entity steer, 2026-08-12; converted to the footnote style 2026-10-02, and the *A Necessary Revolution* account corrected to the PSS commentary (the title belongs to the whole first introduction, not the one paragraph).
+
+[^1]: <span lang="ru">«приехал из Англии Чертков, который предложил Толстому сделать в статье ряд сокращений»</span> (PSS 36:656). English: ours.
+
+[^2]: <span lang="ru">«После исключения двух глав статья оказалась поделенной на девять глав»</span> (PSS 36, commentary). English: ours.
+
+[^3]: <span lang="ru">«Сократил Великий Грех, выбросил многое. Мне жалко»</span> (PSS 55:144–146, diary, 6 June 1905). English: ours.
+
+[^4]: <span lang="ru">«Необходимый переворот. Из неизданных писаний Л. Н. Толстого»</span> (PSS 36:665). The PSS prints this introduction among the variants as No. 15 (PSS 36, variants).
+
+[^5]: <span lang="ru">«он выделен из вступления и напечатан после него с редакторским пояснением»</span> (PSS 36:665). English: ours.
+
+[^6]: <span lang="ru">«жизнь народа слагается не вследствие внешних форм, которые могут быть наложены на него внешними влияниями, а внутренней деятельностью отдельных личностей»</span> (PSS 36:474). English: ours.
+
+[^7]: <span lang="ru">«абзац этот, утверждающий независимость жизни народа от внешних форм, стоит в противоречии со всем предыдущим, где утверждается необходимость внешнего изменения форм пользования землей»</span> (PSS 36:665). English: ours.
+
+[^8]: <span lang="ru">«все эти явления происходят от основного, главного зла»</span> → <span lang="ru">«все эти явления связаны с основным, главным злом»</span> (PSS 36:473, 665); his reason: <span lang="ru">«в этом случае слишком сильно сказано, так как само зло земельной собственности происходит от еще гораздо более основного зла: человеческого эгоизма»</span> (PSS 36:665). English: ours.
+
+[^9]: No. 98; title <span lang="ru">«Великий грех»</span>, subtitle <span lang="ru">«О земельной собственности»</span> (PSS 36:664).
+
+[^10]: PSS 36:664.
+
+[^11]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905).

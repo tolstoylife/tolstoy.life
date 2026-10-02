@@ -10,7 +10,7 @@ nameAlternatives:
   - name: "Генри Джордж"
     type: transliteration
     language: ru
-description: "American political economist (1839–1897); author of Progress and Poverty (1879) and of the land-value tax proposal Tolstoy adopted."
+description: "American political economist, author of Progress and Poverty (1879), quoted at length in The Great Sin (1905)."
 birthDate: ""
 birthDateOldStyle: ""
 birthDateApproximate: false
@@ -27,7 +27,7 @@ roles: []
 occupation:
   - political economist
 relationToTolstoy: ""
-relationshipDescription: "They never met. George is the intellectual debt at the centre of The Great Sin (1905), read in S. D. Nikolaev's Russian translations and championed from the mid-1880s onward."
+relationshipDescription: "They never met. George's books were read from the mid-1880s onward, in S. D. Nikolaev's Russian translations; The Great Sin (1905) quotes him at length."
 periodOfContact:
   from: ""
   to: ""
@@ -58,49 +58,62 @@ fieldSources:
       sourceId: ""
       volume: ""
       page: ""
-      notes: "Life dates 1839–1897 carried from the dive's entity routing, not yet verified against an authority file. Note that Old Style dates do not apply — George was American; the pre-1918 OldStyle companion convention is a Russian-calendar rule."
+      notes: "Life dates 1839–1897 carried from the dive's entity routing, not yet verified against an authority file. Old Style dates do not apply: George was American."
 ---
 
-<!-- NEEDS PRIMARY SOURCE: Birth and death dates, birthplace, deathplace, and the Wikidata QID are all unfilled. Nothing in the corpus attests them — they need an authority file (VIAF/LCCN), not a dive. The 1839–1897 span in the description comes from the dive's entity routing. -->
+<!-- NEEDS PRIMARY SOURCE: birth and death dates (routed as 1839–1897), birthplace, deathplace and the Wikidata QID; they need an authority file, not a dive. -->
+<!-- NEEDS PRIMARY SOURCE: George's own English for the ch. IX "eye of faith" passage is not yet collated against the Russian and the 1905 English. -->
 
-Henry George (Генри Джордж) was an American political economist. His *Progress and Poverty* (1879) argued that private ownership of land is the cause of poverty amid advancing wealth, and proposed as the remedy a single tax on the value of land — his own term for taking the rental value of land for public use while leaving everything a person makes or earns untaxed.
+Henry George (<span lang="ru">Генри Джордж</span>) was an American political economist. His *Progress and Poverty* (1879) argued that private ownership of land is the cause of poverty amid advancing wealth, and proposed a tax on the value of land in place of other taxes; his movement called it the single tax. [[The Great Sin]] (1905) quotes him at length; the term "single tax" does not appear in it.
 
-He is the intellectual centre of [[The Great Sin]] (1905), which quotes him at length and stakes its whole remedy on his proposal.
+<figure class="key-quote">
+<blockquote><p>“…the method of solving the land question has been worked out by Henry George to such a degree of perfection that, under the existing state order and with compulsory taxes, it is impossible to devise any other better, more just, practical and peaceful solution.”</p></blockquote>
+<details><summary>Russian</summary><p lang="ru">«…способ решения земельного вопроса выработан Генри Джорджем до такого совершенства, что при существующем государственном строе и обязательных податях невозможно придумать какого-либо другого лучшего, более справедливого, практического и мирного решения».</p></details>
+<figcaption><cite>The Great Sin</cite>, ch. IX (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 36:229). English: ours.</figcaption>
+</figure>
 
 ## Read in Nikolaev's translation
 
-The 1905 engagement is traceable to a single diary entry. On 16 April 1905 Tolstoy wrote that he wanted to write «о Генри Джорже, которого прочел по Николаеву и вновь восхищен» — about Henry George, whom he had read in Nikolaev's translation and by whom he was again delighted (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 55:134). It is the earliest trace of the essay's George strand, and the word «вновь» — again — marks it as a renewal rather than a discovery: the commitment runs back to the mid-1880s.
+On 16 April 1905 the diary records a wish to write "about Henry George, whom I read in Nikolaev's version and am delighted with again".[^1] The PSS commentary traces the essay's George quotations to [[Sergei Nikolaev]]'s Russian translation, *Selected Speeches and Articles of Henry George* (Posrednik, Moscow, 1904).[^2] The 1905 English, *A Great Iniquity*, gives George's own English for these passages rather than translating the Russian back.
 
-The route matters. The quotations in *The Great Sin* come through [[Sergei Nikolaev]]'s Russian versions, not from George's English, which is why the 1905 English translation had to restore George's own wording rather than translate the Russian back.
+## In the essay
 
-## What the essay takes from him
+Chapter II quotes him at length. One sentence: "We talk of the abolition of slavery, but we have not abolished slavery, we have abolished only its cruder form: personal slavery."[^3]
 
-Chapter II hands George the economic argument entire. The governing analogy of the whole essay is his: «Мы толкуем об отмене рабства, но мы не отменили рабства, мы отменили лишь более грубую форму его: личное рабство» — we talk of the abolition of slavery, but we have abolished only its cruder form, personal slavery (PSS 36:210, working English). Ownership of land is the surviving, subtler form.
+Chapter III describes how his teaching was received. Parnell, Toynbee, Gladstone and Herbert Spencer turned against it, Spencer buying up the old editions of his *Statics*; Oxford students demonstrated at his lecture; the Catholic party, orthodox political economy and the socialists were hostile. But the chief weapon was "silence", "employed against George to this day".[^4]
 
-Chapter III turns to George's own reception, and reads it as evidence. Against him stood Gladstone, Spencer — who recanted his *Social Statics* and bought up the old editions — Parnell, the Oxford students, the Catholic party and orthodox political economy; but the chief weapon was neither argument nor refutation: «Средство это, употребляемое и до сих пор по отношению к Джорджу, было замалчивание» — the means used against George, to this day, was suppression by silence (PSS 36:216, working English). The neglect is taken as proof of the truth of what was neglected.
+Chapter IX gives the endorsement above, made "under the existing state order and with compulsory taxes". What chapter VIII asks for is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^5]
 
-Chapter IX gives the endorsement, and gives it conditionally: under the existing state structure and its obligatory taxes, «невозможно придумать какого-либо другого лучшего, более справедливого, практического и мирного решения» — it is impossible to devise any better, more just, practical and peaceful solution (PSS 36:229, working English). The clause is load-bearing. What is endorsed is the least unjust shape of an order the essay still wants gone; the change it actually calls for is a change of conscience, not of tax law.
+## Faith in his words
 
-## The religious reading
-
-<!-- NEEDS PRIMARY SOURCE: the "eye of faith" phrasing below is quoted from the 1905 Chertkov & Mayo English (A Great Iniquity, ch. IX), where Tolstoy is quoting George. George's own English original and the Russian intermediate wording have not yet been collated against it. -->
-
-George is quoted approvingly in language that is not economic. In Chapter IX the figure is agricultural and patient — the ground plowed, the seed set, the good tree that will grow, so little of it visible now that only the eye of faith can see it.
-
-This is the same ground on which the essay itself stands: that the remedy is a religious awakening rather than a legislative act. Read this way George is adopted less as an economist than as a fellow religious reformer, which is why a word like *sin* can cover his subject as well as Tolstoy's. It also sharpens the essay's own open question — George's confidence that his proposal is a perfected solution sits unresolved against the claim that only a change of conscience can work.
+The essay ends by quoting him: "The ground is plowed, the seed is sown, a good tree will grow up. It is still so small, but the eyes of him who believes already see it."[^6] The 1905 English has George's own wording: "only the eye of faith can see it".[^7] The next sentence: "And I think that Henry George is right, that the loosing of the sin of landed property is near."[^8]
 
 ## Standing
 
-The commitment was lifelong and often restated, not a single 1905 intervention: George was read from the mid-1880s, and the engagement intensified after his death in 1897 — [[To the Working People]] (1902), the 1906 prefaces to Nikolaev's translations, and a diary record of a dream-conversation as late as 1909. On this point the scholarship agrees with the corpus and adds nothing to argue with (Wenzer 1997).
-
-Where scholarship does turn the endorsement into a debate — reading it as a concession that contradicts Tolstoy's rejection of state coercion (Wenzer), or as genuine and foundational (Lebrun, writing from inside the movement) — both sides argue intent in the abstract, in vocabulary that is theirs rather than his. Recorded here attributed, not as this page's spine.
+George was read from the mid-1880s, and the engagement continued after his death in 1897: [[To the Working People]] (1902), the 1906 prefaces to Nikolaev's translations, and a diary record of a dream-conversation with him as late as 1909 (Wenzer 1997; Lebrun 1956).
 
 ## Open questions
 
 - Wikidata QID, life dates, and birthplace need an authority file.
-- Which edition of George the Chapter II quotations come from: the dive routes them to Nikolaev's «Избранные речи и статьи Генри Джорджа» (Posrednik, 1904), which needs confirming page-side.
-- George's own English for the passages Tolstoy quotes — worth collating against both the Russian and the 1905 English, as a translation-layer note rather than a correction.
+- The PSS commentary names the 1904 Posrednik edition as the source of the George quotations; the quotations are still to be checked against its pages.
+- George's own English for the passages the essay quotes, to collate against both the Russian and the 1905 English, as a translation-layer note rather than a correction.
 
 ## Dive provenance
 
-- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — George as the essay's intellectual centre (E3, E5, E12, E21); the conditional single-tax clause; the reception-by-silence reading. Enriched 2026-07-11 from the reader's annotation A2 — George's own faith language, and what it implies about why he was adopted.
+- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — George in the essay (E3, E5, E12, E21); the conditional chapter IX clause; the reception by silence. Enriched 2026-07-11 from the reader's annotation A2 (George's own faith language); converted to the footnote style 2026-10-02.
+
+[^1]: <span lang="ru">«о Генри Джорже, которого прочел по Николаеву и вновь восхищен»</span> (PSS 55:134). English: ours.
+
+[^2]: <span lang="ru">«Избранные речи и статьи»</span> in the translation of S. D. Nikolaev, Posrednik, Moscow, 1904 (PSS 36, commentary).
+
+[^3]: <span lang="ru">«Мы толкуем об отмене рабства, но мы не отменили рабства, мы отменили лишь более грубую форму его: личное рабство»</span> (PSS 36:210). English: ours.
+
+[^4]: <span lang="ru">«Средство это, употребляемое и до сих пор по отношению к Джорджу, было замалчивание»</span> (PSS 36:216). English: ours.
+
+[^5]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
+
+[^6]: <span lang="ru">«Земля вспахана, семя брошено, вырастет доброе дерево. Оно еще так мало, но глаза верующего уже видят его»</span> (PSS 36, ch. IX; the commentary lists p. 230 among the pages quoting George). English: ours.
+
+[^7]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. IX.
+
+[^8]: <span lang="ru">«И я думаю, что Генри Джордж прав, что разрешение греха земельной собственности близко»</span> (PSS 36, ch. IX). English: ours.

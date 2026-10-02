@@ -21,7 +21,7 @@ A primary-source corpus-dive on Tolstoy's 1905 essay on the private ownership of
 
 - **Tolstoy indicts himself.** He folds the landowner-writer into the guilty class — «мы, русские паразиты». The day before he began the essay, a peasant reproached him to his face for preaching against land-owning while buying up land: «было и больно и хорошо».
 
-- **Chertkov cut a paragraph, and recorded why.** Preparing the first proofs, Chertkov — Tolstoy's closest friend and editor — set one paragraph of the introduction apart and had it printed separately (as «Необходимый переворот»). His reason, in a letter of 8 July 1905 and reported in the PSS commentary: the paragraph, which says the people's life is independent of external forms, «стоит в противоречии со всем предыдущим» — it stands against all the preceding, where the essay insists the outward forms of land-use must change. The corpus shows the seam — the cut, the two merged pieces, the regretted excisions — that outside readers can only infer.
+- **Chertkov cut a paragraph, and recorded why.** Preparing the first proofs, Chertkov — Tolstoy's closest friend and editor — took one paragraph out of the first introduction; the introduction was printed in «Свободное слово» No. 17–18 as «Необходимый переворот», with the paragraph printed after it under an editor's note. His reason, in a letter of 8 July 1905 and reported in the PSS commentary: the paragraph, which says the people's life is independent of external forms, «стоит в противоречии со всем предыдущим» — it stands against all the preceding, where the essay insists the outward forms of land-use must change. The corpus shows the seam — the cut, the two merged pieces, the regretted excisions — that outside readers can only infer.
 
 ## Why this matters
 
@@ -114,7 +114,7 @@ The single tax is not his programme but his answer to a narrower question — *g
 >
 > (…under the existing state structure and obligatory taxes it is impossible to devise any other better, more just, practical and peaceful solution.) — working English; ch. IX, p. 229.
 
-The essay also carries, in its making, one fact the corpus can show and outside readers can only infer. Preparing the first proofs of the introduction for the «Свободное слово» edition, Chertkov — Tolstoy's closest friend and editor — set one paragraph apart from the withdrawn first introduction (variant № 15) and had it printed separately, after the introduction, under the title «Необходимый переворот» ("A Necessary Revolution"). Its key sentence:
+The essay also carries, in its making, one fact the corpus can show and outside readers can only infer. Preparing the first proofs of the introduction for the «Свободное слово» edition, Chertkov — Tolstoy's closest friend and editor — took one paragraph out of the withdrawn first introduction (variant № 15). The introduction was printed in «Свободное слово» No. 17–18 as «Необходимый переворот» ("A Necessary Revolution"), and the paragraph was printed after it with an editor's note. Its key sentence:
 
 > «…жизнь народа слагается не вследствие внешних форм, которые могут быть наложены на него внешними влияниями, а внутренней деятельностью отдельных личностей.»
 >

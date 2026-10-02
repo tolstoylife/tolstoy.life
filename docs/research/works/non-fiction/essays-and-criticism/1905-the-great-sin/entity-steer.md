@@ -19,7 +19,7 @@ Which people and ideas this dive fed into the shared entity layer (`docs/researc
 
 | Entity | Enrich page | What this dive adds |
 |---|---|---|
-| [[Vladimir Chertkov]] | `wiki/Vladimir Chertkov.md` — `enriches-live` (2026-08-12) | Proposed the 1905 cuts (two chapters + parts of others); set apart the one paragraph he judged to stand against the essay and had it printed separately as «Необходимый переворот» (his 8 July 1905 reason); softened «происходят от»→«связаны с»; published via «Свободное слово» No. 98; co-translated *A Great Iniquity*. |
+| [[Vladimir Chertkov]] | `wiki/Vladimir Chertkov.md` — `enriches-live` (2026-08-12) | Proposed the 1905 cuts (two chapters + parts of others); set apart the one paragraph he judged to stand against the essay, printed after the first introduction, which appeared as «Необходимый переворот» in «Свободное слово» No. 17–18 (his 8 July 1905 reason; corrected 2026-10-02 from the PSS commentary); softened «происходят от»→«связаны с»; published via «Свободное слово» No. 98; co-translated *A Great Iniquity*. |
 | [[Maria Tolstaya]] | `wiki/Maria Tolstaya.md` — `enriches-live` (2026-08-12) | Copied the final text for *Русская мысль* (per Makovitsky, 1 Jul 1905) — the lost copy behind the journal text's divergences. Disambiguation resolved 2026-07-27: the existing page **is** the daughter Maria Lvovna (m. Obolenskaya). |
 
 ## Concepts
