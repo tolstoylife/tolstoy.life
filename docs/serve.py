@@ -747,6 +747,8 @@ def md_to_html(md_path: Path) -> str:
     # Top bar + Contents hub: Docs | Library | ☰ Work › Subpage for any page of a work (bundle, dive or annotations); a plain doc keeps just the Docs link.
     nav = nav_for(md_path)
     eyebrow = folder or "docs"
+    if md_path.parent == WIKI_DIR and md_path.name != "README.md":
+        eyebrow = f"wiki · {_parse_frontmatter_md(md_path).get('type', '')}".rstrip(" ·")
     if nav["hub_html"] and (ROOT / "reader") in md_path.parents:
         eyebrow = "reader edition · overview" if md_path.name == "overview.md" else "reader edition"
 
@@ -1373,6 +1375,7 @@ def main():
     if args.build_only:
         return
 
+    socketserver.TCPServer.allow_reuse_address = True   # ⚠ without it a restart fails with "Address already in use" for a minute
     with socketserver.TCPServer(("", args.port), Handler) as httpd:
         httpd.allow_reuse_address = True
         url = f"http://localhost:{args.port}/INDEX.html"
