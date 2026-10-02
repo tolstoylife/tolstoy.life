@@ -550,7 +550,7 @@ def _render_sentence_web(text: str) -> str:
             out.append(f'<a class="noteref" href="#{nid}"><sup>{esc(label)}</sup></a>')
         else:
             out.append(esc(part))
-    return "".join(out)
+    return re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out))   # markdown italics
 
 
 def work_page_html(md_path: Path, work: str, version: str) -> str:

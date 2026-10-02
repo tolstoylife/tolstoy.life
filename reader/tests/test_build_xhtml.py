@@ -24,3 +24,7 @@ def test_is_wellformed_xml():
     import xml.dom.minidom as m
     html = render_section_xhtml(_seg(), "sec-1", "The Great Sin", "en")
     m.parseString(html)   # raises on malformed XML
+
+def test_italics_become_em():
+    from reader.build_xhtml import _render_sentence
+    assert _render_sentence("And *he* was amused.") == "And <em>he</em> was amused."

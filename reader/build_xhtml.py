@@ -37,7 +37,7 @@ def _render_sentence(text):
     for p in parts:
         m = re.fullmatch(r"\[\^(\w+)\]", p)
         out.append(noteref_html(m.group(1)) if m else html.escape(p))
-    return "".join(out)
+    return re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out))   # markdown italics
 
 def render_section_xhtml(seg, section_id, title, lang):
     sec = next(s for s in seg["sections"] if s["id"] == section_id)
