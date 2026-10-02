@@ -275,7 +275,8 @@ MD = markdown.Markdown(extensions=[
     "pymdownx.critic",      # editorial marks: {--cut--} {++add++} {~~a~>b~~} {>>note<<} {==hi==}
     WikiLinkExtension(base_url="/research/wiki/", end_url="/",
                       html_class="wikilink", build_url=wiki_url),
-])
+    "smarty",               # curly quotes and apostrophes at render; the .md keeps straight ones
+], extension_configs={"smarty": {"smart_dashes": False, "smart_ellipses": False}})   # ponytail: quotes only — "--" stays as authored
 
 # The repo root isn't on sys.path when serve.py runs from docs/; add it so the shared reader/ helpers import.
 _REPO_ROOT = str(Path(__file__).resolve().parent.parent)
