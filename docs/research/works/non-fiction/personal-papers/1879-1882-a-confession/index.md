@@ -16,7 +16,7 @@ A work-focused dive across the local Tolstoy corpus: the PSS (Jubilee Edition) T
 - It was not written in a single rush. A complete, untitled religious treatise of 1879 (begun «вскоре после возвращения из Москвы») was reworked, and *A Confession* grew out of its first chapter; the work existed in finished form by about early July 1881 (the Jubilee editors hedge the date), and was proof-corrected for print in 1882.
 - The title «Исповедь» was **not Tolstoy's**. The manuscripts and proofs carry working titles — «Вступление к ненапечатанному сочинению», «Что я?», «Как я потерял смысл жизни и в чем нашел его». «Исповедь» first appears in print in M. Elpidin's 1884 Geneva edition; Tolstoy himself accepted it only by 1885.
 - It was **suppressed before it could appear**: set in type for *Русская мысль* (May 1882), it was cut from the issue by the ecclesiastical censorship and the sheets sent for destruction. It then circulated in hectographed and lithographed copies, was first published abroad (Elpidin, Geneva, 1884), and was not legally printed in Russia until 1906 (*Всемирный вестник*, no. 1) — all within Tolstoy's lifetime.
-- The composition-window letters and diaries name the **people around the work**: N. N. Strakhov (chief correspondent and first reader), A. A. Fet (foil), the cousin A. A. Tolstaya / "Alexandrine" (Orthodox interlocutor), and the Moscow circle of late 1881 — N. F. Fedorov, the peasant V. K. Sutaev, V. I. Alekseev, Orlov — who read his gospel synthesis and were "of one mind" with him.
+- The composition-window letters and diaries name the **people around the work**: N. N. Strakhov (chief correspondent), A. A. Fet (correspondent and neighbour), the cousin A. A. Tolstaya / "Alexandrine" (Orthodox interlocutor), and the Moscow circle of late 1881 — N. F. Fedorov, the peasant V. K. Sutaev, V. I. Alekseev, Orlov. Orlov and Fedorov read his gospel synthesis and were "of one mind" with him; with Sutaev he agreed "in everything".
 - Tolstoy's own later verdict (a letter to Georges Dumas, 1892) is that the change *A Confession* describes "did not happen all at once" but was present "in embryo" in his earlier work — the gradual-not-sudden reading that specialist scholarship (Medzhibovskaya) shares and that the popular "sudden crisis after *Anna Karenina*" frame misses.
 
 ## Why this matters
@@ -75,11 +75,11 @@ By the summer of 1881 the surrounding theological work was finished, and Tolstoy
 
 Out of the larger work, which I finished after seeing you and have gone through once more, I have made besides an extract from the Gospel without notes. *(working English — letter to N. N. Strakhov, 1–8 July 1881 OS, PSS Tom 63)*
 
-The people around the composition are named in the same letters and diaries. Strakhov is the constant interlocutor and first reader; the poet Fet a pessimist foil; the cousin A. A. Tolstaya ("Alexandrine") the Orthodox believer he argues against. After the painful move to Moscow in the autumn of 1881 — "the most agonizing month of my life," the diary says — a circle forms.
+The people around the composition are named in the same letters and diaries. Strakhov is the constant interlocutor; the poet Fet a correspondent and neighbour; the cousin A. A. Tolstaya ("Alexandrine") the Orthodox believer he argues against. After the painful move to Moscow in the autumn of 1881 — "the most agonizing month of my life," the diary says — a circle forms.
 
 > Мне очень тяжело в Москве.
 
-Things are very hard for me in Moscow. *(working English — letter to V. I. Alekseev, November 1881 OS, PSS Tom 63; the same letter names N. F. Fedorov «святой», Orlov, and reports that Fedorov and the peasant Sutaev had read his «Краткое изложение» and were «единомышленны» with him.)*
+Things are very hard for me in Moscow. *(working English — letter to V. I. Alekseev, November 1881 OS, PSS Tom 63; the same letter names N. F. Fedorov «святой», Orlov, and reports that Orlov and Fedorov had read his «Краткое изложение» and were «единомышленны» with him, and that he agreed with the peasant Sutaev «во всем до малейших подробностей».)*
 
 ## What the work says
 

@@ -41,7 +41,7 @@ Links added in the reader: the overview (Elpidin, *Russkaya Mysl*) and Maude's n
 
 ### Where the dive's own notes disagree with its sources
 
-Found while writing the pages; the pages follow the sources. `dossier.yaml` and `index.md` are not yet corrected.
+Found while writing the pages; the pages follow the sources. `dossier.yaml` and `index.md` corrected the same day.
 
 - **Optina 1881 without Strakhov.** The dossier says Strakhov went to Optina with Tolstoy in 1881. The letter of 1–8 July 1881 tells Strakhov of that trip as news; the commentary's joint trip is undated and sits with the late 1870s.
 - **Geneva is in the PSS for 1884.** The dossier and `index.md` say the commentary gives Женева only for 1889; it says «впервые напечатана М. К. Элпидиным в Женеве в 1884 г.».

@@ -99,7 +99,8 @@ Strakhov also called the work a confession, before Tolstoy used that title himse
 
 ## Open questions
 
-- The dossier calls Strakhov the work's "first reader" and says he went to Optina Pustyn with Tolstoy in summer 1881. The July 1881 letter reports that trip to him as news, and the commentary places the joint Optina trip in the earlier church-going years. No source in the dive shows him reading the manuscript of A Confession itself.
+- The year of the joint Optina trip: the commentary places it in the earlier church-going years without a date; the July 1881 trip was made without him.
+- No source in the dive shows him reading the manuscript of A Confession itself.
 - The letter of 27 January 1878 carries a query on the day («27?») in the PSS heading and the commentary.
 - The letter sweep gives the Müller and Burnouf request twice, under letters 362 (26–27 November 1877) and 370 (17–18 December 1877), with near-identical wording. Which letter it is needs checking in PSS 62.
 - Birth and death years are not from the PSS.

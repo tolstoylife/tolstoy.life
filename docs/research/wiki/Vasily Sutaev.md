@@ -65,9 +65,7 @@ In a long letter to [[Mikhail Engelhardt]] of late 1882 or early 1883, arguing t
 
 ## Open questions
 
-- The dive's index and dossier say Sutaev read the gospel synthesis with Fyodorov and Orlov. The letter to Alekseev names only Orlov and Fyodorov as readers; agreement with Sutaev is stated separately. Which reading is right needs the <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> commentary.
-- The PSS notes to both letters (note 8 in the Alekseev letter, note 20 in the Engelhardt letter) are not in the dive's extracts. Sutaev's dates, his home village, and what his own teaching was are not documented in these sources.
-- The dossier's visuals note calls Sutaev "named in the text". He is not named in the final text of A Confession or its variants as extracted; the note likely means the letters.
+- The <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> notes to both letters (note 8 in the Alekseev letter, note 20 in the Engelhardt letter) are not in the dive's extracts. Sutaev's dates, his home village, and what his own teaching was are not documented in these sources.
 - The dossier lists a photograph (Y. Steinberg, 1885, Wikimedia Commons) and gives his death as 1892 in a rights note. Both are from Commons, not from the PSS — check.
 
 ## Dive provenance

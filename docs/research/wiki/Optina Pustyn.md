@@ -67,7 +67,7 @@ In a letter to Strakhov dated 1–8 July 1881 (OS), from Yasnaya Polyana, he wro
 
 ## Open questions
 
-- Was Strakhov with him in 1881? The dive's dossier says so, but the July 1881 letter tells Strakhov of the journey as news, which suggests he went without him. The undated journey with Strakhov in the commentary may be a separate, earlier one. The year of that journey: NEEDS PRIMARY SOURCE.
+- The year of the earlier journey with Strakhov in the commentary: NEEDS PRIMARY SOURCE. The July 1881 letter tells Strakhov of the 1881 journey as news, so he was not on it.
 - The exact dates of the 1881 journey, and whom he met there: not in these sources.
 - Location, coordinates and the nearest town are not in this dive's sources.
 

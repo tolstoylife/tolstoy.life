@@ -87,7 +87,7 @@ The commentary to A Confession names Fet three times:
 
 - The other 1879 and 1880 letters to Fet (PSS 62, Nos. 486, 498, 522; PSS 63, No. 31) are quoted only in the dive's sweep note; their texts are not among the extracts. The quotes and dates need checking against the PSS.
 - The dive's commentary note dates the 22 November letter "around 2 November"; the PSS commentary itself and the letter extract give 22 November.
-- The dossier calls Fet a "pessimist foil", and the visuals note says A Confession cites Fet's pessimism. The text of A Confession does not name him; whether any passage has Fet in mind is not shown by these sources.
+- The text of A Confession does not name him; whether any passage has Fet in mind is not shown by these sources.
 - The two couplets in the January 1878 letter to Strakhov follow the mention of Fet's poem, but the letter does not say whose lines they are.
 - Birth and death years come from the dive's visuals note, not from a primary source.
 

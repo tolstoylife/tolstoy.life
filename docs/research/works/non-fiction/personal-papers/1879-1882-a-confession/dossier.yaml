@@ -218,7 +218,7 @@ evidence:
     extract: extracts/v63_079_V_I_Alekseevu.txt
     quoteRu: "Мне очень тяжело в Москве."
     quoteEn: "(working English) Things are very hard for me in Moscow."
-    significance: "The Moscow despair of the move (echoing the work's urban horror). Same letter names the forming circle — N. F. Fedorov, the peasant Sutaev, Orlov — who had read his «Краткое изложение» and were «единомышленны» (of one mind) with him."
+    significance: "The Moscow despair of the move (echoing the work's urban horror). Same letter names the forming circle — N. F. Fedorov, the peasant Sutaev, Orlov. Orlov and Fedorov had read his «Краткое изложение» and were «единомышленны» (of one mind) with him; with Sutaev «во всем до малейших подробностей»."
 
   - id: conf-let-07
     genre: letter
@@ -338,7 +338,7 @@ entities:
     wikiType: person
     wikilinkTarget: "Nikolai Strakhov"
     vaultStatus: missing
-    role: "Philosopher and critic; Tolstoy's chief correspondent through the composition and first reader; accompanied him to Optina Pustyn."
+    role: "Philosopher and critic; Tolstoy's chief correspondent through the composition; went with him to Optina Pustyn on an undated earlier trip (PSS 23 commentary), not in 1881 — the July 1881 letter reports that trip to him as news."
     sources: [tolstoydigital-tei, jubilee-edition]
     evidenceRefs: [conf-let-01, conf-let-02, conf-let-03, conf-let-05]
     ingestionPriority: 1
@@ -377,7 +377,7 @@ entities:
     wikiType: person
     wikilinkTarget: "Afanasy Fet"
     vaultStatus: missing
-    role: "Poet and neighbour; correspondent and pessimist foil during the crisis."
+    role: "Poet and neighbour; correspondent during the crisis years. Not named in the text of A Confession."
     sources: [tolstoydigital-tei, jubilee-edition]
     evidenceRefs: [conf-let-04]
     ingestionPriority: 2
@@ -452,7 +452,7 @@ entities:
     wikiType: place
     wikilinkTarget: "Optina Pustyn"
     vaultStatus: missing
-    role: "The monastery Tolstoy visited (with Strakhov) in summer 1881 as the work neared its finished form."
+    role: "The monastery Tolstoy visited in summer 1881 as the work neared its finished form (reported to Strakhov in a letter of July 1881); an earlier undated trip with Strakhov is in the PSS 23 commentary."
     sources: [tolstoydigital-tei, jubilee-edition]
     evidenceRefs: [conf-let-05]
     ingestionPriority: 3
@@ -583,8 +583,8 @@ workRecord:
     - field: firstPublishedVenue
       value: "M. Elpidin, Geneva"
       evidenceRefs: []
-      source: "scholarship (Elpidin press, Geneva); PSS commentary localizes Geneva to the 1889 2nd ed."
-      confidence: medium
+      source: "PSS 23 commentary: «впервые напечатана М. К. Элпидиным в Женеве в 1884 г.»"
+      confidence: high
       note: "Elpidin's press was in Geneva (Carouge) from 1865; the 1884 first edition is a Geneva imprint. Exact title-page wording (Genève vs Carouge) unconfirmed — see needsReview."
     - field: firstPublishedVenueType
       value: "book"
@@ -716,7 +716,7 @@ notCovered:
 needsReview:
   - item: "1884 Elpidin title-page imprint wording — Genève vs Carouge."
     phase: 3
-    why: "'Geneva (Elpidin) 1884' is well-supported (Elpidin's press was in Geneva from 1865), but the physical 1884 title page was not byte-confirmed; PSS commentary attaches «Женева» only to the 1889 2nd edition. Confirm against a scan before treating the PSS attribution as an error."
+    why: "'Geneva (Elpidin) 1884' is well-supported (Elpidin's press was in Geneva from 1865), but the physical 1884 title page was not byte-confirmed; The PSS commentary gives Geneva for 1884 («впервые напечатана М. К. Элпидиным в Женеве в 1884 г.»); only the Genève vs Carouge wording on the title page remains open."
   - item: "Identity of the 'book exposing the deceivers' in the 1882 Alexandrine letter (conf-let-07)."
     phase: 2
     why: "May refer to A Confession or to the Critique of Dogmatic Theology (the larger anti-dogmatic work). Cited here for the censorship climate, not asserted as about A Confession specifically."
@@ -837,7 +837,7 @@ visuals:
     url: "https://upload.wikimedia.org/wikipedia/commons/b/b7/NNStrakhov.jpg"
     localPath: visuals/commons-people-01-strakhov.jpg
     downloaded: true
-    note: "Chief correspondent and first reader of the manuscript."
+    note: "Chief correspondent through the composition."
   - id: commons-people-02
     type: painting
     subject: "V. G. Chertkov (Repin, c.1890)"
@@ -879,7 +879,7 @@ visuals:
     url: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Fet_by_Repin.jpg"
     localPath: visuals/commons-people-04-fet.jpg
     downloaded: true
-    note: "Correspondent and pessimist foil; painted the year the text circulated."
+    note: "Correspondent and neighbour; painted the year the text circulated."
   - id: commons-people-05
     type: photograph
     subject: "A. A. Tolstaya (Alexandrine), 1860s"
@@ -921,7 +921,7 @@ visuals:
     url: "https://upload.wikimedia.org/wikipedia/commons/3/37/Vasily_Sutaev.jpg"
     localPath: visuals/commons-people-07-sutaev.jpg
     downloaded: true
-    note: "Peasant exemplar named in the text; one of few such peasants photographed."
+    note: "Named in the letters and diary of 1881–83, not in the text of A Confession; one of few such peasants photographed."
   - id: commons-people-08
     type: painting
     subject: "K. P. Pobedonostsev (Repin study, 1903)"
