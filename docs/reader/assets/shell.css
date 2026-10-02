@@ -222,19 +222,6 @@ blockquote {
 }
 hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
 
-/* Key quotation on a wiki page: at most one, where the quote is the subject's tie to the works; the Russian opens under it. */
-.key-quote { margin: 2rem 0; padding: 0.2rem 0 0.2rem 1.2rem; border-left: 3px solid var(--accent); }
-.key-quote blockquote { margin: 0; padding: 0; border: 0; color: var(--ink); font-style: normal; font-size: 1.3em; line-height: 1.35; text-wrap: pretty; }
-.key-quote blockquote p { margin: 0; hyphens: manual; }
-.key-quote details { margin-top: 0.7rem; }
-.key-quote summary { width: fit-content; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; color: var(--accent); }
-.key-quote details p { margin: 0.4rem 0 0; color: var(--ink-soft); }
-.key-quote figcaption { margin-top: 0.6rem; text-align: start; font-style: normal; font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); }
-@media (prefers-reduced-motion: no-preference) {
-  .key-quote details { interpolate-size: allow-keywords; }
-  .key-quote details::details-content { block-size: 0; overflow: clip; transition: block-size 0.25s ease, content-visibility 0.25s allow-discrete; }
-  .key-quote details[open]::details-content { block-size: auto; }
-}
 
 /* Parallel excerpt card: a Russian passage and its English, always shown together.
    Used on the restored-text page; the orthography (pre-reform vs modern) still

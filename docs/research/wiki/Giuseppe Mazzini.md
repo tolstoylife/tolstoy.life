@@ -62,21 +62,17 @@ fieldSources: {}
 
 Giuseppe Mazzini (<span lang="ru">Джузеппе Мадзини</span>) was an Italian revolutionary and writer. [[The Great Sin]] (1905) quotes him once, at the opening of chapter VIII.
 
-<figure class="key-quote">
-<blockquote><p>“Great social transformations,” says Mazzini, “always have been and will be only the consequence of great religious movements.”</p></blockquote>
-<details><summary>Russian</summary><p lang="ru">«Великие общественные преобразования, — говорит Мадзини, — всегда были и будут лишь следствием великих религиозных движений».</p></details>
-<figcaption><cite>The Great Sin</cite>, ch. VIII (PSS 36:226). English: ours.</figcaption>
-</figure>
+The line reads: “Great social transformations,” says Mazzini, “always have been and will be only the consequence of great religious movements.”[^1]
 
 ## What the religious movement is
 
-The paragraphs that follow say what the movement is. It "consists in loosing that great sin which has long tormented and divided men not in Russia alone, but in the whole world".[^1] The sin can be loosed "neither by political reforms, nor by socialist projects in the future, nor by revolutions in the present, and still less by philanthropic donations or by governmental institutions for the purchase and distribution of lands to the peasants".[^2] What is needed is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^3]
+The paragraphs that follow say what the movement is. It "consists in loosing that great sin which has long tormented and divided men not in Russia alone, but in the whole world".[^2] The sin can be loosed "neither by political reforms, nor by socialist projects in the future, nor by revolutions in the present, and still less by philanthropic donations or by governmental institutions for the purchase and distribution of lands to the peasants".[^3] What is needed is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^4]
 
 ## The source
 
-The PSS commentary calls the line a paraphrased and shortened quotation from a Posrednik pamphlet, *Selected Thoughts of Joseph Mazzini*, compiled by L. P. Nikiforov (Moscow, 1905), p. 5, thought 4.[^4] The wording, "only" included, is therefore Tolstoy's own rendering.
+The PSS commentary calls the line a paraphrased and shortened quotation from a Posrednik pamphlet, *Selected Thoughts of Joseph Mazzini*, compiled by L. P. Nikiforov (Moscow, 1905), p. 5, thought 4.[^5] The wording, "only" included, is therefore Tolstoy's own rendering.
 
-The 1905 English translation, *A Great Iniquity*, leaves out "only": "always have been and will be the result of great religious movements".[^5]
+The 1905 English translation, *A Great Iniquity*, leaves out "only": "always have been and will be the result of great religious movements".[^6]
 
 ## Open questions
 
@@ -88,12 +84,14 @@ The 1905 English translation, *A Great Iniquity*, leaves out "only": "always hav
 
 - [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — the chapter VIII epigraph (E11) and the PSS commentary on its source. Routed to a page of his own in the entity steer, 2026-08-12; revised from Johan's notes on 2026-10-02 (the dive's `annotations.md`).
 
-[^1]: <span lang="ru">«Религиозное движение, предстоящее теперь русскому народу, состоит в том, чтобы развязать тот великий грех, который давно уже мучает и разделяет людей не в одной России, но во всем мире»</span> (PSS 36:226). English: ours.
+[^1]: <span lang="ru">«Великие общественные преобразования, — говорит Мадзини, — всегда были и будут лишь следствием великих религиозных движений».</span> (PSS 36:226, ch. VIII). English: ours.
 
-[^2]: <span lang="ru">«Развязать же этот грех могут не политические реформы, не социалистические проекты в будущем, не революции в настоящем, ни еще менее филантропические пожертвования или правительственные учреждения для покупки и раздачи земель крестьянам»</span> (PSS 36:226). English: ours.
+[^2]: <span lang="ru">«Религиозное движение, предстоящее теперь русскому народу, состоит в том, чтобы развязать тот великий грех, который давно уже мучает и разделяет людей не в одной России, но во всем мире»</span> (PSS 36:226). English: ours.
 
-[^3]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
+[^3]: <span lang="ru">«Развязать же этот грех могут не политические реформы, не социалистические проекты в будущем, не революции в настоящем, ни еще менее филантропические пожертвования или правительственные учреждения для покупки и раздачи земель крестьянам»</span> (PSS 36:226). English: ours.
 
-[^4]: <span lang="ru">«Перефразированная и сокращенная цитата»</span>; the title <span lang="ru">«Избранные мысли Иосифа Мадзини»</span> (PSS 36, commentary).
+[^4]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
 
-[^5]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. VIII.
+[^5]: <span lang="ru">«Перефразированная и сокращенная цитата»</span>; the title <span lang="ru">«Избранные мысли Иосифа Мадзини»</span> (PSS 36, commentary).
+
+[^6]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. VIII.

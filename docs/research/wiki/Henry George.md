@@ -66,27 +66,23 @@ fieldSources:
 
 Henry George (<span lang="ru">Генри Джордж</span>) was an American political economist. His *Progress and Poverty* (1879) argued that private ownership of land is the cause of poverty amid advancing wealth, and proposed a tax on the value of land in place of other taxes; his movement called it the single tax. [[The Great Sin]] (1905) quotes him at length; the term "single tax" does not appear in it.
 
-<figure class="key-quote">
-<blockquote><p>“…the method of solving the land question has been worked out by Henry George to such a degree of perfection that, under the existing state order and with compulsory taxes, it is impossible to devise any other better, more just, practical and peaceful solution.”</p></blockquote>
-<details><summary>Russian</summary><p lang="ru">«…способ решения земельного вопроса выработан Генри Джорджем до такого совершенства, что при существующем государственном строе и обязательных податях невозможно придумать какого-либо другого лучшего, более справедливого, практического и мирного решения».</p></details>
-<figcaption><cite>The Great Sin</cite>, ch. IX (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 36:229). English: ours.</figcaption>
-</figure>
+Chapter IX says: “…the method of solving the land question has been worked out by Henry George to such a degree of perfection that, under the existing state order and with compulsory taxes, it is impossible to devise any other better, more just, practical and peaceful solution.”[^1]
 
 ## Read in Nikolaev's translation
 
-On 16 April 1905 the diary records a wish to write "about Henry George, whom I read in Nikolaev's version and am delighted with again".[^1] The PSS commentary traces the essay's George quotations to [[Sergei Nikolaev]]'s Russian translation, *Selected Speeches and Articles of Henry George* (Posrednik, Moscow, 1904).[^2] The 1905 English, *A Great Iniquity*, gives George's own English for these passages rather than translating the Russian back.
+On 16 April 1905 the diary records a wish to write "about Henry George, whom I read in Nikolaev's version and am delighted with again".[^2] The <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> commentary traces the essay's George quotations to [[Sergei Nikolaev]]'s Russian translation, *Selected Speeches and Articles of Henry George* (Posrednik, Moscow, 1904).[^3] The 1905 English, *A Great Iniquity*, gives George's own English for these passages rather than translating the Russian back.
 
 ## In the essay
 
-Chapter II quotes him at length. One sentence: "We talk of the abolition of slavery, but we have not abolished slavery, we have abolished only its cruder form: personal slavery."[^3]
+Chapter II quotes him at length. One sentence: "We talk of the abolition of slavery, but we have not abolished slavery, we have abolished only its cruder form: personal slavery."[^4]
 
-Chapter III describes how his teaching was received. Parnell, Toynbee, Gladstone and Herbert Spencer turned against it, Spencer buying up the old editions of his *Statics*; Oxford students demonstrated at his lecture; the Catholic party, orthodox political economy and the socialists were hostile. But the chief weapon was "silence", "employed against George to this day".[^4]
+Chapter III describes how his teaching was received. Parnell, Toynbee, Gladstone and Herbert Spencer turned against it, Spencer buying up the old editions of his *Statics*; Oxford students demonstrated at his lecture; the Catholic party, orthodox political economy and the socialists were hostile. But the chief weapon was "silence", "employed against George to this day".[^5]
 
-Chapter IX gives the endorsement above, made "under the existing state order and with compulsory taxes". What chapter VIII asks for is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^5]
+Chapter IX gives the endorsement above, made "under the existing state order and with compulsory taxes". What chapter VIII asks for is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^6]
 
 ## Faith in his words
 
-The essay ends by quoting him: "The ground is plowed, the seed is sown, a good tree will grow up. It is still so small, but the eyes of him who believes already see it."[^6] The 1905 English has George's own wording: "only the eye of faith can see it".[^7] The next sentence: "And I think that Henry George is right, that the loosing of the sin of landed property is near."[^8]
+The essay ends by quoting him: "The ground is plowed, the seed is sown, a good tree will grow up. It is still so small, but the eyes of him who believes already see it."[^7] The 1905 English has George's own wording: "only the eye of faith can see it".[^8] The next sentence: "And I think that Henry George is right, that the loosing of the sin of landed property is near."[^9]
 
 ## Standing
 
@@ -102,18 +98,20 @@ George was read from the mid-1880s, and the engagement continued after his death
 
 - [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — George in the essay (E3, E5, E12, E21); the conditional chapter IX clause; the reception by silence. Enriched 2026-07-11 from the reader's annotation A2 (George's own faith language); converted to the footnote style 2026-10-02.
 
-[^1]: <span lang="ru">«о Генри Джорже, которого прочел по Николаеву и вновь восхищен»</span> (PSS 55:134). English: ours.
+[^1]: <span lang="ru">«…способ решения земельного вопроса выработан Генри Джорджем до такого совершенства, что при существующем государственном строе и обязательных податях невозможно придумать какого-либо другого лучшего, более справедливого, практического и мирного решения».</span> (PSS 36:229, ch. IX). English: ours.
 
-[^2]: <span lang="ru">«Избранные речи и статьи»</span> in the translation of S. D. Nikolaev, Posrednik, Moscow, 1904 (PSS 36, commentary).
+[^2]: <span lang="ru">«о Генри Джорже, которого прочел по Николаеву и вновь восхищен»</span> (PSS 55:134). English: ours.
 
-[^3]: <span lang="ru">«Мы толкуем об отмене рабства, но мы не отменили рабства, мы отменили лишь более грубую форму его: личное рабство»</span> (PSS 36:210). English: ours.
+[^3]: <span lang="ru">«Избранные речи и статьи»</span> in the translation of S. D. Nikolaev, Posrednik, Moscow, 1904 (PSS 36, commentary).
 
-[^4]: <span lang="ru">«Средство это, употребляемое и до сих пор по отношению к Джорджу, было замалчивание»</span> (PSS 36:216). English: ours.
+[^4]: <span lang="ru">«Мы толкуем об отмене рабства, но мы не отменили рабства, мы отменили лишь более грубую форму его: личное рабство»</span> (PSS 36:210). English: ours.
 
-[^5]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
+[^5]: <span lang="ru">«Средство это, употребляемое и до сих пор по отношению к Джорджу, было замалчивание»</span> (PSS 36:216). English: ours.
 
-[^6]: <span lang="ru">«Земля вспахана, семя брошено, вырастет доброе дерево. Оно еще так мало, но глаза верующего уже видят его»</span> (PSS 36, ch. IX; the commentary lists p. 230 among the pages quoting George). English: ours.
+[^6]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
 
-[^7]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. IX.
+[^7]: <span lang="ru">«Земля вспахана, семя брошено, вырастет доброе дерево. Оно еще так мало, но глаза верующего уже видят его»</span> (PSS 36, ch. IX; the commentary lists p. 230 among the pages quoting George). English: ours.
 
-[^8]: <span lang="ru">«И я думаю, что Генри Джордж прав, что разрешение греха земельной собственности близко»</span> (PSS 36, ch. IX). English: ours.
+[^8]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. IX.
+
+[^9]: <span lang="ru">«И я думаю, что Генри Джордж прав, что разрешение греха земельной собственности близко»</span> (PSS 36, ch. IX). English: ours.
