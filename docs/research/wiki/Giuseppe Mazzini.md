@@ -13,7 +13,7 @@ nameAlternatives:
   - name: "Иосифа Мадзини"
     type: variant
     language: ru
-description: "Italian revolutionary and writer; quoted by Tolstoy in the Chapter VIII epigraph of The Great Sin (1905) on social change as the consequence of religious movements."
+description: "Italian revolutionary and writer, quoted at the opening of chapter VIII of The Great Sin (1905)."
 birthDate: ""
 birthDateOldStyle: ""
 birthDateApproximate: false
@@ -31,7 +31,7 @@ occupation:
   - revolutionary
   - writer
 relationToTolstoy: ""
-relationshipDescription: "They never met — Mazzini belonged to the generation before. He reaches the corpus as a quoted authority, by way of a Russian Posrednik anthology of his thoughts, and is a recurring touchstone in Tolstoy's late writing."
+relationshipDescription: "No personal contact. Quoted in The Great Sin (1905) from a Russian anthology of his thoughts."
 periodOfContact:
   from: ""
   to: ""
@@ -58,23 +58,42 @@ identifiers:
 fieldSources: {}
 ---
 
-<!-- NEEDS PRIMARY SOURCE: life dates (routed as 1805–1872), birthplace, and the Wikidata QID are unfilled and not attested in this corpus — they need an authority file, not a dive. -->
+<!-- NEEDS PRIMARY SOURCE: life dates (routed as 1805–1872), birthplace and identifiers; they need an authority file, not a dive. -->
 
-Giuseppe Mazzini (Джузеппе Мадзини; in the 1905 Russian anthology, «Иосиф Мадзини») was an Italian revolutionary and writer. Tolstoy quotes him once in [[The Great Sin]], at a load-bearing point.
+Giuseppe Mazzini (<span lang="ru">Джузеппе Мадзини</span>) was an Italian revolutionary and writer. [[The Great Sin]] (1905) quotes him once, at the opening of chapter VIII.
 
-## The Chapter VIII epigraph
+<figure class="key-quote">
+<blockquote><p>“Great social transformations,” says Mazzini, “always have been and will be only the consequence of great religious movements.”</p></blockquote>
+<details><summary>Russian</summary><p lang="ru">«Великие общественные преобразования, — говорит Мадзини, — всегда были и будут лишь следствием великих религиозных движений».</p></details>
+<figcaption><cite>The Great Sin</cite>, ch. VIII (PSS 36:226). English: ours.</figcaption>
+</figure>
 
-Chapter VIII opens on Mazzini: «Великие общественные преобразования, — говорит Мадзини, — всегда были и будут лишь следствием великих религиозных движений» — "Great social transformations," says Mazzini, "always have been and will be only the consequence of great religious movements" (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 36:226, working English). The line does the essay's central work: it frames the coming emancipation of the land as a *religious* movement rather than a political one, and so turns the whole argument off the axis — economics, legislation, the state — where its readers expected to find it.
+## What the religious movement is
 
-## How Tolstoy read him
+The paragraphs that follow say what the movement is. It "consists in loosing that great sin which has long tormented and divided men not in Russia alone, but in the whole world".[^1] The sin can be loosed "neither by political reforms, nor by socialist projects in the future, nor by revolutions in the present, and still less by philanthropic donations or by governmental institutions for the purchase and distribution of lands to the peasants".[^2] What is needed is "only the consciousness of their sin by all the men who commit it or take part in it, and the desire to be rid of it".[^3]
 
-The quotation comes not from Mazzini directly but through the Posrednik anthology «Избранные мысли Иосифа Мадзини» (1905), compiled by L. P. Nikiforov — the same route, a curated Russian selection, by which several Western figures entered Tolstoy's late essays. Mazzini is a recurring touchstone across that work, cited where Tolstoy wants a witness that great change is moral before it is political.
+## The source
+
+The PSS commentary calls the line a paraphrased and shortened quotation from a Posrednik pamphlet, *Selected Thoughts of Joseph Mazzini*, compiled by L. P. Nikiforov (Moscow, 1905), p. 5, thought 4.[^4] The wording, "only" included, is therefore Tolstoy's own rendering.
+
+The 1905 English translation, *A Great Iniquity*, leaves out "only": "always have been and will be the result of great religious movements".[^5]
 
 ## Open questions
 
-- Life dates, birthplace, and a Wikidata/VIAF identifier need an authority file.
-- The Nikiforov anthology's page for the quoted passage, and whether Tolstoy quotes Mazzini elsewhere from the same source.
+- Life dates, birthplace and identifiers need an authority file.
+- The anthology's own wording of thought 4, to set beside the paraphrase.
+- Whether the writings of these years (*A Circle of Reading*, the essays of 1904–08) quote Mazzini or other political figures more often than before, and how their words are handled. A question for a dive.
 
 ## Dive provenance
 
-- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — Mazzini as the Chapter VIII epigraph and the essay's religious-movement frame (E11), read via Nikiforov's 1905 Posrednik anthology. Routed to a page of his own in the entity steer, 2026-08-12.
+- [1905-the-great-sin](../works/non-fiction/essays-and-criticism/1905-the-great-sin/index.md) (2026-06-30) — the chapter VIII epigraph (E11) and the PSS commentary on its source. Routed to a page of his own in the entity steer, 2026-08-12; revised from Johan's notes on 2026-10-02 (the dive's `annotations.md`).
+
+[^1]: <span lang="ru">«Религиозное движение, предстоящее теперь русскому народу, состоит в том, чтобы развязать тот великий грех, который давно уже мучает и разделяет людей не в одной России, но во всем мире»</span> (PSS 36:226). English: ours.
+
+[^2]: <span lang="ru">«Развязать же этот грех могут не политические реформы, не социалистические проекты в будущем, не революции в настоящем, ни еще менее филантропические пожертвования или правительственные учреждения для покупки и раздачи земель крестьянам»</span> (PSS 36:226). English: ours.
+
+[^3]: <span lang="ru">«нужно только сознание своего греха всеми людьми, совершающими его или участвующими в нем, и желание избавления от него»</span> (PSS 36:226). English: ours.
+
+[^4]: <span lang="ru">«Перефразированная и сокращенная цитата»</span>; the title <span lang="ru">«Избранные мысли Иосифа Мадзини»</span> (PSS 36, commentary).
+
+[^5]: *A Great Iniquity*, tr. V. Chertkov and I. F. Mayo (1905), ch. VIII.

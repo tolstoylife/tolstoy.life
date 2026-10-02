@@ -434,3 +434,20 @@ the substrate.** The re-dive must not reproduce the phrases that *misstate the t
 The interpretive steer (the misdirection critique, the money-vs-land religious question,
 featuring the variants, foregrounding the Chertkov–Tolstoy cutting dialogue, and the
 enrichments in sections A/B) also feeds the re-dive, not the old substrate.
+
+## Wiki page notes — Giuseppe Mazzini (2026-10-02)
+
+Johan's notes on `docs/research/wiki/Giuseppe Mazzini.md`, kept as steer for this and later wiki pages.
+
+1. `[p-1-1]` The ch. VIII epigraph. Minimise Russian in the sentence and move it to a footnote. The quotation is an important part of the text and deserves a pull quote; there, the Russian can be revealed on demand instead of footnoted.
+   - Tolstoy would point out that "religious movement" means people's own convictions, not the established church, which serves the legal and economic system. Most people take "the church" to mean organised religion.
+   - Bears on the "Christian anarchist" label: for Tolstoy, as for Jesus, change comes from inside (*The Kingdom of God Is Within You*), from faith, not from political action, least of all the violent methods associated with anarchists.
+   - Open question: was Tolstoy more inclined to quote political activists in this period than in *The Great Sin*? The smallest change of wording can change how a message is perceived. Wiener turning "a Christian" into "Christianity" in Tolstoy's preface to *The Kingdom of God* is one example. Wordings that make Tolstoy political instead of religious need weighing with caution. His definition of religion is not the conventional one either, so calling him "religious" can be used to pull his stand toward the mainstream. These moves are at work on Wikipedia and in the Standard Ebooks text of *The Kingdom of God Is Within You* (Wiener).
+2. `[p-2-1]` «Избранные мысли Иосифа Мадзини» needs a translation.
+
+### What was done (2026-10-02)
+
+- Pull quote: decided as at most one per page, only where the quotation is the subject's tie to Tolstoy; the Russian opens under it (`<details>`). Mazzini is the first.
+- "Religious movement": answered from the essay itself — ch. VIII's next paragraphs say what the movement is and what it is not (reforms, socialism, revolution, philanthropy, government). No interpretation added.
+- The PSS commentary calls the epigraph a "paraphrased and shortened" quotation (anthology p. 5, thought 4).
+- Not on this page: Tolstoy's definition of religion vs the Church, and "Christian anarchist" — each wants its own page from his definitions. The quoting-political-figures question is a dive, logged as an open question on the page.
