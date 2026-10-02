@@ -335,3 +335,10 @@ For content-level operations (source ingestions, wiki queries, lint passes), see
 - **The audio builder would have mixed the two translations.** Its voice cache and audio file names were keyed by work, and Maude and Wiener share both the work name and every sentence id, so a build would have reused Wiener's recorded sentences and overwritten Wiener's audio. Cache and file names are now keyed by work and edition; the existing caches were renamed, so nothing had to be re-recorded.
 - **Years are spoken as years.** Johan's first note was that "1838" came out as "one thousand…"; `reader/speech.py` now says "eighteen thirty-eight", and respells Schopenhauer, *Wille zum Leben* and kumys.
 - **Garnett for The Kingdom of God Is Within You** — recorded as a standing decision on the TODO; there was no earlier note of it in the repository.
+
+## 2026-10-02
+
+- **Research wiki grew to 23 pages and settled its style.** A Confession fed fourteen entity pages, eleven of them written by helpers in parallel from the dive's own extracts, each Russian quotation checked word for word by a small script. The nine Great Sin pages were converted to the same style. The style: English in the sentence, the exact Russian in a footnote, short names inline in brackets; brief and neutral.
+- **Pull quotes tried and dropped the same day.** A highlighted key quotation with the Russian on a toggle was built for three pages, then removed: Johan found it too editorial. Quotations stay in the running text.
+- **Writing the pages corrected the dives.** Reading the extracts closely showed claims in the two dossiers that their sources don't support (Strakhov at Optina in 1881, Geneva missing from the PSS for 1884, Sutaev as a reader of the gospel synthesis, Chertkov printing one paragraph as «Необходимый переворот»). The dossiers and dive indexes now follow the sources.
+- **Johan's reader notes routed by topic, not by where they were written.** His notes on religion versus the Church and the "Christian anarchist" label became steer for the A Confession re-dive; the Wiener wording point went to The Kingdom of God.
