@@ -343,7 +343,7 @@ a.wikilink-missing {
 }
 
 /* Footnote marker */
-a.noteref { text-decoration: none; }
+:is(a.noteref, a.footnote-ref) { text-decoration: none; }
 a.noteref sup { font-size: 13px; color: var(--accent); margin-left: 2px; }
 
 /* ── Work reader: sentences, notes ── */
