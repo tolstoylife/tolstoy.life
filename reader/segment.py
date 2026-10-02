@@ -14,7 +14,6 @@ def resolve_reading_text(md):
     md = re.sub(r"\{\+\+(.*?)\+\+\}", r"\1", md, flags=re.S)# insertions: keep
     md = re.sub(r"\{~~(.*?)~>(.*?)~~\}", r"\2", md, flags=re.S)  # change: keep new
     md = re.sub(r"\{==(.*?)==\}", r"\1", md, flags=re.S)    # highlight: keep
-    md = re.sub(r"\[\[([^\]]+)\]\]", r"\1", md)             # wikilink: keep label
     return re.sub(r"[ \t]{2,}", " ", md).strip()
 
 # ── Sentence split (ported from build_audiobook.split_sents) ───────────────────
@@ -28,7 +27,7 @@ def split_sentences(text):
     # Split on whitespace after terminal punctuation. A footnote marker may sit
     # between the punctuation and the space ("cow.[^1] I") — keep it glued to the
     # sentence it ends, then split on a sentinel so the boundary still fires.
-    text = re.sub(r'(?<=[.!?"])(\[\^\w+\])?\s+(?=["“(A-ZА-Я])', r"\1<SPLIT>", text)
+    text = re.sub(r'(?<=[.!?"])(\[\^\w+\])?\s+(?=["“(A-ZА-Я]|\[\[)', r"\1<SPLIT>", text)
     parts = text.split("<SPLIT>")
     return [p.replace("<DOT>", ".").replace("<ATTR>", " ").strip() for p in parts if p.strip()]
 

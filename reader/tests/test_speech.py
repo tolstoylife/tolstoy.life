@@ -62,3 +62,7 @@ def test_italic_asterisks_not_spoken():
 
 def test_german_marked_for_german_pronunciation():
     assert "‹de›Wille zum Leben‹/de›" in to_speech("that same wish to live—*Wille zum Leben*—which")
+
+def test_wikilink_speaks_the_words_shown():
+    assert to_speech("my [[Samara]] estate") == "my Samara estate"
+    assert to_speech("in [[Execution in Paris (1857)|Paris]], the") == "in Paris, the"

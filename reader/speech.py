@@ -96,6 +96,7 @@ def _respell(t):
 
 def to_speech(text):
     text = re.sub(r"\[\^\w+\]", "", text)                # drop footnote markers (skippable in audio)
+    text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]", r"\1", text)  # wikilink: speak the words shown
     text = re.sub(r"\*([^*]+)\*", r"\1", text)             # ⚠ drop italic asterisks, or the voice reads them aloud
     text = _fix_ellipsis(text)
     text = _fix_semicolons(text)

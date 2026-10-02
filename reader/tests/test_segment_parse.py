@@ -27,9 +27,9 @@ def test_parse_sentence_ids_and_text():
 def test_parse_resolves_marks_in_display():
     sec = parse(MD)["sections"][0]
     p2 = sec["paragraphs"][1]["sentences"]
-    # wikilink label kept, footnote marker kept in display, stripped in speech
-    assert "[[old woman]]" not in p2[1]["display"]
-    assert "old woman" in p2[1]["display"]
+    # wikilink and footnote marker kept in display, stripped in speech
+    assert "[[old woman]]" in p2[1]["display"]
+    assert p2[1]["speech"] == "I knew the old woman."
     assert "[^1]" in p2[0]["display"]
     assert "[^1]" not in p2[0]["speech"]
 

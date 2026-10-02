@@ -32,6 +32,7 @@ def aside_html(note):
 
 def _render_sentence(text):
     # turn [^label] markers into noterefs, escape the rest
+    text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]", r"\1", text)   # ponytail: no wiki in the EPUB yet, keep the words
     parts = re.split(r"(\[\^\w+\])", text)
     out = []
     for p in parts:
