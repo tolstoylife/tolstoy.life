@@ -73,7 +73,7 @@ var h=document.documentElement;h.dataset.theme=s.theme||'paper';
 h.style.setProperty('--font-scale',s.fontScale||1);
 if(s.measure)h.style.setProperty('--measure',s.measure+'ch');
 var L=s.layers||{};['wikilinks','cuts','footnotes'].forEach(function(k){
-h.dataset['l'+k[0].toUpperCase()+k.slice(1)]=L[k]?'on':'off';});}catch(e){}})();
+var on=k in L?L[k]:k==='footnotes';h.dataset['l'+k[0].toUpperCase()+k.slice(1)]=on?'on':'off';});}catch(e){}})();
 """.strip()
 
 # Inline icon symbols (Tabler-outline style), copied from _generated/design/session-reader-ui-drafts-2026-07-03/reader-ui-drafts.html
@@ -547,7 +547,8 @@ def _render_sentence_web(text: str) -> str:
         if m:
             label = m.group(1)
             nid = reader_ids.note_id(int(label)) if label.isdigit() else f"note-{label}"
-            out.append(f'<a class="noteref" href="#{nid}"><sup>{esc(label)}</sup></a>')
+            rid = reader_ids.noteref_id(int(label)) if label.isdigit() else f"noteref-{label}"
+            out.append(f'<a class="noteref" id="{rid}" href="#{nid}"><sup>{esc(label)}</sup></a>')
         else:
             out.append(esc(part))
     return re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out))   # markdown italics
@@ -574,7 +575,9 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
             parts.append(f'<p id="{p["id"]}">{spans}</p>')
     notes = seg.get("notes") or []
     if notes:
-        asides = "\n".join(f'<aside id="{n["id"]}"><p>{n["html"]}</p></aside>' for n in notes)
+        asides = "\n".join(
+            f'<aside id="{n["id"]}"><p><a class="note-back" href="#{n["id"].replace("note-", "noteref-")}">{n["id"].removeprefix("note-")}.</a> {n["html"]} '
+            f'<a class="note-back" href="#{n["id"].replace("note-", "noteref-")}" aria-label="Back to text">↩</a></p></aside>' for n in notes)
         parts.append(f'<section class="work-notes">{asides}</section>')
     body_html = "\n".join(parts)
 
