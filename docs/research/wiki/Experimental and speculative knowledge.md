@@ -21,25 +21,25 @@ identifiers:
 fieldSources: {}
 ---
 
-In chapter V of [[Confession]] (Исповедь, 1879–82) knowledge is divided into two rows, measured against one question — «Зачем мне жить, зачем чего-нибудь желать, зачем что-нибудь делать?» (Maude: "Why should I live, why wish for anything, or do anything?"). The rows are «знаний опытных», experimental knowledge, and «знаний умозрительных», speculative knowledge. Neither answers the question. Beside them stand the «полунауки», the half-sciences (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> 23, ch. V).
+In chapter V of [[Confession]] (Исповедь, 1879–82) knowledge is divided into two rows, measured against one question: "Why should I live, why wish for anything, or do anything?"[^1] The rows are experimental knowledge and speculative knowledge (<span lang="ru">знания опытные</span> and <span lang="ru">знания умозрительные</span>). Neither answers the question. Beside them stand the half-sciences (<span lang="ru">полунауки</span>).
 
 ## The two rows
 
-«Один ряд знаний как бы и не признает вопроса, но зато ясно и точно отвечает на свои независимо поставленные вопросы: это — ряд знаний опытных, и на крайней точке их стоит математика; другой ряд знаний признает вопрос, но не отвечает на него: это — ряд знаний умозрительных, и на крайней их точке — метафизика» (PSS 23, ch. V). In Maude's English: "The one series of sciences seems not to recognize the question, but replies clearly and exactly to its own independent questions: that is the series of experimental sciences, and at the extreme end of it stands mathematics. The other series of sciences recognizes the question, but does not answer it; that is the series of abstract sciences, and at the extreme end of it stands metaphysics."
+"The one series of sciences seems not to recognize the question, but replies clearly and exactly to its own independent questions: that is the series of experimental sciences, and at the extreme end of it stands mathematics. The other series of sciences recognizes the question, but does not answer it; that is the series of abstract sciences, and at the extreme end of it stands metaphysics."[^2]
 
 The translators differ on the second term: Wiener (1904) has "speculative", Maude (1921) "abstract". Both have "experimental".
 
-Experimental knowledge is exact «обратно пропорционально их приложимости к вопросам жизни» — in inverse proportion to its bearing on the questions of life. Speculative knowledge, asked what the world and the self are, answers «всё и ничто», all and nothing; asked why, «не знаю», I do not know (PSS 23, ch. V, working English).
+Experimental knowledge is "exact and clear in inverse proportion to [its] applicability to the question of life".[^3] Speculative knowledge, asked "What am I, and what is the universe?", answers "All and nothing"; asked "Why?", "I do not know".[^4]
 
 ## The half-sciences
 
-The half-sciences are found on both sides. On the experimental side: «физиологии, психологии, биологии, социологии». On the speculative side: «науки юридические, социальные, исторические», which «мнимо» — seemingly — settle the question of life for all humanity and so claim to settle it for the individual (PSS 23, ch. V). Chapter VI calls them «сделки между умозрительными и опытными знаниями», compromises between the two rows, and lists them as «юридических, политических, исторических» (PSS 23, ch. VI).
+The half-sciences are found on both sides. On the experimental side: physiology, psychology, biology, sociology. On the speculative side: the legal, social and historical sciences, which "endeavour to solve the questions of a man's life by pretending to decide each in its own way, the question of the life of all humanity".[^5] Chapter VI calls them "compromises between abstract and experimental sciences", and lists them as "juridical, political, and historical".[^6]
 
-The «науки юридические» are the sciences of law. Wiener translates them "jurisprudence", Maude "the juridical [sciences]". The PSS commentary records Kazan University from 1844 to 1847: one year in the oriental department, then two in the law faculty (PSS 23, commentary).
+The legal sciences (<span lang="ru">науки юридические</span>) are the sciences of law. Wiener translates them "jurisprudence", Maude "juridical". The PSS commentary records Kazan University from 1844 to 1847: one year in the oriental department, then two in the law faculty.[^7]
 
 ## A draft image
 
-An earlier draft of chapter V (PSS 23, variants, No. 6) pictures the search as looking for a house in a forest. A hilltop with everything in view is «чистая математика»; clearings where some things are visible are «опытные, естественные знания»; the deepest dark is «философия»; and the places where the more one sees the less one hopes are «умозрительные науки: история, право, филология». The final text keeps the forest in chapter VI in shorter form.
+An earlier draft of chapter V pictures the search as looking for a house in a forest. A hilltop with everything in view is pure mathematics; clearings where some things are visible are the experimental, natural sciences; the deepest dark is philosophy; and the places where the more one sees the less one hopes are the speculative sciences: history, law, philology.[^8] The final text keeps the forest in chapter VI in shorter form.
 
 ## Open questions
 
@@ -49,3 +49,19 @@ An earlier draft of chapter V (PSS 23, variants, No. 6) pictures the search as l
 ## Dive provenance
 
 - [1879-1882-a-confession](../works/non-fiction/personal-papers/1879-1882-a-confession/index.md) — from Johan's reader annotations (V.7/V.8, VI.9), 2026-10-02; PSS 23 final text, variants and commentary; Maude (1921) and Wiener (1904).
+
+[^1]: <span lang="ru">«Зачем мне жить, зачем чего-нибудь желать, зачем что-нибудь делать?»</span> (PSS 23, ch. V). English: Maude.
+
+[^2]: <span lang="ru">«Один ряд знаний как бы и не признает вопроса, но зато ясно и точно отвечает на свои независимо поставленные вопросы: это — ряд знаний опытных, и на крайней точке их стоит математика; другой ряд знаний признает вопрос, но не отвечает на него: это — ряд знаний умозрительных, и на крайней их точке — метафизика»</span> (PSS 23, ch. V). English: Maude.
+
+[^3]: <span lang="ru">«обратно пропорционально их приложимости к вопросам жизни»</span> (PSS 23, ch. V). English: Maude.
+
+[^4]: <span lang="ru">«всё и ничто»</span>; <span lang="ru">«не знаю»</span> (PSS 23, ch. V). English: Maude.
+
+[^5]: <span lang="ru">«Полунауки этой области — науки юридические, социальные, исторические — пытаются разрешать вопросы человека тем, что они мнимо, каждая по-своему разрешают вопрос жизни всего человечества»</span> (PSS 23, ch. V). English: Maude, who has "the juridical and the social-historical".
+
+[^6]: <span lang="ru">«сделки между умозрительными и опытными знаниями, которые составляют весь балласт полунаук, так называемых юридических, политических, исторических»</span> (PSS 23, ch. VI). English: Maude.
+
+[^7]: PSS 23, commentary.
+
+[^8]: <span lang="ru">«Это чистая математика»</span>; <span lang="ru">«Это — опытные, естественные знания»</span>; <span lang="ru">«это — философия»</span>; <span lang="ru">«это все умозрительные науки: история, право, филология»</span> (PSS 23, variants, No. 6 to ch. V). Our translation.
