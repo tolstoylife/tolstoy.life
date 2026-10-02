@@ -578,7 +578,8 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
         asides = "\n".join(
             f'<aside id="{n["id"]}"><p><a class="note-back" href="#{n["id"].replace("note-", "noteref-")}">{n["id"].removeprefix("note-")}.</a> {n["html"]} '
             f'<a class="note-back" href="#{n["id"].replace("note-", "noteref-")}" aria-label="Back to text">↩</a></p></aside>' for n in notes)
-        parts.append(f'<section class="work-notes">{asides}</section>')
+        by = f" by {esc(meta['notesBy'])}" if meta.get("notesBy") else ""   # who wrote the notes, from meta.<version>.json; ⚠ not an h2 — shell.js treats every h2 as an audio section
+        parts.append(f'<section class="work-notes"><p class="notes-by">Notes{by}</p>\n{asides}</section>')
     body_html = "\n".join(parts)
 
     # Version switch: sibling editions that exist as both segments + md

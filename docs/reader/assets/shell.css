@@ -360,6 +360,7 @@ body[data-kind="work"][data-audio="true"] main h2 { cursor: pointer; }
 .work-notes { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1.2rem; }
 .work-notes aside { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
 .work-notes a.note-back { color: var(--accent); text-decoration: none; }
+.work-notes .notes-by { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 1rem; }
 :is(a.noteref, .work-notes aside) { scroll-margin-block: 30vh; }   /* land mid-screen, clear of the top bar */
 
 /* ── TOC drawer (upper-left) ── */
