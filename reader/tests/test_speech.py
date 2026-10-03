@@ -74,3 +74,9 @@ def test_bible_references_spoken():
     assert "Matthew twenty-three, verses twenty-three and three" in to_speech("(Matt. xxiii. 23, 3).")
     assert "Matthew five, verse thirty-nine" in to_speech("(M. v. 39.)")
     assert to_speech("free.\"—John viii. 32.").endswith("John eight, verse thirty-two.")
+
+def test_single_word_lists_get_even_cuts():
+    assert "Mennonites,‹br› Herrnhuters,‹br› and Quakers," in to_speech("sects of Mennonites, Herrnhuters, and Quakers, who do not")
+    assert "‹br›" not in to_speech("If, then, the time is predicted")
+    assert "‹br›" not in to_speech("War, too, is a Christian duty.")
+    assert "‹br›" not in to_speech("to be fishers of men, and, developing this")
