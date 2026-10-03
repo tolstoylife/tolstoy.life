@@ -12,7 +12,7 @@ A book-length treatise written between 1890 and 1893. Its full title is *The Kin
 - [Alignment notes](alignment-notes.html)
 - [The corpus dive](/research/works/non-fiction/treatises/1890-1893-the-kingdom-of-god-is-within-you/index.html)
 
-**This edition is being built in stages.** It now holds the preface and chapters I–III. Chapters IV–VIII and IX–XII will follow.
+**This edition is being built in stages.** It now holds the preface and chapters I–VIII. Chapters IX–XII will follow.
 
 ## What the first chapters say
 
