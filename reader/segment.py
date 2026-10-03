@@ -125,6 +125,11 @@ def main():
     a = ap.parse_args()
     spine_doc = json.loads(Path(a.spine_json).read_text()) if a.spine_json else None
     doc = segment(a.md, version=a.version, work=a.work, spine=a.spine, spine_doc=spine_doc)
+    meta = Path(a.md).parent / f"meta.{a.version}.json"
+    if meta.exists() and doc["sections"]:   # the narrator says the book's title before the first heading
+        title = json.loads(meta.read_text(encoding="utf-8")).get("title")
+        if title:
+            doc["sections"][0]["headingSpeech"] = f"{title}. {doc['sections'][0]['headingSpeech']}"
     Path(a.out).write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"wrote {a.out}: {len(doc['sections'])} sections, "
           f"{sum(len(s['paragraphs']) for s in doc['sections'])} paragraphs")

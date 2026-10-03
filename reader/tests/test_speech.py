@@ -66,3 +66,11 @@ def test_german_marked_for_german_pronunciation():
 def test_wikilink_speaks_the_words_shown():
     assert to_speech("my [[Samara]] estate") == "my Samara estate"
     assert to_speech("in [[Execution in Paris (1857)|Paris]], the") == "in Paris, the"
+
+def test_bible_references_spoken():
+    assert to_speech("—Matt. x. 28.") == "— Matthew ten, verse twenty-eight."
+    assert to_speech("1 Cor. vii. 23.") == "First Corinthians seven, verse twenty-three."
+    assert "Exodus twenty-one, verses twelve and twenty-three to twenty-five" in to_speech("Ex. xxi. 12 and 23-25.")
+    assert "Matthew twenty-three, verses twenty-three and three" in to_speech("(Matt. xxiii. 23, 3).")
+    assert "Matthew five, verse thirty-nine" in to_speech("(M. v. 39.)")
+    assert to_speech("free.\"—John viii. 32.").endswith("John eight, verse thirty-two.")

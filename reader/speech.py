@@ -63,6 +63,7 @@ _SUBS = [
     # Picked by pitch measurement (parselmouth). Voice note 2026-07-04.
     (r"support us, their parasites\.", "support us — their parasites."),
     (r"\bSchopenhauer\b", "Shopenhower"),
+    (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
     (r"\bkumys\b", "koomiss"),
     (r"(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
@@ -91,6 +92,27 @@ def _year_words(m):
     tail = "hundred" if n == 0 else f"oh {_ONES[n]}" if n < 10 else _ONES[n] if n < 20 else _TENS[n // 10] + ("" if n % 10 == 0 else "-" + _ONES[n % 10])
     return f"{'eighteen' if m.group(1) == '18' else 'nineteen'} {tail}"
 
+def _num(n):
+    return _ONES[n] if n < 20 else _TENS[n // 10] + ("" if n % 10 == 0 else "-" + _ONES[n % 10])
+
+_BOOKS = {"Matt": "Matthew", "M": "Matthew", "Mark": "Mark", "Luke": "Luke", "John": "John", "Gen": "Genesis",
+          "Ex": "Exodus", "Lev": "Leviticus", "Deut": "Deuteronomy", "Cor": "Corinthians", "Rom": "Romans"}
+_ROMAN = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100}
+_BIBLE = re.compile(r"\b(?:([12]) )?(" + "|".join(_BOOKS) + r")\.? ([ivxlc]+)\. (\d+(?:-\d+)?(?:(?:, | and )\d+(?:-\d+)?)*)")
+
+def _roman(s):
+    v = [_ROMAN[c] for c in s]
+    return sum(-a if a < b else a for a, b in zip(v, v[1:] + [0]))
+
+def _bible(m):
+    # "Matt. x. 28" -> "Matthew ten, verse twenty-eight"; Garnett's lower-case Roman chapter numbers.
+    items = re.split(r", | and ", m.group(4))
+    words = [" to ".join(_num(int(x)) for x in i.split("-")) for i in items]
+    verses = words[0] if len(words) == 1 else ", ".join(words[:-1]) + " and " + words[-1]
+    plural = "s" if len(items) > 1 or "-" in m.group(4) else ""
+    book = ("First " if m.group(1) == "1" else "Second " if m.group(1) == "2" else "") + _BOOKS[m.group(2)]
+    return f"{book} {_num(_roman(m.group(3)))}, verse{plural} {verses}"
+
 def _fix_ellipsis(t):
     t = t.replace("...", "…")
     return re.sub(r"\.\s*\.\s*\.", "…", t)
@@ -112,6 +134,7 @@ def to_speech(text):
     text = re.sub(r"\[\^\w+\]", "", text)                # drop footnote markers (skippable in audio)
     text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]", r"\1", text)  # wikilink: speak the words shown
     text = re.sub(r"\*([^*]+)\*", r"\1", text)             # ⚠ drop italic asterisks, or the voice reads them aloud
+    text = _BIBLE.sub(_bible, text)
     text = _fix_ellipsis(text)
     text = _fix_semicolons(text)
     text = _fix_dashes(text)
