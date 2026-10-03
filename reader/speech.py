@@ -66,7 +66,21 @@ _SUBS = [
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
     (r"\bkumys\b", "koomiss"),
     (r"(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
-]
+    # The Kingdom of God (Garnett), chapters II–III: French and German quotations. Latin is left to the English voice.
+    (r"(L'Église est la société des fidéles .*?notre Saint Père le Pape,)", r"‹fr›\1‹/fr›"),
+    (r'"(pasteurs légitimes)" an association', r'"‹fr›\1‹/fr›" an association'),
+    (r"(Quels sont ceux qui sont hors de l'église\?)", r"‹fr›\1‹/fr›"),
+    (r"(Je sais que l'on nous conteste le droit de qualifier ainsi)", r"‹fr›\1‹/fr›"),
+    (r"(les tendances qui furent si vivement combattues par les premiers Pères\.)", r"‹fr›\1‹/fr›"),
+    (r"(Die wahre Kirche wird darein erkannt.*?gewahret werden\.)", r"‹de›\1‹/de›"),
+    (r"(Unpartheyische Kirchen- und Ketzer-Historie)", r"‹de›\1‹/de›"),
+    (r"\b(du charmant docteur)\b", r"‹fr›\1‹/fr›"),
+    (r"(l'infâme)", r"‹fr›\1‹/fr›"),
+] + [(rf'^("?)({re.escape(s)}.*?)("?)$', r"\1‹fr›\2‹/fr›\3") for s in (   # whole French sentences, by their opening words
+    "Les infidèles, les hérétiques", "La désignation même d'hérésie", "Nous ne pouvons partager ce scrupule",
+    "L'église est une libre association", "La polémique contre l'erreur", "Un type doctrinal uniforme",
+    "Si au sein de cette diversité", "Si cette même unanimité", "Cette présomption ne se transformera",
+    "Pour dire que le gnosticisme", "Sous prétexte de l'élargir", "Personne au temps de Platon", "Reconnaissons donc que")]
 
 _TENS = "_ ten twenty thirty forty fifty sixty seventy eighty ninety".split()
 _ONES = "_ one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
