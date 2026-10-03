@@ -14,7 +14,13 @@ _CONJ = r"(?:and|but|or|nor|yet|so|for)\b"
 # legitimate rising questions ("Why is this?", "Whence this dreadful perversity?").
 # ponytail: forward-merge only; add backward-merge if a short paragraph-final clip
 # ever needs it. Applied in reader/segment.py.
-MERGE_FORWARD = {"p-7-3-s1"}   # "But we are wrong." -> glue into the long next sentence
+# ⚠ Keyed by work, or by "work/version" when only one version needs it — sentence ids repeat across books.
+MERGE_FORWARD = {
+    "the-great-sin": {"p-7-3-s1"},   # "But we are wrong." -> glue into the long next sentence
+    # Initials and titles the splitter cuts ("G. D. Bartlett", "Rev. Dr. Reuen Thomas"); a run of flags chains into one sentence.
+    "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
+        "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1"},
+}
 
 # Pronunciation respellings for Kokoro's g2p (verbatim from build_audiobook.py SUBS).
 _SUBS = [
@@ -77,6 +83,11 @@ _SUBS = [
     (r"(Unpartheyische Kirchen- und Ketzer-Historie)", r"‹de›\1‹/de›"),
     (r"\b(du charmant docteur)\b", r"‹fr›\1‹/fr›"),
     (r"(l'infâme)", r"‹fr›\1‹/fr›"),
+    # The Kingdom of God (Garnett), chapters IV–VIII: names the English voice garbles, and the French phrases.
+    (r"\bMontesquieu\b", "Montesskew"), (r"\bDoucet\b", "Doosay"), (r"\bMoltke\b", "Moltka"), (r"\bCaprivi\b", "Ka-preevee"),
+    (r"\bClaretie\b", "Klartee"), (r"\bDefourney\b", "Defoornay"), (r"\bMoneta\b", "Monayta"),
+    (r"that Nice was incorporated", "that Neess was incorporated"),   # the city, not the adjective
+    (r"(Esplanade des Invalides|ceci tuera cela|Entrons au palais de la guerre|Sur le Désarmement|pondération de forces)", r"‹fr›\1‹/fr›"),
 ] + [(rf'^("?)({re.escape(s)}.*?)("?)$', r"\1‹fr›\2‹/fr›\3") for s in (   # whole French sentences, by their opening words
     "Les infidèles, les hérétiques", "La désignation même d'hérésie", "Nous ne pouvons partager ce scrupule",
     "L'église est une libre association", "La polémique contre l'erreur", "Un type doctrinal uniforme",

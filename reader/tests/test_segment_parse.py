@@ -45,7 +45,7 @@ def test_merge_speech_groups_glues_flagged_sentence_forward():
         {"id": "p-7-3-s2", "display": "Among us there are many.", "speech": "Among us there are many."},
         {"id": "p-7-3-s3", "display": "The end.", "speech": "The end."},
     ]
-    out = merge_speech_groups(sents)
+    out = merge_speech_groups(sents, {"p-7-3-s1"})
     assert [s["id"] for s in out] == ["p-7-3-s1", "p-7-3-s3"]
     assert out[0]["display"] == "But we are wrong. Among us there are many."
     assert out[0]["speech"] == "But we are wrong. Among us there are many."
@@ -58,4 +58,19 @@ def test_merge_speech_groups_leaves_unflagged_untouched():
 def test_merge_speech_groups_flagged_last_sentence_is_safe():
     # a flagged sentence with nothing after it can't merge forward — left alone
     sents = [{"id": "p-7-3-s1", "display": "But we are wrong.", "speech": "But we are wrong."}]
-    assert merge_speech_groups(sents) == sents
+    assert merge_speech_groups(sents, {"p-7-3-s1"}) == sents
+
+def test_merge_speech_groups_chains_initials():
+    # "says Signor E. G. Moneta." is cut at each initial; flagging the first two pieces rejoins all three
+    sents = [{"id": f"p-6-67-s{k}", "display": d, "speech": d} for k, d in
+             enumerate(['says Signor E.', 'G.', 'Moneta.', '"Hear what Montesquieu wrote."'], start=1)]
+    out = merge_speech_groups(sents, {"p-6-67-s1", "p-6-67-s2"})
+    assert [s["id"] for s in out] == ["p-6-67-s1", "p-6-67-s4"]
+    assert out[0]["display"] == "says Signor E. G. Moneta."
+
+def test_merge_list_is_per_work():
+    # the Great Sin's merge must not touch another book that happens to have a p-7-3-s1
+    md = "## I\n\nA.\n\n## II\n\nB.\n\n## III\n\nC.\n\n## IV\n\nD.\n\n## V\n\nE.\n\n## VI\n\nF.\n\n## VII\n\nX\n\nY\n\nThe first. The second."
+    other = parse(md, "another-work", "en")["sections"][6]["paragraphs"][2]["sentences"]
+    great = parse(md, "the-great-sin", "en")["sections"][6]["paragraphs"][2]["sentences"]
+    assert len(other) == 2 and len(great) == 1

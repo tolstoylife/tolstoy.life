@@ -57,28 +57,27 @@ def _note_defs(md):
     body = re.sub(r"^\[\^(\w+)\]:[ \t]*(.+)$", repl, md, flags=re.M)
     return body, notes
 
-def merge_speech_groups(sentences):
-    """Glue each MERGE_FORWARD sentence into the next one in its paragraph: joined
+def merge_speech_groups(sentences, flagged=frozenset()):
+    """Glue each flagged sentence into the next one in its paragraph: joined
     display + joined speech, keeping the first id. Runs before segments.json is
     written, so clips / timeline / SMIL stay consistent (1 sentence = 1 clip = 1
-    <par>) — the merged pair is just one small read-along unit (Option A). A flagged
-    sentence with no following sentence is left alone (can't merge forward)."""
+    <par>) — the merged run is just one small read-along unit (Option A). Consecutive
+    flags chain into one sentence. A flagged last sentence is left alone."""
     out, i = [], 0
     while i < len(sentences):
         s = sentences[i]
-        if s["id"] in MERGE_FORWARD and i + 1 < len(sentences):
-            nxt = sentences[i + 1]
-            out.append({"id": s["id"],
-                        "display": s["display"] + " " + nxt["display"],
-                        "speech": s["speech"] + " " + nxt["speech"]})
-            i += 2
-        else:
-            out.append(s)
+        while sentences[i]["id"] in flagged and i + 1 < len(sentences):
             i += 1
+            nxt = sentences[i]
+            s = {"id": s["id"], "display": s["display"] + " " + nxt["display"],
+                 "speech": s["speech"] + " " + nxt["speech"]}
+        out.append(s)
+        i += 1
     return out
 
-def parse(md):
+def parse(md, work=None, version=None):
     body, notes = _note_defs(md)
+    flagged = MERGE_FORWARD.get(work, set()) | MERGE_FORWARD.get(f"{work}/{version}", set())
     # split into sections on '## ' headings; text before the first heading is ignored here
     chunks = re.split(r"^##\s+(.+)$", body, flags=re.M)
     sections = []
@@ -98,12 +97,12 @@ def parse(md):
                 sentences.append({"id": ids.sentence_id(pid, sk),
                                   "display": sent, "speech": to_speech(sent)})
             sec["paragraphs"].append({"id": pid,
-                                      "sentences": merge_speech_groups(sentences)})
+                                      "sentences": merge_speech_groups(sentences, flagged)})
         sections.append(sec)
     return {"sections": sections, "notes": notes}
 
 def segment(md_path, version, work, spine="ru", spine_doc=None):
-    doc = parse(Path(md_path).read_text(encoding="utf-8"))
+    doc = parse(Path(md_path).read_text(encoding="utf-8"), work, version)
     if spine_doc is not None:
         for s_sec, t_sec in zip(spine_doc["sections"], doc["sections"]):
             if len(s_sec["paragraphs"]) != len(t_sec["paragraphs"]):
