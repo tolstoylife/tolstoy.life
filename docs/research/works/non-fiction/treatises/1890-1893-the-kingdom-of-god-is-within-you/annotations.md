@@ -38,7 +38,7 @@ The Russian names the commandment «непротивление злу насил
 
 ## Garnett at the same places (2026-10-03)
 
-Constance Garnett's 1894 translation (Project Gutenberg #43302; no local copy yet), the planned reading text, checked at the places above:
+Constance Garnett's 1894 translation (Project Gutenberg #43302; local copy `primary-sources/project-gutenberg/leo-tolstoy_the-kingdom-of-god-is-within-you_constance-garnett.epub`, plus `.txt`), the planned reading text, checked at the places above:
 
 - **Preface:** "a book under the title 'What I Believe,' in which I did in fact make a sincere statement of my beliefs" — belief stays belief, and the title is translated, not "My Religion". "Among the many points in which this doctrine falls short of the doctrine of Christ" — the fault stays with the Church's teaching. "the absence of any commandment of non-resistance to evil by force" — "by force" kept, though «непризнание» ("non-recognition") becomes "absence". "who do not allow a Christian the use of weapons".
 - **Chapter I, first sentence:** "my views on the unlawfulness for a Christian of war and the use of force" — "a Christian" kept.
