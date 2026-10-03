@@ -1,6 +1,6 @@
 ---
 layer: reference
-lastUpdated: 2026-10-01
+lastUpdated: 2026-10-03
 tags: [research, annotations]
 ---
 
@@ -64,3 +64,16 @@ Johan's thoughts, first written as notes on the Mazzini wiki page and moved here
 - **Against the "Christian anarchist" label.** For Tolstoy, as for Jesus, change comes from inside (*The Kingdom of God Is Within You*), from faith, not from political action, least of all the violent methods associated with anarchists. Wordings that make him political instead of religious need weighing with caution. See also [[feedback_mainstream_framing]] in memory: the Christian Anarchism page exists to refute the label.
 - **Watch the wording.** The smallest change of wording can change how the message is perceived; check the translations (Maude, Wiener) where they turn faith into doctrine or an inner change into a political one.
 - **Open question for a later dive:** did he quote political figures (Mazzini and others) more often in the years of *The Great Sin* and *A Circle of Reading* than before, and how are their words handled?
+
+## Wiener, Maude and the machine translation compared (2026-10-03)
+
+A first pass at the "Watch the wording" point above: five places where the translations part ways, each set against the Russian and the project's machine translation (`confession.en-machine`). Paragraph ids are the bundle's shared coordinates. Working notes for the re-dive, not text for a page.
+
+- **XVI.1 — "knowledge of faith" becomes "religion".** Russian «в том знании веры, к которому я присоединился». Wiener: "in that knowledge of faith which I had accepted". Maude: "in the religion I had joined". Machine: "in that knowledge of faith to which I had joined myself". Only Maude turns it into an institution one joins, against the book's own definition of faith as knowledge (IX.12). Here it is Maude, not Wiener, who pulls toward the Church.
+- **IX.12 — the definition of faith, present or past.** Russian «вера есть знание смысла человеческой жизни, вследствие которого человек не уничтожает себя, а живет. Вера есть сила жизни.» Wiener: "faith *was* the knowledge … man *did not destroy* himself … Faith is the power of life." Maude: "faith *is* a knowledge … man *does not destroy* himself … Faith is the strength of life." Machine: "faith *is* the knowledge … man *does not destroy* himself but lives. Faith is the force of life." Wiener's past tense makes a standing claim read like a passing realisation.
+- **«сила жизни» — the echo is lost.** The same phrase ties the definition (IX.12) to the recovery (XII.13, XII.15). Wiener: "power of life", then "force of life". Maude: "strength of life", then "force" and "strength" mixed within XII.13. Machine: "force of life" every time. Neither published translation lets an English reader see that the definition and the recovery are one thing; a wiki page leaning on it should give the Russian in the footnote.
+- **«вероучение» — doctrine, teaching or faith, both ways.** I.5: Wiener "religious teaching", Maude "religious doctrine". X.9: Wiener "doctrine … the Christian doctrine", Maude "the faith … the same Christian faith". XIII.1: Wiener "the whole doctrine", Maude "the whole teaching of faith". XVI.1 «всё вероучение ложно»: Wiener "the whole doctrine was wrong", Maude "it was all false". Machine: "religious teaching" in all of them. Neither translator consistently turns faith into doctrine; check paragraph by paragraph.
+- **XII.11 — a sentence missing from Wiener.** Russian «Ведь я живу, истинно живу только тогда, когда чувствую его и ищу его.» Maude: "I live, really live, only when I feel Him and seek Him." Machine: "For I live, truly live, only when I feel him and seek him." The Wiener e-text goes straight from "the dim hope of finding him" to the voice. It may be an e-text defect rather than Wiener's omission — check a scan of the 1904 book before citing it.
+- **Smaller word choices.** «рабов» (II.1): Wiener "slaves", Maude "serfs", machine "slaves". «мнимоверующих» (X.9): Wiener "quasi-believers", Maude "pseudo-believers", machine "supposed believers". «раскольниками» (X.9): Wiener "dissenters", Maude "sectarians", machine "sectarians".
+
+The machine translation is the most literal and the most consistent of the three, which makes it a useful third witness wherever Wiener and Maude disagree.
