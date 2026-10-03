@@ -8,7 +8,7 @@ tags: [research, church, translations]
 
 The passages in chapter III of *The Kingdom of God Is Within You* where Tolstoy argues about what "church" means: the word in the Gospels, the singular, heresy as the other side of the church, "churches as churches", and the churches' dilemma. Collected for the re-dive (see `annotations.md`, "Re-dive steer — 'the Church' is not the body of Christ"). The chapter mentions the church in 74 of its 133 paragraphs; these 15 are the ones that argue about the concept itself.
 
-Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph number within chapter III of that text). Wiener 1904 (Standard Ebooks; the wordings discussed in the notes checked against the text of the 1904 scan, `Complete Works/20.pdf`). Garnett 1894 (Project Gutenberg #43302, local copy in `primary-sources/project-gutenberg/`). Maude 1936 (Internet Archive `in.ernet.dli.2015.461988`, read from its text layer, not yet checked against the page images) — quoted only at the points of difference, as its US copyright status is unchecked. The Russian edition lowercases «церковь» throughout (Soviet convention), so capitals in the English are the translators'.
+Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph number within chapter III of that text). Wiener 1904 (Standard Ebooks; the wordings discussed in the notes checked against the text of the 1904 scan, `Complete Works/20.pdf`). Garnett 1894 (Project Gutenberg #43302, local copy in `primary-sources/project-gutenberg/`). Maude 1936 (Internet Archive `in.ernet.dli.2015.461988`, every quotation checked against the page images, printed pp. 68–101) — quoted only at the points of difference, as its US copyright status is unchecked. The Russian edition lowercases «церковь» throughout (Soviet convention), so capitals in the English are the translators'.
 
 ## What the comparison shows
 
@@ -25,7 +25,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** But the Church is holy; the Church was founded by Christ. God could not leave men to interpret his teaching at random--therefore he founded the Church. All those statements are so utterly untrue and unfounded that one is ashamed to refute them. Nowhere nor in anything, except in the assertion of the Church, can we find that God or Christ founded anything like what Churchmen understand by the Church. In the Gospels there is a warning against the Church, as it is an external authority, a warning most clear and obvious in the passage where it is said that Christ's followers should "call no man master." But nowhere is anything said of the foundation of what Churchmen call the Church.
 
-**Maude (at the point of difference):** “Nowhere, nor in anything but in the Church’s assertion, is it shown that God or Christ founded anything at all resembling what churchmen understand by the Church.”
+**Maude (at the point of difference, p. 68):** “Nowhere, nor in anything but in the Church’s assertion, is it shown that God or Christ founded anything at all resembling what churchmen understand by the Church.”
 
 **Notes:** «кроме как по утверждению церквей» is plural, "the churches' assertion". Wiener keeps it ("the assertion of the churches"); Garnett ("the assertion of the Church") and Maude ("the Church's assertion") make it one Church. «несправедливы и голословны» ("untrue and unfounded"): Wiener's "unjust and bold" is weak; Garnett "untrue and unfounded", Maude "unjust and unfounded". Wiener splits the Russian paragraph in three.
 
@@ -37,7 +37,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** The word church is used twice in the Gospels--once in the sense of an assembly of men to decide a dispute, the other time in connection with the obscure utterance about a stone--Peter, and the gates of hell. From these two passages in which the word church is used, in the signification merely of an assembly, has been deduced all that we now understand by the Church.
 
-**Maude (at the point of difference):** “In the Gospels the word ‘church’ is used twice. … From these two mentions of the word ‘church’ (meaning merely an assembly) what is now meant by the word ‘Church’ has been deduced.”
+**Maude (at the point of difference, p. 68–69):** “In the Gospels the word ‘church’ is used twice. … From these two mentions of the word ‘church’ (meaning merely an assembly) what is now meant by the word ‘Church’ has been deduced.”
 
 **Notes:** All three faithful. Garnett and Maude capitalise the second "Church" — what is meant now, the institution — and keep the Gospel word lower case.
 
@@ -49,7 +49,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** But Christ could not have founded the Church, that is, what we now understand by that word. For nothing like the idea of the Church as we know it now, with its sacraments, miracles, and above all its claim to infallibility, is to be found either in Christ's words or in the ideas of the men of that time.
 
-**Maude (at the point of difference):** “…nothing resembling our present conception of the Church — with its sacraments, its hierarchy, and especially its claim to infallibility…”
+**Maude (at the point of difference, p. 69):** “…nothing resembling our present conception of the Church — with its sacraments, its hierarchy, and especially its claim to infallibility…”
 
 **Notes:** Garnett has "sacraments, miracles" where the Russian has «таинствами, иерархией» ("sacraments, hierarchy"): the hierarchy drops out. Wiener and Maude have "hierarchy".
 
@@ -61,7 +61,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** The fact that men called what was formed afterward by the same word as Christ used for something totally different, does not give them the right to assert that Christ founded the one, true Church.
 
-**Maude (at the point of difference):** “The fact that people called an institution established later, by a name Christ had used to designate something quite different, in no way gives them the right…”
+**Maude (at the point of difference, p. 69):** “The fact that people called an institution established later, by a name Christ had used to designate something quite different, in no way gives them the right…”
 
 **Notes:** All three faithful.
 
@@ -73,7 +73,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** Ordinarily, when speaking of the rise of Christianity, men belonging to one of the existing churches use the word church in the singular, as though there were and had been only one church. But this is absolutely incorrect. The Church, as an institution which asserted that it possessed infallible truth, did not make its appearance singly; there were at least two churches directly this claim was made.
 
-**Maude (at the point of difference):** “Usually when speaking of the origin of Christianity people belonging to one of the existing Churches use the word ‘Church’ in the singular, as though there were and had been only one Church.”
+**Maude (at the point of difference, p. 71):** “Usually when speaking of the origin of Christianity people belonging to one of the existing Churches use the word ‘Church’ in the singular, as though there were and had been only one Church.”
 
 **Notes:** All three faithful. Maude capitalises even the plural, "existing Churches".
 
@@ -115,7 +115,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** Thus, almost two hundred years ago, the real meaning of heresy was understood. And notwithstanding that, the same conception of it has gone on existing up to now. And it cannot fail to exist so long as the conception of a church exists. Heresy is the obverse side of the Church. Wherever there is a church, there must be the conception of heresy. A church is a body of men who assert that they are in possession of infallible truth. Heresy is the opinion of the men who do not admit the infallibility of the Church's truth.
 
-**Maude (at the point of difference):** “It is bound to exist as long as the present conception of the Church exists. Heresy is the obverse side of the Church.”
+**Maude (at the point of difference, p. 80):** “It is bound to exist as long as the present conception of the Church exists. Heresy is the obverse side of the Church.”
 
 **Notes:** Maude adds "present": «пока существует понятие церкви» is "as long as the concept of the church exists" — no "present". With it, another conception of the church would seem to be fine, which softens the claim. Wiener ("so long as there is a concept of the church"; "the reverse of the church" as printed in 1904 — Standard Ebooks modernises it to "flip-side") and Garnett ("so long as the conception of a church exists") are faithful.
 
@@ -127,7 +127,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** Heresy makes its appearance in the Church. It is the effort to break through the petrified authority of the Church. All effort after a living comprehension of the doctrine has been made by heretics. Tertullian, Origen, Augustine, Luther, Huss, Savonarola, Helchitsky, and the rest were heretics. It could not be otherwise.
 
-**Maude (at the point of difference):** “Heresy is a manifestation of movement in the Church… Every step of progress towards an understanding and fulfilment of the teaching has been made by heretics.”
+**Maude (at the point of difference, p. 81):** “Heresy is a manifestation of movement in the Church… Every step of progress towards an understanding and fulfilment of the teaching has been made by heretics.”
 
 **Notes:** Garnett's "Heresy makes its appearance in the Church" drops «проявление движения» ("a manifestation of movement"), and "All effort after a living comprehension of the doctrine" drops «исполнения» ("fulfilling") — understanding without doing — and turns "teaching" into "doctrine". Wiener and Maude faithful.
 
@@ -139,7 +139,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** Strange as it may seem, the churches as churches have always been, and cannot but be, institutions not only alien in spirit to Christ's teaching, but even directly antagonistic to it. With good reason Voltaire calls the Church _l'infâme_; with good reason have all or almost all so-called sects of Christians recognized the Church as the scarlet woman foretold in the Apocalypse; with good reason is the history of the Church the history of the greatest cruelties and horrors.
 
-**Maude (at the point of difference):** “…the Churches as Churches have always been and cannot fail to be institutions not only alien to, but directly hostile towards, Christ’s teaching.”
+**Maude (at the point of difference, p. 81):** “…the Churches as Churches have always been and cannot fail to be institutions not only alien to, but directly hostile towards, Christ’s teaching.”
 
 **Notes:** All three faithful; Maude capitalises "Churches".
 
@@ -161,7 +161,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** The Sermon on the Mount, or the Creed. One cannot believe in both. And Churchmen have chosen the latter. The Creed is taught and is read as a prayer in the churches, but the Sermon on the Mount is excluded even from the Gospel passages read in the churches, so that the congregation never hears it in church, except on those days when the whole of the Gospel is read. Indeed, it could not be otherwise. People who believe in a wicked and senseless God--who has cursed the human race and devoted his own Son to sacrifice, and a part of mankind to eternal torment--cannot believe in the God of love. The man who believes in a God, in a Christ coming again in glory to judge and to punish the quick and the dead, cannot believe in the Christ who bade us turn the left cheek, judge not, forgive those that wrong us, and love our enemies. The man who believes in the inspiration of the Old Testament and the sacred character of David, who commanded on his deathbed the murder of an old man who had cursed him, and whom he could not kill himself because he was bound by an oath to him, and the similar atrocities of which the Old Testament is full, cannot believe in the holy love of Christ. The man who believes in the Church's doctrine of the compatibility of warfare and capital punishment with Christianity cannot believe in the brotherhood of all men.
 
-**Maude (at the point of difference):** “…cannot believe in Christ’s moral law.”
+**Maude (at the point of difference, p. 91):** “…cannot believe in Christ’s moral law.”
 
 **Notes:** Garnett's "cannot believe in the holy love of Christ" replaces «нравственный закон Христа» ("Christ's moral law"). Wiener and Maude have "moral law".
 
@@ -173,7 +173,7 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** The Church as a church, whatever it may be--Catholic, Anglican, Lutheran, Presbyterian--every church, in so far as it is a church, cannot but strive for the same object as the Russian Church. That object is to conceal the real meaning of Christ's teaching and to replace it by their own, which lays no obligation on them, excludes the possibility of understanding the true teaching of Christ, and what is the chief consideration, justifies the existence of priests supported at the people's expense.
 
-**Maude (at the point of difference):** “…substituting its own doctrine which puts men under no obligation, excludes the possibility of understanding the true and vital teaching of Jesus…”
+**Maude (at the point of difference, p. 95):** “…substituting its own doctrine which puts men under no obligation, excludes the possibility of understanding the true and vital teaching of Jesus…”
 
 **Notes:** «истинного, деятельного учения Христа» ("the true, active teaching of Christ"): Maude "true and vital"; Garnett drops "active" ("the true teaching"); Wiener garbles it ("the true activity of Christ's teaching").
 
@@ -185,6 +185,6 @@ Sources: Russian, PSS 28 (TEI, `extract_tei.py --choice=reg`; ¶ = paragraph num
 
 **Garnett:** It is terrible to think what the churches do to men. But if one imagines oneself in the position of the men who constitute the Church, we see they could not act differently. The churches are placed in a dilemma: the Sermon on the Mount or the Nicene Creed--the one excludes the other. If a man sincerely believes in the Sermon on the Mount, the Nicene Creed must inevitably lose all meaning and significance for him, and the Church and its representatives together with it. If a man believes in the Nicene Creed, that is, in the Church, that is, in those who call themselves its representatives, the Sermon on the Mount becomes superfluous for him. And therefore the churches cannot but make every possible effort to obscure the meaning of the Sermon on the Mount, and to attract men to themselves. It is only due to the intense zeal of the churches in this direction that the influence of the churches has lasted hitherto.
 
-**Maude (at the point of difference):** “What the Church does to men is terrible, but if we consider the condition of those who form the Church institutions we see that they cannot act otherwise.”
+**Maude (at the point of difference, p. 101):** “What the Church does to men is terrible, but if we consider the condition of those who form the Church institutions we see that they cannot act otherwise.”
 
 **Notes:** Both sentences are plural in Russian: «что делают над людьми церкви» ("what the churches do to people"), «учреждение церквей» ("the institution of the churches"). Wiener keeps both. Garnett keeps the first but makes the second "the men who constitute the Church"; Maude makes the first "What the Church does" and half-keeps the second ("the Church institutions"). Garnett's paragraph also runs on into the next Russian paragraph.
