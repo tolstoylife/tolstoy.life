@@ -113,26 +113,6 @@ def _bible(m):
     book = ("First " if m.group(1) == "1" else "Second " if m.group(1) == "2" else "") + _BOOKS[m.group(2)]
     return f"{book} {_num(_roman(m.group(3)))}, verse{plural} {verses}"
 
-# Single-word lists ("Mennonites, Herrnhuters, and Quakers"): the voice gives the first comma a long pause and the rest
-# almost none, so each list comma gets a ‹br› cut; the audio builder records the pieces apart and joins them with one
-# even gap (LIST_GAP in build_audiobook.py). Voice notes 2026-10-03. Words that make a run of commas a clause, not a list:
-_NOT_LIST = set("""a an the and but or nor so yet for then too also indeed therefore however moreover rather
-    consequently thus who whom which that this these those what when where while as if though although because
-    since than it its they them their he him his she her we us our you your i me my one ought cannot can could
-    would should will shall may might must is are was were be been being not no just only even both either
-    in on at to of by with from into upon about saying finding regarding directly""".split())
-_LIST = re.compile(r"(?<![\w'’-])[\w'’-]+(?:, (?!(?:and|or)\b)[\w'’-]+)+(?:,? (?:and|or) [\w'’-]+)?")
-
-def _list_cuts(t):
-    if "‹" in t:   # leave foreign passages alone
-        return t
-    def cut(m):
-        words = re.findall(r"[\w'’-]+", m.group())
-        if len(re.split(r",? (?:and|or) |, ", m.group())) < 3 or any(w.lower() in _NOT_LIST for w in words if w not in ("and", "or")):
-            return m.group()
-        return m.group().replace(", ", ",‹br› ")
-    return _LIST.sub(cut, t)
-
 def _fix_ellipsis(t):
     t = t.replace("...", "…")
     return re.sub(r"\.\s*\.\s*\.", "…", t)
@@ -160,5 +140,4 @@ def to_speech(text):
     text = _fix_dashes(text)
     text = _respell(text)
     text = re.sub(r"\b(18|19)(\d\d)\b", _year_words, text)
-    text = _list_cuts(text)
     return text.strip()
