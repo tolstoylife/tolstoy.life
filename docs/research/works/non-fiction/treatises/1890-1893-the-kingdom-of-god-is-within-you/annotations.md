@@ -35,3 +35,13 @@ The search did not cover the plural «христиане» or Wiener's other vol
 ## "By violence" through the whole book (2026-10-03)
 
 The Russian names the commandment «непротивление злу насилием» ("non-resistance to evil by violence") 40 times. None of Wiener's 37 uses of "nonresistance to evil" carries "by violence". He keeps it only where Tolstoy uses the verb ("resisting evil with violence", "by means of violence", about a dozen times). So the short name — which reads as doing nothing about evil — is Wiener's throughout, starting in the preface (above) and the same first paragraph of chapter I, where «учение Христа о непротивлении злу насилием» is "Christ's teaching about non-resistance to evil" (scan p. 5).
+
+## Garnett at the same places (2026-10-03)
+
+Constance Garnett's 1894 translation (Project Gutenberg #43302; no local copy yet), the planned reading text, checked at the places above:
+
+- **Preface:** "a book under the title 'What I Believe,' in which I did in fact make a sincere statement of my beliefs" — belief stays belief, and the title is translated, not "My Religion". "Among the many points in which this doctrine falls short of the doctrine of Christ" — the fault stays with the Church's teaching. "the absence of any commandment of non-resistance to evil by force" — "by force" kept, though «непризнание» ("non-recognition") becomes "absence". "who do not allow a Christian the use of weapons".
+- **Chapter I, first sentence:** "my views on the unlawfulness for a Christian of war and the use of force" — "a Christian" kept.
+- **"By force":** 25 of Garnett's 42 uses of "non-resistance to evil" carry "by force", against none of Wiener's 37; several of the bare ones are where the Russian is bare too (e.g. preface paras 4 and 8). Not yet checked one by one.
+
+Maude's own translation of this book (*The Kingdom of God and Peace Essays*, 1936) is not held locally and has not been compared.
