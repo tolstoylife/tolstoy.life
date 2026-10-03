@@ -44,4 +44,11 @@ Constance Garnett's 1894 translation (Project Gutenberg #43302; no local copy ye
 - **Chapter I, first sentence:** "my views on the unlawfulness for a Christian of war and the use of force" — "a Christian" kept.
 - **"By force":** 25 of Garnett's 42 uses of "non-resistance to evil" carry "by force", against none of Wiener's 37; several of the bare ones are where the Russian is bare too (e.g. preface paras 4 and 8). Not yet checked one by one.
 
-Maude's own translation of this book (*The Kingdom of God and Peace Essays*, 1936) is not held locally and has not been compared.
+## Maude at the same places (2026-10-03)
+
+Aylmer Maude's translation (*The Kingdom of God and Peace Essays*, Oxford University Press 1936, Tolstoy Centenary Edition) is on the Internet Archive as two openly readable Digital Library of India scans: `in.ernet.dli.2015.461988` (labelled public domain) and `in.ernet.dli.2015.77097` (a later Geoffrey Cumberlege printing, labelled in copyright); also lending-only copies of 1942 and 1960. Not saved locally. Maude died in 1938, so the text is public domain in the UK and EU; its US status was not checked. Read from the text of `461988`, with the preface and chapter I opening checked against the page images (printed pp. 445–447).
+
+- **Preface:** "a book called *What I Believe*, in which I gave an account of what I do believe"; "Among the many divergences of that doctrine from the teaching of Christ"; "its omission to acknowledge the law of non-resistance to evil by violence"; "who do not allow a Christian to use weapons". All four points right — and «непризнание» rendered as "omission to acknowledge", closer than Garnett's "absence".
+- **Chapter I, first sentence:** "my views as to the unlawfulness of war or the use of violence for a Christian".
+- **"By violence":** across the whole book, "evil by violence/force" occurs 13 times in Wiener, 21 in Maude and 39 in Garnett, against 40 uses of «злу насилием» in the Russian. Maude often shortens to plain "non-resistance" (his introduction says Tolstoy himself used "Resist not evil" and "non-resistance" as short forms), but the bare long form "non-resistance to evil" appears only seven times, two of them where the Russian is bare too (preface paras 4 and 8). Not yet checked one by one.
+- **Epigraph:** «рабами человеков» is "bondservants of men" (Revised Version wording) — closer to "slaves" than Wiener's "servants". Maude's printing also misprints the first reference, as "John iii. 32" (Wiener's has "John viii. 23").
