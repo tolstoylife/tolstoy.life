@@ -82,7 +82,7 @@ The exact list is in the appendix at the end of this file.
 - **What she leaves out**: Tolstoy's own footnote to Ballou's catechism heading («Перевод сделан свободно, с некоторыми пропусками», "The translation is made freely, with some omissions"); the I.56 line.
 - **Foreign words she leaves untranslated**: *securus judicat orbis terrarum* (Latin, Augustine), *du charmant docteur* (French, Renan), *Ubi Christus, ibi Ecclesia* (Latin), Arnold's German book title, *l'infâme* (French, Voltaire).
 
-Garnett's own footnotes keep her straight quotation marks; ours use curly ones.
+Each footnote says whose it is: *Tolstoy's note.* (in all three versions; «Примечание Толстого.» in the Russian), *The PSS editors' translation.* for note 3 of the Russian and machine versions, and *Our note, not Garnett's.* for ours. Garnett's text of Tolstoy's notes keeps her straight quotation marks; ours use curly ones.
 
 ## Machine translation
 
