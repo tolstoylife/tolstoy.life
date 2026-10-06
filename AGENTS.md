@@ -223,6 +223,8 @@ Every session that produced artifacts decides whether to also publish:
 
 State the choice and the reasoning in the session summary.
 
+How to write each one: a dev-blog note copies the front matter of a recent file in `website/src/posts/notes/`, has no leading H1 (the layout supplies the title), and is written in the site's voice (`feedback_voice_target.md`, with `architecture-review.html` as the model). Reference HTML follows the target `docs/` subdir's own convention (`docs/editorial/conventions.md` covers evergreen vs dated): a new evergreen doc gets a `changelog:` front-matter block, and a dated report uses the serif reading shape and can be featured through `serve.py`'s `FEATURED` list if Johan flags it.
+
 ### The `corpus-dive` skill
 
 `/corpus-dive <theme>` automates primary-source research: a layered Russian keyword sweep over the
