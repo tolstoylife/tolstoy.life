@@ -295,7 +295,9 @@ def work_url(label: str):
 
 def wiki_url(label: str, base: str = "/research/wiki/", end: str = "/") -> str:
     """`[[Henry George]]` → `/research/wiki/henry-george/` — the page's `id`, like /wiki/<id>/ on tolstoy.life; a work goes to its own page instead."""
-    return work_url(label) or f"{base}{wiki_ids().get(label) or slugify(label)}/"
+    label, _, frag = label.partition("#")   # [[Page#Heading]] → …/page/#heading; ⚠ the heading needs a matching {#id} in its page
+    url = work_url(label) or f"{base}{wiki_ids().get(label) or slugify(label)}/"
+    return url + (f"#{slugify(frag)}" if frag else "")
 
 def html_out(md_path: Path) -> Path:
     """Where a page's HTML is written: wiki pages at research/wiki/<id>/index.html, everything else beside its .md."""
