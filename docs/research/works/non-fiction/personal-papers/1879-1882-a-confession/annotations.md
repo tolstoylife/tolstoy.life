@@ -101,7 +101,7 @@ Johan's 56 reader notes on the Maude edition (`confession.en-maude`), made on 10
 ### Text questions, checked
 
 - **IV.4 — italic *wished*.** Not italic in the PSS text (the TEI marks italics elsewhere in the work, but not «хотел»); Wiener has no italics either. The emphasis is Maude's.
-- **IV.8 — "And *he* was amused. …"** (tagged needs-fix). The Russian is a quoted thought, «А ему смешно...» — the dots are Tolstoy's; the quotation marks are dropped and the italic *he* is added by Maude. Open: what the fix should be — restore the quotation marks, or change how the voice reads it?
+- **IV.8 — "And *he* was amused. …"** (tagged needs-fix). The Russian is a quoted thought, «А ему смешно...» — the dots are Tolstoy's; the quotation marks are dropped and the italic *he* is added by Maude. Fixed 2026-10-10: the quotation marks are restored in the Maude text (recorded in the bundle's `alignment-notes.md`).
 - **VII.16 — the closing "…".** Not in the Russian, which ends on "!"; Wiener has none. Maude's addition.
 - **VI.15 — "I made me great works".** Not slang: Maude quotes Ecclesiastes 2 in the King James wording, where "made me" means "made for myself". Wiener does the same. The whole paragraph is Solomon's speech in quotation marks, which is easy to lose on screen; see the layout list below.
 - **VII.2 — "as regards education and manner of life".** Old-fashioned but correct: "with regard to". Russian «по образованию и образу жизни», "in education and way of life".
@@ -127,9 +127,13 @@ None of these has a vault page yet. Johan's brief: "as brief and neutral as poss
 
 ### Pronunciation (audio)
 
-- Verb read as adjective or noun: "Live" in "Live joyfully" (VII.7); "lives" as a verb (VII.17, IX.12); "read" in the past tense, should sound "red" (XV.4).
-- "i.e." should be spoken as "that is" (XII.13).
-- Descartes (IX.7) and St. John Chrysostom (XIV.7) mispronounced.
+Fixed 2026-10-10 in `reader/speech.py`; 19 clips re-voiced. The voice reads "lives" as the noun and "read" as the present tense whatever the context, so every verb use in the book was respelled, not only the flagged ones.
+
+- "Live" as a verb (VII.7, and III.1, XII.12, XII.13).
+- "lives" as a verb (VII.17, IX.12, and five more).
+- "read" in the past tense, sounding "red" (XV.4, and I.4, X.10, XIV.7).
+- "i.e." now spoken as "that is" (XII.13, III.8).
+- Descartes (IX.7) and St. John Chrysostom (XIV.7). The splitter had also cut XIV.7 into two sentences after "St.", so "John Chrysostom" started a new clip; the two halves are now voiced as one.
 
 ### Reader layout
 

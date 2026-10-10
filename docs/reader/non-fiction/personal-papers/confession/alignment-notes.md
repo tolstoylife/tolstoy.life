@@ -12,6 +12,7 @@ Same rule as for Wiener: Maude's wording is untouched, and only paragraph breaks
 
 - **Chapter III — a closing paragraph the Russian spine does not have.** Maude (and Wiener) end the chapter with "I felt that what I had been standing on had collapsed…". The PSS text ends at «И я ничего и ничего не мог ответить.» in all three local Russian sources (the TEI file, the Jubilee fb2, and tolstoy.ru's fb2), so this is the translators' source text, not a gap in ours. The extra paragraph is joined to III.16 ("But there was no answer. I felt…"), the paragraph it follows.
 - **Chapter XI — a half-sentence offset.** The Russian starts XI.3 with «И я понял, что мы действительно такие сумасшедшие», which Maude runs into the end of his previous sentence ("…such madmen? and I understood that we really are such madmen."). Splitting there would open a paragraph mid-sentence, so the clause stays at the end of XI.2.
+- **IV.8 — quotation marks restored (2026-10-10).** The one change to Maude's text. The Russian closes the paragraph with a quoted thought, «А ему смешно...»; Maude dropped the quotation marks, so the line now reads “And *he* was amused. …”. Maude's words and italic are kept. Johan's reader note; see the dive's `annotations.md`.
 - **Wiener's chapter VI boundaries are slightly off** (found while doing this). The counts match, but Wiener's paragraphs drift by one around the Socrates and Solomon quotations (VI.11–VI.17) and in IV.1–IV.3 against the Russian. Left as it is, since Wiener is no longer the reading text.
 
 ## Which version defines the coordinate

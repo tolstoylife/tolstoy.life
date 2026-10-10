@@ -20,6 +20,7 @@ MERGE_FORWARD = {
     # Initials and titles the splitter cuts ("G. D. Bartlett", "Rev. Dr. Reuen Thomas"); a run of flags chains into one sentence.
     "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
         "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1"},
+    "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
 }
 
 # Pronunciation respellings for Kokoro's g2p (verbatim from build_audiobook.py SUBS).
@@ -69,6 +70,13 @@ _SUBS = [
     # Picked by pitch measurement (parselmouth). Voice note 2026-07-04.
     (r"support us, their parasites\.", "support us — their parasites."),
     (r"\bSchopenhauer\b", "Shopenhower"),
+    # ⚠ The g2p reads "lives" as the noun and "read" as present tense whatever the context; respell each verb use by phrase. A Confession (Maude), voice notes 2026-10-10.
+    (r"\bLive\b", "Liv"),                  # capitalised "Live" is always the imperative in these books
+    (r"\b(man|often|humanity|lived and|himself but) lives\b", r"\1 livs"),
+    (r"\b(I|whom I|when I|and) read (Voltaire|and heard|the Lives|all I could)\b", r"\1 red \2"),
+    (r"\bi\.\s?e\.,?", "that is,"),         # read as letters "i e" otherwise
+    (r"\bSt\.(?= [A-Z]|$)", "Saint"),     # the abbreviation dot reads as a full stop; "$" covers a sentence the splitter cut after "St."
+    (r"\bDescartes\b", "Day-kart"), (r"\bChrysostom\b", "Krisustum"),
     (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
     (r"\bkumys\b", "koomiss"),
