@@ -354,8 +354,8 @@ a.noteref sup { font-size: 13px; color: var(--accent); margin-left: 2px; }
   background: var(--rl-wash);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  padding: 1px 0;
 }
+.sentence.rl-active { padding: 1px 0; }   /* ⚠ inline only: on the block h2 the padding adds height and shifts the page */
 body[data-kind="work"][data-audio="true"] .sentence,
 body[data-kind="work"][data-audio="true"] main h2 { cursor: pointer; }
 

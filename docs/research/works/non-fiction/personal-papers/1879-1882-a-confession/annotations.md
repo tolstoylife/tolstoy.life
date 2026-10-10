@@ -137,5 +137,5 @@ Fixed 2026-10-10 in `reader/speech.py`; 19 clips re-voiced. The voice reads "liv
 
 ### Reader layout
 
-- **Layout shift (V.1):** the page jumps when a chapter is highlighted during read-along.
+- **Layout shift (V.1):** the page jumps when a chapter is highlighted during read-along. Fixed 2026-10-10: the highlight's 1px padding added height to the block heading; it now applies to sentences only (`docs/reader/assets/shell.css`).
 - **Long Bible quotations (VI.15 and around):** Solomon's speech runs on for paragraphs and it is easy to lose that Tolstoy is still quoting. Johan suggests marking it typographically, for example as a block quotation.
