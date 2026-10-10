@@ -19,7 +19,8 @@ MERGE_FORWARD = {
     "the-great-sin": {"p-7-3-s1"},   # "But we are wrong." -> glue into the long next sentence
     # Initials and titles the splitter cuts ("G. D. Bartlett", "Rev. Dr. Reuen Thomas"); a run of flags chains into one sentence.
     "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
-        "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1"},
+        "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1",
+        "p-4-84-s4", "p-7-43-s12"},   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
     "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
 }
 
@@ -76,6 +77,7 @@ _SUBS = [
     (r"\b(I|whom I|when I|and) read (Voltaire|and heard|the Lives|all I could)\b", r"\1 red \2"),
     (r"\bi\.\s?e\.,?", "that is,"),         # read as letters "i e" otherwise
     (r"\bSt\.(?= [A-Z]|$)", "Saint"),     # the abbreviation dot reads as a full stop; "$" covers a sentence the splitter cut after "St."
+    (r"\bMr\.(?= [A-Z]|$)", "Mister"),
     (r"\bDescartes\b", "Day-kart"), (r"\bChrysostom\b", "Krisustum"),
     (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
