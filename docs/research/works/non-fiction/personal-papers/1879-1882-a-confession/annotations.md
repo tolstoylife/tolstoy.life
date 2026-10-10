@@ -1,6 +1,6 @@
 ---
 layer: reference
-lastUpdated: 2026-10-03
+lastUpdated: 2026-10-10
 tags: [research, annotations]
 ---
 
@@ -80,3 +80,58 @@ A first pass at the "Watch the wording" point above: five places where the trans
 Every Wiener wording quoted in this section was read against the same scan (printed pp. 8, 54, 59, 69, 86) and matches it, so none of the differences above comes from the e-text.
 
 The machine translation is the most literal and the most consistent of the three, which makes it a useful third witness wherever Wiener and Maude disagree.
+
+## Notes on the Maude reader edition, chapters IV–XVI (2026-10-10)
+
+Johan's 56 reader notes on the Maude edition (`confession.en-maude`), made on 10 October 2026 and exported as a W3C annotation file. They mix his own reading of the book with fixes, questions and wiki wishes; this section sorts them. Anchors are as above, but the sentence numbers here are Maude's own. Text questions were checked against the PSS Russian (`primary-sources/tolstoydigital-TEI/texts/works/v23_001_059_Ispoved.xml`) and Wiener.
+
+### Johan's reading (interpretive steer, not text for a page)
+
+- **Key sentences:** VII.13 "Life is all. Reason is its fruit yet reason rejects life itself!" — the key contradiction. IX.12 "If he did not believe that one must live for something … Without faith he cannot live." XII.11 "I remembered that I only lived at those times when I believed in God." — the key turning point. XV.3 "theology was itself destroying what it ought to produce" — "very good line". XV.1 truth and falsehood "interwoven by finest threads" — the best lies are wrapped in truths.
+- **The four ways out (VII.4–VII.11):** ignorance; epicureanism; strength and energy (suicide); weakness (clinging to a life one has judged worse than death). VII.11: Tolstoy places himself in the fourth.
+- **Class and the "painted hussy" (VII.19, VIII.1–3):** the wording reads as degrading toward lower-class women, perhaps blaming his own sins on the women he paid. But VIII.2–3 then names that outlook outright — his circle took itself for "the whole of humanity" and the rest for "cattle", in "the delusion of my pride of intellect" — so the bluntness may be deliberate, exposing his earlier pride. The book sits at a breaking point between the upper-class world of *Anna Karenina* and the faith of working people; his tone toward the poor and toward prostitutes grows much more sympathetic later, above all with Katusha in *Resurrection*. A comparison worth making in the re-dive.
+- **"A few hundred similar people" (VIII.1–2):** the circle that has concluded life is evil is tiny, and Tolstoy says so himself ("And I saw no others").
+- **Faith against reason (VIII.5, IX.9, XII.3, XII.12, XIII.3):** Johan's own view is that recognising faith as life is itself reasonable — that faith in God can be a rational conclusion — so he does not share Tolstoy's split between faith and reason here. Calling the search for God "a feeling … from the heart" (XII.3) yields to the convention that "reason" means only mainstream, scientific reasoning; Tolstoy could have reclaimed the word. XIII.3 ("That source is God, the origin both of the human body and the human reason") comes close to doing so. Open question for the re-dive: does he reclaim "reason" in later writings, and separate faith from miracles and the supernatural?
+- **Doctrine as the common people's faith (VIII.5, X.9):** it is odd that he lists the Trinity, the six days and the devils and angels as what ordinary people believe; they may hold these loosely or as images. X.9 is an important distinction: the faith of the common people is the same faith the "pseudo-believers" of his circle profess — who do not believe what they preach.
+- **God, not yet the follower of Christ (XII.4, XIII.3):** this book is about God and whether he can be proved; later Tolstoy plays down the supernatural and speaks of following Christ, a practical everyday matter. Many ideas here are drawn "with a broad brush", as by someone new to it. *Religion*, *Christian* and *Christianity* matter word by word — his meaning of "religion" differs from the usual one and is still forming. Ties to the re-dive steer above.
+- **"Truth reveals itself to love" (XIII.4):** still the Church's method — take over the word *love*, and any critic of the Church becomes the one who is unloving.
+- **Maude's footnote 9 (X.7):** true, though Tolstoy says it more plainly in later writings; Maude's "back-to-the-people" wording is very mild.
+- **The ending (XVI.8):** the dream and the ending are great, but it stops abruptly. (See XVI.5 below: the book was written as the introduction to a longer work.)
+
+### Text questions, checked
+
+- **IV.4 — italic *wished*.** Not italic in the PSS text (the TEI marks italics elsewhere in the work, but not «хотел»); Wiener has no italics either. The emphasis is Maude's.
+- **IV.8 — "And *he* was amused. …"** (tagged needs-fix). The Russian is a quoted thought, «А ему смешно...» — the dots are Tolstoy's; the quotation marks are dropped and the italic *he* is added by Maude. Open: what the fix should be — restore the quotation marks, or change how the voice reads it?
+- **VII.16 — the closing "…".** Not in the Russian, which ends on "!"; Wiener has none. Maude's addition.
+- **VI.15 — "I made me great works".** Not slang: Maude quotes Ecclesiastes 2 in the King James wording, where "made me" means "made for myself". Wiener does the same. The whole paragraph is Solomon's speech in quotation marks, which is easy to lose on screen; see the layout list below.
+- **VII.2 — "as regards education and manner of life".** Old-fashioned but correct: "with regard to". Russian «по образованию и образу жизни», "in education and way of life".
+- **VII.4 — "one cannot cease to know what one does know".** Yes, Wiener differs: "it is impossible to stop knowing what you know". Russian «нельзя перестать знать того, что знаешь».
+- **VII.9 — "strength and energy".** Russian «выход силы и энергии»; Wiener "force and energy". Both are literal; the Russian names no gentler alternative.
+- **VIII.5 — "God, One in Three".** The Russian writes «бог 1 и 3» with numerals, offhand; Wiener "God as one and three". Maude's capitals make it sound more like a creed than Tolstoy's shorthand does. «пока я не сошел с ума» is "as long as I have not gone mad" — Maude softens it to "as long as I retain my reason".
+- **IX.21 — "the hidden infinity of human thought".** Not "soul". The PSS reads «в скрывающейся от наших глаз исторической дали жизни человечества», "in the historical distance of mankind's life, hidden from our eyes". Wiener ("the remote infinitude of human thought") and Maude agree with each other against the PSS, and both also have a phrase the PSS lacks ("the unity and existence of the soul"). They seem to have translated from an earlier Russian text than the PSS one. Worth confirming against the Geneva printing before any wiki page leans on this sentence.
+- **IX.22 — "faith is stored up the deepest human wisdom".** Russian «хранится глубочайшая мудрость человечества», "is kept the deepest wisdom of mankind"; Wiener "there was preserved the profoundest wisdom of humanity". Plain sense: faith's answers hold humanity's deepest wisdom.
+- **XI.2 — "a dark room which he has fouled".** Russian «огадивший эту свою комнату»: a madman shut for life in a dark room he has soiled with his own filth, who thinks he will die if he leaves it.
+- **XII.1 — "ratiocination".** Russian «умствования»: idle theorising, reasoning for its own sake. Wiener "idle speculation".
+- **XIV.1 — "the chosen Warriors".** A Maude error. The Russian «взбранной воеводе» is the opening of the hymn to the Mother of God, "To thee, the champion leader" (the kontakion of the Akathist); Wiener's "To the chosen leader" is close. The same paragraph's "prayer for the Emperor" is Maude's rendering of «ектения», the litany (Wiener "responsory").
+- **XIV.7 — "the Lives of Holy men".** Russian «Четьи-Минеи и Прологи»: the *Chetyi-Minei* (saints' lives arranged for daily reading through the year, compiled by Dmitry of Rostov) and the *Prologues* (short lives and sayings). Maude drops the names, and also drops "Prince Joasaph" before "the story of Buddha". "Peter the publican" (tax-collector) is right; Wiener's "Peter the Martyr" is wrong.
+- **XVI.5 — "1879."** Not a diary entry: the date he finished the main text. The PSS text carries no date there, but its title note calls the work an "introduction to an unpublished work" («Вступление к ненапечатанному сочинению»), and XVI.6 adds that the foregoing was written three years earlier — so the dream is an 1882 postscript, which explains the abrupt end.
+
+### Wiki links and explanations wanted
+
+None of these has a vault page yet. Johan's brief: "as brief and neutral as possible, without any editorializing at all".
+
+- **People:** Socrates, Schopenhauer, Solomon and Buddha (VI.10); Descartes (IX.7); Kant (XII.4); St. John Chrysostom (XIV.7). For Kant and Schopenhauer, a one-line summary of why they held God's existence cannot be proved (XII.4).
+- **Concepts:** epicureanism (VII.5); Schopenhauer's *Wille zum Leben*, the will to live, with a translation or a link to that section of a Schopenhauer page (VI.13).
+- **Church terms:** the Cherubic Hymn and the "chosen leader" hymn (XIV.1); the feasts in XIV.2 (Ascension, Pentecost, Epiphany, the Intercession of the Virgin); archimandrite, head of a large monastery (XV.4); the *Chetyi-Minei* (XIV.7).
+- **Regiments:** the Sumy Hussars and the Yellow Uhlans (XV.4) — a short footnote may serve better than a page.
+
+### Pronunciation (audio)
+
+- Verb read as adjective or noun: "Live" in "Live joyfully" (VII.7); "lives" as a verb (VII.17, IX.12); "read" in the past tense, should sound "red" (XV.4).
+- "i.e." should be spoken as "that is" (XII.13).
+- Descartes (IX.7) and St. John Chrysostom (XIV.7) mispronounced.
+
+### Reader layout
+
+- **Layout shift (V.1):** the page jumps when a chapter is highlighted during read-along.
+- **Long Bible quotations (VI.15 and around):** Solomon's speech runs on for paragraphs and it is easy to lose that Tolstoy is still quoting. Johan suggests marking it typographically, for example as a block quotation.
