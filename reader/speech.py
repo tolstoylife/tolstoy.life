@@ -20,8 +20,14 @@ MERGE_FORWARD = {
     # Initials and titles the splitter cuts ("G. D. Bartlett", "Rev. Dr. Reuen Thomas"); a run of flags chains into one sentence.
     "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
         "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1",
-        "p-4-84-s4", "p-7-43-s12"},   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
+        "p-4-84-s4", "p-7-43-s12",
+        "p-1-10-s2", "p-1-10-s3"},   # the preface signature "L." / "Tolstoy." / place and date -> one clip   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
     "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
+}
+
+# Paragraphs whose em-dashes become full stops in speech: Kokoro's dash pause is too short to separate the items of a chapter's summary.
+DASH_STOPS = {
+    "the-kingdom-of-god-is-within-you/en-garnett": {"p-2-2", "p-3-2", "p-4-2", "p-5-2", "p-6-2", "p-7-2", "p-8-2", "p-9-2"},   # ⚠ add IX–XII's summaries when stage 3 is built
 }
 
 # Pronunciation respellings for Kokoro's g2p (verbatim from build_audiobook.py SUBS).
@@ -71,6 +77,8 @@ _SUBS = [
     # Picked by pitch measurement (parselmouth). Voice note 2026-07-04.
     (r"support us, their parasites\.", "support us — their parasites."),
     (r"\bSchopenhauer\b", "Shopenhower"),
+    (r"\b2d Reply\b", "Second Reply"), (r"\b3d Reply\b", "Third Reply"),   # Garnett's old ordinals, read as "two d" otherwise
+    (r"May 14/26, ", "May fourteenth, or twenty-sixth new style, "),   # Old Style / New Style date in the Kingdom of God preface signature
     # ⚠ The g2p reads "lives" as the noun and "read" as present tense whatever the context; respell each verb use by phrase. A Confession (Maude), voice notes 2026-10-10.
     (r"\bLive\b", "Liv"),                  # capitalised "Live" is always the imperative in these books
     (r"\b(man|often|humanity|lived and|himself but) lives\b", r"\1 livs"),

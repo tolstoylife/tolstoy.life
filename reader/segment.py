@@ -5,7 +5,7 @@ are validated as paragraph-parallel."""
 import re, json, sys, argparse
 from pathlib import Path
 from reader import ids
-from reader.speech import to_speech, MERGE_FORWARD
+from reader.speech import to_speech, MERGE_FORWARD, DASH_STOPS
 
 # ── CriticMarkup → reading text ────────────────────────────────────────────────
 def resolve_reading_text(md):
@@ -78,6 +78,7 @@ def merge_speech_groups(sentences, flagged=frozenset()):
 def parse(md, work=None, version=None):
     body, notes = _note_defs(md)
     flagged = MERGE_FORWARD.get(work, set()) | MERGE_FORWARD.get(f"{work}/{version}", set())
+    dash_stops = DASH_STOPS.get(work, set()) | DASH_STOPS.get(f"{work}/{version}", set())
     # split into sections on '## ' headings; text before the first heading is ignored here
     chunks = re.split(r"^##\s+(.+)$", body, flags=re.M)
     sections = []
@@ -96,6 +97,9 @@ def parse(md, work=None, version=None):
             for sk, sent in enumerate(split_sentences(reading), start=1):
                 sentences.append({"id": ids.sentence_id(pid, sk),
                                   "display": sent, "speech": to_speech(sent)})
+            if pid in dash_stops:
+                for st in sentences:
+                    st["speech"] = re.sub(r"\s*—\s*(\w)", lambda m: ". " + m.group(1).upper(), st["speech"])
             sec["paragraphs"].append({"id": pid,
                                       "sentences": merge_speech_groups(sentences, flagged)})
         sections.append(sec)
