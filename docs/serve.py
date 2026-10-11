@@ -146,6 +146,7 @@ ANNOTATION_UI = """
   <div class="ann-quote" id="ann-quote"></div>
   <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
   <label class="ann-fix"><input type="checkbox" id="ann-fix"> 🔧 Needs a text fix</label>
+  <label class="ann-fix"><input type="checkbox" id="ann-audio-fix"> 🔊 Needs an audio fix</label>
   <div class="ann-actions">
     <button id="ann-cancel">Cancel</button>
     <button class="primary" id="ann-save">Save</button>
@@ -1162,6 +1163,10 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
     <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/the-great-sin/">
       <div class="nc-title">The Great Sin</div>
       <div class="nc-meta">1905 · the Russian, the 1905 English (<em>A Great Iniquity</em>), a first machine draft · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/non-fiction/treatises/the-kingdom-of-god-is-within-you/">
+      <div class="nc-title">The Kingdom of God Is Within You</div>
+      <div class="nc-meta">1890–93 · the Russian, Garnett's 1894 English, a first machine draft · preface and chapters I–VIII so far · read-along audio</div>
     </a>
     <a class="nav-card" href="/reader/index.html">
       <div class="nc-title">The whole library</div>

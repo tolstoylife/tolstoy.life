@@ -2,7 +2,7 @@
    One record per note:
      { "@context": "http://www.w3.org/ns/anno.jsonld", id, type: "Annotation",
        created, motivation: "commenting",
-       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix tag) ],
+       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix / needs-audio-fix tags) ],
        target: { source: "<docKey>#<paraId>",
                  selector: [ TextQuoteSelector {exact,prefix,suffix},
                              TextPositionSelector {start,end} ] } }
@@ -38,12 +38,12 @@
       prefix: a.anchor.before || '',
       suffix: a.anchor.after || '',
       start: null, end: null,
-    }, a.comment, !!a.needsFix, a.created);
+    }, a.comment, a.needsFix ? ['needs-fix'] : [], a.created);
   }
 
-  function makeAnnotation(anchor, comment, needsFix, created) {
+  function makeAnnotation(anchor, comment, tags, created) {
     const body = [{ type: 'TextualBody', value: comment, format: 'text/plain', purpose: 'commenting' }];
-    if (needsFix) body.push({ type: 'TextualBody', value: 'needs-fix', purpose: 'tagging' });
+    tags.forEach(t => body.push({ type: 'TextualBody', value: t, purpose: 'tagging' }));
     const selector = [{
       type: 'TextQuoteSelector',
       exact: anchor.exact, prefix: anchor.prefix, suffix: anchor.suffix,
@@ -80,7 +80,9 @@
   const paraIdOf = ann => ((ann.target && ann.target.source) || '').split('#')[1] || '';
   const bodies = ann => Array.isArray(ann.body) ? ann.body : (ann.body ? [ann.body] : []);
   const commentOf = ann => (bodies(ann).find(b => b.purpose !== 'tagging') || {}).value || '';
-  const needsFix = ann => bodies(ann).some(b => b.purpose === 'tagging' && b.value === 'needs-fix');
+  const hasTag = (ann, t) => bodies(ann).some(b => b.purpose === 'tagging' && b.value === t);
+  const needsFix = ann => hasTag(ann, 'needs-fix');
+  const needsAudioFix = ann => hasTag(ann, 'needs-audio-fix');
 
   // ── Anchor capture from a selection ────────────────────────────────────
   function getContext(range) {
@@ -135,7 +137,7 @@
     const { node: n, idx } = best;
     const after = n.textContent.slice(idx + exact.length);
     const mark = document.createElement('mark');
-    mark.className = 'annotation' + (needsFix(ann) ? ' needs-fix' : '');
+    mark.className = 'annotation' + (needsFix(ann) ? ' needs-fix' : '') + (needsAudioFix(ann) ? ' needs-audio-fix' : '');
     mark.dataset.annId = ann.id;
     mark.textContent = exact;
     const afterNode = document.createTextNode(after);
@@ -216,7 +218,7 @@
       const meta = document.createElement('div');
       meta.className = 'note-meta';
       const when = document.createElement('span');
-      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '');
+      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '');
       const edit = document.createElement('button');
       edit.className = 'note-edit';
       edit.textContent = 'Edit';
@@ -307,7 +309,7 @@
     const lines = ['Notes — ' + DOC_KEY, ''];
     anns.forEach((a, i) => {
       const q = ((quoteSel(a) || {}).exact || '').trim();
-      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}`);
+      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}${needsAudioFix(a) ? ' 🔊' : ''}`);
       lines.push('   ' + commentOf(a).replace(/\n/g, '\n   '));
       lines.push('');
     });
@@ -372,7 +374,7 @@
     const comment = annText.value.trim();
     if (!comment || !pendingAnchor) { hidePopover(); return; }
     const anns = loadDoc();
-    anns.push(makeAnnotation(pendingAnchor, comment, document.getElementById('ann-fix').checked));
+    anns.push(makeAnnotation(pendingAnchor, comment, [['ann-fix', 'needs-fix'], ['ann-audio-fix', 'needs-audio-fix']].filter(([id]) => document.getElementById(id).checked).map(([, t]) => t)));
     saveDoc(anns);
     hidePopover();
     renderAll();
@@ -388,6 +390,7 @@
     popover.style.display = 'none';
     annText.value = '';
     document.getElementById('ann-fix').checked = false;
+    document.getElementById('ann-audio-fix').checked = false;
     if (pendingAnchor) window.getSelection().removeAllRanges();
     pendingAnchor = null;
   }
