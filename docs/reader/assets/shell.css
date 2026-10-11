@@ -604,7 +604,8 @@ mark.annotation.needs-fix { border-bottom-style: dashed; }
 mark.annotation.needs-fix::after { content: "🔧"; font-size: 0.72em; vertical-align: super; margin-left: 1px; opacity: 0.8; }
 mark.annotation.needs-audio-fix { border-bottom-style: dashed; }
 mark.annotation.needs-audio-fix::after { content: "🔊"; font-size: 0.72em; vertical-align: super; margin-left: 1px; opacity: 0.8; }
-mark.annotation.needs-fix.needs-audio-fix::after { content: "🔧🔊"; }
+mark.annotation.needs-fix.needs-audio-fix:not(.ann-cont)::after { content: "🔧🔊"; }
+mark.annotation.ann-cont::after { content: none; }
 mark.annotation.flash { animation: entry-flash 1.2s; }
 /* Margin marker: a thin bar beside any line-block that carries a note. */
 main :is(p, li, blockquote, h2, h3):has(mark.annotation)::before {
