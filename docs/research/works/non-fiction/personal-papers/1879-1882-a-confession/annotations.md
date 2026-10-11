@@ -118,6 +118,8 @@ Johan's 56 reader notes on the Maude edition (`confession.en-maude`), made on 10
 
 ### Wiki links and explanations wanted
 
+Done 2026-10-11. Wiki pages (in `docs/research/wiki/`), linked from the Maude text: Arthur Schopenhauer (with *Will to live* and *On proving God* sections), Socrates, Solomon, Buddha, René Descartes, Immanuel Kant, John Chrysostom, Epicureanism, Archimandrite, Chetyi-Minei. Reader notes marked as ours (10, 11, 13, 15): the Cherubic Hymn, the "chosen leader" hymn, the four feasts, the two regiments.
+
 None of these has a vault page yet. Johan's brief: "as brief and neutral as possible, without any editorializing at all".
 
 - **People:** Socrates, Schopenhauer, Solomon and Buddha (VI.10); Descartes (IX.7); Kant (XII.4); St. John Chrysostom (XIV.7). For Kant and Schopenhauer, a one-line summary of why they held God's existence cannot be proved (XII.4).
