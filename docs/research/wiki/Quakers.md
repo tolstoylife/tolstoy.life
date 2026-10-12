@@ -79,9 +79,9 @@ Chapter I calls it "On War", first published in London in 1824, and marvels that
 
 [^8]: <span lang="ru">«Как всё то, что 200 лет проповедуют квакеры… точно как будто не существуют и не существовали»</span> (PSS 28:16, ch. I). English: Garnett.
 
-[^9]: Tolstoy's English, letter to L. G. Wilson, 22 June (5 July NS) 1889 (PSS 64:270–274, No. 391).
+[^9]: Tolstoy's English, letter to L. G. Wilson, 22 June (5 July <abbr title="New Style (Gregorian calendar)">NS</abbr>) 1889 (PSS 64:270–274, No. 391).
 
-[^10]: <span lang="ru">«Здесь мы живем в местности, наполненной квакерами. Я несколько знакомлюсь с их литературою... Войну и присягу они безусловно отрицают»</span>; <span lang="ru">«замечательно полно и убедительно исследовано отношение Христа и его первых последователей к войне»</span> (V. G. Chertkov to Tolstoy, 4 June 1885, ГМТ; quoted PSS 28:343, commentary). English: ours.
+[^10]: <span lang="ru">«Здесь мы живем в местности, наполненной квакерами. Я несколько знакомлюсь с их литературою... Войну и присягу они безусловно отрицают»</span>; <span lang="ru">«замечательно полно и убедительно исследовано отношение Христа и его первых последователей к войне»</span> (V. G. Chertkov to Tolstoy, 4 June 1885, <abbr title="Государственный музей Л. Н. Толстого — the State Tolstoy Museum, Moscow">ГМТ</abbr>; quoted PSS 28:343, commentary). English: ours.
 
 [^11]: <span lang="ru">«В письме от 14 ноября 1890 г. Толстой просил Черткова прислать ему книгу квакера Ионафана Даймонда „Аn Enquiry into the Accordancy of War with the principles of Christianity“, London, 1824»</span> (PSS 28:343, commentary). English: ours.
 
