@@ -614,6 +614,31 @@ def _render_sentence_web(text: str) -> str:
     return mark_missing_wikilinks(re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out)))   # markdown italics
 
 
+# Documents a work quotes whole, set off on a lighter ground (web reader only): first..last paragraph id, how many leading paragraphs are its title, and a source line (markdown links allowed). Paragraph ids are shared across versions, so one entry styles every version.
+SET_OFF = {
+    "the-kingdom-of-god-is-within-you": [
+        ("p-2-12", "p-2-26", 2, "Garrison's text, shortened by Tolstoy · first printed in *The Liberator*, 28 September 1838, p. 154 · "
+            "[scan](https://archive.org/details/sim_liberator_1838-09-28_8_39/page/n1/) · [[William Lloyd Garrison#The Declaration of Sentiments|about the text]]"),
+        ("p-2-38", "p-2-85", 1, "Adin Ballou's catechism, translated freely and shortened by Tolstoy · [[Adin Ballou#The Catechism and the beginning of the book|about the catechism]]"),
+    ],
+}
+
+
+def _drop_quote(text: str, last: bool) -> str:
+    """Inside a set-off document the block marks the quotation, so drop the per-paragraph opening '"' and the closing one at the very end; balanced inner quotes stay."""
+    n = text.count('"')
+    if text.startswith('"') and (n % 2 or (last and n == 2 and text.endswith('"'))):
+        text = text[1:]
+    if last and text.endswith('"') and text.count('"') % 2:
+        text = text[:-1]
+    return text
+
+
+def _source_line(src: str) -> str:
+    html = _render_sentence_web(src)   # [[wikilinks]] and *italics*
+    return re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html)
+
+
 def work_page_html(md_path: Path, work: str, version: str) -> str:
     """Render a reader-edition page from its segments.json — each sentence a
     <span class="sentence" id=…> inside <p id=…>, exactly the coordinates
@@ -626,13 +651,29 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
 
     # Body: sections → paragraphs → sentence spans (+ end-of-text notes)
     parts = []
+    starts = {b[0]: b for b in SET_OFF.get(work, [])}
+    block, left_in_title = None, 0
     for sec in seg["sections"]:
         parts.append(f'<h2 id="{sec["id"]}">{esc(sec["heading"])}</h2>')
         for p in sec["paragraphs"]:
+            if p["id"] in starts:
+                block, left_in_title = starts[p["id"]], starts[p["id"]][2]
+                parts.append('<div class="set-off">')
+            last_p = block is not None and p["id"] == block[1]
+            sents = p["sentences"]
             spans = " ".join(
-                f'<span class="sentence" id="{s["id"]}">{_render_sentence_web(s["display"])}</span>'
-                for s in p["sentences"])
-            parts.append(f'<p id="{p["id"]}">{spans}</p>')
+                f'<span class="sentence" id="{s["id"]}">'
+                f'{_render_sentence_web(_drop_quote(s["display"], last_p and i == len(sents) - 1) if block else s["display"])}</span>'
+                for i, s in enumerate(sents))
+            cls = ""
+            if block and left_in_title:
+                cls, left_in_title = ' class="set-off-title"', left_in_title - 1
+            elif block and sents and re.match(r"\*[QA]\.\*", sents[0]["display"]):
+                cls = f' class="qa-{sents[0]["display"][1].lower()}"'
+            parts.append(f'<p id="{p["id"]}"{cls}>{spans}</p>')
+            if last_p:
+                parts.append(f'<p class="set-off-source">{_source_line(block[3])}</p></div>')
+                block = None
     notes = seg.get("notes") or []
     if notes:
         asides = "\n".join(

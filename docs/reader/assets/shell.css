@@ -810,3 +810,11 @@ main :is(li, blockquote, h2, h3):has(mark.annotation) { position: relative; }
 .wiki-index li > a { font-size: 1.15em; text-decoration: none; }
 .wiki-index li > a:hover { text-decoration: underline 1px; text-underline-offset: 2px; }
 .wiki-index li p { margin: 0.2rem 0 0; color: var(--ink-soft); font-size: 0.92em; line-height: 1.45; }
+
+/* Set-off document (serve.py SET_OFF): a text the work quotes whole, on the theme's lighter surface. */
+.set-off { background: var(--surface); border: 1px solid var(--rule-soft); border-radius: 4px; padding: 1.1rem 1.25rem 0.5rem; margin: 1.6rem -0.25rem; }
+.set-off .set-off-title { text-align: center; font-variant-caps: all-small-caps; letter-spacing: 0.05em; margin-block: 0 0.2rem; }
+.set-off .set-off-title + p:not(.set-off-title) { margin-top: 1rem; }
+.set-off .qa-q { margin-top: 1.4rem; }
+.set-off :is(.qa-q, .qa-a) > .sentence:first-child > em:first-child { font-style: normal; font-weight: 600; }
+.set-off .set-off-source { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-soft); border-top: 1px solid var(--rule-soft); padding-top: 0.5rem; margin-top: 1.2rem; }
