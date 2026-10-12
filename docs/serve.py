@@ -617,6 +617,7 @@ def _render_sentence_web(text: str) -> str:
 # Documents a work quotes whole, set off on a lighter ground (web reader only): first..last paragraph id, how many leading paragraphs are its title, and a source line (markdown links allowed). Paragraph ids are shared across versions, so one entry styles every version.
 SET_OFF = {
     "the-kingdom-of-god-is-within-you": [
+        ("p-2-5", "p-2-7", 0, "From the letters American Quakers sent Tolstoy after *What I Believe* · [[Quakers|about the Quakers]]"),
         ("p-2-12", "p-2-26", 2, "Garrison's text, shortened by Tolstoy · first printed in *The Liberator*, 28 September 1838, p. 154 · "
             "[scan](https://archive.org/details/sim_liberator_1838-09-28_8_39/page/n1/) · [[William Lloyd Garrison#The Declaration of Sentiments|about the text]]"),
         ("p-2-38", "p-2-85", 1, "Adin Ballou's catechism, translated freely and shortened by Tolstoy · [[Adin Ballou#The Catechism and the beginning of the book|about the catechism]]"),
