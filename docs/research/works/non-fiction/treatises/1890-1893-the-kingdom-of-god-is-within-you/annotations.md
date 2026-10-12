@@ -89,3 +89,12 @@ Johan's reading at I.29, where the Declaration was "unknown in Europe" and hardl
 
 - **Ignoring is the chief method.** Simply not speaking about a well-argued dissent is one of the most important ways of suppressing it: where there is little to refute, the academy and the churches look the other way. It is also the chief way Tolstoy himself has been silenced.
 - **Tolstoy says so himself.** The chapter I summary ends on the "conscious efforts to silence and suppress these manifestations of Christian non-resistance"; I.90 says the Quakers', Garrison's and Ballou's work is treated "as though it did not exist". In the 1903 preface to the English life of Garrison (PSS 36:95–99) he asks how the truth Garrison stated fifty years earlier "could be so hushed up" («могла быть так замолчана») that he had to state it as something new, and reads that indifference and hostility as a sign of the law's importance.
+
+## The Declaration in Hedberg, Garnett and 1838 (2026-10-12)
+
+Johan's note at I.12 asked whether Hedberg left the Declaration out, whether a facsimile exists and where the original is. Findings, in full on the wiki page `William Lloyd Garrison` (§ The Declaration of Sentiments):
+
+- **Hedberg keeps it**, whole, pp. 3–8 of the 1894 edition, following Tolstoy's shortened version. Full digital copy at the National Library of Sweden: `https://urn.kb.se/resolve?urn=urn:nbn:se:kb:dig-9sl79vdm3vn1q1j` (PDF `https://weburn.kb.se/dig/tryck/198/002086198.pdf`). "Våra vapen" ("our weapons") for «души свои» ("our souls", I.25) hints that she translated from the French *Le salut est en vous*.
+- **Garnett mixes** Garrison's own English (where Tolstoy kept his sentence) with translation of Tolstoy's Russian (where he changed it). "Jacobinical" is Garrison's; Tolstoy has «революционного учения».
+- **Facsimile:** *The Liberator*, 28 September 1838, p. 154 (archive.org `sim_liberator_1838-09-28_8_39`, page n1). The original was to be engrossed on parchment for signing; its whereabouts are not found. A lithographed broadside of 1838 with 44 facsimile signatures survives in a few libraries.
+- **For the reader edition:** a set-off style for the Declaration (Johan's note) could also carry a one-line source note pointing to the 1838 printing.
