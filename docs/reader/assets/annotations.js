@@ -2,7 +2,7 @@
    One record per note:
      { "@context": "http://www.w3.org/ns/anno.jsonld", id, type: "Annotation",
        created, motivation: "commenting",
-       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix / needs-audio-fix tags) ],
+       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix / needs-audio-fix / private-thought tags) ],
        target: { source: "<docKey>#<paraId>",
                  selector: [ TextQuoteSelector {exact,prefix,suffix},
                              TextPositionSelector {start,end} ] } }
@@ -65,7 +65,7 @@
     };
   }
 
-  const TAGS = [['needs-fix', '🔧 Needs a text fix'], ['needs-audio-fix', '🔊 Needs an audio fix']];
+  const TAGS = [['needs-fix', '🔧 Needs a text fix'], ['needs-audio-fix', '🔊 Needs an audio fix'], ['private-thought', '💭 Private thought']];
 
   function setTags(ann, tags) {
     ann.body = bodies(ann).filter(b => b.purpose !== 'tagging')
@@ -90,6 +90,7 @@
   const hasTag = (ann, t) => bodies(ann).some(b => b.purpose === 'tagging' && b.value === t);
   const needsFix = ann => hasTag(ann, 'needs-fix');
   const needsAudioFix = ann => hasTag(ann, 'needs-audio-fix');
+  const isPrivate = ann => hasTag(ann, 'private-thought');   // the reader's own interpretation: steer for overviews and wiki pages, never text
 
   // ── Anchor capture from a selection ────────────────────────────────────
   function getContext(range) {
@@ -225,7 +226,7 @@
       const meta = document.createElement('div');
       meta.className = 'note-meta';
       const when = document.createElement('span');
-      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '');
+      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '') + (isPrivate(ann) ? ' · 💭 private thought' : '');
       const edit = document.createElement('button');
       edit.className = 'note-edit';
       edit.textContent = 'Edit';
@@ -329,7 +330,7 @@
     const lines = ['Notes — ' + DOC_KEY, ''];
     anns.forEach((a, i) => {
       const q = ((quoteSel(a) || {}).exact || '').trim();
-      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}${needsAudioFix(a) ? ' 🔊' : ''}`);
+      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}${needsAudioFix(a) ? ' 🔊' : ''}${isPrivate(a) ? ' 💭' : ''}`);
       lines.push('   ' + commentOf(a).replace(/\n/g, '\n   '));
       lines.push('');
     });
@@ -394,7 +395,7 @@
     const comment = annText.value.trim();
     if (!comment || !pendingAnchor) { hidePopover(); return; }
     const anns = loadDoc();
-    anns.push(makeAnnotation(pendingAnchor, comment, [['ann-fix', 'needs-fix'], ['ann-audio-fix', 'needs-audio-fix']].filter(([id]) => document.getElementById(id).checked).map(([, t]) => t)));
+    anns.push(makeAnnotation(pendingAnchor, comment, [['ann-fix', 'needs-fix'], ['ann-audio-fix', 'needs-audio-fix'], ['ann-private', 'private-thought']].filter(([id]) => document.getElementById(id).checked).map(([, t]) => t)));
     saveDoc(anns);
     hidePopover();
     renderAll();
@@ -411,6 +412,7 @@
     annText.value = '';
     document.getElementById('ann-fix').checked = false;
     document.getElementById('ann-audio-fix').checked = false;
+    document.getElementById('ann-private').checked = false;
     if (pendingAnchor) window.getSelection().removeAllRanges();
     pendingAnchor = null;
   }

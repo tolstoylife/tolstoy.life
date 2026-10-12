@@ -82,3 +82,10 @@ Johan's reading, prompted by the preface sentence above. Interpretive steer for 
 - **Watch capitals.** Garnett and Maude write "the Church" (Maude even "Churches"); Wiener mostly "the church". A capital lends the institution standing. The PSS can't settle Tolstoy's own usage: Soviet editions lowercase «церковь» and «бог» throughout, so a capital or its absence there is the editors', not his.
 - **The chapter III passages, side by side:** `church-passages.md` — Russian, Wiener, Garnett, and Maude at the points of difference.
 - **For wiki pages:** say "the churches" or "the church as an institution" where Tolstoy means the organisations, and don't let "the Church" stand in for the body of Christ.
+
+## Overview steer — silence as the way dissent is suppressed (2026-10-12)
+
+Johan's reading at I.29, where the Declaration was "unknown in Europe" and hardly known even to Americans. Interpretive steer for the overview page, not text for a page.
+
+- **Ignoring is the chief method.** Simply not speaking about a well-argued dissent is one of the most important ways of suppressing it: where there is little to refute, the academy and the churches look the other way. It is also the chief way Tolstoy himself has been silenced.
+- **Tolstoy says so himself.** The chapter I summary ends on the "conscious efforts to silence and suppress these manifestations of Christian non-resistance"; I.90 says the Quakers', Garrison's and Ballou's work is treated "as though it did not exist". In the 1903 preface to the English life of Garrison (PSS 36:95–99) he asks how the truth Garrison stated fifty years earlier "could be so hushed up" («могла быть так замолчана») that he had to state it as something new, and reads that indifference and hostility as a sign of the law's importance.
