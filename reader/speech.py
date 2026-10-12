@@ -21,7 +21,7 @@ MERGE_FORWARD = {
     "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
         "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1",
         "p-4-84-s4", "p-7-43-s12",
-        "p-1-10-s2", "p-1-10-s3"},   # the preface signature "L." / "Tolstoy." / place and date -> one clip   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
+        "p-1-10-s2", "p-1-10-s3", "p-2-27-s2", "p-2-27-s3", "p-4-2-s1"},   # the preface signature "L." / "Tolstoy." / place and date -> one clip   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
     "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
 }
 
@@ -37,7 +37,7 @@ _SUBS = [
     (r"\$1\.40", "one dollar forty"),        # spell out money — the decimal dot reads as a full stop
     (r"\bLabouchere\b", "Labooshair"),
     (r"\bRadischeff\b", "Rahdeeshef"),
-    (r"Yasnaya Poliana", "Yasnaya Polyahna"),
+    (r"Yasna(?:ya|ïa) Poliana", "Yasnaya Polyahna"),   # Garnett prints "Yasnaïa"
     (r"\bAlexander II\b\.?", "Alexander the Second"),   # regnal number reads as letters; also kills the abbrev-dot's spoken stop
     (r"\bper cent\.", "per cent"),                       # the archaic abbreviation dot reads as a full stop
     # The Part IV policy list rushes like the Part I professions list — full-stop
@@ -90,6 +90,7 @@ _SUBS = [
     (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
     (r"\bkumys\b", "koomiss"),
+    (r"\bimpious\b", "ympious"),           # g2p stresses im-PEE-us; "ympious" -> IM-pee-us
     (r"(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
     # The Kingdom of God (Garnett), chapters II–III: French and German quotations. Latin is left to the English voice.
     (r"(L'Église est la société des fidéles .*?notre Saint Père le Pape,)", r"‹fr›\1‹/fr›"),
@@ -162,6 +163,7 @@ def _respell(t):
 def to_speech(text):
     text = re.sub(r"\[\^\w+\]", "", text)                # drop footnote markers (skippable in audio)
     text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]", r"\1", text)  # wikilink: speak the words shown
+    text = re.sub(r"^\*([QA])\.\*", lambda m: "Question." if m.group(1) == "Q" else "Answer.", text)   # catechism *Q.* / *A.*
     text = re.sub(r"\*([^*]+)\*", r"\1", text)             # ⚠ drop italic asterisks, or the voice reads them aloud
     text = _BIBLE.sub(_bible, text)
     text = _fix_ellipsis(text)
