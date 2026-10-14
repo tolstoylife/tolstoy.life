@@ -1330,13 +1330,29 @@ def build_works_tracker_page(verbose=True):
         print(f"  ! reader/index.html skipped: {exc}")
 
 
-def build_all(verbose=True):
+_folder_mtimes = {}   # folder → newest non-HTML file mtime, refilled on each build_all
+
+def _newest_input(md_path):
+    """Newest mtime among serve.py, the page's .md, and the files beside it and in its build/ (meta, segments, timing)."""
+    newest = max(Path(__file__).stat().st_mtime, md_path.stat().st_mtime)
+    for d in (md_path.parent, md_path.parent / "build"):
+        if d not in _folder_mtimes:
+            _folder_mtimes[d] = max((f.stat().st_mtime for f in d.iterdir() if f.is_file() and f.suffix != ".html"), default=0) if d.is_dir() else 0
+        newest = max(newest, _folder_mtimes[d])
+    return newest
+
+
+def build_all(verbose=True, only_changed=False):
+    """⚠ only_changed skips pages whose inputs are older than their .html; links to pages elsewhere (a new wiki page, a works record) can stay stale until that page is opened, which rebuilds it."""
     md_docs = collect_md_files()
     html_docs = collect_orphan_html_files()
+    _folder_mtimes.clear()
     count = 0
     for folder, files in md_docs.items():
         for md_path in files:
             html_path = html_out(md_path)
+            if only_changed and html_path.exists() and html_path.stat().st_mtime >= _newest_input(md_path):
+                continue
             html = md_to_html(md_path)
             html_path.parent.mkdir(exist_ok=True)
             html_path.write_text(html, encoding="utf-8")
@@ -1384,7 +1400,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path = self.path.split("?")[0].lstrip("/")
         if path == "" or path == "INDEX.html":
-            build_all(verbose=False)
+            build_all(verbose=False, only_changed=True)
         elif (ROOT / path).is_dir() and (ROOT / path / "overview.md").exists():
             html = md_to_html(ROOT / path / "overview.md")
             (ROOT / path / "index.html").write_text(html, encoding="utf-8")
