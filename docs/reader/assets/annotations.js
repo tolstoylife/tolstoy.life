@@ -65,7 +65,7 @@
     };
   }
 
-  const TAGS = [['needs-fix', '🔧 Needs a text fix'], ['needs-audio-fix', '🔊 Needs an audio fix'], ['private-thought', '💭 Private thought']];
+  const TAGS = [['needs-fix', '🔧 Needs a text fix'], ['needs-audio-fix', '🔊 Needs an audio fix'], ['private-thought', '🧭 Dive steer']];
 
   function setTags(ann, tags) {
     ann.body = bodies(ann).filter(b => b.purpose !== 'tagging')
@@ -226,7 +226,7 @@
       const meta = document.createElement('div');
       meta.className = 'note-meta';
       const when = document.createElement('span');
-      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '') + (isPrivate(ann) ? ' · 💭 private thought' : '');
+      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '') + (isPrivate(ann) ? ' · 🧭 dive steer' : '');
       const edit = document.createElement('button');
       edit.className = 'note-edit';
       edit.textContent = 'Edit';

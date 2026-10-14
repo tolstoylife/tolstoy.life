@@ -147,7 +147,7 @@ ANNOTATION_UI = """
   <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
   <label class="ann-fix"><input type="checkbox" id="ann-fix"> 🔧 Needs a text fix</label>
   <label class="ann-fix"><input type="checkbox" id="ann-audio-fix"> 🔊 Needs an audio fix</label>
-  <label class="ann-fix"><input type="checkbox" id="ann-private"> 💭 Private thought</label>
+  <label class="ann-fix"><input type="checkbox" id="ann-private"> 🧭 Dive steer</label>
   <div class="ann-actions">
     <button id="ann-cancel">Cancel</button>
     <button class="primary" id="ann-save">Save</button>
