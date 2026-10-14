@@ -1425,8 +1425,10 @@ def main():
     if args.build_only:
         return
 
-    socketserver.TCPServer.allow_reuse_address = True   # ⚠ without it a restart fails with "Address already in use" for a minute
-    with socketserver.TCPServer(("", args.port), Handler) as httpd:
+    socketserver.ThreadingTCPServer.allow_reuse_address = True   # ⚠ without it a restart fails with "Address already in use" for a minute
+    socketserver.ThreadingTCPServer.daemon_threads = True
+    # ponytail: one thread per request so the ~18s full rebuild on INDEX.html doesn't hold up every other page; two rebuilds at once can overlap (harmless on a dev server)
+    with socketserver.ThreadingTCPServer(("", args.port), Handler) as httpd:
         httpd.allow_reuse_address = True
         url = f"http://localhost:{args.port}/INDEX.html"
         print(f"\nServing at {url}")
