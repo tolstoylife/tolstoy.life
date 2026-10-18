@@ -1,6 +1,6 @@
 # Tolstoy Research Platform — Backlog
 
-Last updated: 2026-08-14
+Last updated: 2026-10-18
 
 ---
 
@@ -18,6 +18,8 @@ Base installation done (2026-04-18). Qwen2.5:7b + bge-m3 (1024d) operational sin
 
 ### 2. GitHub Projects for the `projects/` folder
 Bethink Yourselves, the Birukoff biography, and Korrektur live in `projects/` but are excluded from the parent repo via `.gitignore`. Investigate how GitHub Projects can be used to track and organise these production projects — issues, boards, milestones. Decide whether each project should have its own repo under `tolstoylife/` or whether a shared project board is enough.
+
+- **Betänken Eder! (2026-10-18):** decided on its own repo. The Swedish edition now lives in `projects/betanken-eder/` (to become `tolstoylife/betanken-eder`; Johan creates it and pushes). EPUB built with Pandoc, passes epubcheck. Waiting on Johan: review `docs/anteckningar.md` (the 83 notes) and rewrite the foreword draft `forord.md`. Next: bilingual (sv/en) johanedlund.se, then a Projects post type there — handoff written for a JEDEE brainstorming session. `projects/bethink-yourselves/` stays as the local working folder.
 
 ### 3. TEI data ingestion (phase 3)
 3,113 persons and 770 locations in the tolstoydigital/TEI repo. Start with Tolstoy's closest circle and work outward in tiers. See the implementation plan in CLAUDE.md.
