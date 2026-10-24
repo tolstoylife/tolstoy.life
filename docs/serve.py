@@ -433,6 +433,8 @@ def _version_label(version: str) -> str:
         return "EN"
     if version.startswith("ru"):
         return "RU"
+    if version.startswith("sv"):
+        return "SV"
     return version.upper()
 
 
@@ -494,6 +496,9 @@ def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
             base = "English"
     elif version.startswith("ru"):
         base = "Русский (Russian version)" if verbose else "Русский"
+    elif version.startswith("sv"):
+        year = version.split("-", 1)[1] if "-" in version else year
+        base = (f"Svenska, {year} (Swedish version)" if verbose else f"Svenska, {year}") if year else "Svenska"
     else:
         base = version.upper()
     return base + (" · read-along" if readalong else "")
@@ -735,7 +740,7 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
         hub_html=nav["hub_html"],
         tools_extra=TOOLS_LAYERS + version_html,
         readalong=readalong,
-        lang="ru" if version.startswith("ru") else "en",
+        lang=version.split("-", 1)[0] if version[:2] in ("ru", "sv") else "en",
     )
 
 

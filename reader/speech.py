@@ -40,6 +40,27 @@ _SUBS = [
     (r"Yasna(?:ya|ïa) Poliana", "Yasnaya Polyahna"),   # Garnett prints "Yasnaïa"
     (r"\bAlexander II\b\.?", "Alexander the Second"),   # regnal number reads as letters; also kills the abbrev-dot's spoken stop
     (r"\bper cent\.", "per cent"),                       # the archaic abbreviation dot reads as a full stop
+    # Bethink Yourselves! (Chertkov/Mayo 1904): names and references, unheard first guesses — confirm by ear.
+    (r"\bLyof Nikolaevitch\b", "Lyoff Nikolayevich"),
+    (r"\bToula\b", "Toola"),
+    (r"\bNijni Novgorod\b", "Nizhny Novgorod"),
+    (r"\bM\. Muravieff\b", "Monsieur Mooravyoff"),
+    (r"\bMuravieff\b", "Mooravyoff"),
+    (r"\bDibitch\b", "Deebitch"),
+    (r"\bVilijinsky\b", "Vilizhinsky"),
+    (r"\bYakoutsk\b", "Yakootsk"),
+    (r"\bRetvisan\b", "Retvizahn"),
+    (r"\bDrojjin\b", "Drozhzhin"),
+    (r"\bNovoe Vremya\b", "Novoye Vremya"),
+    (r"\bViedomosti\b", "Vedomosti"),
+    (r"\bSoyen Shaku\b", "Soyen Shahkoo"),
+    (r"\bMoltka\b", "Moltke"),                          # PG's misprint; the page keeps it
+    (r"\(μετανοεῖτε\)", "(metanoeite)"),
+    (r"\bNicholas II\b", "Nicholas the Second"),
+    (r"the year '77\.", "the year seventy-seven."),
+    (r"\(Mark i\. 15\)", "Mark one, verse fifteen"),
+    (r"\(Luke xiii\. 5\)", "Luke thirteen, verse five"),
+    (r"\bLuke xii\. 49\.", "Luke twelve, verse forty-nine."),
     # The Part IV policy list rushes like the Part I professions list — full-stop
     # each item (the one pause Kokoro honors). Voice note 2026-07-04.
     (r"Tariffs, colonies, income taxes, military and naval budgets, socialistic "

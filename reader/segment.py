@@ -27,7 +27,7 @@ def split_sentences(text):
     # Split on whitespace after terminal punctuation. A footnote marker may sit
     # between the punctuation and the space ("cow.[^1] I") — keep it glued to the
     # sentence it ends, then split on a sentinel so the boundary still fires.
-    text = re.sub(r'(?<=[.!?"])(\[\^\w+\])?\s+(?=["“(A-ZА-Я]|\[\[)', r"\1<SPLIT>", text)
+    text = re.sub(r'(?<=[.!?"])(\[\^\w+\])?\s+(?=["“(A-ZА-ЯÅÄÖ»]|\[\[)', r"\1<SPLIT>", text)
     parts = text.split("<SPLIT>")
     return [p.replace("<DOT>", ".").replace("<ATTR>", " ").strip() for p in parts if p.strip()]
 
@@ -105,7 +105,7 @@ def parse(md, work=None, version=None):
         sections.append(sec)
     return {"sections": sections, "notes": notes}
 
-def segment(md_path, version, work, spine="ru", spine_doc=None):
+def segment(md_path, version, work, spine="ru", spine_doc=None, missing_tail=0):
     doc = parse(Path(md_path).read_text(encoding="utf-8"), work, version)
     if spine_doc is not None:
         for s_sec, t_sec in zip(spine_doc["sections"], doc["sections"]):
@@ -113,7 +113,8 @@ def segment(md_path, version, work, spine="ru", spine_doc=None):
                 raise ValueError(
                     f"paragraph count mismatch in {t_sec['id']}: spine has "
                     f"{len(s_sec['paragraphs'])}, {version} has {len(t_sec['paragraphs'])}")
-        if len(spine_doc["sections"]) != len(doc["sections"]):
+        # missing_tail: a version printed without the spine's last N sections (e.g. the 1904 Swedish has no postscript)
+        if len(spine_doc["sections"]) - missing_tail != len(doc["sections"]):
             raise ValueError("section count mismatch between spine and " + version)
     return {"work": work, "version": version, "spine": spine, **doc}
 
@@ -124,15 +125,18 @@ def main():
     ap.add_argument("--work", required=True)
     ap.add_argument("--spine", default="ru")
     ap.add_argument("--spine-json", help="segments.json of the spine, to align against")
+    ap.add_argument("--missing-tail", type=int, default=0, help="this version lacks the spine's last N sections")
     ap.add_argument("-o", "--out", required=True)
     a = ap.parse_args()
     spine_doc = json.loads(Path(a.spine_json).read_text()) if a.spine_json else None
-    doc = segment(a.md, version=a.version, work=a.work, spine=a.spine, spine_doc=spine_doc)
+    doc = segment(a.md, version=a.version, work=a.work, spine=a.spine, spine_doc=spine_doc,
+                  missing_tail=a.missing_tail)
     meta = Path(a.md).parent / f"meta.{a.version}.json"
     if meta.exists() and doc["sections"]:   # the narrator says the book's title before the first heading
         title = json.loads(meta.read_text(encoding="utf-8")).get("title")
         if title:
-            doc["sections"][0]["headingSpeech"] = f"{title}. {doc['sections'][0]['headingSpeech']}"
+            stop = "" if title[-1] in ".!?" else "."
+            doc["sections"][0]["headingSpeech"] = f"{title}{stop} {doc['sections'][0]['headingSpeech']}"
     Path(a.out).write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"wrote {a.out}: {len(doc['sections'])} sections, "
           f"{sum(len(s['paragraphs']) for s in doc['sections'])} paragraphs")
