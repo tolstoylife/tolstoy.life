@@ -1,0 +1,1492 @@
+# Machine-readable dossier for the Betänken Eder! theme dive (index.md).
+# Built 2026-10-24 by a corpus-dive run (slug: betanken-eder-in-sweden) from two finished sweeps (extracts/_sweep_corpus.md, extracts/_sweep_swedish.md) plus a short web check (≤10 searches) on the 1909–10 Stockholm peace congress, made after Johan corrected the question mid-run.
+# Every quoteRu is byte-faithful to its named extract (verify_quotes.py). Rows with genre "newspaper" / "catalogue" / "pamphlet" / "parliamentary" carry a quoteSv instead (read from KB page images or Runeberg OCR, as stated per row) and no quoteRu, so the gate skips them.
+# Swedish rows keep the sweep's FOUND / INFERRED distinction in `status`.
+
+topic:
+  slug: betanken-eder-in-sweden
+  title: "Betänken Eder! in Sweden, 1904, and the Swedish peace society's link to Tolstoy"
+  question: >-
+    Johan first asked why Svenska freds- och skiljedomsföreningen (SFSF) took the initiative to the Swedish Betänken Eder! (Stockholm 1904) and what happened around it. The 1904 evidence does not support that premise, and Johan then corrected it: he now places SFSF's involvement with Tolstoy around the Stockholm peace congress of 1909–10. The dive therefore asks (1) who actually brought Одумайтесь! to Swedish readers in 1904, and what was cut; (2) where SFSF and Tolstoy really met, in 1909–10; (3) the earlier Swedish thread and Tolstoy's own view of peace societies, in his words.
+  date: 2026-10-24
+  period: prophet
+  corpusSurface: [letters, diaries, works, commentary, swedish-press-1904, swedish-catalogues, riksdag-print]
+  dateRange: "1896–1910 (corpus); June 1904–April 1905 (Swedish press); 1908–1910 (congress)"
+
+evidence:
+  # ── 1904: the Russian side — how the essay went abroad ──
+  - id: v36_604_free_word_edition
+    genre: commentary
+    pssTom: 36
+    pages: "604–621"
+    date: "1936 (commentary, N. V. Gorbachev)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_604_621_Odumajtes.txt
+    quoteRu: >-
+      Статья вышла в издании «Свободного слова», в Крайстчерче, в Англии, в 1904 г.
+    quoteEn: >-
+      The article came out in the Free Word edition, at Christchurch, England, in 1904. (working English)
+    significance: "First edition abroad, through Chertkov. The Tom 36 commentary names no translation into Swedish and no Swedish publisher."
+    facsimile: null
+
+  - id: v36_604_popular_edition
+    genre: commentary
+    pssTom: 36
+    pages: "604–621"
+    date: "1936 (commentary)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_604_621_Odumajtes.txt
+    quoteRu: >-
+      В том же году вышло второе популярное издание, предназначенное для народа и солдат, без эпиграфов
+    quoteEn: >-
+      The same year a second, popular edition appeared, intended for the people and soldiers, without epigraphs. (working English)
+    significance: "An epigraph-free edition existed in Russian in 1904. Whether the Swedish text descends from it, or simply drops the epigraphs itself, is not known."
+    facsimile: null
+
+  - id: v88_720_chertkov_simultaneous
+    genre: commentary
+    pssTom: 88
+    pages: "329–331"
+    date: "1904-05-13 (OS); note to Tolstoy's letter"
+    addressee: "V. G. Chertkov"
+    localPdf: null
+    extract: extracts/v88_720_maya13.notes-force.txt
+    quoteRu: >-
+      Чертков писал, что статья «Одумайтесь!» набирается в его типографии, переведена им на английский язык и появится одновременно в разных странах.
+    quoteEn: >-
+      Chertkov wrote that the article "Bethink Yourselves!" was being set in his press, that he had translated it into English, and that it would appear simultaneously in different countries. (working English)
+    significance: "The planned route abroad: Chertkov's English, released at once in several countries. The Swedish GHT text of 1 July calls itself the letter 'in the world paper Times', which fits this route."
+    facsimile: null
+
+  - id: v88_720_epigraphs_kept
+    genre: letters
+    pssTom: 88
+    pages: "329–331"
+    date: "1904-05-13 (OS)"
+    addressee: "V. G. Chertkov"
+    localPdf: null
+    extract: extracts/v88_720_maya13.txt
+    quoteRu: >-
+      на помещение эпиграфов¹ отдельно я не согласен. Мне кажется, это совсем лишит эпиграфы их значения.
+    quoteEn: >-
+      I do not agree to placing the epigraphs separately. It seems to me this would strip the epigraphs of their meaning entirely. (working English)
+    significance: "Tolstoy wanted the chapter epigraphs kept with their chapters. The Swedish pamphlet has none."
+    facsimile: null
+
+  - id: v36_100_ch9_question
+    genre: works
+    pssTom: 36
+    pages: "100–148"
+    date: "1904"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_100_148_Odumajtes.txt
+    quoteRu: >-
+      Но как же поступить теперь, сейчас? — скажут мне, — у нас в России в ту минуту, когда враги уже напали на нас, убивают наших, угрожают нам, — как поступить русскому солдату, офицеру, генералу, царю, частному человеку?
+    quoteEn: >-
+      "But how are we to act now, at once?" I shall be told. "Here in Russia, at the moment when enemies have already attacked us, are killing our people, threatening us: how should a Russian soldier, officer, general, tsar, private person act?" (working English)
+    significance: "The opening of chapter IX's main text: the chapter the Björck & Börjesson pamphlet leaves out."
+    facsimile: null
+
+  - id: v36_100_ch9_refusal
+    genre: works
+    pssTom: 36
+    pages: "100–148"
+    date: "1904"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_100_148_Odumajtes.txt
+    quoteRu: >-
+      я не могу поступить иначе как так, как того требует от меня Бог, и потому я, как человек, не могу ни прямо, ни косвенно, ни распоряжениями, ни помощью, ни возбуждением к ней, участвовать в войне
+    quoteEn: >-
+      I cannot act otherwise than as God requires of me, and so I, as a man, cannot take part in war, neither directly nor indirectly, neither by orders, nor by help, nor by urging others to it. (working English)
+    significance: "The personal refusal at the centre of chapter IX. Its Russian epigraphs are letters of peasants who refused military service (Olkhovik, Seredа, Drozhzhin). This is the chapter missing from the pamphlet."
+    facsimile: null
+
+  - id: v36_100_hague
+    genre: works
+    pssTom: 36
+    pages: "100–148"
+    date: "1904"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_100_148_Odumajtes.txt
+    quoteRu: >-
+      Ничто очевиднее речей господина Муравьева и профессора Мартенса о том, что японская война не противоречит Гаагской конференции мира, ничто очевиднее этих речей не показывает, до какой степени среди нашего мира извращено орудие передачи мысли
+    quoteEn: >-
+      Nothing is clearer than the speeches of Mr Muravyov and Professor Martens that the Japanese war does not contradict the Hague Peace Conference; nothing shows more plainly how far, in our world, the instrument for conveying thought has been perverted. (working English)
+    significance: "The essay itself on the Hague peace conference: the institutional peace work that a peace-and-arbitration society stood for."
+    facsimile: null
+
+  - id: v36_426_variant_peace_societies
+    genre: works
+    pssTom: 36
+    pages: "426–435"
+    date: "1904 (variant)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v36_426_435_Odumajtes_Varianty.txt
+    quoteRu: >-
+      Все уже испробовано: и стачки, и союзы, и благотворительность, и синдикаты, и установленіе политическаго равновѣсія, и общества мира, и международные суды
+    quoteEn: >-
+      Everything has already been tried: strikes, unions, charity, syndicates, the establishment of a political balance, peace societies and international courts. (working English)
+    significance: "A draft of Одумайтесь! names peace societies among the remedies already tried. Variant apparatus printed in pre-reform spelling."
+    facsimile: null
+
+  # ── Tolstoy on peace societies ──
+  - id: v70_175_peace_societies
+    genre: letters
+    pssTom: 70
+    pages: "148–154"
+    date: "1897-09-23 (OS)"
+    addressee: "the editor of Stockholms Tagblad"
+    localPdf: null
+    extract: extracts/v70_175_RedaktorugazetyStokholmTagblatt.txt
+    quoteRu: >-
+      О мире говорят профессора, писатели, члены парламентов и обществ мира и те же профессора, писатели, члены парламентов и обществ мира при случае выражают патриотические чувства
+    quoteEn: >-
+      Professors, writers, members of parliaments and of peace societies talk about peace, and the same professors, writers, members of parliaments and of peace societies express patriotic feelings when occasion arises. (working English)
+    significance: "Tolstoy's view of peace societies, written for a Stockholm paper seven years before Betänken Eder!."
+    facsimile: null
+
+  - id: v70_175_serve_god
+    genre: letters
+    pssTom: 70
+    pages: "148–154"
+    date: "1897-09-23 (OS)"
+    addressee: "the editor of Stockholms Tagblad"
+    localPdf: null
+    extract: extracts/v70_175_RedaktorugazetyStokholmTagblatt.txt
+    quoteRu: >-
+      Люди, действительно служащие делу мира, служат ему потому, что служат богу, и потому не нуждаются в денежном награждении и не примут его.
+    quoteEn: >-
+      People who truly serve the cause of peace serve it because they serve God, and so they need no monetary reward and would not accept it. (working English)
+    significance: "The 1897 letter proposes that Nobel's peace money go to the families of the Doukhobors who refused military service."
+    facsimile: null
+
+  - id: v70_175_langlet
+    genre: letters
+    pssTom: 70
+    pages: "148–154"
+    date: "1897-09-23 (OS)"
+    addressee: "the editor of Stockholms Tagblad (French cover note)"
+    localPdf: null
+    extract: extracts/v70_175_RedaktorugazetyStokholmTagblatt.txt
+    quoteRu: >-
+      Voldemar Langlet, c’est lui, qui m’a conseillé de m’adresser à votre journal.
+    quoteEn: >-
+      Voldemar Langlet is the one who advised me to address your newspaper. (working English)
+    significance: "Original French. The Swedish helper behind Tolstoy's first letter to the Swedish press."
+    facsimile: null
+
+  - id: v73_139_suttner_no_societies
+    genre: letters
+    pssTom: 73
+    pages: "124–127"
+    date: "1901-08-15/28"
+    addressee: "Bertha von Suttner"
+    localPdf: null
+    extract: extracts/v73_139_BerteZutnerBerthaSuttner.txt
+    quoteRu: >-
+      Для того, чтобы не было войны, не надо ни конференций, ни обществ мира, а нужно только одно: восстановление истинной религии и, как следствие этого, восстановление достоинства человека.
+    quoteFr: >-
+      Pour que la guerre disparaisse il ne faut ni conférences, ni sociétés de paix, il ne faut qu’une chose: le rétablissement de la vraie religion et à la suite de cela le rétablissement de la dignité de l’homme.
+    quoteEn: >-
+      For war to disappear, neither conferences nor peace societies are needed, only one thing: the restoration of true religion and, following from it, the restoration of human dignity. (working English) [from the French]
+    significance: "Tolstoy wrote in French; the Russian is the PSS editors' translation. His clearest word to the best-known figure of the peace societies."
+    facsimile: null
+
+  - id: v73_139_suttner_energy
+    genre: letters
+    pssTom: 73
+    pages: "124–127"
+    date: "1901-08-15/28"
+    addressee: "Bertha von Suttner"
+    localPdf: null
+    extract: extracts/v73_139_BerteZutnerBerthaSuttner.txt
+    quoteRu: >-
+      Если бы самая малая часть энергии, которая тратится сейчас на статьи и на речи на конференциях и в обществах мира, употреблялась бы в школах и среди народа на уничтожение ложной религии и на распространение истинной, — войны скоро стали бы невозможными.
+    quoteEn: >-
+      If the smallest part of the energy now spent on articles and speeches at conferences and in peace societies were used in schools and among the people to destroy false religion and spread the true one, wars would soon become impossible. (working English)
+    significance: "Same letter: what he would have the peace societies do instead."
+    facsimile: null
+
+  - id: v31_078_signs_of_times
+    genre: works
+    pssTom: 31
+    pages: "78–86"
+    date: "1898"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v31_078_086_Priblizhenie_kontsa.txt
+    quoteRu: >-
+      и в деятельности конгрессов и обществ мира, главное же в отказах вообще отдельных лиц от военной службы
+    quoteEn: >-
+      ...and in the activity of congresses and peace societies, but above all in the refusals of individuals in general to do military service. (working English)
+    significance: "In «Приближение конца» (1898) peace congresses and societies are listed as signs of the times, but refusals of service come first."
+    facsimile: null
+
+  - id: v39_197_carthago_sweden
+    genre: works
+    pssTom: 39
+    pages: "197–205"
+    date: "1898"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v39_197_205_Carthago_delenda_est.txt
+    quoteRu: >-
+      Средство это и применялось уже давно и в последнее время стало особенно часто применяться как отдельными лицами в Австрии, Пруссии, Швеции, Голландии, Швейцарии, России
+    quoteEn: >-
+      This means has long been used, and lately it has been used especially often, by individuals in Austria, Prussia, Sweden, Holland, Switzerland, Russia. (working English)
+    significance: "Sweden named among countries where individuals refuse military service. 'This means' is refusal."
+    facsimile: null
+
+  # ── The earlier Swedish thread ──
+  - id: v69_031_swedes_congenial
+    genre: letters
+    pssTom: 69
+    pages: "43–45"
+    date: "1896-02-19 (OS)"
+    addressee: "Lev Lvovich Tolstoy"
+    localPdf: null
+    extract: extracts/v69_031_L_L_Tolstomu.txt
+    quoteRu: >-
+      Хотя я и стараюсь не иметь предилекции к людям и нациям, шведы мне всегда были, еще с Карла XII,¹ симпатичны.
+    quoteEn: >-
+      Although I try not to have a predilection for peoples and nations, the Swedes have always been congenial to me, ever since Charles XII. (working English)
+    significance: "Written when his son was about to marry Dora Westerlund, a Swede. The family tie to Sweden."
+    facsimile: null
+
+  - id: v70_154_letter_to_sweden
+    genre: letters
+    pssTom: 70
+    pages: "130–131"
+    date: "1897-09-03 (OS)"
+    addressee: "P. A. Boulanger"
+    localPdf: null
+    extract: extracts/v70_154_P_A_Bulanzhe.txt
+    quoteRu: >-
+      Письмо в Швецию я закончил,² были препятствия со стороны Софьи Андреевны, но, кажется, они устранились.
+    quoteEn: >-
+      I have finished the letter to Sweden; there were obstacles from Sofya Andreevna, but they seem to have been removed. (working English)
+    significance: "The 1897 Nobel/Doukhobor letter to the Swedish press, finished."
+    facsimile: null
+
+  - id: v53_152_translation_with_langlet
+    genre: diaries
+    pssTom: 53
+    pages: "152"
+    date: "1897-09-21 (OS)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v53_152_152_1897_09_21.txt
+    quoteRu: >-
+      Вчера докончил перевод с Langlet.
+    quoteEn: >-
+      Yesterday I finished the translation with Langlet. (working English)
+    significance: "A young Swede helps translate the letter at Yasnaya Polyana."
+    facsimile: null
+
+  - id: v84_687_letter_to_wife
+    genre: letters
+    pssTom: 84
+    pages: "291–292"
+    date: "1897-09-21 (OS)"
+    addressee: "S. A. Tolstaya"
+    localPdf: null
+    extract: extracts/v84_687_a25.txt
+    quoteRu: >-
+      у меня было по отношению тебя неприятное чувство за письмо в Шведские газеты
+    quoteEn: >-
+      I had an unpleasant feeling toward you over the letter to the Swedish papers. (working English)
+    significance: "Family friction over the 1897 letter; it recurs over the 1909 journey."
+    facsimile: null
+
+  - id: v72_003_censorship
+    genre: letters
+    pssTom: 72
+    pages: "9–16"
+    date: "1899-01-07/09 (OS)"
+    addressee: "a group of the Swedish intelligentsia"
+    localPdf: null
+    extract: extracts/v72_003_Gruppeshvedskojintelligencii.txt
+    quoteRu: >-
+      Боюсь, однако, того, чтобы капризная и робкая русская цензура не запретила печатания как вашего прекрасного письма, так и самый ответ на него.
+    quoteEn: >-
+      I fear, however, that the capricious and timid Russian censorship may forbid the printing of both your fine letter and my answer to it. (working English)
+    significance: "Tolstoy's covering letter to the Swedish group, 1899."
+    facsimile: null
+
+  - id: v72_003_signatories
+    genre: commentary
+    pssTom: 72
+    pages: "9–16"
+    date: "1899 (the Swedes' letter, quoted in commentary)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v72_003_Gruppeshvedskojintelligencii.notes-force.txt
+    quoteRu: >-
+      Четыре члена рейхстага, один журналист, один секретарь редакции, два профессора, пять пасторов, один военный врач, один директор миссии, один учитель и другие.
+    quoteEn: >-
+      Four members of the Riksdag, one journalist, one editorial secretary, two professors, five pastors, one army doctor, one mission director, one teacher, and others. (working English)
+    significance: "Who signed the 1899 Stockholm letter, by occupation only. No society is named; no names are given."
+    facsimile: null
+
+  - id: v72_003_objectors
+    genre: commentary
+    pssTom: 72
+    pages: "9–16"
+    date: "1899 (the Swedes' letter, quoted in commentary)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v72_003_Gruppeshvedskojintelligencii.notes-force.txt
+    quoteRu: >-
+      За последнее десятилетие более тридцати беспорочных молодых людей осуждены в тюрьму и на штрафные работы, иные до трех лет и четырех месяцев за отказ от исполнения воинской повинности по своим убеждениям.
+    quoteEn: >-
+      In the last decade more than thirty blameless young men have been sentenced to prison and penal labour, some for up to three years and four months, for refusing military service out of conviction. (working English)
+    significance: "The Swedish signatories' own concern: Swedish conscientious objectors."
+    facsimile: null
+
+  - id: v90_367_origin
+    genre: commentary
+    pssTom: 90
+    pages: "367–368"
+    date: "1958 (commentary, M. A. Tsyavlovsky)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v90_367_368_Po_povodu_kongressa_o_mire_Pismo_k_shved.txt
+    quoteRu: >-
+      Письмо-статья «По поводу конгресса о мире» было вызвано обращением к Толстому группы шведской интеллигенции в связи с созывавшейся, по инициативе Николая II, мирной конференцией в Гааге в мае 1899 г.
+    quoteEn: >-
+      The letter-article "On the Peace Congress" was prompted by an appeal to Tolstoy from a group of the Swedish intelligentsia in connection with the peace conference at the Hague, convened on Nicholas II's initiative for May 1899. (working English)
+    significance: "The 1899 'Letter to the Swedes': its occasion."
+    facsimile: null
+
+  - id: v90_367_stadling_printed
+    genre: commentary
+    pssTom: 90
+    pages: "367–368"
+    date: "1899-03-14 (NS), Stadling to Tolstoy, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v90_367_368_Po_povodu_kongressa_o_mire_Pismo_k_shved.txt
+    quoteRu: >-
+      Я перевел ваше письмо и напечатал его по-шведски (“Aftonbladt”), по-английски (“The Daily Chronicle”) и по-немецки (“Lokal Anzeiger”)
+    quoteEn: >-
+      I have translated your letter and printed it in Swedish (Aftonbladet), English (The Daily Chronicle) and German (Lokal-Anzeiger). (working English)
+    significance: "The model of 1899: a named Swedish go-between translates and places the text in newspapers."
+    facsimile: null
+
+  - id: v90_367_already_printed
+    genre: commentary
+    pssTom: 90
+    pages: "367–368"
+    date: "1899-02-05 (OS), Tolstoy to Chertkov, quoted"
+    addressee: "V. G. Chertkov"
+    localPdf: null
+    extract: extracts/v90_367_368_Po_povodu_kongressa_o_mire_Pismo_k_shved.txt
+    quoteRu: >-
+      Мне ответили, что письмо уже отпечатано и послано в Англию
+    quoteEn: >-
+      I was told that the letter had already been printed and sent to England. (working English)
+    significance: "Tolstoy's late corrections came too late; the Swedish and foreign versions follow an earlier draft."
+    facsimile: null
+
+  - id: v90_060_refusal_idea
+    genre: works
+    pssTom: 90
+    pages: "60–66"
+    date: "1899-01"
+    addressee: "the Swedes"
+    localPdf: null
+    extract: extracts/v90_060_066_Po_povodu_kongressa_o_mire_Pismo_k_shvedam.txt
+    quoteRu: >-
+      Мысль, высказанная в прекрасном письме вашем о том, что всеобщее разоружение может быть достигнуто самым легким и верным путем посредством отказа отдельных лиц от участия в военной службе, — совершенно справедлива.
+    quoteEn: >-
+      The idea expressed in your fine letter, that general disarmament can be reached most easily and surely through individuals refusing to take part in military service, is entirely correct. (working English)
+    significance: "He agrees with the Swedes on refusal."
+    facsimile: null
+
+  - id: v90_060_conference
+    genre: works
+    pssTom: 90
+    pages: "60–66"
+    date: "1899-01"
+    addressee: "the Swedes"
+    localPdf: null
+    extract: extracts/v90_060_066_Po_povodu_kongressa_o_mire_Pismo_k_shvedam.txt
+    quoteRu: >-
+      Конференция может только отвести глаза народа от единственного средства спасения и освобождения.
+    quoteEn: >-
+      The conference can only turn the people's eyes away from the one means of salvation and liberation. (working English)
+    significance: "...and disagrees with their plan to take it to a governmental conference."
+    facsimile: null
+
+  - id: v72_011_collective_letter
+    genre: letters
+    pssTom: 72
+    pages: "31"
+    date: "1899-01-12 (OS)"
+    addressee: "Jonas Stadling"
+    localPdf: null
+    extract: extracts/v72_011_IonasuStadlinguJonasStadling.txt
+    quoteRu: >-
+      Можно ли прислать вам этот ответ с тем, чтобы, если найдете его того заслуживающим, перевести его и напечатать?
+    quoteEn: >-
+      May I send you this reply, so that, if you find it deserving, you may translate and print it? (working English)
+    significance: "Tolstoy himself asks Stadling to translate and place the 1899 letter."
+    facsimile: null
+
+  - id: v72_011_stadling_note
+    genre: commentary
+    pssTom: 72
+    pages: "31"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v72_011_IonasuStadlinguJonasStadling.notes-force.txt
+    quoteRu: >-
+      Ионас Стадлинг (Jonas Stadling) (p. 1847 г.) — шведский писатель, неоднократно бывавший в России.
+    quoteEn: >-
+      Jonas Stadling (b. 1847) is a Swedish writer who visited Russia several times. (working English)
+    significance: "Identifies the go-between."
+    facsimile: null
+
+  - id: v72_187_stadling_famine
+    genre: letters
+    pssTom: 72
+    pages: "214"
+    date: "1899-10-09/21"
+    addressee: "Jonas Stadling"
+    localPdf: null
+    extract: extracts/v72_187_IonasuStadlinguJonasStadling.txt
+    quoteRu: >-
+      Я получил 250 рублей, предназначенные для голодающих, и благодарю вас и жертвователей за их доброе пожертвование.
+    quoteEn: >-
+      I have received 250 roubles intended for the starving, and I thank you and the donors for their kind gift. (working English)
+    significance: "Stadling also collected Swedish money for famine relief in 1899."
+    facsimile: null
+
+  - id: v73_211_nobel_not_awarded
+    genre: letters
+    pssTom: 73
+    pages: "204–205"
+    date: "1902-01-22/02-04"
+    addressee: "a group of Swedish writers and scholars"
+    localPdf: null
+    extract: extracts/v73_211_Gruppeshvedskixpisatelejiuchenyx.txt
+    quoteRu: >-
+      Я был очень доволен, что Нобелевская премия не была мне присуждена.
+    quoteFr: >-
+      J’ai été très content de ce que le prix Nobel ne m’a pas été decerné.
+    quoteEn: >-
+      I was very pleased that the Nobel Prize was not awarded to me. (working English)
+    significance: "Answer, in French, to the Swedish writers' protest against the first literature prize (1901). Printed in Swedish papers, February 1902."
+    facsimile: null
+
+  - id: v73_211_levertin
+    genre: commentary
+    pssTom: 73
+    pages: "204–205"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v73_211_Gruppeshvedskixpisatelejiuchenyx.notes-force.txt
+    quoteRu: >-
+      Ответ Толстого послан на имя проф. Оскара Левертина.
+    quoteEn: >-
+      Tolstoy's reply was sent to Prof. Oskar Levertin. (working English)
+    significance: "The 1902 Swedish circle was literary, separate from the peace society."
+    facsimile: null
+
+  - id: v76_274_nobel_avoid
+    genre: letters
+    pssTom: 76
+    pages: "201–202"
+    date: "1906-09-25 (OS)"
+    addressee: "Arvid Järnefelt"
+    localPdf: null
+    extract: extracts/v76_274_A_A_Ernefeltu.txt
+    quoteRu: >-
+      постараться сделать так, чтобы мне не присуждали этой премии
+    quoteEn: >-
+      ...to try to see that this prize is not awarded to me. (working English)
+    significance: "He asks Järnefelt to use his Swedish connections to keep the Nobel Prize from him (1906)."
+    facsimile: null
+
+  # ── 1909–10: the Stockholm peace congress ──
+  - id: v80_016_honorary_member
+    genre: letters
+    pssTom: 80
+    pages: "13–14"
+    date: "1909-07-10 (OS)"
+    addressee: "A. V. Varnavsky"
+    localPdf: null
+    extract: extracts/v80_016_A_V_Varnavskomu.txt
+    quoteRu: >-
+      Господа эти избрали меня почетным членом и приглашают на конец августа в Штокгольм, в Швецию, где будет собрание.
+    quoteEn: >-
+      These gentlemen have elected me an honorary member and invite me to Stockholm, in Sweden, at the end of August, where the meeting will be. (working English)
+    significance: "Tolstoy's own account of the 1909 invitation."
+    facsimile: null
+
+  - id: v80_016_what_to_say
+    genre: letters
+    pssTom: 80
+    pages: "13–14"
+    date: "1909-07-10 (OS)"
+    addressee: "A. V. Varnavsky"
+    localPdf: null
+    extract: extracts/v80_016_A_V_Varnavskomu.txt
+    quoteRu: >-
+      И я хочу поехать, если будут силы, чтобы высказать там как сумею яснее мысль о том, что мир может установиться между людьми только тогда, когда люди будут точно на деле, а не на словах верить в христов закон любви
+    quoteEn: >-
+      And I want to go, if I have the strength, to say there as clearly as I can that peace can be established among people only when people truly believe, in deed and not in words, in Christ's law of love. (working English)
+    significance: "Why he meant to go."
+    facsimile: null
+
+  - id: v38_520_gusev_dictated
+    genre: commentary
+    pssTom: 38
+    pages: "520–523"
+    date: "1909-07-09 (OS), Gusev's diary, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v38_520_523_Doklad_prigotovlennyj_dlja_kongressa_mir.txt
+    quoteRu: >-
+      Сегодня же Л. Н. продиктовал мне письмо президенту конгресса
+    quoteEn: >-
+      That same day L. N. dictated to me a letter to the president of the congress. (working English)
+    significance: "N. N. Gusev, Tolstoy's secretary, records the acceptance."
+    facsimile: null
+
+  - id: v80_029_acceptance
+    genre: letters
+    pssTom: 80
+    pages: "22–24"
+    date: "1909-07-12/25"
+    addressee: "the organising committee (president) of the XVIII Universal Peace Congress, Stockholm"
+    localPdf: null
+    extract: extracts/v80_029_OrganizacionnomukomitetuXVIIIMezhdunarodno.txt
+    quoteRu: >-
+      Если силы мне позволят, я сделаю всё возможное, чтобы прибыть в Стокгольм к назначенному сроку
+    quoteFr: >-
+      Si mes forces me le pormettent je ferai mon possible pour me rendre à Stockholm à la date indiquée
+    quoteEn: >-
+      If my strength allows, I will do everything possible to come to Stockholm on the appointed date. (working English) [from the French]
+    significance: "The acceptance, in French. The addressee is the congress president; the PSS does not name him or his society."
+    facsimile: null
+
+  - id: v80_029_postponed
+    genre: commentary
+    pssTom: 80
+    pages: "22–24"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v80_029_OrganizacionnomukomitetuXVIIIMezhdunarodno.notes-force.txt
+    quoteRu: >-
+      но 4 августа было получено телеграфное извещение, что конгресс отложен до 1910 г.
+    quoteEn: >-
+      ...but on 4 August a telegram came saying that the congress had been put off until 1910. (working English)
+    significance: "Postponement. The commentary gives the official reason as the strike in Sweden."
+    facsimile: null
+
+  - id: v80_029_sweden_waited
+    genre: commentary
+    pssTom: 80
+    pages: "22–24"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v80_029_OrganizacionnomukomitetuXVIIIMezhdunarodno.notes-force.txt
+    quoteRu: >-
+      В Швеции с волнением ждали приезда Толстого, поднимался вопрос о присуждении ему Нобелевской премии.
+    quoteEn: >-
+      In Sweden Tolstoy's arrival was awaited with excitement, and the question of awarding him the Nobel Prize was being raised. (working English)
+    significance: "Soviet commentary; Swedish press for August 1909 not checked in this dive."
+    facsimile: null
+
+  - id: v80_029_makovitsky
+    genre: commentary
+    pssTom: 80
+    pages: "22–24"
+    date: "1909-08-06, Makovitsky's diary, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v80_029_OrganizacionnomukomitetuXVIIIMezhdunarodno.notes-force.txt
+    quoteRu: >-
+      Я думаю — это нескромно с моей стороны, — что в том, что конгресс отложен, сыграли роль не одна забастовка рабочих в Швеции
+    quoteEn: >-
+      I think (it is immodest of me) that it was not the workers' strike in Sweden alone that played a part in the congress being put off. (working English)
+    significance: "Tolstoy, as recorded by D. P. Makovitsky, suspects his own letter and views also played a part."
+    facsimile: null
+
+  - id: v80_029_cannot_chase_away
+    genre: commentary
+    pssTom: 80
+    pages: "22–24"
+    date: "1909-08-06, Makovitsky's diary, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v80_029_OrganizacionnomukomitetuXVIIIMezhdunarodno.notes-force.txt
+    quoteRu: >-
+      Как нам быть с ним? Прогнать нельзя
+    quoteEn: >-
+      "What are we to do with him? We can't chase him away." (working English)
+    significance: "Tolstoy imagining the organisers' dilemma."
+    facsimile: null
+
+  - id: v57_097_reread
+    genre: diaries
+    pssTom: 57
+    pages: "97–98"
+    date: "1909-07-20 (OS)"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v57_097_098_1909_07_20.txt
+    quoteRu: >-
+      Сейчас для Штокгольма перечитывал и письмо к шведам и Царство Божие. Всё как будто сказано.
+    quoteEn: >-
+      Just now, for Stockholm, I re-read the letter to the Swedes and The Kingdom of God. Everything seems to have been said. (working English)
+    significance: "He prepares for Stockholm from the 1899 letter to the Swedes."
+    facsimile: null
+
+  - id: v38_119_report_opening
+    genre: works
+    pssTom: 38
+    pages: "119–125"
+    date: "1909-07/08"
+    addressee: "the Stockholm peace congress"
+    localPdf: null
+    extract: extracts/v38_119_125_Doklad_prigotovlennyj_dlja_kongressa_mira_v_Stokgolme.txt
+    quoteRu: >-
+      мы собрались здесь для того, чтобы бороться против войны.
+    quoteEn: >-
+      ...we have gathered here to fight against war. (working English)
+    significance: "Opening of the Report. The SFSF's 1910 Swedish pamphlet opens the same way: 'Vi ha samlats här för att kämpa mot kriget.'"
+    facsimile: null
+
+  - id: v38_119_report_andersen
+    genre: works
+    pssTom: 38
+    pages: "119–125"
+    date: "1909-07/08"
+    addressee: "the Stockholm peace congress"
+    localPdf: null
+    extract: extracts/v38_119_125_Doklad_prigotovlennyj_dlja_kongressa_mira_v_Stokgolme.txt
+    quoteRu: >-
+      Как в сказке Андерсена, когда царь шел в торжественном шествии по улицам города и весь народ восхищался его прекрасной новой одеждой, одно слово ребенка, сказавшего то, что все знали, но не высказывали, изменило все.
+    quoteEn: >-
+      As in Andersen's tale, when the king walked in solemn procession through the streets and all the people admired his fine new clothes, one word from a child, who said what everyone knew but no one said, changed everything. (working English)
+    significance: "The Report asks the congress to be that child: to call killing killing."
+    facsimile: null
+
+  - id: v38_520_biryukov_not_read
+    genre: commentary
+    pssTom: 38
+    pages: "520–523"
+    date: "Biryukov, Biografiya IV (1923), p. 191, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v38_520_523_Doklad_prigotovlennyj_dlja_kongressa_mir.txt
+    quoteRu: >-
+      Статья Л. Н-ча, которую он послал на конгресс, была получена, но на конгрессе ее не читали.
+    quoteEn: >-
+      L. N.'s article, which he sent to the congress, was received, but it was not read at the congress. (working English)
+    significance: "Biryukov on the Report's fate at the 1910 congress."
+    facsimile: null
+
+  - id: v38_520_biryukov_scandalised
+    genre: commentary
+    pssTom: 38
+    pages: "520–523"
+    date: "Biryukov, Biografiya IV (1923), p. 191, quoted"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v38_520_523_Doklad_prigotovlennyj_dlja_kongressa_mir.txt
+    quoteRu: >-
+      Умеренная и благонамеренная среда пацифистов, собравшихся на конгресс, была скандализирована «выходкой» Л. Н-ча
+    quoteEn: >-
+      The moderate and well-meaning milieu of pacifists gathered at the congress was scandalised by L. N.'s "escapade". (working English)
+    significance: "Biryukov's account of why it was not read. 'Pacifists' is Biryukov's word."
+    facsimile: null
+
+  - id: v82_058_bergman_secretary
+    genre: commentary
+    pssTom: 82
+    pages: "56–57"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v82_058_ZH_BergmanuJ_BergmaniKarluKarlsonuBonduCar.notes-force.txt
+    quoteRu: >-
+      Ж. Бергман — доктор филологических наук, секретарь организационного комитета XVIII Всеобщего конгресса мира в Стокгольме
+    quoteEn: >-
+      J. Bergman, doctor of philology, secretary of the organising committee of the XVIII Universal Peace Congress in Stockholm. (working English)
+    significance: "Who invited him in 1910 (invitation of 29 May NS; repeated by Baron Carl Carlson Bonde, 13 June NS). Neither is called an SFSF officer in the PSS."
+    facsimile: null
+
+  - id: v82_058_health
+    genre: letters
+    pssTom: 82
+    pages: "56–57"
+    date: "1910-05-23 – 06-12 (OS), draft"
+    addressee: "J. Bergman and Baron C. C. Bonde"
+    localPdf: null
+    extract: extracts/v82_058_ZH_BergmanuJ_BergmaniKarluKarlsonuBonduCar.txt
+    quoteRu: >-
+      Состояние моего здоровья не позволит мне предпринять путешествие в Стокгольм
+    quoteFr: >-
+      L’état de ma santé ne [me] permettra pas d’entreprendre le voyage de Stockholme
+    quoteEn: >-
+      The state of my health will not allow me to undertake the journey to Stockholm. (working English)
+    significance: "The 1910 refusal (draft, French)."
+    facsimile: null
+
+  - id: v38_577_poisonous_article
+    genre: commentary
+    pssTom: 38
+    pages: "577"
+    date: "commentary (N. K. Gudzy), citing diary 19 July 1910"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v38_577_577_Dobavlenie_k_Dokladu_na_kongress_mira.txt
+    quoteRu: >-
+      написал «ядовитую статью в Конгресс мира»
+    quoteEn: >-
+      ...he wrote "a venomous article for the Peace Congress". (working English)
+    significance: "Tolstoy's own name for the 1910 Addition."
+    facsimile: null
+
+  - id: v38_577_unsent
+    genre: commentary
+    pssTom: 38
+    pages: "577"
+    date: "commentary"
+    addressee: ""
+    localPdf: null
+    extract: extracts/v38_577_577_Dobavlenie_k_Dokladu_na_kongress_mira.txt
+    quoteRu: >-
+      Статья осталась неоконченной и неотправленной и публикуется в настоящем издании впервые.
+    quoteEn: >-
+      The article remained unfinished and unsent and is published in this edition for the first time. (working English)
+    significance: "The Addition never reached Stockholm."
+    facsimile: null
+
+  - id: v38_419_antimilitarism
+    genre: works
+    pssTom: 38
+    pages: "419–420"
+    date: "1910-07-20 (OS)"
+    addressee: "the Stockholm peace congress (unsent)"
+    localPdf: null
+    extract: extracts/v38_419_420_Dobavlenie_k_dokladu_na_kongresse_mira.txt
+    quoteRu: >-
+      на всех конгрессах мира мои взгляды и не мои личные, а взгляды всех религиозных людей мира на этот вопрос считаются под названием неопределенного нового слова антимилитаризма исключительным, случайным проявлением личных желаний и свойств некоторых людей
+    quoteEn: >-
+      ...at all the peace congresses my views (and not mine personally, but those of all religious people in the world on this question) are treated, under the vague new word "antimilitarism", as an exceptional, chance expression of the personal wishes and traits of certain people. (working English)
+    significance: "How he saw his place at the peace congresses."
+    facsimile: null
+
+  - id: v38_419_young_swede
+    genre: works
+    pssTom: 38
+    pages: "419–420"
+    date: "1910-07-20 (OS)"
+    addressee: "the Stockholm peace congress (unsent)"
+    localPdf: null
+    extract: extracts/v38_419_420_Dobavlenie_k_dokladu_na_kongresse_mira.txt
+    quoteRu: >-
+      вчера только получил такое письмо от молодого Шведа, готовящегося к отказу
+    quoteEn: >-
+      ...only yesterday I received such a letter from a young Swede preparing to refuse. (working English)
+    significance: "The Swede Tolstoy points the congress to is a young man about to refuse service."
+    facsimile: null
+
+  - id: v38_419_not_congresses
+    genre: works
+    pssTom: 38
+    pages: "419–420"
+    date: "1910-07-20 (OS)"
+    addressee: "the Stockholm peace congress (unsent)"
+    localPdf: null
+    extract: extracts/v38_419_420_Dobavlenie_k_dokladu_na_kongresse_mira.txt
+    quoteRu: >-
+      нужны нам не союзы, не конгрессы, устраиваемые императорами и королями, главными начальниками войск, не рассуждения на этих конгрессах об устройстве жизни других людей, а только одно
+    quoteEn: >-
+      ...what we need is not unions, not congresses arranged by emperors and kings, the chief commanders of armies, not discussions at these congresses about arranging other people's lives, but only one thing. (working English)
+    significance: "The Addition's close: the one thing is to live the law of love, which cannot be squared with readiness to kill."
+    facsimile: null
+
+  # ── Swedish sources, 1904 (no quoteRu; status FOUND/INFERRED from the Swedish sweep) ──
+  - id: sv_ght_1904_07_01
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-01
+    source: "Göteborgs Handels- och Sjöfartstidning, no. 149 (B), pp. 7–8"
+    url: https://tidningar.kb.se/4gft98g524nhhpjx/part/2/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      Lev Tolstoj mot krigets män och tsaren: »BETÄNKEN EDER!« — Den ryktbare ryske tänkarens bref i världsbladet Times.
+    quoteEn: >-
+      Lev Tolstoy against the men of war and the tsar: "Bethink yourselves!" The famous Russian thinker's letter in the world paper the Times. (working English)
+    significance: "First full Swedish printing, four days before the pamphlet: 13 titled chapters including IX, the postscript and the datelines."
+    facsimile: null
+
+  - id: sv_ght_chapter_ix
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-01
+    source: "Göteborgs Handels- och Sjöfartstidning, no. 149 (B), p. 7"
+    url: https://tidningar.kb.se/4gft98g524nhhpjx/part/2/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      KAPITEL IX. »Hvad skola vi göra, då kriget nu ändå börjat?»
+    quoteEn: >-
+      Chapter IX. "What shall we do, now that the war has begun after all?" (working English)
+    significance: "The chapter the Björck & Börjesson pamphlet leaves out."
+    facsimile: null
+
+  - id: sv_socdem_1904_07_02
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-02
+    source: "Socialdemokraten (Stockholm), p. 3"
+    url: https://tidningar.kb.se/q038rgc8nc0sk87q/part/1/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      Vi börja härmed att i sin helhet återge Tolstois sista uppseendeväckande bref mot tsaren och kriget
+    quoteEn: >-
+      We hereby begin to reproduce in full Tolstoy's latest sensational letter against the tsar and the war. (working English)
+    significance: "An independent serial with different wording at the start; later instalments match GHT (INFERRED switch, not verified page by page)."
+    facsimile: null
+
+  - id: sv_svd_1904_07_05_notice
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-05
+    source: "Svenska Dagbladet, p. 4"
+    url: https://tidningar.kb.se/p719lrn14g0d0pk/part/1/page/4
+    readFrom: "KB page image"
+    quoteSv: >-
+      »Betänken Eder!», Leo Tolstoys uppseendeväckande bref "till tsaren och krigets män" utkommer redan i e. m. i fullständig öfversättning hos firman Björck & Börjesson.
+    quoteEn: >-
+      "Bethink Yourselves!", Leo Tolstoy's sensational letter "to the tsar and the men of war", comes out this very afternoon in complete translation from the firm Björck & Börjesson. (working English)
+    significance: "Publication date and the 'complete translation' claim. Same press release in many papers, 5–11 July."
+    facsimile: null
+
+  - id: sv_socdem_1904_07_06_advert
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-06
+    source: "Socialdemokraten (Stockholm), p. 1, advert"
+    url: https://tidningar.kb.se/08cj1zllx14z588k/part/1/page/1
+    readFrom: "KB page image"
+    quoteSv: >-
+      I går e. m. utkom 1:a upplagan i 10,000 ex. af Tolstoys uppseendeväckande bref, som i dag finnes till salu hos alla bokhandlare, tidningskontor, cigarraffärer samt genom kolportörer.
+    quoteEn: >-
+      Yesterday afternoon the first printing of 10,000 copies of Tolstoy's sensational letter came out; today it is on sale at all booksellers, newspaper offices and cigar shops, and through colporteurs. (working English)
+    significance: "Commercial distribution with trade discounts and sale-or-return ('Retur af osålda ex. tillåtes!'), signed Björck & Börjesson, 62 Drottninggatan."
+    facsimile: null
+
+  - id: sv_falukuriren_1904_07_08_slogan
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-08
+    source: "Falukuriren, p. 2"
+    url: https://tidningar.kb.se/lvzhxvzgj9q17zck/part/1/page/2
+    readFrom: "KB page image"
+    quoteSv: >-
+      Från Björck och Börjessons förlag i Stockholm har Tolstoys bref mot kriget och tsaren utgifvits som broschyr med titeln: "Till krig emot kriget! Betänken Eder!
+    quoteEn: >-
+      From Björck and Börjesson's press in Stockholm, Tolstoy's letter against the war and the tsar has been issued as a pamphlet with the title "War against war! Bethink yourselves!" (working English)
+    significance: "The slogan is on the pamphlet from the first week."
+    facsimile: null
+
+  - id: sv_falukuriren_1904_07_08_sfsf_board
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-08
+    source: "Falukuriren, p. 2 (same page as the Betänken notice)"
+    url: https://tidningar.kb.se/lvzhxvzgj9q17zck/part/1/page/2
+    readFrom: "KB page image"
+    quoteSv: >-
+      Centralstyrelsen för Svenska freds- och skiljedomsföreningen hade under resa från Köpenhamn till Helsingborg i onsdags sammanträde på ångaren Hven under ordförandeskap af d:r Nilsson från Örebro
+    quoteEn: >-
+      The central board of the Swedish Peace and Arbitration Society met on Wednesday aboard the steamer Hven, travelling from Copenhagen to Helsingborg, with Dr Nilsson of Örebro in the chair. (working English)
+    significance: "What the SFSF board did the week the pamphlet came out (Boston delegate; approach to Carnegie). Tolstoy is not mentioned."
+    facsimile: null
+
+  - id: sv_arbetarbladet_1904_07_09_advert
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-09
+    source: "Arbetarbladet (Gävle), p. 2, advert"
+    url: https://tidningar.kb.se/3gfms3d71fkk5qkx/part/1/page/2
+    readFrom: "KB page image"
+    quoteSv: >-
+      10,000 exemplar rekvirerade på två dagar.
+    quoteEn: >-
+      10,000 copies ordered in two days. (working English)
+    significance: "Second printing (10th–15th thousand) in press by 9 July."
+    facsimile: null
+
+  - id: sv_svd_1904_07_05_copenhagen
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-05
+    source: "Svenska Dagbladet, p. 4, 'Nordiska fredsmötet i Köpenhamn'"
+    url: https://tidningar.kb.se/p719lrn14g0d0pk/part/1/page/4
+    readFrom: "KB page image"
+    quoteSv: >-
+      riksdagsmännen Wavrinsky, Österberg
+    quoteEn: >-
+      Riksdag members Wavrinsky, Österberg (among the Swedes at the Copenhagen peace meeting, with Knut Wicksell, Dr Nilsson and Sundblad). (working English)
+    significance: "SFSF's chair and Fredsfanan's editor were in Copenhagen, 2–6 July, while the pamphlet was produced in Stockholm."
+    facsimile: null
+
+  - id: sv_svmorgonbladet_1904_07_13_ch9
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-13
+    source: "Svenska Morgonbladet, p. 3 (OCR snippet)"
+    url: https://tidningar.kb.se/2j9g6qk70nbnhjjt/part/1/page/3
+    readFrom: "search-engine OCR snippet"
+    quoteSv: >-
+      Mitt lifs arbete består i att
+    quoteEn: >-
+      The work of my life consists in... (working English)
+    significance: "A free-church daily printed the chapter IX passage the pamphlet left out."
+    facsimile: null
+
+  - id: sv_stockholmstidningen_1904_07_26
+    genre: newspaper
+    status: FOUND
+    date: 1904-07-26
+    source: "Stockholmstidningen, p. 3, 'Ett bokhandelsrekord'"
+    url: https://tidningar.kb.se/zh9rw5s94z77wxw/part/1/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      har på den korta tiden af två veckor utgått i icke mindre än 35,000 ex., däraf i Stockholm sålts öfver 20,000.
+    quoteEn: >-
+      ...has in the short space of two weeks gone out in no fewer than 35,000 copies, of which over 20,000 were sold in Stockholm. (working English)
+    significance: "Print run after two weeks."
+    facsimile: null
+
+  - id: sv_westgotaposten_1904_08_23
+    genre: newspaper
+    status: FOUND
+    date: 1904-08-23
+    source: "Westgötaposten, p. 2"
+    url: https://tidningar.kb.se/gvbrjkmcdrmgh0w1/part/1/page/2
+    readFrom: "KB page image"
+    quoteSv: >-
+      Diskussionen visade, att Tolstoi har både sympatier och antipatier bland prästmännen
+    quoteEn: >-
+      The discussion showed that Tolstoy has both sympathies and antipathies among the clergy. (working English)
+    significance: "Clergy of Skara deanery discussed the pamphlet."
+    facsimile: null
+
+  - id: sv_ornskoldsvik_1904_09_07
+    genre: newspaper
+    status: FOUND
+    date: 1904-09-07
+    source: "Örnsköldsviks Allehanda, p. 2 (OCR snippet)"
+    url: https://tidningar.kb.se/mxbvsfmrkv2r94nr/part/1/page/2
+    readFrom: "search-engine OCR snippet"
+    quoteSv: >-
+      Tolstoys broschyr »Betänken Eder!» till uppbyggelse för sina landsmän därhemma
+    quoteEn: >-
+      Tolstoy's pamphlet "Bethink Yourselves!" for the edification of his countrymen at home. (working English)
+    significance: "A Finn tried to smuggle the pamphlet into Russian-ruled Finland via Torneå."
+    facsimile: null
+
+  - id: sv_soderkopingsposten_1904_09_19_fredsfanan
+    genre: newspaper
+    status: FOUND
+    date: 1904-09-19
+    source: "Söderköpingsposten, p. 3"
+    url: https://tidningar.kb.se/r60m2w52p2l02m95/part/1/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      Rysk-Japanska kriget och Sverges neutralitet — ett ord till Sverges tidningspräss. Ett billigt och godt försvar
+    quoteEn: >-
+      The Russo-Japanese war and Sweden's neutrality: a word to the Swedish press. A cheap and good defence. (working English)
+    significance: "Contents of Fredsfanan no. 5 (September 1904), SFSF's own paper. Tolstoy's letter is not listed."
+    facsimile: null
+
+  - id: sv_svmorgonbladet_1904_09_08_tsaren
+    genre: newspaper
+    status: FOUND
+    date: 1904-09-08
+    source: "Svenska Morgonbladet, p. 3, Björck & Börjesson advert"
+    url: https://tidningar.kb.se/8qhndz3q69ds4bdn/part/1/page/3
+    readFrom: "KB page image"
+    quoteSv: >-
+      En kompletterande belysning af Tolstoys »Betänken Eder». Agenter antagas. Samma försäljningsvillkor som på Tolstoys bok
+    quoteEn: >-
+      A complementary light on Tolstoy's "Bethink Yourselves". Agents taken on. Same terms of sale as for Tolstoy's book. (working English)
+    significance: "The publisher's follow-up, Tsaren i ny belysning (Fria ord no. 2)."
+    facsimile: null
+
+  - id: sv_runeberg_pamphlet
+    genre: pamphlet
+    status: FOUND
+    date: 1904
+    source: "Betänken Eder! Ett bref till krigets män och tsaren (Stockholm: Björck & Börjesson, 1904), Projekt Runeberg"
+    url: https://runeberg.org/betanken/
+    readFrom: "Runeberg proofread OCR"
+    quoteSv: >-
+      Låtom oss då icke släcka den, utan sprida och underhålla den! Leo Tolstoy.
+    quoteEn: >-
+      Let us then not put it out, but spread and sustain it! Leo Tolstoy. (working English)
+    significance: "The pamphlet ends here: no dateline, no postscript. Cover of this copy: '31:sta – 35:te tusendet / Till krig emot kriget!'"
+    facsimile: null
+
+  - id: sv_libris_fria_ord
+    genre: catalogue
+    status: FOUND
+    date: 1904
+    source: "LIBRIS 2201876 (the pamphlet) and 8228618 (series Fria ord)"
+    url: http://libris.kb.se/bib/2201876
+    readFrom: "LIBRIS xsearch record"
+    quoteSv: >-
+      Fria ord ; 1
+    quoteEn: >-
+      Free Words, no. 1 (working English)
+    significance: "The pamphlet opens the publisher's own series; no translator field in any of five records."
+    facsimile: null
+
+  # ── Swedish sources, 1908–1910 (web check made after Johan's correction) ──
+  - id: sv_riksdag_1908_prop93
+    genre: parliamentary
+    status: FOUND
+    date: 1908-03-06
+    source: "Kungl. Maj:ts proposition nr 93 (1908), p. 3"
+    url: https://weburn.kb.se/riks/tvåkammarriksdagen/pdf/web/1908/web_prop_1908____93/prop_1908____93.pdf
+    readFrom: "pdftotext of the KB scan"
+    quoteSv: >-
+      Sveriges fredsförenings samarbetskommitté anhållit
+    quoteEn: >-
+      The cooperation committee of Sweden's peace associations has requested (a state grant of 10,000 kronor for the international peace congress to be held in Stockholm in 1909). (working English)
+    significance: "Who asked the state to fund the 1909 congress. The grant was approved (Statsutskottets utlåtande nr 92, 1 May 1908). The committee's members are not named in the print."
+    facsimile: null
+
+  - id: sv_doda_icke_1910
+    genre: pamphlet
+    status: FOUND
+    date: 1910
+    source: "Leo Tolstoj, Döda icke! Det tal som skulle hållits på fredskongressen i Stockholm (Stockholm 1910), p. 16; Projekt Runeberg; KB dark-21812337"
+    url: https://runeberg.org/tldodaicke/0016.html
+    readFrom: "Runeberg proofread OCR (p. 16)"
+    quoteSv: >-
+      Denna skrift är utgiven av Svenska Freds- och Skiljedomsföreningens Centralstyrelse, Stockholm.
+    quoteEn: >-
+      This publication is issued by the Central Board of the Swedish Peace and Arbitration Society, Stockholm. (working English)
+    significance: "The one Tolstoy pamphlet SFSF itself published: his Report for the postponed 1909 congress, in the Swedish of Dagens Nyheter (p. 2 says DN obtained the text by applying to him). KB catalogue date 1910-01-15."
+    facsimile: null
+
+  - id: sv_doda_icke_preface
+    genre: pamphlet
+    status: FOUND
+    date: 1910
+    source: "Döda icke! (1910), p. 1"
+    url: https://runeberg.org/tldodaicke/0001.html
+    readFrom: "Runeberg proofread OCR (p. 1)"
+    quoteSv: >-
+      var det meningen att Leo Tolstoj skulle närvara och hålla ett tal. Den stora ryska författarens hitkomst avvaktades naturligtvis med spänning, men så kom storstrejken emellan
+    quoteEn: >-
+      ...it was intended that Leo Tolstoy should attend and give a speech. The great Russian writer's coming was of course awaited with excitement, but then the general strike intervened. (working English)
+    significance: "The Swedish side's own account of the postponement. It dates the planned congress to 'September last year'; the PSS commentary gives 14/27 August 1909."
+    facsimile: null
+
+entities:
+  - name: "Svenska freds- och skiljedomsföreningen"
+    wikiType: institution
+    wikilinkTarget: "Svenska freds- och skiljedomsföreningen"
+    vaultStatus: missing
+    role: "Swedish Peace and Arbitration Society (founded 1883). No 1904 source ties it to Betänken Eder!. Its central board published Döda icke! (1910), Tolstoy's Report for the Stockholm congress."
+    sources: []
+    evidenceRefs: [sv_falukuriren_1904_07_08_sfsf_board, sv_soderkopingsposten_1904_09_19_fredsfanan, sv_doda_icke_1910, sv_riksdag_1908_prop93]
+    ingestionPriority: 1
+
+  - name: "XVIII Universal Peace Congress, Stockholm (1909, held 1910)"
+    wikiType: event
+    wikilinkTarget: "Stockholm Peace Congress 1910"
+    vaultStatus: missing
+    role: "Set for 14/27 August 1909, postponed by the Swedish general strike, held 1–6 August 1910. Tolstoy elected honorary member, accepted, wrote the Report; declined in 1910; Report not read aloud."
+    sources: [jubilee-edition]
+    evidenceRefs: [v80_016_honorary_member, v80_029_acceptance, v80_029_postponed, v38_520_biryukov_not_read, v82_058_bergman_secretary, sv_doda_icke_preface]
+    ingestionPriority: 1
+    dependsOn: ["Svenska freds- och skiljedomsföreningen"]
+
+  - name: "Björck & Börjesson"
+    wikiType: institution
+    wikilinkTarget: "Björck & Börjesson"
+    vaultStatus: missing
+    role: "Stockholm publisher (62 Drottninggatan) of the 1904 pamphlet and the series Fria ord (1904–1910). Partners' names not found."
+    sources: []
+    evidenceRefs: [sv_svd_1904_07_05_notice, sv_socdem_1904_07_06_advert, sv_libris_fria_ord, sv_svmorgonbladet_1904_09_08_tsaren]
+    ingestionPriority: 1
+
+  - name: "Göteborgs Handels- och Sjöfartstidning"
+    wikiType: institution
+    wikilinkTarget: "Göteborgs Handels- och Sjöfartstidning"
+    vaultStatus: missing
+    role: "Göteborg daily that printed the first full Swedish text on 1 July 1904; source of the pamphlet's translation (INFERRED)."
+    sources: []
+    evidenceRefs: [sv_ght_1904_07_01, sv_ght_chapter_ix]
+    ingestionPriority: 2
+
+  - name: "Jonas Stadling"
+    wikiType: person
+    wikilinkTarget: "Jonas Stadling"
+    vaultStatus: missing
+    role: "Swedish writer and traveller (1847–1935); translated and placed the 1899 Letter to the Swedes; collected famine money."
+    sources: [jubilee-edition]
+    evidenceRefs: [v72_011_collective_letter, v72_011_stadling_note, v90_367_stadling_printed, v72_187_stadling_famine]
+    ingestionPriority: 2
+
+  - name: "Voldemar Langlet"
+    wikiType: person
+    wikilinkTarget: "Voldemar Langlet"
+    vaultStatus: missing
+    role: "Young Swede who helped translate the 1897 Nobel/Doukhobor letter at Yasnaya Polyana."
+    sources: [jubilee-edition]
+    evidenceRefs: [v70_175_langlet, v53_152_translation_with_langlet]
+    ingestionPriority: 2
+
+  - name: "Johan Bergman"
+    wikiType: person
+    wikilinkTarget: "Johan Bergman"
+    vaultStatus: missing
+    role: "Dr J. Bergman, secretary of the organising committee of the 1910 Stockholm congress; invited Tolstoy (29 May 1910 NS). Identification with the Latinist and temperance man Johan Bergman (1864–1951) is not confirmed; SFSF office not confirmed."
+    sources: [jubilee-edition]
+    evidenceRefs: [v82_058_bergman_secretary, v82_058_health]
+    ingestionPriority: 2
+
+  - name: "Carl Carlson Bonde"
+    wikiType: person
+    wikilinkTarget: "Carl Carlson Bonde"
+    vaultStatus: missing
+    role: "Baron; repeated the 1910 invitation (13 June NS). Nominated for the Nobel Peace Prize 1911 and, for the Swedish group of the Inter-Parliamentary Union, 1913 (Digitalarkivet). SFSF office not confirmed."
+    sources: [jubilee-edition]
+    evidenceRefs: [v82_058_bergman_secretary, v82_058_health]
+    ingestionPriority: 2
+
+  - name: "Bertha von Suttner"
+    wikiType: person
+    wikilinkTarget: "Bertha von Suttner"
+    vaultStatus: missing
+    role: "Austrian writer of Die Waffen nieder!; Tolstoy's 1901 letter to her rejects conferences and peace societies. Her Kriget och dess bekämpande was Fria ord no. 4."
+    sources: [jubilee-edition]
+    evidenceRefs: [v73_139_suttner_no_societies, v73_139_suttner_energy]
+    ingestionPriority: 2
+
+  - name: "Vladimir Chertkov"
+    wikiType: person
+    wikilinkTarget: "Vladimir Chertkov"
+    vaultStatus: exists
+    role: "Translated Одумайтесь! into English and planned its simultaneous release abroad."
+    sources: [jubilee-edition]
+    evidenceRefs: [v88_720_chertkov_simultaneous, v88_720_epigraphs_kept]
+    ingestionPriority: 3
+
+  - name: "Pavel Birukoff"
+    wikiType: person
+    wikilinkTarget: "Pavel Birukoff"
+    vaultStatus: exists
+    role: "Biographer; reports the 1910 Report was received but not read."
+    sources: [jubilee-edition]
+    evidenceRefs: [v38_520_biryukov_not_read, v38_520_biryukov_scandalised]
+    ingestionPriority: 3
+
+  - name: "Lev Lvovich Tolstoy"
+    wikiType: person
+    wikilinkTarget: "Lev Lvovich Tolstoy"
+    vaultStatus: exists
+    role: "Son; married the Swede Dora Westerlund in 1896."
+    sources: [jubilee-edition]
+    evidenceRefs: [v69_031_swedes_congenial]
+    ingestionPriority: 3
+
+  - name: "Sophia Tolstaya"
+    wikiType: person
+    wikilinkTarget: "Sophia Tolstaya"
+    vaultStatus: exists
+    role: "Opposed the 1897 Swedish letter and the 1909 Stockholm journey."
+    sources: [jubilee-edition]
+    evidenceRefs: [v70_154_letter_to_sweden, v84_687_letter_to_wife, v80_029_postponed]
+    ingestionPriority: 3
+
+  - name: "N. A. Nilsson"
+    wikiType: person
+    wikilinkTarget: "N. A. Nilsson"
+    vaultStatus: missing
+    role: "Med. dr, Örebro; SFSF chair 1904–05."
+    sources: []
+    evidenceRefs: [sv_falukuriren_1904_07_08_sfsf_board, sv_svd_1904_07_05_copenhagen]
+    ingestionPriority: 3
+
+  - name: "Carl Sundblad"
+    wikiType: person
+    wikilinkTarget: "Carl Sundblad"
+    vaultStatus: missing
+    role: "Editor of Fredsfanan to late 1904; SFSF's head of outreach."
+    sources: []
+    evidenceRefs: [sv_svd_1904_07_05_copenhagen]
+    ingestionPriority: 3
+
+  - name: "Oskar Levertin"
+    wikiType: person
+    wikilinkTarget: "Oskar Levertin"
+    vaultStatus: missing
+    role: "Addressee of Tolstoy's 1902 reply to the Swedish writers' Nobel protest."
+    sources: [jubilee-edition]
+    evidenceRefs: [v73_211_levertin]
+    ingestionPriority: 3
+
+  - name: "Arvid Järnefelt"
+    wikiType: person
+    wikilinkTarget: "Arvid Järnefelt"
+    vaultStatus: missing
+    role: "Finnish writer; asked in 1906 to help keep the Nobel Prize from Tolstoy; chosen in 1909 to read the Report in his place."
+    sources: [jubilee-edition]
+    evidenceRefs: [v76_274_nobel_avoid]
+    ingestionPriority: 3
+
+  - name: "Russo-Japanese War"
+    wikiType: event
+    wikilinkTarget: "Russo-Japanese War"
+    vaultStatus: missing
+    role: "The war Одумайтесь! answers."
+    sources: [jubilee-edition]
+    evidenceRefs: [v36_100_hague, v36_100_ch9_question]
+    ingestionPriority: 3
+
+  - name: "Hague Peace Conference (1899)"
+    wikiType: event
+    wikilinkTarget: "Hague Peace Conference 1899"
+    vaultStatus: missing
+    role: "Occasion of the 1899 Letter to the Swedes; mocked in Одумайтесь!."
+    sources: [jubilee-edition]
+    evidenceRefs: [v90_367_origin, v90_060_conference, v36_100_hague]
+    ingestionPriority: 3
+
+  - name: "Free Age Press"
+    wikiType: institution
+    wikilinkTarget: "Free Age Press"
+    vaultStatus: missing
+    role: "Chertkov's Christchurch press; first edition of Одумайтесь!."
+    sources: [jubilee-edition]
+    evidenceRefs: [v36_604_free_word_edition, v36_604_popular_edition]
+    ingestionPriority: 3
+
+visuals:
+  - id: ght-1904-07-01-p7
+    type: newspaper-page
+    subject: "Göteborgs Handels- och Sjöfartstidning, 1 July 1904, no. 149 (B), p. 7: the first full Swedish printing of Betänken Eder!"
+    relatedEntity: "Göteborgs Handels- och Sjöfartstidning"
+    relatedEvidence: sv_ght_1904_07_01
+    holding: "Kungliga biblioteket (KB), Svenska tidningar"
+    archiveId: "dark-13130788/bib19225758_19040701_144022_149_0007.jp2"
+    access: open
+    rights: "Printed 1904; public domain. KB offers pre-1906 newspapers freely."
+    licence: PD
+    usable: true
+    url: https://tidningar.kb.se/4gft98g524nhhpjx/part/2/page/3
+    localPath: visuals/goteborgs-handelstidning-1904-07-01-p7-betanken-eder-first-swedish-printing.jpg
+    note: "Full page from the KB IIIF service (https://data.kb.se/iiif/3/<archiveId>). Embedded in index.md."
+
+  - id: ght-1904-07-01-p7-chapter-ix
+    type: newspaper-detail
+    subject: "Detail of the same page: 'KAPITEL IX. »Hvad skola vi göra, då kriget nu ändå börjat?»', the chapter the pamphlet omits"
+    relatedEntity: "Göteborgs Handels- och Sjöfartstidning"
+    relatedEvidence: sv_ght_chapter_ix
+    holding: "Kungliga biblioteket (KB), Svenska tidningar"
+    archiveId: "dark-13130788/bib19225758_19040701_144022_149_0007.jp2 (region crop)"
+    access: open
+    rights: "Printed 1904; public domain."
+    licence: PD
+    usable: true
+    url: https://tidningar.kb.se/4gft98g524nhhpjx/part/2/page/3
+    localPath: visuals/goteborgs-handelstidning-1904-07-01-p7-kapitel-IX-detail.jpg
+    note: "Embedded in index.md."
+
+  - id: ght-1904-07-01-p8
+    type: newspaper-page
+    subject: "Göteborgs Handels- och Sjöfartstidning, 1 July 1904, p. 8: chapters XI–XIII and the sailor's letter"
+    relatedEntity: "Göteborgs Handels- och Sjöfartstidning"
+    relatedEvidence: sv_ght_1904_07_01
+    holding: "Kungliga biblioteket (KB), Svenska tidningar"
+    archiveId: "dark-13130788, page 8 (image id not recorded by the sweep)"
+    access: open
+    rights: "Printed 1904; public domain."
+    licence: PD
+    usable: true
+    url: https://tidningar.kb.se/4gft98g524nhhpjx/part/2/page/4
+    localPath: visuals/goteborgs-handelstidning-1904-07-01-p8-betanken-eder-continued.jpg
+    note: "Not embedded."
+
+  - id: socialdemokraten-1904-07-06-advert
+    type: newspaper-advert
+    subject: "Socialdemokraten, 6 July 1904, p. 1: Björck & Börjesson's advert, 'I går e. m. utkom 1:a upplagan i 10,000 ex.'"
+    relatedEntity: "Björck & Börjesson"
+    relatedEvidence: sv_socdem_1904_07_06_advert
+    holding: "Kungliga biblioteket (KB), Svenska tidningar"
+    archiveId: "dark-10246759/bib22688892_19040706_154030_153_0001.jp2 (region crop)"
+    access: open
+    rights: "Printed 1904; public domain."
+    licence: PD
+    usable: true
+    url: https://tidningar.kb.se/08cj1zllx14z588k/part/1/page/1
+    localPath: visuals/socialdemokraten-1904-07-06-p1-betanken-eder-advert.jpg
+    note: "Embedded in index.md."
+
+  - id: arbetarbladet-1904-07-09-advert
+    type: newspaper-advert
+    subject: "Arbetarbladet (Gävle), 9 July 1904, p. 2: '10,000 exemplar rekvirerade på två dagar'"
+    relatedEntity: "Björck & Börjesson"
+    relatedEvidence: sv_arbetarbladet_1904_07_09_advert
+    holding: "Kungliga biblioteket (KB), Svenska tidningar"
+    archiveId: "dark-14581106/bib15760616_19040709_163320_81_0002.jp2 (region crop)"
+    access: open
+    rights: "Printed 1904; public domain."
+    licence: PD
+    usable: true
+    url: https://tidningar.kb.se/3gfms3d71fkk5qkx/part/1/page/2
+    localPath: visuals/arbetarbladet-1904-07-09-p2-betanken-eder-advert.jpg
+    note: "Not embedded."
+
+  - id: doda-icke-1910
+    type: pamphlet
+    subject: "Döda icke! Det tal som skulle hållits på fredskongressen i Stockholm (SFSF central board, 1910), 16 pp."
+    relatedEntity: "Svenska freds- och skiljedomsföreningen"
+    relatedEvidence: sv_doda_icke_1910
+    holding: "Kungliga biblioteket (KB); Projekt Runeberg"
+    archiveId: "KB dark-21812337; LIBRIS 19655807"
+    access: open
+    rights: "KB marks it Public Domain Mark 1.0."
+    licence: PD
+    usable: true
+    url: https://runeberg.org/tldodaicke/
+    localPath: null
+    note: "Not downloaded. IIIF: https://data.kb.se/iiif/3/dark-21812337%2FJP2000%2F001063535_0001.jp2"
+
+  - id: betanken-eder-cover-runeberg
+    type: pamphlet-cover
+    subject: "Cover of Betänken Eder!, 31st–35th thousand, with 'Till krig emot kriget!'"
+    relatedEntity: "Björck & Börjesson"
+    relatedEvidence: sv_runeberg_pamphlet
+    holding: "Projekt Runeberg"
+    archiveId: "runeberg.org/betanken/0001.html"
+    access: open
+    rights: "Printed 1904; public domain."
+    licence: PD
+    usable: true
+    url: https://runeberg.org/betanken/0001.html
+    localPath: null
+    note: "Not downloaded; the work dive's visuals/ holds Johan's own scan of a first-week copy."
+
+scholarship:
+  summary: >-
+    No academic scholarship was consulted for this dive; the question is one of Swedish publishing history, which the 1904 newspapers and catalogues answer directly. Two Wikipedia articles were read for background on SFSF people (Carl Sundblad; Knut Sandstedt, said there to have represented the society at the Stockholm congress of 1910). The prior project work dive on Bethink Yourselves! is the nearest earlier account; where this dive corrects it, index.md says so.
+  triangulation:
+    - evidenceRef: sv_ght_1904_07_01
+      conventionalView: "The project's work dive (2026-06-08) read the Swedish coda as following Chertkov's English and left the translator open."
+      relation: extends
+      source: "docs/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/index.md"
+    - evidenceRef: sv_libris_fria_ord
+      conventionalView: "Projekt Runeberg and LIBRIS give the Swedish as translated from the Russian (LIBRIS language code)."
+      relation: complicates
+      source: "LIBRIS 2201876; runeberg.org/betanken"
+    - evidenceRef: sv_doda_icke_1910
+      conventionalView: "Johan's working premise: SFSF initiated Betänken Eder! (1904)."
+      relation: contradicts
+      source: ""
+
+workRecord: null
+
+coverage:
+  - { surface: "1904 corpus: letters, diaries, Tom 36 commentary on Одумайтесь!", status: covered, note: "No Swedish translator, publisher or society named." }
+  - { surface: "1904 Swedish press (Svenska tidningar)", status: covered, note: "Full-text searches June 1904–April 1905; some quotes from OCR snippets only, marked per row." }
+  - { surface: "Swedish catalogues (LIBRIS, Runeberg)", status: covered, note: "" }
+  - { surface: "SFSF internal records 1904 (board minutes, Fredsfanan nos. 4–6)", status: not-covered, note: "Not digitised in Svenska tidningar; archive location not verified." }
+  - { surface: "The Times, 27 June 1904, and the Free Age Press popular edition", status: not-covered, note: "Whether GHT translated from the Times text, and whether its chapter heads came from there." }
+  - { surface: "Earlier Swedish thread 1896–1906 (corpus)", status: covered, note: "" }
+  - { surface: "Tolstoy on peace societies (corpus)", status: covered, note: "Sampled: 1897, 1898, 1901, 1904, 1910." }
+  - { surface: "1909–10 Stockholm congress (corpus)", status: covered, note: "Tom 38, 57, 80, 82 and commentary." }
+  - { surface: "1909–10 Stockholm congress (Swedish sources)", status: partial, note: "Short web check: Riksdag 1908 print and SFSF's 1910 Döda icke! found; organising-committee roster, Swedish press of July–August 1909 and 1910 not read." }
+  - { surface: "Hedemora 1904 edition (Borlänge Tidning supplement)", status: partial, note: "In LIBRIS and digitised at KB; pages not read." }
+
+contradictions:
+  - claim: "Döda icke! (1910) says the congress was meant for 'september förra året'."
+    correction: "The PSS commentary gives the opening as 14/27 August 1909, and Tolstoy's letter to Varnavsky says 'the end of August'."
+    evidenceRef: sv_doda_icke_preface
+
+notCovered:
+  - "Socialdemokraten's serial, 2–9 July 1904: read all instalments to see whether it printed chapter IX and where it switches to GHT wording."
+  - "Hvar 8 dag (Göteborg) 1904-07-10, pp. 5 and 7: article '»Betänken eder!»' (not read)."
+  - "Motala Tidning 1904-07-04 p. 3: snippet may credit the translation."
+  - "Who translated for GHT: GHT's own columns of 30 June–2 July and its 1904 staff."
+  - "Björck & Börjesson: the partners' names; whether they paid GHT."
+  - "Arnoldson's own reaction in 1904 (no longer SFSF chair)."
+  - "Svensk bokkatalog 1901–1905."
+  - "Carl Sundblad's history of the society 1883–1903 (vol. II, 1904)."
+  - "Swedish press reports of Tolstoy's acceptance (July 1909), the postponement (August 1909) and his 1910 refusal."
+  - "Proceedings of the XVIII Universal Peace Congress (Stockholm 1910): organising committee roster, and any mention of Tolstoy's Report."
+  - "Names of the 1899 Stockholm signatories (Svobodnaya Mysl 1899 no. 1; Aftonbladet, February–March 1899)."
+
+needsReview:
+  - item: "SFSF board minutes for summer 1904 and Fredsfanan 1904 nos. 4–6 would settle the 1904 question either way. The archive's location was not verified in this sweep."
+    phase: 2
+    why: "Only internal records could show an SFSF role that left no trace in print."
+  - item: "Whether Dr J. Bergman and Baron Carl Carlson Bonde held SFSF office in 1909–10, and whether the organising committee was SFSF's or the joint 'Sveriges fredsföreningars samarbetskommitté' named in the 1908 Riksdag print."
+    phase: 3
+    why: "The PSS calls Bergman only 'secretary of the organising committee'; the web check found no roster."
+  - item: "Identity of Dr J. Bergman: the Latinist and temperance leader Johan Bergman (1864–1951) is a plausible match, not confirmed."
+    phase: 3
+    why: "Name, title (doctor of philology) and period fit; no source links him to the congress."
+  - item: "Chapter IX: who cut it from the pamphlet and why. Three possibilities are listed as inference only (page budget, legal caution about urging refusal, a Tsar-critical but defence-minded readership)."
+    phase: 4
+    why: "No source explains the cut; the pamphlet still called itself a complete translation."
+  - item: "Socialdemokraten's opening wording differs from GHT: is it a second, independent translation?"
+    phase: 2
+    why: "Not compared beyond chapter I."
+  - item: "Whether to keep the bracketed line in the reader edition's empty Swedish chapter IX (open in alignment-notes.md)."
+    phase: 4
+    why: "Editorial decision for Johan."
+  - item: "PSS PDF cross-check not run for this dive's quotes (local vol-dir numbering is offset)."
+    phase: 2
+    why: "Quotes are verified against TEI extracts only."
+  - item: "scholarship.triangulation's third entry sets Johan's own working premise (not a scholarly or conventional view) against sv_doda_icke_1910 with relation 'contradicts' and an empty source. The 1904 negative evidence (e.g. sv_socdem_1904_07_06_advert, sv_falukuriren_1904_07_08_sfsf_board) is what contradicts the premise; Döda icke rather relocates the SFSF link to 1910. Keep, re-point, or move to the topic block?"
+    phase: 5
+    why: "Verifier: judgement on what triangulation is for; not changed."
+
+archivesConsulted:
+  - "tolstoydigital TEI corpus (PSS), via extract_tei.py --choice=reg --notes=auto / --notes=force"
+  - "Svenska tidningar (tidningar.kb.se), full-text search and KB IIIF page images"
+  - "LIBRIS (xsearch API)"
+  - "Projekt Runeberg (betanken; tldodaicke)"
+  - "KB data API (data.kb.se), monograph search"
+  - "Riksdag prints 1908 (weburn.kb.se): proposition nr 93; statsutskottets utlåtande nr 92"
+  - "archive.org: American Peace Society reprint of the Times text (Boston 1904)"
+  - "Digitalarkivet (Norway): Nobel Peace Prize nomination records, via search results"
+
+references:
+  primary:
+    - "Толстой Л. Н. Полное собрание сочинений в 90 тт. (Jubilee Edition), Тт. 31, 36, 38, 39, 53, 57, 69, 70, 72, 73, 76, 80, 82, 84, 88, 90 — via tolstoydigital TEI."
+    - "Göteborgs Handels- och Sjöfartstidning, 1 July 1904, no. 149 (B), pp. 7–8."
+    - "Socialdemokraten, 2 and 6 July 1904; Svenska Dagbladet, 5 July 1904; Falukuriren, 8 July 1904; Arbetarbladet, 9 July 1904; Svenska Morgonbladet, 13 July and 8 September 1904; Stockholmstidningen, 26 July 1904; Westgötaposten, 23 August 1904; Örnsköldsviks Allehanda, 7 September 1904; Söderköpingsposten, 19 September 1904."
+    - "Betänken Eder! Ett bref till krigets män och tsaren (Stockholm: Björck & Börjesson, 1904; Fria ord 1). runeberg.org/betanken."
+    - "Döda icke! Det tal som skulle hållits på fredskongressen i Stockholm (Stockholm: SFSF central board, 1910). runeberg.org/tldodaicke."
+    - "Kungl. Maj:ts proposition nr 93 (1908); Statsutskottets utlåtande nr 92 (1908)."
+  background:
+    - "Wikipedia, 'Carl Sundblad', https://en.wikipedia.org/wiki/Carl_Sundblad"
+    - "Wikipedia, 'Knut Sandstedt', https://en.wikipedia.org/wiki/Knut_Sandstedt"
+    - "Digitalarkivet, NOBEL/NOM records 157381 and 157442, https://www.digitalarkivet.no/en/source/157381"
+    - "Bethink Yourselves! work dive (2026-06-08), docs/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/index.md"
+    - "Reader edition alignment notes, docs/reader/non-fiction/essays-and-criticism/bethink-yourselves/alignment-notes.md"
