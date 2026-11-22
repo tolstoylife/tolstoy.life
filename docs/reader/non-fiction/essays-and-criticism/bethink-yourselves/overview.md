@@ -11,5 +11,8 @@ The essay asks soldier, officer, diplomat, journalist and tsar in turn why they 
 - [English, 1904 · read-along](bethink-yourselves.en-1904.html)
 - [Русский](bethink-yourselves.ru.html) (Russian version)
 - [Svenska, 1904](bethink-yourselves.sv-1904.html) (Swedish version, *Betänken Eder!*)
+- [Русский, restored](bethink-yourselves.ru-restored.html) (the text as Tolstoy left it in his manuscript, with V. G. Chertkov's proof-stage changes undone)
+- [English, tolstoy.life (restored)](bethink-yourselves.en-restored.html) (first stage: the 1904 English with the epigraphs and restored passages translated in)
 - [Alignment notes](alignment-notes.html)
+- [Translation ledger](translation-ledger.html)
 - [The corpus dive](/research/works/non-fiction/essays-and-criticism/1904-bethink-yourselves/index.html)

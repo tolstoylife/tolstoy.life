@@ -464,10 +464,11 @@ _PAGE_LABELS = {
     "restored-text.md": "Restored text",
     "translation-diagnostic.md": "Fidelity report",
     "alignment-notes.md": "Alignment notes",
+    "translation-ledger.md": "Translation ledger",
     "index.md": "The corpus dive",
     "annotations.md": "Reading annotations",
 }
-_HUB_APPARATUS = ["restored-text.md", "translation-diagnostic.md", "alignment-notes.md"]
+_HUB_APPARATUS = ["restored-text.md", "translation-diagnostic.md", "alignment-notes.md", "translation-ledger.md"]
 
 
 def _edition_year(bundle: Path, version: str) -> str:

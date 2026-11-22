@@ -119,6 +119,14 @@ The extract keeps the PSS note numbers but not their text; the text was taken fr
 - Two Latin letters in the commentary e-text were set as Cyrillic: «зa того» (Origen) and «a проявление» (XI). Nothing else in the restored passages was touched.
 - In the Novikov letter the restored version is split into sentences differently from the PSS version (sentence ids are per version; there is no audio for the restored version).
 
+## The restored English (first stage)
+
+`bethink-yourselves.en-restored.md` (2026-11-22) is the 1904 English with what it lacks translated in by tolstoy.life from the restored Russian: all 46 chapter epigraphs and the two restored Origen epigraphs, the passages of Chertkov's changes 2–6 (the moved paragraph in V goes to slot 4 as in the restored Russian, and the 1904 wording in slot 6 is struck through; "a quantity of" becomes "several thousand"), Dibich's accented words in XI ¶6, and the postscript's address line, Tolstoy's answer and the date. Every addition is marked against the 1904 English, so the switch shows what the 1904 English lacked. 13 sections, 117 paragraphs. Whose English each slot is, and the open translation questions, are in `translation-ledger.md`.
+
+**Check:** a script confirmed that the file, with every addition dropped, every struck-through 1904 wording put back and the 12 new notes removed, is exactly `bethink-yourselves.en-1904.md`.
+
+**The title epigraph.** The 1904 English does print the Luke epigraph ("This is your hour, and the power of darkness." — Luke xxii. 53., Project Gutenberg #27189), but `bethink-yourselves.en-1904.md` leaves it out, because text before the first heading was ignored when the bundle was built. The restored English has it, unmarked, in the 1904 wording. Adding it to `en-1904.md` too is now possible (epigraphs don't move paragraph numbers or the audio) but changes the 1904 file, so it waits for Johan's word.
+
 ## The Swedish
 
 Output: `docs/reader/non-fiction/essays-and-criticism/bethink-yourselves/bethink-yourselves.sv-1904.md`, built from `projects/betanken-eder/betanken-eder.md` (read only, not edited). Coordinate: `bethink-yourselves.en-1904.md` (I–XII, 115 paragraphs without the Postscript).
