@@ -52,6 +52,8 @@ body { font-family: Palatino, "Iowan Old Style", Georgia, serif; line-height: 1.
 h2 { font-size: 1.25em; margin: 1.4em 0 0.7em; }
 p { margin: 0 0 0.9em; }
 aside { display: block; font-size: 0.88em; color: #555; margin: 0.6em 0; }
+blockquote.epigraph { margin: 0 0 1em 2em; font-size: 0.9em; color: #444; }
+.epigraph-source { text-align: right; font-variant: small-caps; }
 /* current sentence during read-along — named by media:active-class in the OPF */
 .-epub-media-overlay-active { background-color: #fff2a8; color: inherit; }
 """

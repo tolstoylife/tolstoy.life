@@ -137,7 +137,7 @@ TOOLS_DISPLAY = """
 TOOLS_LAYERS = """
   <h3>Layers</h3>
   <label class="tool-row">Wikilinks <input type="checkbox" class="sw" data-layer="wikilinks"></label>
-  <label class="tool-row">Editorial cuts <input type="checkbox" class="sw" data-layer="cuts"></label>
+  <!-- ⚠ keep data-layer="cuts": readers' saved switch setting is stored under that name --><label class="tool-row">Editorial changes <input type="checkbox" class="sw" data-layer="cuts"></label>
   <label class="tool-row">Footnotes <input type="checkbox" class="sw" data-layer="footnotes"></label>
 """
 
@@ -427,6 +427,8 @@ def _load_json(path: Path):
 
 
 def _version_label(version: str) -> str:
+    if version.endswith("-restored"):
+        return _version_label(version[:-len("-restored")]) + " restored"
     if version.startswith("en-machine"):
         return "MT"
     if version.startswith("en"):
@@ -482,7 +484,11 @@ def _edition_year(bundle: Path, version: str) -> str:
 def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
                    year: str = "") -> str:
     # verbose = the spelled-out drawer/body form; terse (default) = the crumb form.
-    if version.startswith("en-machine"):
+    if version == "ru-restored":
+        base = "Русский, restored (the text Tolstoy intended)" if verbose else "Русский, restored"
+    elif version == "en-restored":
+        base = "English, tolstoy.life (restored)"
+    elif version.startswith("en-machine"):
         base = "English (machine translation)" if verbose else "English (machine)"
     elif version.startswith("en"):
         suffix = version.split("-", 1)[1] if "-" in version else ""
@@ -619,6 +625,36 @@ def _render_sentence_web(text: str) -> str:
     return mark_missing_wikilinks(re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out)))   # markdown italics
 
 
+_CHANGE_MARK = re.compile(r"(\{\+\+.*?\+\+\}|\{--.*?--\})", re.S)
+
+def _render_marked_web(text: str) -> str:
+    """displayMarked → HTML: {++…++} becomes <ins>, {--…--} becomes <del>, the rest as _render_sentence_web."""
+    out = []
+    for part in _CHANGE_MARK.split(text):
+        if part.startswith("{++") and part.endswith("++}"):
+            out.append(f"<ins>{_render_sentence_web(part[3:-3])}</ins>")
+        elif part.startswith("{--") and part.endswith("--}"):
+            out.append(f"<del>{_render_sentence_web(part[3:-3])}</del>")
+        elif part:
+            out.append(_render_sentence_web(part))
+    return "".join(out)
+
+
+def _render_text_web(d: dict) -> str:
+    """A {display, displayMarked?} pair → HTML, marks shown when present."""
+    return _render_marked_web(d["displayMarked"]) if d.get("displayMarked") else _render_sentence_web(d["display"])
+
+
+def _epigraphs_html(epigraphs) -> str:
+    """Epigraphs under a heading: not paragraphs, so no p- ids and no read-along spans."""
+    out = []
+    for e in epigraphs or []:
+        paras = "".join(f"<p>{_render_text_web(x)}</p>" for x in e["paragraphs"])
+        src = f'<p class="epigraph-source">{_render_text_web(e["source"])}</p>' if e.get("source") else ""
+        out.append(f'<blockquote class="epigraph" id="{e["id"]}">{paras}{src}</blockquote>')
+    return f'<div class="epigraphs">{"".join(out)}</div>' if out else ""
+
+
 # Documents a work quotes whole, set off on a lighter ground (web reader only): first..last paragraph id, how many leading paragraphs are its title, and a source line (markdown links allowed). Paragraph ids are shared across versions, so one entry styles every version.
 SET_OFF = {
     "the-kingdom-of-god-is-within-you": [
@@ -659,8 +695,12 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
     parts = []
     starts = {b[0]: b for b in SET_OFF.get(work, [])}
     block, left_in_title = None, 0
+    if seg.get("epigraphs"):
+        parts.append(_epigraphs_html(seg["epigraphs"]).replace('class="epigraphs"', 'class="epigraphs title-epigraphs"', 1))
     for sec in seg["sections"]:
         parts.append(f'<h2 id="{sec["id"]}">{esc(sec["heading"])}</h2>')
+        if sec.get("epigraphs"):
+            parts.append(_epigraphs_html(sec["epigraphs"]))
         for p in sec["paragraphs"]:
             if p["id"] in starts:
                 block, left_in_title = starts[p["id"]], starts[p["id"]][2]
@@ -669,7 +709,7 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
             sents = p["sentences"]
             spans = " ".join(
                 f'<span class="sentence" id="{s["id"]}">'
-                f'{_render_sentence_web(_drop_quote(s["display"], last_p and i == len(sents) - 1) if block else s["display"])}</span>'
+                f'{_render_marked_web(s["displayMarked"]) if s.get("displayMarked") else _render_sentence_web(_drop_quote(s["display"], last_p and i == len(sents) - 1) if block else s["display"])}</span>'
                 for i, s in enumerate(sents))
             cls = ""
             if block and left_in_title:

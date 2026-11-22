@@ -818,3 +818,10 @@ main :is(li, blockquote, h2, h3):has(mark.annotation) { position: relative; }
 .set-off .qa-q { margin-top: 1.4rem; }
 .set-off :is(.qa-q, .qa-a) > .sentence:first-child > em:first-child { font-style: normal; font-weight: 600; }
 .set-off .set-off-source { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-soft); border-top: 1px solid var(--rule-soft); padding-top: 0.5rem; margin-top: 1.2rem; }
+
+/* Epigraphs (segments.json "epigraphs"): quotations under a heading, outside the paragraph numbering and the read-along. */
+.epigraphs { margin: 0.4rem 0 2rem auto; max-width: 34rem; font-size: 0.9em; }
+.epigraph { margin: 0 0 1.3rem; padding: 0; border: 0; font-style: normal; color: var(--ink-soft); }
+.epigraph p { margin: 0 0 0.5rem; }
+.epigraph .epigraph-source { text-align: right; font-variant-caps: all-small-caps; letter-spacing: 0.04em; margin-top: 0.3rem; }
+.title-epigraphs { margin-top: 0; }

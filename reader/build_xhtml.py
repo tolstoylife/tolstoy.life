@@ -40,11 +40,22 @@ def _render_sentence(text):
         out.append(noteref_html(m.group(1)) if m else html.escape(p))
     return re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out))   # markdown italics
 
+def epigraphs_xhtml(epigraphs):
+    """Epigraphs as blockquotes: the reading text only (no marks in the EPUB yet), no sentence spans, so no read-along."""
+    out = []
+    for e in epigraphs or []:
+        paras = "".join(f"<p>{_render_sentence(x['display'])}</p>" for x in e["paragraphs"])
+        src = f'<p class="epigraph-source">{_render_sentence(e["source"]["display"])}</p>' if e.get("source") else ""
+        out.append(f'<blockquote class="epigraph" id="{e["id"]}">{paras}{src}</blockquote>')
+    return "\n".join(out)
+
 def render_section_xhtml(seg, section_id, title, lang):
     sec = next(s for s in seg["sections"] if s["id"] == section_id)
+    epis = (seg.get("epigraphs", []) if sec is seg["sections"][0] else []) + sec.get("epigraphs", [])   # the work's epigraph opens the first section
+    epi_text = " ".join(x["display"] for e in epis for x in e["paragraphs"] + ([e["source"]] if e.get("source") else []))
     referenced = set(re.findall(r"\[\^(\w+)\]",
-                     " ".join(s["display"] for p in sec["paragraphs"] for s in p["sentences"])))
-    paras = []
+                     " ".join(s["display"] for p in sec["paragraphs"] for s in p["sentences"]) + " " + epi_text))
+    paras = [epigraphs_xhtml(epis)] if epis else []
     for p in sec["paragraphs"]:
         spans = " ".join(
             f'<span class="sentence" id="{s["id"]}">{_render_sentence(s["display"])}</span>'
