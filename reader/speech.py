@@ -23,6 +23,7 @@ MERGE_FORWARD = {
         "p-4-84-s4", "p-7-43-s12",
         "p-1-10-s2", "p-1-10-s3", "p-2-27-s2", "p-2-27-s3", "p-4-2-s1"},   # the preface signature "L." / "Tolstoy." / place and date -> one clip   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
     "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
+    "bethink-yourselves/en-1904": {"p-9-3-s1", "p-11-2-s1", "p-11-13-s1"},   # cut after "St." (St. Petersburg); split, the voice drops the "g"
 }
 
 # Paragraphs whose em-dashes become full stops in speech: Kokoro's dash pause is too short to separate the items of a chapter's summary.
