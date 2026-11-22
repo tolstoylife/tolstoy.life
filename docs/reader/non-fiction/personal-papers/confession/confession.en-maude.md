@@ -454,36 +454,36 @@ Now a few days ago, when revising it and returning to the line of thought and to
 
 I could not even make out whether I saw anything there below, in that bottomless abyss over which I was hanging and whither I was being drawn. My heart contracted, and I experienced horror. To look thither was terrible. If I looked thither I felt that I should at once slip from the last support and perish. And I did not look. But not to look was still worse, for I thought of what would happen to me directly I fell from the last support. And I felt that from fear I was losing my last supports, and that my back was slowly slipping lower and lower. Another moment and I should drop off. And then it occurred to me that this cannot be real. It is a dream. Wake up! I try to arouse myself but cannot do so. What am I to do? What am I to do? I ask myself, and look upwards. Above, there is also an infinite space. I look into the immensity of sky and try to forget about the immensity below, and I really do forget it. The immensity below repels and frightens me; the immensity above attracts and strengthens me. I am still supported above the abyss by the last supports that have not yet slipped from under me; I know that I am hanging, but I look only upwards and my fear passes. As happens in dreams, a voice says: “Notice this, this is it!” And I look more and more into the infinite above me and feel that I am becoming calm. I remember all that has happened, and remember how it all happened; how I moved my legs, how I hung down, how frightened I was, and how I was saved from fear by looking upwards. And I ask myself: Well, and now am I not hanging just the same? And I do not so much look round as experience with my whole body the point of support on which I am held. I see that I no longer hang as if about to fall, but am firmly held. I ask myself how I am held: I feel about, look round, and see that under me, under the middle of my body, there is one support, and that when I look upwards I lie on it in the position of securest balance, and that it alone gave me support before. And then, as happens in dreams, I imagined the mechanism by means of which I was held; a very natural, intelligible, and sure means, though to one awake that mechanism has no sense. I was even surprised in my dream that I had not understood it sooner. It appeared that at my head there was a pillar, and the security of that slender pillar was undoubted though there was nothing to support it. From the pillar a loop hung very ingeniously and yet simply, and if one lay with the middle of one’s body in that loop and looked up, there could be no question of falling. This was all clear to me, and I was glad and tranquil. And it seemed as if someone said to me: “See that you remember.” And I awoke. 1882.
 
-[^1]: “Nothing so forms a young man as an intimacy with a woman of good breeding.”
+[^1]: <em>Translator’s note.</em> “Nothing so forms a young man as an intimacy with a woman of good breeding.”
 
-[^2]: Tolstoy makes a slip here: he was twenty-seven.
+[^2]: <em>Translator’s note.</em> Tolstoy makes a slip here: he was twenty-seven.
 
-[^3]: <em>Our note, not Maude’s.</em> “All that exists is reasonable” echoes Hegel’s saying in the preface to his <em>Philosophy of Right</em> (1820): “What is rational is actual, and what is actual is rational.” The attribution is ours; the <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> commentary does not name a source. Maude’s “Culture” in the next sentences translates «просвещение» — enlightenment, education.
+[^3]: <em>tolstoy.life note.</em> “All that exists is reasonable” echoes Hegel’s saying in the preface to his <em>Philosophy of Right</em> (1820): “What is rational is actual, and what is actual is rational.” The attribution is ours; the <abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> commentary does not name a source. Maude’s “Culture” in the next sentences translates «просвещение» — enlightenment, education.
 
-[^4]: Russians generally make a distinction between Europeans and Russians.
+[^4]: <em>Translator’s note.</em> Russians generally make a distinction between Europeans and Russians.
 
-[^5]: To keep peace between peasants and owners.
+[^5]: <em>Translator’s note.</em> To keep peace between peasants and owners.
 
-[^6]: A fermented drink prepared from mare’s milk.
+[^6]: <em>Translator’s note.</em> A fermented drink prepared from mare’s milk.
 
-[^7]: The <em>desyatina</em> is about 2¾ acres.
+[^7]: <em>Translator’s note.</em> The <em>desyatina</em> is about 2¾ acres.
 
-[^8]: Tolstoy’s version differs slightly in a few places from our own Authorized or Revised version. I have followed his text, for in a letter to [[Afanasy Fet|Fet]], quoted on p. 11, vol. II, of my <em>Life of Tolstoy</em>, he says that “The Authorized English version [of Ecclesiastes] is bad.”
+[^8]: <em>Translator’s note.</em> Tolstoy’s version differs slightly in a few places from our own Authorized or Revised version. I have followed his text, for in a letter to [[Afanasy Fet|Fet]], quoted on p. 11, vol. II, of my <em>Life of Tolstoy</em>, he says that “The Authorized English version [of Ecclesiastes] is bad.”
 
-[^9]: This passage is noteworthy as being one of the few references made by Tolstoy at this period to the revolutionary or “Back-to-the-People” movement, in which many young men and women were risking and sacrificing home, property, and life itself from motives which had much in common with his own perception that the upper layers of Society are parasitic and prey on the vitals of the people who support them.
+[^9]: <em>Translator’s note.</em> This passage is noteworthy as being one of the few references made by Tolstoy at this period to the revolutionary or “Back-to-the-People” movement, in which many young men and women were risking and sacrificing home, property, and life itself from motives which had much in common with his own perception that the upper layers of Society are parasitic and prey on the vitals of the people who support them.
 
-[^10]: <em>Our note, not Maude’s.</em> The Cherubic Hymn («херувимская»), sung in every Orthodox Divine Liturgy as the bread and wine are carried to the altar. It is known to many listeners from settings by Tchaikovsky and Rachmaninoff.
+[^10]: <em>tolstoy.life note.</em> The Cherubic Hymn («херувимская»), sung in every Orthodox Divine Liturgy as the bread and wine are carried to the altar. It is known to many listeners from settings by Tchaikovsky and Rachmaninoff.
 
-[^11]: <em>Our note, not Maude’s.</em> The Russian is «взбранной воеводе», “to the champion leader”, in the singular: the opening words of the hymn to the Mother of God sung at the end of the Akathist service. Maude’s plural “Warriors” does not match it.
+[^11]: <em>tolstoy.life note.</em> The Russian is «взбранной воеводе», “to the champion leader”, in the singular: the opening words of the hymn to the Mother of God sung at the end of the Akathist service. Maude’s plural “Warriors” does not match it.
 
-[^12]: In Russia Sunday was called Resurrection-day.
+[^12]: <em>Translator’s note.</em> In Russia Sunday was called Resurrection-day.
 
-[^13]: <em>Our note, not Maude’s.</em> Four of the great feasts of the Orthodox year: the Ascension of Christ, forty days after Easter; Pentecost, the descent of the Holy Spirit on the apostles, fifty days after Easter; Epiphany, the baptism of Christ in the Jordan, on 6 January (Old Style); and the Intercession (Pokrov), on 1 October (Old Style), which recalls a vision of the Mother of God spreading her veil over the faithful at Constantinople.
+[^13]: <em>tolstoy.life note.</em> Four of the great feasts of the Orthodox year: the Ascension of Christ, forty days after Easter; Pentecost, the descent of the Holy Spirit on the apostles, fifty days after Easter; Epiphany, the baptism of Christ in the Jordan, on 6 January (Old Style); and the Intercession (Pokrov), on 1 October (Old Style), which recalls a vision of the Mother of God spreading her veil over the faithful at Constantinople.
 
-[^14]: A sect that rejects sacraments and ritual.
+[^14]: <em>Translator’s note.</em> A sect that rejects sacraments and ritual.
 
-[^15]: <em>Our note, not Maude’s.</em> Two regiments of Russian light cavalry, the Sumy hussars («сумские гусары»), named after the town of Sumy, and the “yellow uhlans” («желтые уланы»); uhlans were lancers. The comparison is to each church holding that it alone has the truth.
+[^15]: <em>tolstoy.life note.</em> Two regiments of Russian light cavalry, the Sumy hussars («сумские гусары»), named after the town of Sumy, and the “yellow uhlans” («желтые уланы»); uhlans were lancers. The comparison is to each church holding that it alone has the truth.
 
-[^16]: At the time this was written, capital punishment was considered to be abolished in Russia.
+[^16]: <em>Translator’s note.</em> At the time this was written, capital punishment was considered to be abolished in Russia.
 
-[^17]: <em>Our note, not Maude’s.</em> The Russian is «убивать своих братьев», “to kill their brothers” (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> Tom 23, p. 56). Maude’s “fellow men” loses the word; Wiener’s 1904 translation keeps “brothers”.
+[^17]: <em>tolstoy.life note.</em> The Russian is «убивать своих братьев», “to kill their brothers” (<abbr title="Полное собрание сочинений — the 90-volume Jubilee edition of the complete works">PSS</abbr> Tom 23, p. 56). Maude’s “fellow men” loses the word; Wiener’s 1904 translation keeps “brothers”.

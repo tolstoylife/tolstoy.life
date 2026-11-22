@@ -1761,21 +1761,21 @@ The contradiction between life and conscience and the misery resulting from it h
 
 The first half of the prophecy has been fulfilled in the generation of men who have not accepted Christ's teaching. Their descendants have been brought now to the absolute necessity of putting the truth of the second half to the test of experience.
 
-[^1]: <em>Our note, not Garnett’s.</em> The Russian has «непризнание заповеди» — “the non-recognition of the commandment”: the church teaching does not recognise a commandment that is there in the Gospel.
+[^1]: <em>tolstoy.life note.</em> The Russian has «непризнание заповеди» — “the non-recognition of the commandment”: the church teaching does not recognise a commandment that is there in the Gospel.
 
-[^2]: <em>Our note, not Garnett’s.</em> Tolstoy’s own footnote to this heading, which Garnett leaves out: «Перевод сделан свободно, с некоторыми пропусками» — “The translation is made freely, with some omissions.”
+[^2]: <em>tolstoy.life note.</em> Tolstoy’s own footnote to this heading, which Garnett leaves out: «Перевод сделан свободно, с некоторыми пропусками» — “The translation is made freely, with some omissions.”
 
-[^3]: <em>Our note, not Garnett’s.</em> Garnett leaves out the next paragraph of the Russian, a single line: «Вот предписания, о которых говорит Иисус» — “These are the precepts Jesus speaks of.”
+[^3]: <em>tolstoy.life note.</em> Garnett leaves out the next paragraph of the Russian, a single line: «Вот предписания, о которых говорит Иисус» — “These are the precepts Jesus speaks of.”
 
 [^4]: <em>Tolstoy’s note.</em> I only know one work which differs somewhat from this general definition, and that is not a criticism in the precise meaning of the word, but an article treating of the same subject and having my book in view. I mean the pamphlet of Mr. Troizky (published at Kazan), "A Sermon for the People." The author obviously accepts Christ's teaching in its true meaning. He says that the prohibition of resistance to evil by force means exactly what it does mean; and the same with the prohibition of swearing. He does not, as others do, deny the meaning of Christ's teaching, but unfortunately he does not draw from this admission the inevitable deductions which present themselves spontaneously in our life when we understand Christ's teaching in that way. If we must not oppose evil by force, nor swear, everyone naturally asks, "How, then, about military service? and the oath of obedience?" To this question the author gives no reply; but it must be answered. And if he cannot answer, then he would do better not to speak on the subject at all, as such silence leads to error.
 
-[^5]: <em>Our note, not Garnett’s.</em> Latin, “the whole world judges securely”: the verdict of the whole world cannot be wrong. The words are Augustine’s (<em>Contra epistolam Parmeniani</em> III.4.24). In the Russian edition the editors add a translation of their own in square brackets.
+[^5]: <em>tolstoy.life note.</em> Latin, “the whole world judges securely”: the verdict of the whole world cannot be wrong. The words are Augustine’s (<em>Contra epistolam Parmeniani</em> III.4.24). In the Russian edition the editors add a translation of their own in square brackets.
 
-[^6]: <em>Our note, not Garnett’s.</em> French, “of the charming doctor”: Renan’s phrase for Jesus.
+[^6]: <em>tolstoy.life note.</em> French, “of the charming doctor”: Renan’s phrase for Jesus.
 
-[^7]: <em>Our note, not Garnett’s.</em> The Russian is plural: «кроме как по утверждению церквей» — “except by the assertion of the churches”. Tolstoy writes “churches” for the organisations; “the Church” in the singular is their own claim.
+[^7]: <em>tolstoy.life note.</em> The Russian is plural: «кроме как по утверждению церквей» — “except by the assertion of the churches”. Tolstoy writes “churches” for the organisations; “the Church” in the singular is their own claim.
 
-[^8]: <em>Our note, not Garnett’s.</em> The Russian has «с таинствами, иерархией» — “with its sacraments, hierarchy”. There are no miracles in Tolstoy’s list.
+[^8]: <em>tolstoy.life note.</em> The Russian has «с таинствами, иерархией» — “with its sacraments, hierarchy”. There are no miracles in Tolstoy’s list.
 
 [^9]: <em>Tolstoy’s note.</em> "The Church is the society of the faithful, established by our Lord Jesus Christ, spread over the whole earth, and subject to the authority of its lawful pastors, and chief of them our Holy Father the Pope."
 
@@ -1785,52 +1785,52 @@ The first half of the prophecy has been fulfilled in the generation of men who h
 
 [^12]: <em>Tolstoy’s note.</em> "The true Church will be known by the Word of God being studied clear and unmixed with man's additions and the sacraments being maintained faithful to Christ's teaching."
 
-[^13]: <em>Our note, not Garnett’s.</em> Latin, “Where Christ is, there is the Church.”
+[^13]: <em>tolstoy.life note.</em> Latin, “Where Christ is, there is the Church.”
 
 [^14]: <em>Tolstoy’s note.</em> "I know that our right to qualify thus the tendencies which were so actively opposed by the early Fathers is contested. The very use of the word heresy seems an attack upon liberty of conscience and thought. We cannot share this scruple; for it would amount to nothing less than depriving Christianity of all distinctive character."
 
 [^15]: <em>Tolstoy’s note.</em> "The Church is a free association; there is much to be gained by separation from it. Conflict with error has no weapons other than thought and feeling. One uniform type of doctrine has not yet been elaborated; divergencies in secondary matters arise freely in East and West; theology is not wedded to invariable formulas. If in the midst of this diversity a mass of beliefs common to all is apparent, is one not justified in seeing in it, not a formulated system, framed by the representatives of pedantic authority, but faith itself in its surest instinct and its most spontaneous manifestation? If the same unanimity which is revealed in essential points of belief is found also in rejecting certain tendencies, are we not justified in concluding that these tendencies were in flagrant opposition to the fundamental principles of Christianity? And will not this presumption be transformed into certainty if we recognize in the doctrine universally rejected by the Church the characteristic features of one of the religions of the past? To say that gnosticism or ebionitism are legitimate forms of Christian thought, one must boldly deny the existence of Christian thought at all, or any specific character by which it could be recognized. While ostensibly widening its realm, one undermines it. No one in the time of Plato would have ventured to give his name to a doctrine in which the theory of ideas had no place, and one would deservedly have excited the ridicule of Greece by trying to pass off Epicurus or Zeno as a disciple of the Academy. Let us recognize, then, that if a religion or a doctrine exists which is called Christianity, it may have its heresies."
 
-[^16]: <em>Our note, not Garnett’s.</em> German, “An Impartial History of the Church and of Heretics”.
+[^16]: <em>tolstoy.life note.</em> German, “An Impartial History of the Church and of Heretics”.
 
-[^17]: <em>Our note, not Garnett’s.</em> The Russian has «Ересь есть проявление движения в церкви» — “Heresy is a manifestation of movement in the church”. Two sentences on, her “All effort after a living comprehension of the doctrine has been made by heretics” stands for «Всякий шаг движения вперед, понимания и исполнения учения совершался еретиками» — “Every step of movement forward, of understanding and fulfilling the teaching, was made by heretics.”
+[^17]: <em>tolstoy.life note.</em> The Russian has «Ересь есть проявление движения в церкви» — “Heresy is a manifestation of movement in the church”. Two sentences on, her “All effort after a living comprehension of the doctrine has been made by heretics” stands for «Всякий шаг движения вперед, понимания и исполнения учения совершался еретиками» — “Every step of movement forward, of understanding and fulfilling the teaching, was made by heretics.”
 
-[^18]: <em>Our note, not Garnett’s.</em> French, “the infamous one”. In the Russian Tolstoy glosses it «бесчестная» (“the dishonourable one”).
+[^18]: <em>tolstoy.life note.</em> French, “the infamous one”. In the Russian Tolstoy glosses it «бесчестная» (“the dishonourable one”).
 
-[^19]: <em>Our note, not Garnett’s.</em> The Russian has «неподвижность» and «движение» — “immobility” and “movement”, the same “movement” as in “movement in the church” above, where Garnett has “stagnation” and “progress”.
+[^19]: <em>tolstoy.life note.</em> The Russian has «неподвижность» and «движение» — “immobility” and “movement”, the same “movement” as in “movement in the church” above, where Garnett has “stagnation” and “progress”.
 
-[^20]: <em>Our note, not Garnett’s.</em> The Russian has «не может верить в нравственный закон Христа» — “cannot believe in Christ’s moral law”.
+[^20]: <em>tolstoy.life note.</em> The Russian has «не может верить в нравственный закон Христа» — “cannot believe in Christ’s moral law”.
 
-[^21]: <em>Our note, not Garnett’s.</em> The Russian has «истинного, деятельного учения Христа» — “the true, active teaching of Christ”.
+[^21]: <em>tolstoy.life note.</em> The Russian has «истинного, деятельного учения Христа» — “the true, active teaching of Christ”.
 
-[^22]: <em>Our note, not Garnett’s.</em> Garnett’s one sentence stands for two short paragraphs of the Russian: «Как одинаково положение всех церковных учений, по отношению к учению Христа, так одинаковы и их приемы» — “As the position of all the church teachings toward Christ’s teaching is the same, so are their methods” — and «Положение их таково, что им нельзя не напрягать все усилия на то, чтобы скрыть учение Христа, именем которого они пользуются» — “Their position is such that they cannot help straining every effort to hide the teaching of Christ, whose name they make use of.”
+[^22]: <em>tolstoy.life note.</em> Garnett’s one sentence stands for two short paragraphs of the Russian: «Как одинаково положение всех церковных учений, по отношению к учению Христа, так одинаковы и их приемы» — “As the position of all the church teachings toward Christ’s teaching is the same, so are their methods” — and «Положение их таково, что им нельзя не напрягать все усилия на то, чтобы скрыть учение Христа, именем которого они пользуются» — “Their position is such that they cannot help straining every effort to hide the teaching of Christ, whose name they make use of.”
 
-[^23]: <em>Our note, not Garnett’s.</em> The Russian is plural: «тем людям, которые составляют учреждение церквей» — “the people who make up the institution of the churches”.
+[^23]: <em>tolstoy.life note.</em> The Russian is plural: «тем людям, которые составляют учреждение церквей» — “the people who make up the institution of the churches”.
 
 [^24]: <em>Tolstoy’s note.</em> The fact that so many varied forms of existence, as the life of the family, of the tribe, of the clan, of the state, and even the life of humanity theoretically conceived by the Positivists, are founded on this social or pagan theory of life, does not destroy the unity of this theory of life. All these varied forms of life are founded on the same conception, that the life of the individual is not a sufficient aim of life—that the meaning of life can be found only in societies of individuals.
 
 [^25]: <em>Tolstoy’s note.</em> Here, for example, is a characteristic view of that kind from the American journal the Arena (October, 1890): "New Basis of Church Life." Treating of the significance of the Sermon on the Mount and non-resistance to evil in particular, the author, being under no necessity, like the Churchmen, to hide its significance, says: "Christ in fact preached complete communism and anarchy; but one must learn to regard Christ always in his historical and psychological significance. Like every advocate of the love of humanity, Christ went to the furthest extreme in his teaching. Every step forward toward the moral perfection of humanity is always guided by men who see nothing but their vocation. Christ, in no disparaging sense be it said, had the typical temperament of such a reformer. And therefore we must remember that his precepts cannot be understood literally as a complete philosophy of life. We ought to analyze his words with respect for them, but in the spirit of criticism, accepting what is true," etc. Christ would have been happy to say what he ought, but he was not able to express himself as exactly and clearly as we can in the spirit of criticism, and therefore let us correct him. All that he said about meekness, sacrifice, lowliness, not caring for the morrow, was said by accident, through lack of knowing how to express himself scientifically.
 
-[^26]: <em>Our note, not Garnett’s.</em> Garnett leaves out the next paragraph of the Russian: «Учение Христа тем отличается от прежних учений, что оно руководит людьми не внешними правилами, а внутренним сознанием возможности достижения божеского совершенства. И в душе человека находятся не умеренные правила справедливости и филантропии, а идеал полного, бесконечного божеского совершенства. Только стремление к этому совершенству отклоняет направление жизни человека от животного состояния к божескому настолько, насколько это возможно в этой жизни.» — “Christ’s teaching differs from earlier teachings in that it guides people not by outward rules but by the inner consciousness that divine perfection can be reached. And in a person’s soul there are not moderate rules of justice and philanthropy, but the ideal of complete, infinite, divine perfection. Only the striving toward this perfection turns the direction of a person’s life from the animal state toward the divine, as far as that is possible in this life.” (Wiener has it.)
+[^26]: <em>tolstoy.life note.</em> Garnett leaves out the next paragraph of the Russian: «Учение Христа тем отличается от прежних учений, что оно руководит людьми не внешними правилами, а внутренним сознанием возможности достижения божеского совершенства. И в душе человека находятся не умеренные правила справедливости и филантропии, а идеал полного, бесконечного божеского совершенства. Только стремление к этому совершенству отклоняет направление жизни человека от животного состояния к божескому настолько, насколько это возможно в этой жизни.» — “Christ’s teaching differs from earlier teachings in that it guides people not by outward rules but by the inner consciousness that divine perfection can be reached. And in a person’s soul there are not moderate rules of justice and philanthropy, but the ideal of complete, infinite, divine perfection. Only the striving toward this perfection turns the direction of a person’s life from the animal state toward the divine, as far as that is possible in this life.” (Wiener has it.)
 
-[^27]: <em>Our note, not Garnett’s.</em> Garnett leaves out the next resolution of the Russian: «4) Чтобы организационный комитет был уполномочен сделать нужные поправки в бумагах и решениях, здесь принятых.» — “4) That the organizing committee be empowered to make the necessary corrections in the papers and resolutions adopted here.” (Wiener has it.)
+[^27]: <em>tolstoy.life note.</em> Garnett leaves out the next resolution of the Russian: «4) Чтобы организационный комитет был уполномочен сделать нужные поправки в бумагах и решениях, здесь принятых.» — “4) That the organizing committee be empowered to make the necessary corrections in the papers and resolutions adopted here.” (Wiener has it.)
 
-[^28]: <em>Our note, not Garnett’s.</em> French, “On Disarmament”.
+[^28]: <em>tolstoy.life note.</em> French, “On Disarmament”.
 
-[^29]: <em>Garnett’s note; the Russian gives the reference in the text.</em> "Sur l'Eau," pp. 71-80.
+[^29]: <em>Translator’s note</em> (the Russian gives the reference in the text). "Sur l'Eau," pp. 71-80.
 
-[^30]: <em>Our note, not Garnett’s.</em> Garnett leaves out Tolstoy’s footnote here: «Книга эта издана год тому назад; за этот год выдумали еще десятки новых орудий истребления — новый, бездымный порох.» — “This book was published a year ago; in that year dozens more new weapons of destruction have been invented — new, smokeless powder.”
+[^30]: <em>tolstoy.life note.</em> Garnett leaves out Tolstoy’s footnote here: «Книга эта издана год тому назад; за этот год выдумали еще десятки новых орудий истребления — новый, бездымный порох.» — “This book was published a year ago; in that year dozens more new weapons of destruction have been invented — new, smokeless powder.”
 
-[^31]: <em>Garnett’s note; the Russian gives the reference in the text.</em> "Le Sens de la Vie," pp. 208-13.
+[^31]: <em>Translator’s note</em> (the Russian gives the reference in the text). "Le Sens de la Vie," pp. 208-13.
 
-[^32]: <em>Our note, not Garnett’s.</em> French, “this will kill that”. The Russian glosses it «это убьет то».
+[^32]: <em>tolstoy.life note.</em> French, “this will kill that”. The Russian glosses it «это убьет то».
 
 [^33]: <em>Tolstoy’s note.</em> Phrase quoted from Victor-Hugo, "Notre-Dame de Paris."
 
-[^34]: <em>Our note, not Garnett’s.</em> French, “Let us enter the palace of war.” The Russian glosses it «Войдем же во дворец войны».
+[^34]: <em>tolstoy.life note.</em> French, “Let us enter the palace of war.” The Russian glosses it «Войдем же во дворец войны».
 
 [^35]: <em>Tolstoy’s note.</em> The fact that in America the abuses of authority exist in spite of the small number of their troops not only fails to disprove this position, but positively confirms it. In America there are fewer soldiers than in other states. That is why there is nowhere else so little oppression of the working classes, and no country where the end of the abuses of government and of government itself seems so near. Of late as the combinations of laborers gain in strength, one hears more and more frequently the cry raised for the increase of the army, though the United States are not threatened with any attack from without. The upper classes know that an army of fifty thousand will soon be insufficient, and no longer relying on Pinkerton's men, they feel that the security of their position depends on the increased strength of the army.
 
-[^36]: <em>Our note, not Garnett’s.</em> The Russian has «в 1891 году» — “in 1891”, as the PSS prints it (p. 163); the speech to the recruits was given in November 1891.
+[^36]: <em>tolstoy.life note.</em> The Russian has «в 1891 году» — “in 1891”, as the PSS prints it (p. 163); the speech to the recruits was given in November 1891.
 
 [^37]: <em>Tolstoy’s note.</em> The fact that among certain nations, as the English and the American, military service is not compulsory (though already one hears there are some who advocate that it should be made so) does not affect the servility of the citizens to the government in principle. Here we have each to go and kill or be killed, there they have each to give the fruit of their toil to pay for the recruiting and training of soldiers.

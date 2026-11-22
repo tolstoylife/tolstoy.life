@@ -1762,7 +1762,7 @@ The first part of the prophecy has been fulfilled on the people and their genera
 
 [^2]: <em>Tolstoy’s note.</em> I know of only one — not a criticism in the exact sense of the word, but an article treating of the same subject and having my book in view — that departs a little from this general definition. It is the pamphlet by Troitsky (Kazan), “The Sermon on the Mount”. The author evidently recognises Christ’s teaching in its real meaning. He says that the commandment of non-resistance to evil by violence means just what it means, and the same of the commandment about the oath; he does not deny, as others do, the significance of Christ’s teaching, but, unfortunately, he does not draw from this recognition those inevitable conclusions which in our life suggest themselves of their own accord with such an understanding of Christ’s teaching. If one must not resist evil by violence and must not swear, then everyone naturally asks: what about military service, then? The oath of allegiance? And to this question the author gives no answer, and an answer is needed. And if one cannot answer, then it is better not to speak at all, because silence produces error.
 
-[^3]: <em>The PSS editors’ translation.</em> [The whole world to judge lightly.]
+[^3]: <em><abbr title="Polnoe sobranie sochinenii">PSS</abbr> editors’ note.</em> Their translation of the Latin: [The whole world to judge lightly.]
 
 [^4]: <em>Tolstoy’s note.</em> The church is the society of believers, founded by our Lord Jesus Christ, spread over all the earth and subject to the authority of the lawful pastors and of our holy father — the pope.
 

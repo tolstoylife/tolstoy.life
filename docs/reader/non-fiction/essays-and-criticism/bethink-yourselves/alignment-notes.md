@@ -100,7 +100,7 @@ So the Swedish has 105 paragraphs of real text for 115 slots. To keep Tolstoy's 
 - `## IX.` — nine slots: `{>>The 1904 Swedish has no counterpart to this paragraph: it leaves out chapter IX entirely.<<}`
 - XI paragraph 19 — one slot: the English dateline "May 2, 1904." has no Swedish counterpart (ch. 10 ends without a date).
 
-The first IX slot also carries one visible editorial line in brackets, so the reader sees why the chapter is empty: *[Kapitel IX finns inte i den svenska utgåvan 1904. Det kan läsas i den engelska eller ryska versionen.]* It is the only text in the Swedish file that is not from 1904. Whether IX should stay like this is open for Johan.
+The first IX slot also carries one visible editorial line in brackets, so the reader sees why the chapter is empty: *[Kapitel IX finns inte i den svenska utgåvan 1904. Det kan läsas i den engelska eller ryska versionen.]* Apart from the footnotes (word glosses by the editor of the Swedish edition, each labelled *tolstoy.life note.*, added 2026-11-22 under AGENTS.md → "Footnotes in texts"), it is the only text in the Swedish file that is not from 1904. ⚠ If the file is ever rebuilt from `projects/betanken-eder/betanken-eder.md`, put the labels back. Whether IX should stay like this is open for Johan.
 
 ### Per section (native Swedish paragraphs → target)
 

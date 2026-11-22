@@ -252,34 +252,34 @@ Det, som Jesus längtade efter, fullbordas nu: elden håller på att tändas. L�
 
 Leo Tolstoy.
 
-[^1]: äggelse: uppeggning, uppmaning.
-[^2]: historici: historiker (latinsk pluralform).
-[^3]: skärf: litet bidrag (jfr änkans skärv, Mark. 12:42).
-[^4]: bispringa: bistå, hjälpa.
-[^5]: redobogenhet: beredvillighet.
-[^6]: Te Deum (lat. ”Dig, Gud”): den ambrosianska lovsången, sjungen vid segrar och kröningar.
-[^7]: alldenstund: eftersom.
-[^8]: kalla vapen: blanka vapen, t.ex. sabel och bajonett.
-[^9]: mitraljös: kulspruta.
-[^10]: Fredskonferensen i Haag 1899, sammankallad på initiativ av tsar Nikolaj II.
-[^11]: eljes: annars.
-[^12]: emedan: därför att, eftersom.
-[^13]: härflyta: härröra, ha sitt ursprung.
-[^14]: atavism: återfall i ett tidigare stadiums tänkesätt och seder.
-[^15]: dukhoborer: rysk kristen rörelse som vägrade vapentjänst; många utvandrade till Kanada 1899 med Tolstojs hjälp.
-[^16]: Stepan Makarov, rysk amiral, omkom när slagskeppet Petropavlovsk sänktes vid Port Arthur i april 1904.
-[^17]: Det polska upproret mot ryskt styre 1830–31.
-[^18]: adjutant: officer som biträder en högre befälhavare.
-[^19]: Józef Chłopicki, polsk general och upprorets ledare vintern 1830–31.
-[^20]: Hans Karl von Diebitsch (1785–1831), rysk fältmarskalk som ledde kriget mot det polska upproret.
-[^21]: Nikolaj II, Rysslands tsar.
-[^22]: idiotismer: dumheter (eng. ”stupidities”).
-[^23]: affärda: expediera, göra af med, döda.
-[^24]: Russ: den ryska dagstidningen Rus (Русь), S:t Petersburg.
-[^25]: martialisk: krigisk.
-[^26]: Retvizan, ryskt slagskepp, skadat vid Port Arthur 1904.
-[^27]: ukas: påbud från tsaren.
-[^28]: mikado: Japans kejsare.
-[^29]: enär: eftersom.
-[^30]: verst: rysk längdenhet, drygt en kilometer (1 066,8 m).
-[^31]: ådagalägga: visa, lägga i dagen.
+[^1]: <em>tolstoy.life note.</em> äggelse: uppeggning, uppmaning.
+[^2]: <em>tolstoy.life note.</em> historici: historiker (latinsk pluralform).
+[^3]: <em>tolstoy.life note.</em> skärf: litet bidrag (jfr änkans skärv, Mark. 12:42).
+[^4]: <em>tolstoy.life note.</em> bispringa: bistå, hjälpa.
+[^5]: <em>tolstoy.life note.</em> redobogenhet: beredvillighet.
+[^6]: <em>tolstoy.life note.</em> Te Deum (lat. ”Dig, Gud”): den ambrosianska lovsången, sjungen vid segrar och kröningar.
+[^7]: <em>tolstoy.life note.</em> alldenstund: eftersom.
+[^8]: <em>tolstoy.life note.</em> kalla vapen: blanka vapen, t.ex. sabel och bajonett.
+[^9]: <em>tolstoy.life note.</em> mitraljös: kulspruta.
+[^10]: <em>tolstoy.life note.</em> Fredskonferensen i Haag 1899, sammankallad på initiativ av tsar Nikolaj II.
+[^11]: <em>tolstoy.life note.</em> eljes: annars.
+[^12]: <em>tolstoy.life note.</em> emedan: därför att, eftersom.
+[^13]: <em>tolstoy.life note.</em> härflyta: härröra, ha sitt ursprung.
+[^14]: <em>tolstoy.life note.</em> atavism: återfall i ett tidigare stadiums tänkesätt och seder.
+[^15]: <em>tolstoy.life note.</em> dukhoborer: rysk kristen rörelse som vägrade vapentjänst; många utvandrade till Kanada 1899 med Tolstojs hjälp.
+[^16]: <em>tolstoy.life note.</em> Stepan Makarov, rysk amiral, omkom när slagskeppet Petropavlovsk sänktes vid Port Arthur i april 1904.
+[^17]: <em>tolstoy.life note.</em> Det polska upproret mot ryskt styre 1830–31.
+[^18]: <em>tolstoy.life note.</em> adjutant: officer som biträder en högre befälhavare.
+[^19]: <em>tolstoy.life note.</em> Józef Chłopicki, polsk general och upprorets ledare vintern 1830–31.
+[^20]: <em>tolstoy.life note.</em> Hans Karl von Diebitsch (1785–1831), rysk fältmarskalk som ledde kriget mot det polska upproret.
+[^21]: <em>tolstoy.life note.</em> Nikolaj II, Rysslands tsar.
+[^22]: <em>tolstoy.life note.</em> idiotismer: dumheter (eng. ”stupidities”).
+[^23]: <em>tolstoy.life note.</em> affärda: expediera, göra af med, döda.
+[^24]: <em>tolstoy.life note.</em> Russ: den ryska dagstidningen Rus (Русь), S:t Petersburg.
+[^25]: <em>tolstoy.life note.</em> martialisk: krigisk.
+[^26]: <em>tolstoy.life note.</em> Retvizan, ryskt slagskepp, skadat vid Port Arthur 1904.
+[^27]: <em>tolstoy.life note.</em> ukas: påbud från tsaren.
+[^28]: <em>tolstoy.life note.</em> mikado: Japans kejsare.
+[^29]: <em>tolstoy.life note.</em> enär: eftersom.
+[^30]: <em>tolstoy.life note.</em> verst: rysk längdenhet, drygt en kilometer (1 066,8 m).
+[^31]: <em>tolstoy.life note.</em> ådagalägga: visa, lägga i dagen.
