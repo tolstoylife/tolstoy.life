@@ -5,7 +5,7 @@ are validated as paragraph-parallel."""
 import re, json, sys, argparse
 from pathlib import Path
 from reader import ids
-from reader.speech import to_speech, MERGE_FORWARD, DASH_STOPS
+from reader.speech import to_speech, join_speech, MERGE_FORWARD, DASH_STOPS
 
 # ── CriticMarkup → reading text ────────────────────────────────────────────────
 def resolve_reading_text(md):
@@ -70,7 +70,7 @@ def merge_speech_groups(sentences, flagged=frozenset()):
             i += 1
             nxt = sentences[i]
             s = {"id": s["id"], "display": s["display"] + " " + nxt["display"],
-                 "speech": s["speech"] + " " + nxt["speech"]}
+                 "speech": join_speech(s["speech"], nxt["speech"])}
         out.append(s)
         i += 1
     return out

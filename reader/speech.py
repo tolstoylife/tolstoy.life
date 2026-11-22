@@ -106,7 +106,8 @@ _SUBS = [
     (r"\b(man|often|humanity|lived and|himself but) lives\b", r"\1 livs"),
     (r"\b(I|whom I|when I|and) read (Voltaire|and heard|the Lives|all I could)\b", r"\1 red \2"),
     (r"\bi\.\s?e\.,?", "that is,"),         # read as letters "i e" otherwise
-    (r"\bSt\.(?= [A-Z]|$)", "Saint"),     # the abbreviation dot reads as a full stop; "$" covers a sentence the splitter cut after "St."
+    (r"\bSt\. Petersburg\b", "Saint-Petersburg"),   # with a space Kokoro leaves a comma-length gap after "Saint"; hyphen chosen by ear (Bethink Yourselves, 2026-11-22). ⚠ Also in _JOIN_SUBS.
+    (r"\bSt\.(?= [A-Z]|$)", "Saint"),    # the abbreviation dot reads as a full stop; "$" covers a sentence the splitter cut after "St."
     (r"\bMr\.(?= [A-Z]|$)", "Mister"),
     (r"\bDescartes\b", "Day-kart"), (r"\bChrysostom\b", "Krisustum"),
     (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
@@ -176,6 +177,15 @@ def _fix_semicolons(t):
 def _fix_dashes(t):
     t = t.replace("—", " — ")
     return re.sub(r"\s{2,}", " ", t)
+
+# Applied once to two speeches glued by MERGE_FORWARD, where a rule must see across the old cut.
+_JOIN_SUBS = [(r"\bSaint Petersburg\b", "Saint-Petersburg")]
+
+def join_speech(a, b):
+    t = a + " " + b
+    for pat, rep in _JOIN_SUBS:
+        t = re.sub(pat, rep, t)
+    return t
 
 def _respell(t):
     for pat, rep in _SUBS:
