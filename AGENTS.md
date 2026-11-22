@@ -184,7 +184,7 @@ Every footnote in a text by Tolstoy on tolstoy.life (every version of every read
 | Not yet known | `<em>Note in the 1904 edition.</em>` (name the edition the note was found in); replace once the writer is found |
 
 - Label every note, with no exceptions, word glosses included. Use the same English labels in every language version.
-- Keep a printed edition's own tags (such as "(Trans.)") as they are; the label is added in front.
+- A printed tag that only repeats the label (such as "(Trans.)" or "—Ed.") is dropped, and the drop is recorded in that edition's `alignment-notes.md`. Everything else in the note stays as printed.
 - Russian versions keep the <abbr title="Polnoe sobranie sochinenii">PSS</abbr> labels exactly as printed (*Примечание Толстого.*, *Перевод редакции ПСС.*); they already follow this rule.
 - A note that quotes a translation or gives one adds the details after the label, e.g. `<em>tolstoy.life note.</em> Our translation.`
 - Wiki, overview and research pages need no labels: every note there belongs to tolstoy.life.
