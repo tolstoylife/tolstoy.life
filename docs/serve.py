@@ -1216,6 +1216,10 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
       <div class="nc-title">The Kingdom of God Is Within You</div>
       <div class="nc-meta">1890–93 · the Russian, Garnett's 1894 English, a first machine draft · preface and chapters I–VIII so far · read-along audio</div>
     </a>
+    <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/bethink-yourselves/">
+      <div class="nc-title">Bethink Yourselves!</div>
+      <div class="nc-meta">1904 · the Russian, Chertkov's 1904 English, the 1904 Swedish (<em>Betänken Eder!</em>) · read-along audio</div>
+    </a>
     <a class="nav-card" href="/reader/index.html">
       <div class="nc-title">The whole library</div>
       <div class="nc-meta">every work, with what exists for each</div>
