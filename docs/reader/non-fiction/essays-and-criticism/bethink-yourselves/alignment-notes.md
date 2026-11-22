@@ -61,6 +61,12 @@ The 1904 English has none of them. 189 extract lines were dropped in all: 2 for 
 
 Attribution of a few multi-part quotations (III Тилье, VII Флюгел and «Л. Толстой») is read from the order of lines in the extract, not checked against the page; it doesn't affect the spine.
 
+### A later English with the epigraphs (checked 2026-11-22)
+
+Aylmer Maude's translation in *Recollections and Essays* (Oxford, World's Classics, 1937; Tolstoy Centenary Edition, pp. 204–271; [archive.org scan](https://archive.org/details/recollectionsand035475mbp), also [the 1937 printing](https://archive.org/details/in.ernet.dli.2015.76705)) prints the title epigraph and the chapter epigraphs, so it is a witness for how they read in English. It follows the printed pamphlet, not the manuscript: no Origen epigraphs in VIII, the X Origen epigraph without its opening, none of the XI ¶8 ending, none of the two Novikov passages in XII. It does have the postscript's closing paragraphs and the date "May 8th, 1904". Maude's footnotes are signed "A. M." and none mention Chertkov's changes. No Free Age Press English with the epigraphs was found. Read from the archive.org text (OCR), not the page images.
+
+The PSS already prints the chapter IV epigraphs in the manuscript order (Richet, Pascal, Flammarion, Larroque), so Chertkov's change 1 needs only a note in the restored version, not a change of text.
+
 ### Footnotes
 
 The extract keeps the PSS note numbers but not their text; the text was taken from the TEI (`primary-sources/tolstoydigital-TEI/texts/works/v36_100_148_Odumajtes.xml`), which holds only the first paragraph of each note, and completed from the Jubilee fb2 (`primary-sources/jubilee-edition/vol05/vol05.fb2`, sections n27 and n28). Labels follow The Kingdom of God's Russian file.
