@@ -95,6 +95,30 @@ The extract keeps the PSS note numbers but not their text; the text was taken fr
 - Two Latin letters sitting inside Cyrillic words in the main text, left as in the extract because the wording rule is byte-for-byte: **«нe»** (IX, Latin e) and **«зa»** (XI, Latin a). The Great Sin repaired the same kind of fault; these are candidates for the same fix.
 - The heading of chapter I in the extract uses a Greek capital iota («Ι.»); irrelevant to the file, which uses `## I`.
 
+## The restored Russian
+
+`bethink-yourselves.ru-restored.md` (2026-11-22) is the text as Tolstoy left it in his corrected manuscript: the PSS text with V. G. Chertkov's proof-stage changes undone, as the PSS commentary lists them (N. V. Gorbachev, vol. 36, pp. 613–616). It keeps the PSS paragraph slots, so it lines up with the other three versions (13 sections, 117 paragraphs). The "Editorial changes" switch shows each restoration: switch off, a clean text; switch on, the restored words in green and what the print had instead struck through.
+
+**Check:** a script took the restored file, dropped every addition, put back every struck-through word and removed the tolstoy.life notes; the result is exactly `bethink-yourselves.ru.md`. The restored passages themselves are copied from the commentary extract (`docs/research/works/…/1904-bethink-yourselves/extracts/v36_604_621_Odumajtes_comments.txt`).
+
+**What was restored**, numbered as in the commentary:
+
+1. **IV, epigraph order.** The PSS already prints the manuscript order, so nothing changes; a note says the first edition had them in the wrong order.
+2. **VIII, two Origen epigraphs; X, the opening of the Origen epigraph.** Put back in full. The commentary does not say where in chapter VIII the two stood, so they follow the printed epigraphs; the source line «[Ориген против Цельзия.]» is ours, in square brackets. In X the printed «...» after the restored opening is kept.
+3. **V, the paragraph «Мы разогнались к пропасти…».** In the manuscript it follows the paragraph ending «могущественные орудия истребления» (slot 4); Chertkov moved it to the end of slot 6. The restored version adds it at the end of slot 4 and strikes it through at the end of slot 6. ⚠ This one paragraph sits in a different slot in the restored version than in the PSS, English and Swedish.
+4. **XI, the end of the paragraph «И что же, начинают понимать свой грех…»** («Видят ли те несчастные… с которой не может бороться человек.»).
+5. **XII, the beginning and end of the second paragraph of Novikov's second letter.** The second paragraph is the one beginning «Я никак не могу установить внутреннего равновесия» (it opens with a new «). The commentary quotes the cut beginning only up to «так как...»; whether it went on is not known.
+6. **XII, «множество» back to «несколько тысяч».**
+
+**Not restored:** «большею частью пьяных» and «проклятые», which Chertkov proposed cutting before the proofs at Tolstoy's own request. They are not in the PSS text and nothing shows where they stood. A note in XII (on the last sentence of the first paragraph) says so.
+
+**Notes.** Each restoration has a *tolstoy.life note.* in Russian (as the Swedish notes are in Swedish) giving the change, Chertkov's reason as the commentary reports it, and Tolstoy's approval of 1 July 1904 after the fact. The notes are numbered in reading order with the three PSS notes: 11 in all.
+
+**Open for Johan:**
+- The commentary prints «бог» in lower case in the restored passages (Origen: «истинного бога», «у бога», «богу»), as Soviet editions did; the PSS main text capitalises it («Божьи люди»). Kept as the commentary prints it for now; the manuscript surely had capitals.
+- Two Latin letters in the commentary e-text were set as Cyrillic: «зa того» (Origen) and «a проявление» (XI). Nothing else in the restored passages was touched.
+- In the Novikov letter the restored version is split into sentences differently from the PSS version (sentence ids are per version; there is no audio for the restored version).
+
 ## The Swedish
 
 Output: `docs/reader/non-fiction/essays-and-criticism/bethink-yourselves/bethink-yourselves.sv-1904.md`, built from `projects/betanken-eder/betanken-eder.md` (read only, not edited). Coordinate: `bethink-yourselves.en-1904.md` (I–XII, 115 paragraphs without the Postscript).
