@@ -785,13 +785,13 @@ visuals:
     subject: "Betänken Eder! (Stockholm: Björck & Börjesson, 1904) — front cover"
     relatedEntity: Vladimir Chertkov
     relatedEvidence: odum-fire-rising
-    holding: "Johan Edlund personal collection (Internet Archive item leo-tolstoy_betanken-eder_jed)"
-    archiveId: "IA:leo-tolstoy_betanken-eder_jed"
+    holding: "Johan Edlund personal collection (Internet Archive item leo-tolstoy_betanken-eder_pj)"
+    archiveId: "IA:leo-tolstoy_betanken-eder_pj"
     access: open
     rights: "PD — 1904 Swedish edition; surrogate digitised by Johan Edlund"
     licence: PD
     usable: true
-    url: "https://archive.org/details/leo-tolstoy_betanken-eder_jed"
+    url: "https://archive.org/details/leo-tolstoy_betanken-eder_pj"
     localPath: visuals/swedish-betanken-eder-cover.png
     note: >-
       The Swedish translation whose coda variance this dive examines. A living surrogate: Johan
