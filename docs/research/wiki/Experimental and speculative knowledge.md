@@ -6,7 +6,7 @@ type: concept
 title: Experimental and speculative knowledge
 titleEn: Experimental and speculative knowledge
 titleRu: Знания опытные и умозрительные
-description: "The two rows of knowledge in A Confession (1879–82), ch. V–VI: «знаний опытных» (experimental, with mathematics at the extreme) and «знаний умозрительных» (speculative, with metaphysics at the extreme), and the «полунауки» (half-sciences) beside them; none answers the question of life."
+description: "The two rows of knowledge in A Confession (1879–82), ch. V–VI: experimental knowledge («знаний опытных»), with mathematics at the extreme, and speculative knowledge («знаний умозрительных»), with metaphysics at the extreme, and the half-sciences («полунауки») beside them; none answers the question of life."
 relatedArticles:
   - leo-tolstoy
 relatedWorks:
