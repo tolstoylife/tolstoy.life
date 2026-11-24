@@ -34,13 +34,13 @@ Generated: 2026-06-08. Five images cached in `visuals/`. Web tools were availabl
   type: cover-scan
   subject: "Betänken Eder! (Stockholm: Björck & Börjesson, 1904) — front cover"
   relatedEntity: "Leo Tolstoy; Björck & Börjesson (publisher)"
-  holding: Johan Edlund personal collection (Internet Archive item leo-tolstoy_betanken-eder_jed)
-  archiveId: "IA:leo-tolstoy_betanken-eder_jed / local: LeoTolstoy-BetankenEder-Framsida-8bit-1439x2197.png"
+  holding: Johan Edlund personal collection (Internet Archive item leo-tolstoy_betanken-eder_pj)
+  archiveId: "IA:leo-tolstoy_betanken-eder_pj / local: LeoTolstoy-BetankenEder-Framsida-8bit-1439x2197.png"
   access: open — digitised by Johan Edlund and uploaded to Internet Archive
   rights: PD — 1904 Swedish edition, well past all copyright horizons
   licence: PD
   usable: true
-  url: "https://archive.org/details/leo-tolstoy_betanken-eder_jed"
+  url: "https://archive.org/details/leo-tolstoy_betanken-eder_pj"
   localPath: visuals/swedish-betanken-eder-cover.png
   dimensions: 1439×2197 px
   note: >
