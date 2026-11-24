@@ -2,7 +2,7 @@
    One record per note:
      { "@context": "http://www.w3.org/ns/anno.jsonld", id, type: "Annotation",
        created, motivation: "commenting",
-       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix tag) ],
+       body: [ {TextualBody, purpose:"commenting", value} (+ needs-fix / needs-audio-fix / private-thought tags) ],
        target: { source: "<docKey>#<paraId>",
                  selector: [ TextQuoteSelector {exact,prefix,suffix},
                              TextPositionSelector {start,end} ] } }
@@ -38,12 +38,12 @@
       prefix: a.anchor.before || '',
       suffix: a.anchor.after || '',
       start: null, end: null,
-    }, a.comment, !!a.needsFix, a.created);
+    }, a.comment, a.needsFix ? ['needs-fix'] : [], a.created);
   }
 
-  function makeAnnotation(anchor, comment, needsFix, created) {
+  function makeAnnotation(anchor, comment, tags, created) {
     const body = [{ type: 'TextualBody', value: comment, format: 'text/plain', purpose: 'commenting' }];
-    if (needsFix) body.push({ type: 'TextualBody', value: 'needs-fix', purpose: 'tagging' });
+    tags.forEach(t => body.push({ type: 'TextualBody', value: t, purpose: 'tagging' }));
     const selector = [{
       type: 'TextQuoteSelector',
       exact: anchor.exact, prefix: anchor.prefix, suffix: anchor.suffix,
@@ -65,6 +65,13 @@
     };
   }
 
+  const TAGS = [['needs-fix', '🔧 Needs a text fix'], ['needs-audio-fix', '🔊 Needs an audio fix'], ['private-thought', '🧭 Dive steer']];
+
+  function setTags(ann, tags) {
+    ann.body = bodies(ann).filter(b => b.purpose !== 'tagging')
+      .concat(tags.map(t => ({ type: 'TextualBody', value: t, purpose: 'tagging' })));
+  }
+
   function setComment(ann, value) {
     const b = bodies(ann).find(b => b.purpose !== 'tagging');
     if (b) b.value = value;
@@ -80,7 +87,10 @@
   const paraIdOf = ann => ((ann.target && ann.target.source) || '').split('#')[1] || '';
   const bodies = ann => Array.isArray(ann.body) ? ann.body : (ann.body ? [ann.body] : []);
   const commentOf = ann => (bodies(ann).find(b => b.purpose !== 'tagging') || {}).value || '';
-  const needsFix = ann => bodies(ann).some(b => b.purpose === 'tagging' && b.value === 'needs-fix');
+  const hasTag = (ann, t) => bodies(ann).some(b => b.purpose === 'tagging' && b.value === t);
+  const needsFix = ann => hasTag(ann, 'needs-fix');
+  const needsAudioFix = ann => hasTag(ann, 'needs-audio-fix');
+  const isPrivate = ann => hasTag(ann, 'private-thought');   // the reader's own interpretation: steer for overviews and wiki pages, never text
 
   // ── Anchor capture from a selection ────────────────────────────────────
   function getContext(range) {
@@ -112,37 +122,37 @@
     const scope = para || document.querySelector('main');
     if (!scope) return;
     const pos = posSel(ann);
+    // ⚠ a quote can cross sentence spans and <em>s, so match on the scope's whole text and mark each text node it touches
     const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
-    let node, offset = 0, best = null;
-    while ((node = walker.nextNode())) {
-      if (node.parentNode.closest('mark.annotation')) { offset += node.textContent.length; continue; }
-      let idx = node.textContent.indexOf(exact);
-      while (idx !== -1) {
-        const abs = offset + idx;
-        const dist = pos ? Math.abs(abs - pos.start) : (best ? Infinity : 0);
-        if (!best || dist < best.dist) best = { node, idx, dist };
-        if (!pos) break; // no position stored: first match wins
-        idx = node.textContent.indexOf(exact, idx + 1);
-      }
-      if (!pos && best) break;
-      offset += node.textContent.length;
+    const nodes = [];
+    let node, text = '';
+    while ((node = walker.nextNode())) { nodes.push({ node, start: text.length }); text += node.textContent; }
+    let best = -1, bestDist = Infinity;
+    for (let idx = text.indexOf(exact); idx !== -1; idx = text.indexOf(exact, idx + 1)) {
+      const dist = pos ? Math.abs(idx - pos.start) : 0;
+      if (dist < bestDist) { best = idx; bestDist = dist; }
+      if (!pos) break; // no position stored: first match wins
     }
-    if (!best) {
+    if (best === -1) {
       // a quote with edge whitespace can start in the gap between sentence spans — retry with the trimmed quote
       if (!exactOverride && exact !== exact.trim()) findAndWrap(ann, exact.trim());
       return;
     }
-    const { node: n, idx } = best;
-    const after = n.textContent.slice(idx + exact.length);
-    const mark = document.createElement('mark');
-    mark.className = 'annotation' + (needsFix(ann) ? ' needs-fix' : '');
-    mark.dataset.annId = ann.id;
-    mark.textContent = exact;
-    const afterNode = document.createTextNode(after);
-    n.textContent = n.textContent.slice(0, idx);
-    n.parentNode.insertBefore(mark, n.nextSibling);
-    n.parentNode.insertBefore(afterNode, mark.nextSibling);
-    attachMark(mark, ann);
+    const end = best + exact.length;
+    const parts = nodes.filter(({ node, start }) => start < end && start + node.textContent.length > best);
+    parts.forEach(({ node, start }, i) => {
+      let n = node;
+      const from = Math.max(0, best - start);
+      if (from > 0) n = n.splitText(from);
+      const len = Math.min(n.textContent.length, end - start - from);
+      if (len < n.textContent.length) n.splitText(len);
+      const mark = document.createElement('mark');
+      mark.className = 'annotation' + (needsFix(ann) ? ' needs-fix' : '') + (needsAudioFix(ann) ? ' needs-audio-fix' : '') + (i < parts.length - 1 ? ' ann-cont' : '');
+      mark.dataset.annId = ann.id;
+      n.replaceWith(mark);
+      mark.appendChild(n);
+      attachMark(mark, ann);
+    });
   }
 
   function renderAll() {
@@ -216,7 +226,7 @@
       const meta = document.createElement('div');
       meta.className = 'note-meta';
       const when = document.createElement('span');
-      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '');
+      when.textContent = (ann.created || '').slice(0, 10) + (needsFix(ann) ? ' · 🔧 needs fix' : '') + (needsAudioFix(ann) ? ' · 🔊 needs audio fix' : '') + (isPrivate(ann) ? ' · 🧭 dive steer' : '');
       const edit = document.createElement('button');
       edit.className = 'note-edit';
       edit.textContent = 'Edit';
@@ -252,14 +262,27 @@
         cancelBtn.className = 'note-cancel';
         cancelBtn.textContent = 'Cancel';
         cancelBtn.addEventListener('click', e => { e.stopPropagation(); renderPanel(); });
+        const boxes = TAGS.map(([tag, label]) => {
+          const l = document.createElement('label');
+          l.className = 'ann-fix';
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.checked = hasTag(ann, tag);
+          cb.dataset.tag = tag;
+          l.addEventListener('click', e => e.stopPropagation());
+          l.append(cb, ' ' + label);
+          return l;
+        });
         row.append(saveBtn, cancelBtn);
         body.replaceWith(ta);
         meta.replaceWith(row);
+        row.before(...boxes);
         ta.focus();
         function save() {
           const v = ta.value.trim();
           if (!v) return;                    // emptying a note isn't deleting it
           setComment(ann, v);
+          setTags(ann, boxes.map(l => l.firstChild).filter(cb => cb.checked).map(cb => cb.dataset.tag));
           saveDoc(loadDoc().map(a => a.id === ann.id ? ann : a));
           renderAll();
         }
@@ -307,7 +330,7 @@
     const lines = ['Notes — ' + DOC_KEY, ''];
     anns.forEach((a, i) => {
       const q = ((quoteSel(a) || {}).exact || '').trim();
-      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}`);
+      lines.push(`${i + 1}. [${paraIdOf(a) || '—'}] "${q}"${needsFix(a) ? ' 🔧' : ''}${needsAudioFix(a) ? ' 🔊' : ''}${isPrivate(a) ? ' 💭' : ''}`);
       lines.push('   ' + commentOf(a).replace(/\n/g, '\n   '));
       lines.push('');
     });
@@ -372,7 +395,7 @@
     const comment = annText.value.trim();
     if (!comment || !pendingAnchor) { hidePopover(); return; }
     const anns = loadDoc();
-    anns.push(makeAnnotation(pendingAnchor, comment, document.getElementById('ann-fix').checked));
+    anns.push(makeAnnotation(pendingAnchor, comment, [['ann-fix', 'needs-fix'], ['ann-audio-fix', 'needs-audio-fix'], ['ann-private', 'private-thought']].filter(([id]) => document.getElementById(id).checked).map(([, t]) => t)));
     saveDoc(anns);
     hidePopover();
     renderAll();
@@ -388,6 +411,8 @@
     popover.style.display = 'none';
     annText.value = '';
     document.getElementById('ann-fix').checked = false;
+    document.getElementById('ann-audio-fix').checked = false;
+    document.getElementById('ann-private').checked = false;
     if (pendingAnchor) window.getSelection().removeAllRanges();
     pendingAnchor = null;
   }

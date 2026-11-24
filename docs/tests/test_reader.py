@@ -152,3 +152,27 @@ def test_overview_page_links_and_folder_index():
     # the reading page points back at the overview, not the dive
     work_html = serve.md_to_html(BUNDLE / "the-great-sin.en-1905.md")
     assert 'href="/reader/non-fiction/essays-and-criticism/the-great-sin/overview.html"' in work_html
+
+
+# ── Epigraphs and the "Editorial changes" switch on reader pages ──
+
+def test_marked_sentence_renders_ins_and_del():
+    html = serve._render_marked_web("Back to {--printed--}{++restored [[Origen]]++} words.")
+    assert "<del>printed</del>" in html and "<ins>restored " in html and 'class="wikilink' in html
+
+
+def test_epigraphs_html_has_no_paragraph_ids():
+    html = serve._epigraphs_html([{"id": "e-1-1", "paragraphs": [{"display": "Quote.", "displayMarked": "{++Quote.++}"}], "source": {"display": "— Origen."}}])
+    assert 'id="e-1-1"' in html and "<ins>Quote.</ins>" in html and 'class="epigraph-source"' in html
+    assert 'id="p-' not in html
+
+
+def test_switch_label_renamed_key_kept():
+    assert "Editorial changes" in serve.TOOLS_LAYERS and 'data-layer="cuts"' in serve.TOOLS_LAYERS
+    assert "Editorial cuts" not in serve.TOOLS_LAYERS
+
+
+def test_restored_versions_get_their_own_labels():
+    assert serve._version_label("ru-restored") == "RU restored"
+    assert serve._version_label("en-restored") == "EN restored"
+    assert serve._edition_label("en-restored") == "English, tolstoy.life (restored)"

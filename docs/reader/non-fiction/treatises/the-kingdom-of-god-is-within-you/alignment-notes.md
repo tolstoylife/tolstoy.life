@@ -1,12 +1,12 @@
 # The Kingdom of God Is Within You — alignment and capture notes
 
-How the three texts in this bundle were made paragraph-parallel, so that paragraph N of section K points to the same place in the work in every version. This is **stage 1**: the preface and chapters I–III. Stages 2 (IV–VIII) and 3 (IX–XII) will add sections at the end; nothing here will need redoing.
+How the three texts in this bundle were made paragraph-parallel, so that paragraph N of section K points to the same place in the work in every version. It now holds **stages 1 and 2**: the preface and chapters I–VIII. Stage 3 (IX–XII) will add sections at the end; nothing here will need redoing.
 
 - `the-kingdom-of-god-is-within-you.ru.md` — the Russian, PSS vol. 28 («Царство божие внутри вас», 1890–93). The spine every other version lines up to.
 - `the-kingdom-of-god-is-within-you.en-garnett.md` — Constance Garnett's translation (Cassell, New York, 1894; Project Gutenberg #43302). The reading text and the read-along.
 - `the-kingdom-of-god-is-within-you.en-machine.md` — the project's raw machine translation from the Russian file, one pass, unproofed.
 
-All three segment to **4 sections / 357 paragraphs** and pass `reader.segment --spine-json`.
+All three segment to **9 sections / 871 paragraphs** and pass `reader.segment --spine-json`.
 
 ## Johan's decisions (2026-10-03)
 
@@ -19,7 +19,7 @@ All three segment to **4 sections / 357 paragraphs** and pass `reader.segment --
 
 ## Section and paragraph numbers
 
-The preface is section 1, so **chapter I is section 2, chapter II section 3, chapter III section 4**. Paragraph ids follow: chapter I's paragraphs are `p-2-1`, `p-2-2`…; chapter III's are `p-4-…`. Annotations on this bundle carry these ids.
+The preface is section 1, so **chapter I is section 2, chapter II section 3**, and so on to **chapter VIII, section 9**. Paragraph ids follow: chapter I's paragraphs are `p-2-1`, `p-2-2`…; chapter III's are `p-4-…`. Annotations on this bundle carry these ids.
 
 In each chapter, paragraph 1 is the chapter title and paragraph 2 Tolstoy's summary, so the first paragraph of the chapter text is paragraph 3. The ¶ numbers in the dive's `church-passages.md` count chapter III's text without the title and summary: **dive ¶n is paragraph n+2 here** (dive ¶33 = III.35 = `p-4-35`).
 
@@ -30,7 +30,7 @@ Extracted fresh from the TEI (`extract_tei.py --choice=reg --notes=auto`). The n
 - **Chapter titles and summaries** come from the PSS contents (TEI file `v28_294_306_…_Oglavlenie.xml`). The body of the text has only the chapter numbers.
 - **The two headings inside chapter I** — Garrison's «Провозглашение основ…» and Ballou's «Катехизис непротивления» — are plain lines in capitals, not `## ` headings, so chapter I stays one section. Neither the reader nor the EPUB renders bold, so there is no bold anywhere.
 - **No italics**, as in A Confession's Russian: the extractor drops them. The PSS has about 120 italic passages in the whole work; they could be added later if wanted.
-- **Footnotes.** The nine footnotes in stage 1 are Tolstoy's own (PSS notes 43–51; the extractor keeps their numbers but drops their text, so the text was taken from the TEI). Note 3 is the exception: its Russian «[Весь мир судить легкомысленно.]» is in square brackets in the PSS, meaning the editors supplied it, not Tolstoy. The brackets are kept.
+- **Footnotes.** The nine footnotes in stage 1 are Tolstoy's own (PSS notes 43–51; the extractor keeps their numbers but drops their text, so the text was taken from the TEI). Note 3 is the exception: its Russian «[Весь мир судить легкомысленно.]» is in square brackets in the PSS, meaning the editors supplied it, not Tolstoy. The brackets are kept. Stage 2 adds six more footnotes, all Tolstoy's own (PSS notes 52–57); each was checked against the scan word for word.
 
 ### Text fixes (transmission errors only)
 
@@ -38,15 +38,21 @@ Checked against the scan of PSS vol. 28 in `primary-sources/jubilee-edition/vol8
 
 - **I.13 «Бостон, 1838 г.»** — the extractor turned the italic year into a footnote marker («Бостон,¹⁸³⁸ г.»). Restored.
 - **I.112, Dymond: «Я не могу участвовать в совете правительства»** — "I cannot take part in the council of government". The TEI and the Jubilee fb2 both read «не могу *не* участвовать» ("I cannot help taking part"), which inverts the sense; the printed page (p. 19) has no second «не». Fixed in the Russian and the machine translation. Garnett has it right.
+- **Latin letters typed for Cyrillic** (found in stage 2; the check for mixed letters inside a word missed them because the whole word is Latin): «Во-1-х», «Во-2-х», «В-4-х», «В-12-х», «В-17-х» in the congress resolutions (VI.19–36), «Все» (VI.125), and «т. е.» twice (III.64 and III.126, in stage 1's text).
+- **Seven more typing slips in stage 2**, each checked against the printed page: «вымышленного» for «вымышленногоо» (VI.128, p. 124); «Есть государство» for «Ест государство» (IV.86); «воскресенье» for «воскресенъе» (VI.20, p. 108); «(Мопассана)» without the stray spaces (VI.87); «оно так необходимо нужно?» without a full stop after «так» (VII.60, p. 141 — a speck on the page); «друг против друга» without a comma (VIII.44, p. 156 — another speck); and «материальных и духовных» for «материальных п духовных» in the chapter V summary (contents, p. 297).
 - **Note 9 (the Russian of the long Pressensé passage, III.66)** — the TEI note stops mid-sentence at «то разве мы не вправе», where the footnote runs on to the next printed page. The rest is restored from the Jubilee fb2 and checked against the scan (pp. 51–52).
 
 ### Oddities left as printed
 
 - **The French of the Pressensé passage (III.66)** has misspellings: «Un tipe doctrinal», «on la dissent» (for *dissout*), «en voulant fair d'Epicure où de Zénon», «la doctrine universellement repoussé». They are printed so in the PSS (p. 51). Garnett's text has them corrected.
+- **«одним из условии существования»** (VI.155, Zola) — printed so on p. 127, for «условий».
+- **«Предложение М. de Camp»** in the chapter VI summary — printed so on p. 297; the text itself has «Maxime du Camp».
 
 ### Spot-checks against the scan
 
 The preface (p. 1: epigraphs and first four paragraphs), Dymond's answer (p. 19), the Pressensé passage and note 9 (pp. 51–52): all match the Russian file word for word, apart from the fixes above. The Latin-letters-inside-Cyrillic sweep is empty.
+
+Stage 2 was checked more fully: every paragraph of IV–VIII was compared word for word with the scan's text layer. About fifty paragraphs differed; all but the slips listed above were the scan's own reading errors (split letters, accent marks). The doubtful places were then read on the printed page: pp. 108, 124, 127, 141, 156, 163 and 297.
 
 ## Garnett
 
@@ -63,6 +69,11 @@ Garnett paragraphs differently from Tolstoy far more often than Maude did in A C
 - **Chapter II** (54 → 76): splits only — most of them where Tolstoy opens a new paragraph after a colon, and the recruiting-board dialogue (II.41–52), which Garnett runs into three paragraphs.
 - **Chapter III** (125 → 135): seventeen splits, eight joins and one empty paragraph (below). Garnett ends many paragraphs a sentence before or after Tolstoy: III.24, III.33, III.73, III.75, III.92, III.101 and III.105 are each two of her paragraphs; III.135 begins with the sentence she puts at the end of III.134.
 
+- **Chapter IV** (94 → 101): the Gospel quotations (IV.34–39), which Garnett runs into one paragraph with their references, are split back into Tolstoy's six; a few splits and joins elsewhere, and one gap (below).
+- **Chapter V** (80 → 78): a dozen splits and joins, most of them in the run of quotations about armaments near the end (Komarovsky, Passy, Lawson, Wilson, Moneta).
+- **Chapter VI** (156 → 170): the most. Garnett gives the congress resolutions her own numbering and paragraphing; the Maupassant and Rod quotations are paragraphed far more finely in the Russian (Rod's passage is eight paragraphs in Garnett, seventeen in Tolstoy); the academicians' letters (Doucet, Claretie, Vogüé) differ in where the salutations and signatures fall. One gap (below).
+- **Chapter VII** (78 → 80) and **chapter VIII** (81 → 85): ordinary splits and joins at sentence ends.
+
 The exact list is in the appendix at the end of this file.
 
 ### Places that could not be split cleanly
@@ -70,9 +81,12 @@ The exact list is in the appendix at the end of this file.
 - **I.35/36 — half a sentence.** The Russian ends I.35 with «Но сколько именно нужно людей для этого?» and opens I.36 with «Вот в чем вопрос.». Garnett makes them one sentence ("But precisely how many people must there be to make it so?—that is the question."), which stays at the end of I.35.
 - **II.38/39 — half a sentence.** The Russian ends II.38 with «И это удается.»; Garnett runs it into the next sentence ("And in this they are successful; for, indeed, how could…"), which opens II.39.
 - **I.84/85 — split mid-sentence, as the Russian does.** Tolstoy breaks Ballou's last sentence before the motto: I.84 ends «…добровольно подчиняющейся закону Христа:» and I.85 is «Не противься злу насилием». Garnett's sentence is split at the same point ("…every soul who obeys willingly Christ's word," / ""Resist not evil." Adin Ballou.").
-- **Two English paragraphs are empty.** Garnett has nothing for two Russian paragraphs. The English keeps an empty paragraph there (a hidden CriticMarkup note, which the reader and the audio skip), so the numbering stays in step, and the paragraph before carries an *Our note* footnote saying what is missing:
+- **Stage 2: half a sentence, and splits inside a sentence.** At IV.84/85 Garnett runs Tolstoy's short line «Оно теоретически действительно так выходит.» ("Theoretically it does indeed come out so") into her next sentence; the merged sentence stays in IV.84, and IV.85 begins "This would be most logical". Where the Russian makes a new paragraph in the middle of one of her long sentences, the break is made at her own semicolon or clause, as at I.84/85: the congress resolutions at VI.33/34 ("; also at the adoption…"), VI.36/37 ("(2) that new treaties…") and VI.44/45 ("and expresses its firm…"), and Vogüé's letter at VI.161/162 ("I hold with Joseph de Maistre…"). Doucet's "Dear Sir:" is split from the rest of her paragraph, as the Russian has «Милостивый государь!» on its own line (VI.138).
+- **Empty English paragraphs.** Garnett has nothing for four Russian paragraphs (two in each stage). The English keeps an empty paragraph there (a hidden CriticMarkup note, which the reader and the audio skip), so the numbering stays in step, and the paragraph before carries an *Our note* footnote saying what is missing:
   - **I.56** «Вот предписания, о которых говорит Иисус» ("These are the precepts Jesus speaks of") — left out by Garnett (Wiener has it).
   - **III.120** «Положение их таково, что им нельзя не напрягать все усилия на то, чтобы скрыть учение Христа…» — Garnett folds III.119 and III.120 into one sentence ("Uniform is the attitude of all the churches to the teaching of Christ, whose name they assume for their own advantage."), losing "to hide the teaching of Christ". Found during this alignment; not in the dive's list.
+  - **IV.58** «Учение Христа тем отличается от прежних учений…» ("Christ's teaching differs from earlier teachings in that it guides people not by outward rules but by the inner consciousness that divine perfection can be reached…") — a whole paragraph of three sentences, left out between the river image and "In reality, in order to reach the place…". Wiener has it.
+  - **VI.42** the congress's resolution «4) Чтобы организационный комитет был уполномочен сделать нужные поправки…» ("that the organizing committee be empowered to make the necessary corrections…"). Wiener has it.
 
 ### Footnotes
 
@@ -82,11 +96,21 @@ The exact list is in the appendix at the end of this file.
 - **What she leaves out**: Tolstoy's own footnote to Ballou's catechism heading («Перевод сделан свободно, с некоторыми пропусками», "The translation is made freely, with some omissions"); the I.56 line.
 - **Foreign words she leaves untranslated**: *securus judicat orbis terrarum* (Latin, Augustine), *du charmant docteur* (French, Renan), *Ubi Christus, ibi Ecclesia* (Latin), Arnold's German book title, *l'infâme* (French, Voltaire).
 
+**Stage 2** adds 14 footnotes. Seven are Garnett's: five are her English for Tolstoy's own notes (PSS 52, 53, 55, 56, 57), and two are her page references for the Maupassant and Rod quotations, which Tolstoy gives in the running text; those two are labelled *Garnett's note; the Russian gives the reference in the text.* Seven are ours:
+
+- **Gaps**: the IV.58 and VI.42 paragraphs above, and Tolstoy's footnote at VI.120 («Книга эта издана год тому назад…», "This book was published a year ago; in that year dozens more new weapons of destruction have been invented — new, smokeless powder"), which Garnett leaves out.
+- **A slip**: at VIII.73 Garnett dates the Kaiser's speech to the recruits "In 1892"; the Russian has «в 1891 году» (p. 163), and the speech was given in November 1891. No other slips were looked for systematically in stage 2; the dive's wording checks covered chapter III only.
+- **French she leaves untranslated**: *Sur le Désarmement* ("On Disarmament"), *ceci tuera cela* ("this will kill that"), *Entrons au palais de la guerre* ("Let us enter the palace of war"). She glosses *pondération de forces* herself ("such a balance of power"), so it has no note.
+
 Each footnote says whose it is: *Tolstoy's note.* (in all three versions; «Примечание Толстого.» in the Russian), *The PSS editors' translation.* for note 3 of the Russian and machine versions, and *Our note, not Garnett's.* for ours. Garnett's text of Tolstoy's notes keeps her straight quotation marks; ours use curly ones.
+
+## Audio (Garnett)
+
+The French and German passages are voiced in their own pronunciation. Names the English voice garbles are respelled for the audio only: in stage 2, Montesquieu, Doucet, Moltke, Caprivi, Claretie, Defourney, Moneta, and Nice the city. The sentence splitter cuts at every initial ("Signor E. G. Moneta", "G. D. Bartlett", "Rev. Dr. Reuen Thomas", "E. M. de Vogüé"); those pieces are joined back into one read-along sentence by the per-book merge list in `reader/speech.py`, without touching the text.
 
 ## Machine translation
 
-Translated from the Russian file, paragraph for paragraph, in one pass, unproofed, as for The Great Sin and A Confession. Literal where literal and readable conflict; Tolstoy's repetitions kept. The French, German and Latin stay as they stand in the Russian text, with Tolstoy's nine footnotes translated (note 3 keeps its brackets). The headings mirror the Russian: the chapter titles in capitals, the preface heading ours.
+Translated from the Russian file, paragraph for paragraph, in one pass, unproofed, as for The Great Sin and A Confession. Stage 2 was added the same way. Literal where literal and readable conflict; Tolstoy's repetitions kept. The French, German and Latin stay as they stand in the Russian text, with Tolstoy's nine footnotes translated (note 3 keeps its brackets). The headings mirror the Russian: the chapter titles in capitals, the preface heading ours.
 
 ## Appendix — every split and join in Garnett
 
@@ -185,3 +209,123 @@ Each line names the words in Garnett where a paragraph break was added or remove
 - new paragraph before: “They need special supernatural efforts.”
 - new paragraph before: “It is only due to the intense zeal of the churches”
 - joined to the paragraph before: “Let the Church stop its work”
+
+**Chapter IV**
+
+- new paragraph after: “Matt. vi. 25-34:”
+- new paragraph before: “Luke xii. 33-34:”
+- new paragraph after: “Luke xii. 33-34:”
+- new paragraph before: “Sell all thou hast and follow me”
+- new paragraph before: “Deny thyself, take up thy cross”
+- new paragraph before: “One of these misconceptions is that the Christian moral”
+- empty paragraph after: “the point he wants to reach.”
+- joined to the paragraph before: “These commandments are, as it were, signposts”
+- new paragraph before: “These precepts must and will be followed”
+- new paragraph before: “This would be most logical, and theoretically”
+- joined to the paragraph before: “It would indeed be an excellent thing.”
+
+**Chapter V**
+
+- joined to the paragraph before: “But the time came when the savage”
+- new paragraph before: “This change is brought about in two ways”
+- joined to the paragraph before: “The sufferings of the working classes, springing”
+- new paragraph before: “All this he knows, and he cannot but suffer”
+- joined to the paragraph before: “"According to all principles, according to all I know”
+- joined to the paragraph before: “We recognize the uselessness of custom”
+- joined to the paragraph before: “"How can we explain this extraordinary”
+- new paragraph before: “Until our warriors are disarmed”
+- new paragraph before: “People used to say then:”
+- new paragraph before: “And to maintain so great a multitude”
+- joined to the paragraph before: “Not to speak of all the other contradi”
+- joined to the paragraph before: “And this is the only explanation of th”
+
+**Chapter VI**
+
+- new paragraph before: “Just in the same way all humanity may cease”
+- new paragraph before: “And therefore it would seem inevitable for Christian men”
+- new paragraph before: “The congress after gathering together”
+- new paragraph before: “also at the adoption of resolutions to a like effect”
+- new paragraph before: “(2) that new treaties in harmony”
+- new paragraph before: “(3) that the following resolutions be adopted:”
+- joined to the paragraph before: “"a. To express satisfaction at the official overtures”
+- empty paragraph after: “presented to each power by influential deputations.”
+- joined to the paragraph before: “"a. A resolution of thanks to the presidents”
+- joined to the paragraph before: “"b. A resolution of thanks to the chairman”
+- joined to the paragraph before: “"c. A resolution of thanks to the conveners”
+- joined to the paragraph before: “"d. A resolution of thanks to Rev.”
+- joined to the paragraph before: “"e. A letter of thanks to her Majesty”
+- joined to the paragraph before: “"f. And also a resolution of thanks”
+- new paragraph before: “and expresses its firm and unshaken belief”
+- new paragraph before: “Disarmament imposed on one nation by another”
+- joined to the paragraph before: “I dare say Monaco has expressed”
+- new paragraph before: “It is amazing how men can deceive themselves”
+- new paragraph before: “Governments consent to decide their disagreements”
+- new paragraph before: “A notable example of such an attitude to war”
+- new paragraph before: “Their fathers are old and poor.”
+- new paragraph before: “Would not any other man than Victor Hugo”
+- new paragraph before: “'To-day force is called violence”
+- new paragraph before: “The nations are coming to understand that the magnitude”
+- new paragraph before: “Ah! let us proclaim these absolute truths”
+- joined to the paragraph before: “"A skilled proficient in that line”
+- joined to the paragraph before: “"'War is holy, war is ordained of God.”
+- joined to the paragraph before: “"That is what”
+- joined to the paragraph before: “"That is what”
+- joined to the paragraph before: “"That is what”
+- joined to the paragraph before: “"Was it the invasions of the Persians”
+- joined to the paragraph before: “"Were the invasions of the barbarians”
+- joined to the paragraph before: “"Was it Napoleon I.”
+- new paragraph before: “But that day will never come."”
+- new paragraph before: “Every where the earth is shaking”
+- new paragraph before: “Every day one balances the chances of war”
+- new paragraph before: “For twenty years past every resource”
+- new paragraph before: “They are robbed of their time now”
+- new paragraph before: “They will go like sheep to the slaughter”
+- new paragraph before: “They will march to battle so deluded”
+- new paragraph before: “We know that the best of us will be cut down”
+- new paragraph before: “We know it and tremble with rage”
+- new paragraph before: “We are enslaved by the laws we set up”
+- new paragraph before: “We are but the tools of that autocratic”
+- joined to the paragraph before: “"The paid politicians, the ambitious”
+- new paragraph before: “So that one might seek in vain in history”
+- new paragraph before: “When you ask the least warlike”
+- joined to the paragraph before: “"Alas! sir, you yourself speak”
+- joined to the paragraph before: “"Often, too, there have been attempts”
+- new paragraph before: “But! Ah! but—since philosophers”
+- new paragraph before: “I hold with Joseph de Maistre”
+- new paragraph before: “The desire of the educated classes to support”
+
+**Chapter VII**
+
+- new paragraph before: “The champions of the social conception of life usu”
+- new paragraph before: “The possibility of applying bodily violence to peo”
+- joined to the paragraph before: “But however power has been gained, those who posse”
+- joined to the paragraph before: “Men lived in families, tribes, and races”
+- joined to the paragraph before: “And it could not be otherwise, since,”
+- joined to the paragraph before: “To keep their subjects in oppression and to be abl”
+- joined to the paragraph before: “But there is not only one government.”
+- joined to the paragraph before: “The rivalry of the European states”
+- new paragraph before: “The danger of war, ever ready to break out”
+- new paragraph before: “"The state," they tell us, "is indispensably needed”
+- new paragraph before: “It is scarcely necessary to refute this last argum”
+- new paragraph before: “The government, they tell us, with its army, is ne”
+- new paragraph before: “So that every man who is led, through his compulso”
+- new paragraph before: “If I belong to the minority of oppressors”
+
+**Chapter VIII**
+
+- new paragraph before: “And it can only be freely assimilated in two ways”
+- new paragraph before: “One sometimes wonders what necessitated”
+- new paragraph before: “Eighteen centuries ago Christianity revealed”
+- new paragraph before: “If fifty years ago the idle rich man”
+- new paragraph before: “Violence no longer rests on the belief”
+- new paragraph before: “The governments of our day—all of them”
+- joined to the paragraph before: “Railways, telegraphs, telephones”
+- new paragraph before: “These bought officials, from the highest”
+- joined to the paragraph before: “The process is kept up during later years”
+- joined to the paragraph before: “The religious superstition is encouraged”
+- new paragraph before: “In one way or another all men of our day”
+- new paragraph before: “If we feel no astonishment at the contrast”
+- joined to the paragraph before: “And these inconsistencies are not, as”
+- new paragraph before: “"Conscripts!" he said”
+- joined to the paragraph before: “The last, the most extreme test”
+- joined to the paragraph before: “All the young men through the whole of”

@@ -14,7 +14,22 @@ _CONJ = r"(?:and|but|or|nor|yet|so|for)\b"
 # legitimate rising questions ("Why is this?", "Whence this dreadful perversity?").
 # ponytail: forward-merge only; add backward-merge if a short paragraph-final clip
 # ever needs it. Applied in reader/segment.py.
-MERGE_FORWARD = {"p-7-3-s1"}   # "But we are wrong." -> glue into the long next sentence
+# ⚠ Keyed by work, or by "work/version" when only one version needs it — sentence ids repeat across books.
+MERGE_FORWARD = {
+    "the-great-sin": {"p-7-3-s1"},   # "But we are wrong." -> glue into the long next sentence
+    # Initials and titles the splitter cuts ("G. D. Bartlett", "Rev. Dr. Reuen Thomas"); a run of flags chains into one sentence.
+    "the-kingdom-of-god-is-within-you/en-garnett": {"p-6-62-s1", "p-6-62-s2", "p-6-67-s1", "p-6-67-s2",
+        "p-7-43-s4", "p-7-43-s5", "p-7-43-s6", "p-7-43-s7", "p-7-43-s8", "p-7-43-s9", "p-7-165-s1",
+        "p-4-84-s4", "p-7-43-s12",
+        "p-1-10-s2", "p-1-10-s3", "p-2-27-s2", "p-2-27-s3", "p-4-2-s1"},   # the preface signature "L." / "Tolstoy." / place and date -> one clip   # cut after "St." (massacres of St. Bartholomew) and "Mr." (Mr. Passmore Edwards)
+    "confession/en-maude": {"p-14-7-s5"},   # cut after "St." (St. John Chrysostom)
+    "bethink-yourselves/en-1904": {"p-9-3-s1", "p-11-2-s1", "p-11-13-s1"},   # cut after "St." (St. Petersburg); split, the voice drops the "g"
+}
+
+# Paragraphs whose em-dashes become full stops in speech: Kokoro's dash pause is too short to separate the items of a chapter's summary.
+DASH_STOPS = {
+    "the-kingdom-of-god-is-within-you/en-garnett": {"p-2-2", "p-3-2", "p-4-2", "p-5-2", "p-6-2", "p-7-2", "p-8-2", "p-9-2"},   # ⚠ add IX–XII's summaries when stage 3 is built
+}
 
 # Pronunciation respellings for Kokoro's g2p (verbatim from build_audiobook.py SUBS).
 _SUBS = [
@@ -23,9 +38,30 @@ _SUBS = [
     (r"\$1\.40", "one dollar forty"),        # spell out money — the decimal dot reads as a full stop
     (r"\bLabouchere\b", "Labooshair"),
     (r"\bRadischeff\b", "Rahdeeshef"),
-    (r"Yasnaya Poliana", "Yasnaya Polyahna"),
+    (r"Yasna(?:ya|ïa) Poliana", "Yasnaya Polyahna"),   # Garnett prints "Yasnaïa"
     (r"\bAlexander II\b\.?", "Alexander the Second"),   # regnal number reads as letters; also kills the abbrev-dot's spoken stop
     (r"\bper cent\.", "per cent"),                       # the archaic abbreviation dot reads as a full stop
+    # Bethink Yourselves! (Chertkov/Mayo 1904): names and references, unheard first guesses — confirm by ear.
+    (r"\bLyof Nikolaevitch\b", "Lyoff Nikolayevich"),
+    (r"\bToula\b", "Toola"),
+    (r"\bNijni Novgorod\b", "Nizhny Novgorod"),
+    (r"\bM\. Muravieff\b", "Monsieur Mooravyoff"),
+    (r"\bMuravieff\b", "Mooravyoff"),
+    (r"\bDibitch\b", "Deebitch"),
+    (r"\bVilijinsky\b", "Vilizhinsky"),
+    (r"\bYakoutsk\b", "Yakootsk"),
+    (r"\bRetvisan\b", "Retvizahn"),
+    (r"\bDrojjin\b", "Drozhzhin"),
+    (r"\bNovoe Vremya\b", "Novoye Vremya"),
+    (r"\bViedomosti\b", "Vedomosti"),
+    (r"\bSoyen Shaku\b", "Soyen Shahkoo"),
+    (r"\bMoltka\b", "Moltke"),                          # PG's misprint; the page keeps it
+    (r"\(μετανοεῖτε\)", "(metanoeite)"),
+    (r"\bNicholas II\b", "Nicholas the Second"),
+    (r"the year '77\.", "the year seventy-seven."),
+    (r"\(Mark i\. 15\)", "Mark one, verse fifteen"),
+    (r"\(Luke xiii\. 5\)", "Luke thirteen, verse five"),
+    (r"\bLuke xii\. 49\.", "Luke twelve, verse forty-nine."),
     # The Part IV policy list rushes like the Part I professions list — full-stop
     # each item (the one pause Kokoro honors). Voice note 2026-07-04.
     (r"Tariffs, colonies, income taxes, military and naval budgets, socialistic "
@@ -63,9 +99,21 @@ _SUBS = [
     # Picked by pitch measurement (parselmouth). Voice note 2026-07-04.
     (r"support us, their parasites\.", "support us — their parasites."),
     (r"\bSchopenhauer\b", "Shopenhower"),
+    (r"\b2d Reply\b", "Second Reply"), (r"\b3d Reply\b", "Third Reply"),   # Garnett's old ordinals, read as "two d" otherwise
+    (r"May 14/26, ", "May fourteenth, or twenty-sixth new style, "),   # Old Style / New Style date in the Kingdom of God preface signature
+    # ⚠ The g2p reads "lives" as the noun and "read" as present tense whatever the context; respell each verb use by phrase. A Confession (Maude), voice notes 2026-10-10.
+    (r"\bLive\b", "Liv"),                  # capitalised "Live" is always the imperative in these books
+    (r"\b(man|often|humanity|lived and|himself but) lives\b", r"\1 livs"),
+    (r"\b(I|whom I|when I|and) read (Voltaire|and heard|the Lives|all I could)\b", r"\1 red \2"),
+    (r"\bi\.\s?e\.,?", "that is,"),         # read as letters "i e" otherwise
+    (r"\bSt\. Petersburg\b", "Saint-Petersburg"),   # with a space Kokoro leaves a comma-length gap after "Saint"; hyphen chosen by ear (Bethink Yourselves, 2026-11-22). ⚠ Also in _JOIN_SUBS.
+    (r"\bSt\.(?= [A-Z]|$)", "Saint"),    # the abbreviation dot reads as a full stop; "$" covers a sentence the splitter cut after "St."
+    (r"\bMr\.(?= [A-Z]|$)", "Mister"),
+    (r"\bDescartes\b", "Day-kart"), (r"\bChrysostom\b", "Krisustum"),
     (r"\bOrigen\b", "Oridgen"),            # g2p says OR-eye-jen; Oridgen -> OR-ih-jen
     (r"\bWille zum Leben\b", "‹de›Wille zum Leben‹/de›"),   # voiced with German pronunciation, like ‹fr› below
     (r"\bkumys\b", "koomiss"),
+    (r"\bimpious\b", "ympious"),           # g2p stresses im-PEE-us; "ympious" -> IM-pee-us
     (r"(Rien ne forme un jeune homme, comme une liaison avec une femme comme il faut\.)", r"‹fr›\1‹/fr›"),   # ‹fr›…‹/fr› is voiced with French pronunciation by the audiobook builder
     # The Kingdom of God (Garnett), chapters II–III: French and German quotations. Latin is left to the English voice.
     (r"(L'Église est la société des fidéles .*?notre Saint Père le Pape,)", r"‹fr›\1‹/fr›"),
@@ -77,6 +125,11 @@ _SUBS = [
     (r"(Unpartheyische Kirchen- und Ketzer-Historie)", r"‹de›\1‹/de›"),
     (r"\b(du charmant docteur)\b", r"‹fr›\1‹/fr›"),
     (r"(l'infâme)", r"‹fr›\1‹/fr›"),
+    # The Kingdom of God (Garnett), chapters IV–VIII: names the English voice garbles, and the French phrases.
+    (r"\bMontesquieu\b", "Montesskew"), (r"\bDoucet\b", "Doosay"), (r"\bMoltke\b", "Moltka"), (r"\bCaprivi\b", "Ka-preevee"),
+    (r"\bClaretie\b", "Klartee"), (r"\bDefourney\b", "Defoornay"), (r"\bMoneta\b", "Monayta"),
+    (r"that Nice was incorporated", "that Neess was incorporated"),   # the city, not the adjective
+    (r"(Esplanade des Invalides|ceci tuera cela|Entrons au palais de la guerre|Sur le Désarmement|pondération de forces)", r"‹fr›\1‹/fr›"),
 ] + [(rf'^("?)({re.escape(s)}.*?)("?)$', r"\1‹fr›\2‹/fr›\3") for s in (   # whole French sentences, by their opening words
     "Les infidèles, les hérétiques", "La désignation même d'hérésie", "Nous ne pouvons partager ce scrupule",
     "L'église est une libre association", "La polémique contre l'erreur", "Un type doctrinal uniforme",
@@ -125,6 +178,15 @@ def _fix_dashes(t):
     t = t.replace("—", " — ")
     return re.sub(r"\s{2,}", " ", t)
 
+# Applied once to two speeches glued by MERGE_FORWARD, where a rule must see across the old cut.
+_JOIN_SUBS = [(r"\bSaint Petersburg\b", "Saint-Petersburg")]
+
+def join_speech(a, b):
+    t = a + " " + b
+    for pat, rep in _JOIN_SUBS:
+        t = re.sub(pat, rep, t)
+    return t
+
 def _respell(t):
     for pat, rep in _SUBS:
         t = re.sub(pat, rep, t)
@@ -133,6 +195,7 @@ def _respell(t):
 def to_speech(text):
     text = re.sub(r"\[\^\w+\]", "", text)                # drop footnote markers (skippable in audio)
     text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]]+)\]\]", r"\1", text)  # wikilink: speak the words shown
+    text = re.sub(r"^\*([QA])\.\*", lambda m: "Question." if m.group(1) == "Q" else "Answer.", text)   # catechism *Q.* / *A.*
     text = re.sub(r"\*([^*]+)\*", r"\1", text)             # ⚠ drop italic asterisks, or the voice reads them aloud
     text = _BIBLE.sub(_bible, text)
     text = _fix_ellipsis(text)

@@ -171,6 +171,25 @@ For the full controlled vocabulary tables (genre, completionStatus, draftLabel, 
 - Primary sources take precedence. In order of authority: Jubilee Edition → Tolstoy's diaries and letters → Birukoff biography → Chertkov correspondence → Maude biography.
 - When sources conflict, record **all** values and note the conflict in the relevant `notes` field. Authority order determines the canonical value, but competing claims are always preserved — never silently discarded.
 
+### Footnotes in texts: who wrote each note
+
+Every footnote in a text by Tolstoy on tolstoy.life (every version of every reader edition, in any language) begins with an italic label naming who wrote it, chosen from this list. The note's wording after the label is never changed.
+
+| Who wrote it | Label (as written in the markdown) |
+|---|---|
+| Tolstoy | `<em>Tolstoy’s note.</em>` |
+| The translator of that version | `<em>Translator’s note.</em>`, or `<em>Translators’ note.</em>` for two or more |
+| The editors or publisher of the source edition | name the edition: `<em><abbr title="…">PSS</abbr> editors’ note.</em>`, `<em>Note by</em> The Times.` |
+| tolstoy.life | `<em>tolstoy.life note.</em>` |
+| Not yet known | `<em>Note in the 1904 edition.</em>` (name the edition the note was found in); replace once the writer is found |
+
+- Label every note, with no exceptions, word glosses included. Use the same English labels in every language version.
+- A printed tag that only repeats the label (such as "(Trans.)" or "—Ed.") is dropped, and the drop is recorded in that edition's `alignment-notes.md`. Everything else in the note stays as printed.
+- Russian versions keep the <abbr title="Polnoe sobranie sochinenii">PSS</abbr> labels exactly as printed (*Примечание Толстого.*, *Перевод редакции ПСС.*); they already follow this rule.
+- A note that quotes a translation or gives one adds the details after the label, e.g. `<em>tolstoy.life note.</em> Our translation.`
+- Wiki, overview and research pages need no labels: every note there belongs to tolstoy.life.
+- Why: the Chicago Manual of Style allows one series of notes with each non-author note tagged; TEI marks who wrote each note with `@resp`. The label puts that in front of the reader. Settled 2026-11-22.
+
 ---
 
 ## Project structure

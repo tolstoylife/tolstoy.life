@@ -52,7 +52,7 @@ Every factual claim requires a named primary source. Sources are weighed in a fi
 | Project | Description |
 |---------|-------------|
 | `projects/birukoff-biography/` | Re-OCR and epub production of Paul Birukoff's *Leo Tolstoy: His Life and Work* (1906 Heinemann edition) — the first readable digital transcription of this illustrated edition |
-| `projects/bethink-yourselves/` | Epub production of Tolstoy's *Bethink Yourselves!* — including a Swedish edition (*Betänken Eder*) scanned from a physical copy |
+| `projects/betanken-eder/` | Ebook of the Swedish 1904 edition of Tolstoy's *Bethink Yourselves!* (*Betänken Eder!*), scanned from a physical copy; scans and English sources in its `_local/originals/` |
 | `projects/timelinegraph/`      | 2D knowledge-graph + timeline visualisation of Tolstoy's universe; currently iterating on prototype 11 (pan-and-zoom). Designed for an eventual landing-page placement on tolstoy.life |
 
 ---

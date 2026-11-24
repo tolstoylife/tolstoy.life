@@ -74,3 +74,8 @@ def test_bible_references_spoken():
     assert "Matthew twenty-three, verses twenty-three and three" in to_speech("(Matt. xxiii. 23, 3).")
     assert "Matthew five, verse thirty-nine" in to_speech("(M. v. 39.)")
     assert to_speech("free.\"—John viii. 32.").endswith("John eight, verse thirty-two.")
+
+def test_catechism_q_and_a_spoken_in_full():
+    assert to_speech('*Q.* Whence is the word "non-resistance" derived?').startswith("Question. Whence")
+    assert to_speech("*A.* No.") == "Answer. No."
+    assert to_speech("A. No.") == "A. No."   # only the italic catechism markers

@@ -6,7 +6,7 @@ type: event
 title: Execution in Paris (1857)
 titleEn: Execution in Paris (1857)
 titleRu: Смертная казнь в Париже (1857)
-description: "The guillotine execution Tolstoy watched in Paris on 6 April 1857 (25 March OS); in A Confession (ch. III) it is the moment that showed him «шаткость моего суеверия прогресса» — the shakiness of his superstition of progress."
+description: "The guillotine execution Tolstoy watched in Paris on 6 April 1857 (25 March OS); in A Confession (ch. III) it is the moment that showed him the shakiness of his “superstition of progress” («шаткость моего суеверия прогресса»)."
 date: "1857-04-06"
 dateOldStyle: "1857-03-25"
 dateApproximate: false

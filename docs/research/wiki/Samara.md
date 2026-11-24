@@ -13,7 +13,7 @@ nameAlternatives:
   - name: "Samara Government"
     type: translation
     language: en
-description: "The steppe province of A Confession (1879–82): the 1862 kumys stay with the Bashkirs, the estate behind the question «6000 десятин в Самарской губернии, 300 голов лошадей, а потом?..», and the Molokans of a draft."
+description: "The steppe province of A Confession (1879–82): the 1862 kumys stay with the Bashkirs, the estate behind the question “six thousand desyatinas in Samara province, three hundred head of horses — and then?” («6000 десятин в Самарской губернии, 300 голов лошадей, а потом?..»), and the Molokans of a draft."
 placeType: region
 country: Russia
 region: Samara Governorate

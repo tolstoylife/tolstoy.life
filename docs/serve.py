@@ -137,7 +137,7 @@ TOOLS_DISPLAY = """
 TOOLS_LAYERS = """
   <h3>Layers</h3>
   <label class="tool-row">Wikilinks <input type="checkbox" class="sw" data-layer="wikilinks"></label>
-  <label class="tool-row">Editorial cuts <input type="checkbox" class="sw" data-layer="cuts"></label>
+  <!-- ⚠ keep data-layer="cuts": readers' saved switch setting is stored under that name --><label class="tool-row">Editorial changes <input type="checkbox" class="sw" data-layer="cuts"></label>
   <label class="tool-row">Footnotes <input type="checkbox" class="sw" data-layer="footnotes"></label>
 """
 
@@ -146,6 +146,8 @@ ANNOTATION_UI = """
   <div class="ann-quote" id="ann-quote"></div>
   <textarea id="ann-text" placeholder="Your comment…" autocomplete="off"></textarea>
   <label class="ann-fix"><input type="checkbox" id="ann-fix"> 🔧 Needs a text fix</label>
+  <label class="ann-fix"><input type="checkbox" id="ann-audio-fix"> 🔊 Needs an audio fix</label>
+  <label class="ann-fix"><input type="checkbox" id="ann-private"> 🧭 Dive steer</label>
   <div class="ann-actions">
     <button id="ann-cancel">Cancel</button>
     <button class="primary" id="ann-save">Save</button>
@@ -295,7 +297,9 @@ def work_url(label: str):
 
 def wiki_url(label: str, base: str = "/research/wiki/", end: str = "/") -> str:
     """`[[Henry George]]` → `/research/wiki/henry-george/` — the page's `id`, like /wiki/<id>/ on tolstoy.life; a work goes to its own page instead."""
-    return work_url(label) or f"{base}{wiki_ids().get(label) or slugify(label)}/"
+    label, _, frag = label.partition("#")   # [[Page#Heading]] → …/page/#heading; ⚠ the heading needs a matching {#id} in its page
+    url = work_url(label) or f"{base}{wiki_ids().get(label) or slugify(label)}/"
+    return url + (f"#{slugify(frag)}" if frag else "")
 
 def html_out(md_path: Path) -> Path:
     """Where a page's HTML is written: wiki pages at research/wiki/<id>/index.html, everything else beside its .md."""
@@ -423,12 +427,16 @@ def _load_json(path: Path):
 
 
 def _version_label(version: str) -> str:
+    if version.endswith("-restored"):
+        return _version_label(version[:-len("-restored")]) + " restored"
     if version.startswith("en-machine"):
         return "MT"
     if version.startswith("en"):
         return "EN"
     if version.startswith("ru"):
         return "RU"
+    if version.startswith("sv"):
+        return "SV"
     return version.upper()
 
 
@@ -456,10 +464,11 @@ _PAGE_LABELS = {
     "restored-text.md": "Restored text",
     "translation-diagnostic.md": "Fidelity report",
     "alignment-notes.md": "Alignment notes",
+    "translation-ledger.md": "Translation ledger",
     "index.md": "The corpus dive",
     "annotations.md": "Reading annotations",
 }
-_HUB_APPARATUS = ["restored-text.md", "translation-diagnostic.md", "alignment-notes.md"]
+_HUB_APPARATUS = ["restored-text.md", "translation-diagnostic.md", "alignment-notes.md", "translation-ledger.md"]
 
 
 def _edition_year(bundle: Path, version: str) -> str:
@@ -476,7 +485,11 @@ def _edition_year(bundle: Path, version: str) -> str:
 def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
                    year: str = "") -> str:
     # verbose = the spelled-out drawer/body form; terse (default) = the crumb form.
-    if version.startswith("en-machine"):
+    if version == "ru-restored":
+        base = "Русский, restored (the text Tolstoy intended)" if verbose else "Русский, restored"
+    elif version == "en-restored":
+        base = "English, tolstoy.life (restored)"
+    elif version.startswith("en-machine"):
         base = "English (machine translation)" if verbose else "English (machine)"
     elif version.startswith("en"):
         suffix = version.split("-", 1)[1] if "-" in version else ""
@@ -490,6 +503,9 @@ def _edition_label(version: str, readalong: bool = False, verbose: bool = False,
             base = "English"
     elif version.startswith("ru"):
         base = "Русский (Russian version)" if verbose else "Русский"
+    elif version.startswith("sv"):
+        year = version.split("-", 1)[1] if "-" in version else year
+        base = (f"Svenska, {year} (Swedish version)" if verbose else f"Svenska, {year}") if year else "Svenska"
     else:
         base = version.upper()
     return base + (" · read-along" if readalong else "")
@@ -610,6 +626,62 @@ def _render_sentence_web(text: str) -> str:
     return mark_missing_wikilinks(re.sub(r"\*([^*]+)\*", r"<em>\1</em>", "".join(out)))   # markdown italics
 
 
+_CHANGE_MARK = re.compile(r"(\{\+\+.*?\+\+\}|\{--.*?--\})", re.S)
+
+def _render_marked_web(text: str) -> str:
+    """displayMarked → HTML: {++…++} becomes <ins>, {--…--} becomes <del>, the rest as _render_sentence_web."""
+    out = []
+    for part in _CHANGE_MARK.split(text):
+        if part.startswith("{++") and part.endswith("++}"):
+            out.append(f"<ins>{_render_sentence_web(part[3:-3])}</ins>")
+        elif part.startswith("{--") and part.endswith("--}"):
+            out.append(f"<del>{_render_sentence_web(part[3:-3])}</del>")
+        elif part:
+            out.append(_render_sentence_web(part))
+    return "".join(out)
+
+
+def _render_text_web(d: dict) -> str:
+    """A {display, displayMarked?} pair → HTML, marks shown when present."""
+    return _render_marked_web(d["displayMarked"]) if d.get("displayMarked") else _render_sentence_web(d["display"])
+
+
+def _epigraphs_html(epigraphs) -> str:
+    """Epigraphs under a heading: not paragraphs, so no p- ids and no read-along spans."""
+    out = []
+    for e in epigraphs or []:
+        paras = "".join(f"<p>{_render_text_web(x)}</p>" for x in e["paragraphs"])
+        src = f'<p class="epigraph-source">{_render_text_web(e["source"])}</p>' if e.get("source") else ""
+        out.append(f'<blockquote class="epigraph" id="{e["id"]}">{paras}{src}</blockquote>')
+    return f'<div class="epigraphs">{"".join(out)}</div>' if out else ""
+
+
+# Documents a work quotes whole, set off on a lighter ground (web reader only): first..last paragraph id, how many leading paragraphs are its title, and a source line (markdown links allowed). Paragraph ids are shared across versions, so one entry styles every version.
+SET_OFF = {
+    "the-kingdom-of-god-is-within-you": [
+        ("p-2-5", "p-2-7", 0, "From the letters American Quakers sent Tolstoy after *What I Believe* · [[Quakers|about the Quakers]]"),
+        ("p-2-12", "p-2-26", 2, "Garrison's text, shortened by Tolstoy · first printed in *The Liberator*, 28 September 1838, p. 154 · "
+            "[scan](https://archive.org/details/sim_liberator_1838-09-28_8_39/page/n1/) · [[William Lloyd Garrison#The Declaration of Sentiments|about the text]]"),
+        ("p-2-38", "p-2-85", 1, "Adin Ballou's catechism, translated freely and shortened by Tolstoy · [[Adin Ballou#The Catechism and the beginning of the book|about the catechism]]"),
+    ],
+}
+
+
+def _drop_quote(text: str, last: bool) -> str:
+    """Inside a set-off document the block marks the quotation, so drop the per-paragraph opening '"' and the closing one at the very end; balanced inner quotes stay."""
+    n = text.count('"')
+    if text.startswith('"') and (n % 2 or (last and n == 2 and text.endswith('"'))):
+        text = text[1:]
+    if last and text.endswith('"') and text.count('"') % 2:
+        text = text[:-1]
+    return text
+
+
+def _source_line(src: str) -> str:
+    html = _render_sentence_web(src)   # [[wikilinks]] and *italics*
+    return re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html)
+
+
 def work_page_html(md_path: Path, work: str, version: str) -> str:
     """Render a reader-edition page from its segments.json — each sentence a
     <span class="sentence" id=…> inside <p id=…>, exactly the coordinates
@@ -622,13 +694,33 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
 
     # Body: sections → paragraphs → sentence spans (+ end-of-text notes)
     parts = []
+    starts = {b[0]: b for b in SET_OFF.get(work, [])}
+    block, left_in_title = None, 0
+    if seg.get("epigraphs"):
+        parts.append(_epigraphs_html(seg["epigraphs"]).replace('class="epigraphs"', 'class="epigraphs title-epigraphs"', 1))
     for sec in seg["sections"]:
         parts.append(f'<h2 id="{sec["id"]}">{esc(sec["heading"])}</h2>')
+        if sec.get("epigraphs"):
+            parts.append(_epigraphs_html(sec["epigraphs"]))
         for p in sec["paragraphs"]:
+            if p["id"] in starts:
+                block, left_in_title = starts[p["id"]], starts[p["id"]][2]
+                parts.append('<div class="set-off">')
+            last_p = block is not None and p["id"] == block[1]
+            sents = p["sentences"]
             spans = " ".join(
-                f'<span class="sentence" id="{s["id"]}">{_render_sentence_web(s["display"])}</span>'
-                for s in p["sentences"])
-            parts.append(f'<p id="{p["id"]}">{spans}</p>')
+                f'<span class="sentence" id="{s["id"]}">'
+                f'{_render_marked_web(s["displayMarked"]) if s.get("displayMarked") else _render_sentence_web(_drop_quote(s["display"], last_p and i == len(sents) - 1) if block else s["display"])}</span>'
+                for i, s in enumerate(sents))
+            cls = ""
+            if block and left_in_title:
+                cls, left_in_title = ' class="set-off-title"', left_in_title - 1
+            elif block and sents and re.match(r"\*[QA]\.\*", sents[0]["display"]):
+                cls = f' class="qa-{sents[0]["display"][1].lower()}"'
+            parts.append(f'<p id="{p["id"]}"{cls}>{spans}</p>')
+            if last_p:
+                parts.append(f'<p class="set-off-source">{_source_line(block[3])}</p></div>')
+                block = None
     notes = seg.get("notes") or []
     if notes:
         asides = "\n".join(
@@ -689,7 +781,7 @@ def work_page_html(md_path: Path, work: str, version: str) -> str:
         hub_html=nav["hub_html"],
         tools_extra=TOOLS_LAYERS + version_html,
         readalong=readalong,
-        lang="ru" if version.startswith("ru") else "en",
+        lang=version.split("-", 1)[0] if version[:2] in ("ru", "sv") else "en",
     )
 
 
@@ -1161,6 +1253,14 @@ footer {{ margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; c
       <div class="nc-title">The Great Sin</div>
       <div class="nc-meta">1905 · the Russian, the 1905 English (<em>A Great Iniquity</em>), a first machine draft · read-along audio</div>
     </a>
+    <a class="nav-card" href="/reader/non-fiction/treatises/the-kingdom-of-god-is-within-you/">
+      <div class="nc-title">The Kingdom of God Is Within You</div>
+      <div class="nc-meta">1890–93 · the Russian, Garnett's 1894 English, a first machine draft · preface and chapters I–VIII so far · read-along audio</div>
+    </a>
+    <a class="nav-card" href="/reader/non-fiction/essays-and-criticism/bethink-yourselves/">
+      <div class="nc-title">Bethink Yourselves!</div>
+      <div class="nc-meta">1904 · the Russian, Chertkov's 1904 English, the 1904 Swedish (<em>Betänken Eder!</em>) · read-along audio</div>
+    </a>
     <a class="nav-card" href="/reader/index.html">
       <div class="nc-title">The whole library</div>
       <div class="nc-meta">every work, with what exists for each</div>
@@ -1280,13 +1380,29 @@ def build_works_tracker_page(verbose=True):
         print(f"  ! reader/index.html skipped: {exc}")
 
 
-def build_all(verbose=True):
+_folder_mtimes = {}   # folder → newest non-HTML file mtime, refilled on each build_all
+
+def _newest_input(md_path):
+    """Newest mtime among serve.py, the page's .md, and the files beside it and in its build/ (meta, segments, timing)."""
+    newest = max(Path(__file__).stat().st_mtime, md_path.stat().st_mtime)
+    for d in (md_path.parent, md_path.parent / "build"):
+        if d not in _folder_mtimes:
+            _folder_mtimes[d] = max((f.stat().st_mtime for f in d.iterdir() if f.is_file() and f.suffix != ".html"), default=0) if d.is_dir() else 0
+        newest = max(newest, _folder_mtimes[d])
+    return newest
+
+
+def build_all(verbose=True, only_changed=False):
+    """⚠ only_changed skips pages whose inputs are older than their .html; links to pages elsewhere (a new wiki page, a works record) can stay stale until that page is opened, which rebuilds it."""
     md_docs = collect_md_files()
     html_docs = collect_orphan_html_files()
+    _folder_mtimes.clear()
     count = 0
     for folder, files in md_docs.items():
         for md_path in files:
             html_path = html_out(md_path)
+            if only_changed and html_path.exists() and html_path.stat().st_mtime >= _newest_input(md_path):
+                continue
             html = md_to_html(md_path)
             html_path.parent.mkdir(exist_ok=True)
             html_path.write_text(html, encoding="utf-8")
@@ -1334,7 +1450,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path = self.path.split("?")[0].lstrip("/")
         if path == "" or path == "INDEX.html":
-            build_all(verbose=False)
+            build_all(verbose=False, only_changed=True)
         elif (ROOT / path).is_dir() and (ROOT / path / "overview.md").exists():
             html = md_to_html(ROOT / path / "overview.md")
             (ROOT / path / "index.html").write_text(html, encoding="utf-8")
@@ -1375,8 +1491,10 @@ def main():
     if args.build_only:
         return
 
-    socketserver.TCPServer.allow_reuse_address = True   # ⚠ without it a restart fails with "Address already in use" for a minute
-    with socketserver.TCPServer(("", args.port), Handler) as httpd:
+    socketserver.ThreadingTCPServer.allow_reuse_address = True   # ⚠ without it a restart fails with "Address already in use" for a minute
+    socketserver.ThreadingTCPServer.daemon_threads = True
+    # ponytail: one thread per request so the ~18s full rebuild on INDEX.html doesn't hold up every other page; two rebuilds at once can overlap (harmless on a dev server)
+    with socketserver.ThreadingTCPServer(("", args.port), Handler) as httpd:
         httpd.allow_reuse_address = True
         url = f"http://localhost:{args.port}/INDEX.html"
         print(f"\nServing at {url}")
